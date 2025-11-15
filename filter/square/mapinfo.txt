@@ -2,5 +2,4 @@ GameInfo
 {
 	StatusBarClass = "SevHUD_Square"
 	AddEventHandlers = "SevHUDHandler"
-	borderflat = "SEV_BLNK"
 }

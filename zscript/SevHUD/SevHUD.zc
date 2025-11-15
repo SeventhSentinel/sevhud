@@ -49,7 +49,7 @@ class SevHUD : DoomStatusBar
 	override void Init(void)
 	{
 		Super.Init();
-		// SetSize(0, 320, 200);
+		SetSize(0, 320, 200);
 
 		mHUDSmallFont = HUDFont.Create(smallfont);
 		mHUDConFont = HUDFont.Create(confont);
@@ -78,27 +78,89 @@ class SevHUD : DoomStatusBar
 		}
 	}
 
-/*	override void DrawAutomapHUD(double ticFrac)
+	override void DrawAutomapHUD(double ticFrac)
 	{
-		// Goal: Draw map name and label in the correct color depending on the loaded game, in the appropriate area of the screen
-		// Doing this means I can get rid of my hacky ass way of drawing transparent black on the bottom 32px of the screen
+		// Map label/name
+		HUDFont fnt = mHUDSmallFont;
+		int fontHeight = fnt.mFont.GetHeight();
 
-		// get fonts
-		Font fnt = mHUDSmallFont.mFont;
+		string maplabel = "";
+		string mapname = "";
 
-		// fonts are invalid, cancel drawing
-		if (!fnt)
+		int am_showmaplabel = CVar.GetCVar("am_showmaplabel", CPlayer).GetInt();
+		bool showmaplabel = false;
+		bool showmapname = CVar.GetCVar("am_showlevelname", CPlayer).GetBool();
+
+ 		if ((am_showmaplabel == 1) || (am_showmaplabel == 2) && (!(Level.clusterflags & Level.CLUSTER_HUB)))
+			showmaplabel = true;
+
+ 		if (showmaplabel)
+		{
+			maplabel = Level.MapName;
+			if (showmapname)
+				maplabel = maplabel..": ";
+		}
+
+		if (showmapname)
+		{
+			mapname = (Level.Levelname);
+		}
+
+		DrawString(fnt, maplabel.."\cj"..mapname, (160, 169-fontHeight), DI_TEXT_ALIGN_CENTER);
+		
+		// Prep for the rest of the HUD
+		fnt = littleNumbers;
+
+		// Global timer
+		if (CVar.GetCVar("am_showtotaltime", CPlayer).GetBool())
+		{
+			int amt;
+			int xoffset = 70;
+			int hoursoffset = 0;
+			int hoursdigits = 1;
+			int minsdigits = 1;
+			int timeSeconds = Thinker.Tics2Seconds(Level.totaltime);
+			int hours   = timeSeconds / 3600;
+			int minutes = (timeSeconds % 3600) / 60;
+			int seconds = timeSeconds % 60;
+
+			string basefilepath = "graphics/SevHUD/";
+			string filepath = basefilepath..mapset.."/";
+
+			// hours
+			if (hours >= 1)
+			{
+				if (hours >= 10)
+					hoursdigits = 2;
+
+				if (hours >= 100)
+					hoursdigits = 3;
+
+				hoursoffset = 1;
+				amt = hours;
+				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (274 + xoffset+2, 0), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(basefilepath..stats.."/st_colon.png", (347, 1), DI_ITEM_OFFSETS);
+			}
+
+			// minutes
+			if ((minutes >= 10) || (hours >= 1))
+				minsdigits = 2;
+			amt = minutes;
+			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (286 + xoffset+hoursoffset, 0), DI_TEXT_ALIGN_RIGHT);
+
+			DrawImage(basefilepath..stats.."/st_colon.png", (358, 1), DI_ITEM_OFFSETS);
+
+			// seconds
+			amt = seconds;
+			DrawString(fnt, FormatNumber(amt, 2, format: 2), (298 + xoffset, 0), DI_TEXT_ALIGN_RIGHT);
+		}
+		
+		if (CVar.GetCVar("sevhud_extra", CPlayer).GetInt())
 			return;
-			
-		string txt = "This is the automap text.";
 
-		Screen.DrawText(fnt, Font.CR_UNTRANSLATED,
-				(Screen.GetWidth() / 2) - ((fnt.StringWidth(txt) / 2) * CleanXFac),
-				(Screen.GetHeight() - 32) - (fnt.GetHeight() * CleanYFac),
-				txt,
-				DTA_CleanNoMove, true
-				DTA_KeepRatio, true);
-	}*/
+		int pcnt;		
+		// TODO: We're not drawing the SevHUD stats, so show kills/secrets/items/time according to user settings
+	}
 
 	//===========================================================================
 	//
@@ -630,34 +692,6 @@ class SevHUD : DoomStatusBar
 	//
 	//===========================================================================
 
-	void SevHUDSetupAnnoyer(void)
-	{
-		// get fonts
-		Font fnt = mHUDSmallFont.mFont;
-
-		// fonts are invalid, cancel drawing
-		if (!fnt)
-			return;
-
-		int annoyTxtColor = Font.CR_WHITE;
-
-		String txt = "$SEVHUD_SETUP_ANNOY";
-
-		// annoy
-		Screen.DrawText(fnt, annoyTxtColor,
-		(Screen.GetWidth() / 2) - ((fnt.StringWidth(txt) / 2) * CleanXFac),
-		(Screen.GetHeight() / 2),
-		txt,
-		DTA_CleanNoMove, true,
-		DTA_KeepRatio, true);
-	}
-
-	//===========================================================================
-	//
-	//
-	//
-	//===========================================================================
-
 	void DrawSevHUD(int state)
 	{
 		GetMapSet();
@@ -665,22 +699,13 @@ class SevHUD : DoomStatusBar
 		if ((CVar.GetCVar("sevhud_checksum", CPlayer).GetBool())&&(!gotchecksum))
 			PrintChecksum();
 
-		// If you have default screenblocks, you probably need to do setup
-		CVar s = CVar.GetCVar("screenblocks", CPlayer);
-		if (s != null)
-		{
-			int blocks = s.GetInt();
-			if (blocks <= 10)
-				SevHUDSetupAnnoyer();
-		}
-
 		string basefilepath = "graphics/SevHUD/";
 		string filepath = basefilepath..mapset.."/";
 
 		// DrawMainBar
-		if (state == HUD_StatusBar)
+		if (automapactive)
 		{
-			DrawImage(basefilepath.."STBACK.png", (0, 168), DI_ITEM_OFFSETS);
+			// DrawImage(basefilepath.."STBACK.png", (0, 168), DI_ITEM_OFFSETS);
 		}
 
 		DrawImage(filepath.."st_bar.png", (0, 168), DI_ITEM_OFFSETS);
