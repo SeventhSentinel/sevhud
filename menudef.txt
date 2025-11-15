@@ -12,23 +12,11 @@ AddOptionMenu "OptionsMenuSimple"
 	StaticText ""
 }
 
-OptionValue SevHUDSize
-{
-	11.0, "Always"
-	12.0, "Automap Only"
-}
-
 OptionMenu "SevHUDOptionMenu"
 {
 	Title "$OPTMNU_SEVHUD"
 	StaticText "$OPTMNU_USE_SEVHUD"
 	Option "$ALTHUDMNU_ENABLE",					"hud_althud", "OnOff"
-	StaticText ""
-	StaticText "Turn this off too -- Classic scaling is unsupported"
-	Option "$SCALEMNU_HUD_OLDSCALE",			"hud_oldscale", "OnOff"
-	StaticText ""
-	StaticText "Make sure this doesn't say 'Unknown'"
-	Option "Show SevHUD",				"screenblocks", 				"SevHUDSize"
 	StaticText ""
 	IfGame(chex)
 	{
@@ -36,14 +24,7 @@ OptionMenu "SevHUDOptionMenu"
 		Option "$OPTMNU_SEVHUD_CHEXEXTRA",			"sevhud_chexextra", 			"OnOff"
 		StaticText ""
 	}
-	StaticText "Adjust to your preferred size"
-	Slider "$SCALEMNU_HUD_SCALEFACTOR",			"hud_scalefactor", 0.0, 1.0, 0.025, 3, "hud_oldscale", 1
-	StaticText ""
-	StaticText "Open the automap and adjust until graphical errors disappear"
-	StaticText "(If you often switch between multiple resolutions, ensure it looks correct in all of them)"
-	Slider "HUD scale factor (Fine)",			"hud_scalefactor", 0.0, 1.0, 0.001, 3, "hud_oldscale", 1
-	StaticText ""
-	StaticText "If the line colors don't look good, fix them here"
+	StaticText "If the automap line colors don't look good, fix them here"
 	Submenu "$OPTMNU_AUTOMAP",			"AutomapOptions"
 	StaticText ""
 	StaticText "There's a custom crosshair, too, if you want it"
