@@ -30,6 +30,7 @@ class SevHUD_Chex : DoomStatusBar
 	override void Init(void)
 	{
 		Super.Init();
+		SetSize(0, 320, 200);
 
 		mHUDSmallFont = HUDFont.Create(smallfont);
 		mHUDConFont = HUDFont.Create(confont);
@@ -49,11 +50,21 @@ class SevHUD_Chex : DoomStatusBar
 	{
 		if ((state == HUD_StatusBar)||(state == HUD_Fullscreen))
 		{
-			BaseStatusBar.Draw(state, TicFrac);
-			DrawSevHUD(state);
 			// draw crosshair etc
+			BaseStatusBar.Draw(state, TicFrac);
+
+			DrawSevHUD(state);
 			DrawHealthBar(state);
+
+			// We'll use this to draw the automap stuff
+			BeginHUD();
+			DrawSevAutomapHUD();
 		}
+	}
+
+	override void DrawAutomapHUD(double ticFrac)
+	{
+		// do nothing
 	}
 
 	//===========================================================================
@@ -76,12 +87,15 @@ class SevHUD_Chex : DoomStatusBar
 
 	void DrawStatusBarStats(int state, string filepath, HUDFont fnt)
 	{
+		// Draw the background first
+		DrawImage(filepath.."st_stats.png", (320, 168), DI_ITEM_OFFSETS);
+
 		int amt;
 		int pcnt;
 
 		int xoffset = 70;
 
-		// kills
+		// flemoids returned
 		pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
 		amt = multiplayer ? CPlayer.killcount : pcnt;
 		DrawString(fnt, FormatNumber(amt, 3), (288 + xoffset, 173), DI_TEXT_ALIGN_RIGHT);
@@ -145,6 +159,9 @@ class SevHUD_Chex : DoomStatusBar
 
 	void DrawStatusBarPowerups(void)
 	{
+		// Draw the background first
+		DrawImage("graphics/SevHUD/chex/st_extra.png", (-53, 168), DI_ITEM_OFFSETS);
+
 		let lightamp = Powerup(CPlayer.mo.FindInventory("PowerLightAmp"));
 		if (lightamp)
 			DrawBar("graphics/SevHUD/chex/st_lightamp.png", "graphics/SevHUD/chex/st_lightampback.png", int(Ceil(double(lightamp.EffectTics))), int(Ceil(double(lightamp.MaxEffectTics))), (-21, 172), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
@@ -156,19 +173,6 @@ class SevHUD_Chex : DoomStatusBar
 		let allmap = Level.allmap;
 		if (allmap)
 			DrawImage("graphics/SevHUD/chex/st_allmap.png", (-21, 181), DI_ITEM_OFFSETS);
-	}
-
-	//===========================================================================
-	//
-	//
-	//
-	//===========================================================================
-
-	void DrawMugshot(void)
-	{
-		int flags = DI_SCREEN_LEFT_BOTTOM;
-		let mug = GetMugShot(5);
-		DrawTexture(mug, (104, -1), flags);
 	}
 
 	//===========================================================================
@@ -369,26 +373,109 @@ class SevHUD_Chex : DoomStatusBar
 	//
 	//===========================================================================
 
-	void SevHUDSetupAnnoyer(void)
+	void DrawSevAutomapHUD(void)
 	{
-		// get fonts
-		Font fnt = mHUDSmallFont.mFont;
+		if (!automapactive)
+		return;
+	
+		HUDFont fnt = mChexIndexFont;
+		int fontHeight = fnt.mFont.GetHeight();
+		
+		int offsety = 0;
 
-		// fonts are invalid, cancel drawing
-		if (!fnt)
+		// Global timer
+		if (CVar.GetCVar("am_showtotaltime", CPlayer).GetBool())
+		{
+			int amt;
+			int hoursoffset = 0;
+			int hoursdigits = 1;
+			int minsdigits = 1;
+			int timeSeconds = Thinker.Tics2Seconds(Level.totaltime);
+			int hours   = timeSeconds / 3600;
+			int minutes = (timeSeconds % 3600) / 60;
+			int seconds = timeSeconds % 60;
+
+			string filepath = "graphics/SevHUD/chex";
+
+			// hours
+			if (hours >= 1)
+			{
+				if (hours >= 10)
+					hoursdigits = 2;
+
+				if (hours >= 100)
+					hoursdigits = 3;
+
+				hoursoffset = 1;
+				amt = hours;
+				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (-29, 4), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(filepath.."/st_colon.png", (-28, 5), DI_ITEM_OFFSETS);
+			}
+
+			// minutes
+			if ((minutes >= 10) || (hours >= 1))
+				minsdigits = 2;
+			amt = minutes;
+			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (hoursoffset-19, 4), DI_TEXT_ALIGN_RIGHT);
+
+			DrawImage(filepath.."/st_colon.png", (-17, 5), DI_ITEM_OFFSETS);
+
+			// seconds
+			amt = seconds;
+			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-7, 4), DI_TEXT_ALIGN_RIGHT);
+			
+			// move the level timer down
+			offsety += 6;
+		}
+
+		// Don't draw anything else if we're already drawing the stats
+		if (CVar.GetCVar("sevhud_extra", CPlayer).GetInt())
 			return;
+		
+		// Map time
+		if (CVar.GetCVar("am_showtime", CPlayer).GetBool())
+		{
+			int amt;
+			int hoursoffset = 0;
+			int hoursdigits = 1;
+			int minsdigits = 1;
+			int timeSeconds = Thinker.Tics2Seconds(Level.time);
+			int hours   = timeSeconds / 3600;
+			int minutes = (timeSeconds % 3600) / 60;
+			int seconds = timeSeconds % 60;
 
-		int annoyTxtColor = Font.CR_WHITE;
+			string filepath = "graphics/SevHUD/chex/";
 
-		String txt = "$SEVHUD_SETUP_ANNOY";
+			// hours
+			if (hours >= 1)
+			{
+				if (hours >= 10)
+					hoursdigits = 2;
 
-		// annoy
-		Screen.DrawText(fnt, annoyTxtColor,
-		(Screen.GetWidth() / 2) - ((fnt.StringWidth(txt) / 2) * CleanXFac),
-		(Screen.GetHeight() / 2),
-		txt,
-		DTA_CleanNoMove, true,
-		DTA_KeepRatio, true);
+				if (hours >= 100)
+					hoursdigits = 3;
+
+				hoursoffset = 1;
+				amt = hours;
+				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (-29, 4 + offsety), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(filepath.."st_colon.png", (-28, 5 + offsety), DI_ITEM_OFFSETS);
+			}
+
+			// minutes
+			if ((minutes >= 10) || (hours >= 1))
+				minsdigits = 2;
+			amt = minutes;
+			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (hoursoffset-19, 4 + offsety), DI_TEXT_ALIGN_RIGHT);
+
+			DrawImage(filepath.."st_colon.png", (-17, 5 + offsety), DI_ITEM_OFFSETS);
+
+			// seconds
+			amt = seconds;
+			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-7, 4 + offsety), DI_TEXT_ALIGN_RIGHT);
+		}
+
+		int pcnt;		
+		// TODO: We're not drawing the SevHUD stats, so show kills/secrets/items according to user settings
 	}
 
 	//===========================================================================
@@ -402,31 +489,44 @@ class SevHUD_Chex : DoomStatusBar
 		string filepath = "graphics/SevHUD/chex/";
 		HUDFont fnt = mChexIndexFont;
 
-		// If you have default screenblocks, you probably need to do setup
-		CVar s = CVar.GetCVar("screenblocks", CPlayer);
-		if (s != null)
-		{
-			int blocks = s.GetInt();
-			if (blocks <= 10)
-				SevHUDSetupAnnoyer();
-		}
-
 		if (CVar.GetCVar("sevhud_extra", CPlayer).GetBool())
 		{
-			DrawImage(filepath.."st_extra.png", (-53, 168), DI_ITEM_OFFSETS);
-			DrawImage(filepath.."st_stats.png", (320, 168), DI_ITEM_OFFSETS);
 			DrawStatusBarStats(state, filepath, fnt);
 			DrawStatusBarPowerups();
 		}
 
-		// Okay, time to draw the rest of the owl
-		// Or trace the owl from gzdoom.pk3's paper I guess
-
 		// DrawMainBar
-		if (state == HUD_StatusBar)
+		if (automapactive)
 		{
-			DrawImage("graphics/SevHUD/STBACK.png", (0, 168), DI_ITEM_OFFSETS);
+			// Map label/name
+			HUDFont fnt = mHUDSmallFont;
+			int fontHeight = fnt.mFont.GetHeight();
+
+			string maplabel = "";
+			string mapname = "";
+
+			int am_showmaplabel = CVar.GetCVar("am_showmaplabel", CPlayer).GetInt();
+			bool showmaplabel = false;
+			bool showmapname = CVar.GetCVar("am_showlevelname", CPlayer).GetBool();
+
+			if ((am_showmaplabel == 1) || (am_showmaplabel == 2) && (!(Level.clusterflags & Level.CLUSTER_HUB)))
+				showmaplabel = true;
+
+			if (showmaplabel)
+			{
+				maplabel = Level.MapName;
+				if (showmapname)
+					maplabel = maplabel..": ";
+			}
+
+			if (showmapname)
+			{
+				mapname = (Level.Levelname);
+			}
+
+			DrawString(fnt, maplabel.."\cj"..mapname, (160, 169-fontHeight), DI_TEXT_ALIGN_CENTER);
 		}
+
 		if (CVar.GetCVar("sevhud_chexextra", CPlayer).GetBool())
 		{
 			DrawImage(filepath.."st_bar.png", (0, 168), DI_ITEM_OFFSETS);
