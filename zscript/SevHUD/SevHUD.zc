@@ -27,7 +27,6 @@ class SevHUD : DoomStatusBar
 	string mapset;
 	HUDFont littleNumbers;
 	string powerups;
-	string stats;
 
 	vector2 invuloffset;
 	vector2 lightampoffset;
@@ -128,7 +127,6 @@ class SevHUD : DoomStatusBar
 			mapset = "standard";
 			powerups = "standard";
 			littleNumbers = mDefaultIndexFont;
-			stats = "standard";
 
 			// Graphic offsets don't work for drawing bars, so we'll add them here instead
 			invuloffset = (0, 0);
@@ -232,7 +230,6 @@ class SevHUD : DoomStatusBar
 					// PRCP
 					/* case '4803362bd33b5e11956f6682dfd48900':
 						mapset = "pl2";
-						stats = mapset;
 						break; */
 				}
 			}
@@ -317,22 +314,22 @@ class SevHUD : DoomStatusBar
 		int amt;
 		int pcnt;
 		
-		int xoffset = 32;
+		int offsetx = 32;
 
 		// kills
 		pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
 		amt = multiplayer ? CPlayer.killcount : pcnt;
-		DrawString(fnt, FormatNumber(amt, 3), (basex + xoffset, 173), DI_TEXT_ALIGN_RIGHT);
+		DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 173), DI_TEXT_ALIGN_RIGHT);
 
 		// items
 		pcnt = Level.total_items ? 100 * Level.found_items / Level.total_items : 100;
 		amt = multiplayer ? CPlayer.itemcount : pcnt;
-		DrawString(fnt, FormatNumber(amt, 3), (basex + xoffset, 179), DI_TEXT_ALIGN_RIGHT);
+		DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 179), DI_TEXT_ALIGN_RIGHT);
 
 		// secrets
 		pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
 		amt = multiplayer ? CPlayer.secretcount : pcnt;
-		DrawString(fnt, FormatNumber(amt, 3), (basex + xoffset, 185), DI_TEXT_ALIGN_RIGHT);
+		DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 185), DI_TEXT_ALIGN_RIGHT);
 
 		// time stuff
 		bool sucks = false;
@@ -362,11 +359,11 @@ class SevHUD : DoomStatusBar
 				hoursoffset = 1;
 				amt = hours;
 				DrawString(fnt, FormatNumber(amt, 1, format: 2), (basex + 20, 191), DI_TEXT_ALIGN_RIGHT);
-				DrawImage(basefilepath..stats.."/st_colon.png", (basex + 21, 192), DI_ITEM_OFFSETS);
+				DrawImage(basefilepath..mapset.."/st_colon.png", (basex + 21, 192), DI_ITEM_OFFSETS);
 			}
 
 			// minutes
-			DrawImage(basefilepath..stats.."/st_colon.png", (basex + 32, 192), DI_ITEM_OFFSETS);
+			DrawImage(basefilepath..mapset.."/st_colon.png", (basex + 32, 192), DI_ITEM_OFFSETS);
 			if ((minutes >= 10) || (hours >= 1))
 				minsdigits = 2;
 			amt = minutes;
@@ -655,6 +652,7 @@ class SevHUD : DoomStatusBar
 		HUDFont fnt = littleNumbers;
 		int fontHeight = fnt.mFont.GetHeight();
 		
+		int lump;
 		int amt;
 
 		int basey = 4;
@@ -663,6 +661,14 @@ class SevHUD : DoomStatusBar
 		string basefilepath = "graphics/SevHUD/";
 		string filepath = basefilepath..mapset.."/";
 
+		// Which colon gfx to use?
+		string imgcolon;
+		lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_colon.png");
+		if (lump >= 0)
+			imgcolon = basefilepath..mapset.."/st_colon.png";
+		else
+			imgcolon = basefilepath.."standard/st_colon.png";
+		
 		// Global timer
 		if (CVar.GetCVar("am_showtotaltime", CPlayer).GetBool())
 		{
@@ -693,7 +699,7 @@ class SevHUD : DoomStatusBar
 				hoursoffset = 1;
 				amt = hours;
 				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (-29, basey), DI_TEXT_ALIGN_RIGHT);
-				DrawImage(basefilepath..stats.."/st_colon.png", (-28, basey + 1), DI_ITEM_OFFSETS);
+				DrawImage(imgcolon, (-28, basey + 1), DI_ITEM_OFFSETS);
 			}
 
 			// minutes
@@ -702,7 +708,7 @@ class SevHUD : DoomStatusBar
 			amt = minutes;
 			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (hoursoffset-19, basey), DI_TEXT_ALIGN_RIGHT);
 
-			DrawImage(basefilepath..stats.."/st_colon.png", (-17, basey + 1), DI_ITEM_OFFSETS);
+			DrawImage(imgcolon, (-17, basey + 1), DI_ITEM_OFFSETS);
 
 			// seconds
 			amt = seconds;
@@ -712,7 +718,7 @@ class SevHUD : DoomStatusBar
 			offsety += fontHeight;
 		}
 
-		// Don't draw anything else if we're already drawing the stats
+		// Don't draw anything else if we're already drawing the stats on the status bar
 		if (CVar.GetCVar("sevhud_extra", CPlayer).GetInt())
 			return;
 		
@@ -749,7 +755,7 @@ class SevHUD : DoomStatusBar
 				hoursoffset = 1;
 				amt = hours;
 				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (-29, basey + offsety), DI_TEXT_ALIGN_RIGHT);
-				DrawImage(basefilepath..stats.."/st_colon.png", (-28, basey + offsety + 1), DI_ITEM_OFFSETS);
+				DrawImage(imgcolon, (-28, basey + offsety + 1), DI_ITEM_OFFSETS);
 			}
 
 			// minutes
@@ -758,7 +764,7 @@ class SevHUD : DoomStatusBar
 			amt = minutes;
 			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (hoursoffset-19, basey + offsety), DI_TEXT_ALIGN_RIGHT);
 
-			DrawImage(basefilepath..stats.."/st_colon.png", (-17, basey + offsety + 1), DI_ITEM_OFFSETS);
+			DrawImage(imgcolon, (-17, basey + offsety + 1), DI_ITEM_OFFSETS);
 
 			// seconds
 			amt = seconds;
@@ -771,8 +777,16 @@ class SevHUD : DoomStatusBar
 
 		if (CVar.GetCVar("am_showsecrets", CPlayer).GetBool())
 		{
+			// Which secrets gfx to use?
+			string imgsecret;
+			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_secret.png");
+			if (lump >= 0)
+				imgsecret = basefilepath..mapset.."/st_secret.png";
+			else
+				imgsecret = basefilepath.."standard/st_secret.png";
+
 			// Draw automap secrets
-			DrawImage(basefilepath..stats.."/st_secret.png", (-48, basey-fontHeight), DI_ITEM_OFFSETS);
+			DrawImage(imgsecret, (-48, basey-fontHeight), DI_ITEM_OFFSETS);
 			pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
 			amt = multiplayer ? CPlayer.secretcount : pcnt;
 			DrawString(fnt, FormatNumber(amt, 3), (-16, basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
@@ -782,8 +796,16 @@ class SevHUD : DoomStatusBar
 
 		if (CVar.GetCVar("am_showitems", CPlayer).GetBool())
 		{
+			// Which items gfx to use?
+			string imgitem;
+			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_item.png");
+			if (lump >= 0)
+				imgitem = basefilepath..mapset.."/st_item.png";
+			else
+				imgitem = basefilepath.."standard/st_item.png";
+
 			// Draw automap items
-			DrawImage(basefilepath..stats.."/st_item.png", (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+			DrawImage(imgitem, (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
 			pcnt = Level.total_items ? 100 * Level.found_items / Level.total_items : 100;
 			amt = multiplayer ? CPlayer.itemcount : pcnt;
 			DrawString(fnt, FormatNumber(amt, 3), (-16, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
@@ -793,8 +815,16 @@ class SevHUD : DoomStatusBar
 
 		if (CVar.GetCVar("am_showmonsters", CPlayer).GetBool())
 		{
+			// Which kills gfx to use?
+			string imgkill;
+			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_kill.png");
+			if (lump >= 0)
+				imgkill = basefilepath..mapset.."/st_kill.png";
+			else
+				imgkill = basefilepath.."standard/st_kill.png";
+
 			// Draw automap kills
-			DrawImage(basefilepath..stats.."/st_kill.png", (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+			DrawImage(imgkill, (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
 			pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
 			amt = multiplayer ? CPlayer.killcount : pcnt;
 			DrawString(fnt, FormatNumber(amt, 3), (-16, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
