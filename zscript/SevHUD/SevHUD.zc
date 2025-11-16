@@ -310,6 +310,13 @@ class SevHUD : DoomStatusBar
 				DrawImage(basefilepath.."standard/st_time.png", (basex, 191), DI_ITEM_OFFSETS);
 			}
 		}
+		
+		string imgcolon;
+		lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_colon.png");
+		if (lump >= 0)
+			imgcolon = basefilepath..mapset.."/st_colon.png";
+		else
+			imgcolon = basefilepath.."standard/st_colon.png";
 
 		int amt;
 		int pcnt;
@@ -359,11 +366,11 @@ class SevHUD : DoomStatusBar
 				hoursoffset = 1;
 				amt = hours;
 				DrawString(fnt, FormatNumber(amt, 1, format: 2), (basex + 20, 191), DI_TEXT_ALIGN_RIGHT);
-				DrawImage(basefilepath..mapset.."/st_colon.png", (basex + 21, 192), DI_ITEM_OFFSETS);
+				DrawImage(imgcolon, (basex + 21, 192), DI_ITEM_OFFSETS);
 			}
 
 			// minutes
-			DrawImage(basefilepath..mapset.."/st_colon.png", (basex + 32, 192), DI_ITEM_OFFSETS);
+			DrawImage(imgcolon, (basex + 32, 192), DI_ITEM_OFFSETS);
 			if ((minutes >= 10) || (hours >= 1))
 				minsdigits = 2;
 			amt = minutes;
