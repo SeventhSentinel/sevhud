@@ -216,14 +216,15 @@ class SevHUD : DoomStatusBar
 					// Despite the map label saying it's E1M1, it is in fact MAP01
 					case 'bf34c34c5dfc8bb47228cc304f9a6748':
 						mapset = "legacyofrust";
+						powerups = mapset;
 						break;
 
 					// Pirate Doom 2
-					/* case '8af76bf89a864c1e2b3b21865c277298':
-						mapset = "pd2";
+					case '8af76bf89a864c1e2b3b21865c277298':
+						mapset = "piratedoom2";
 						powerups = mapset;
 						radsuitoffset = (-15, 1);
-						break; */
+						break;
 
 					// Plutonia 2
 					// case '26901fc48667b76027871880e357cd0a':
@@ -234,7 +235,7 @@ class SevHUD : DoomStatusBar
 				}
 			}
 
-/*			if (LevelInfo.MapExists("MAP41"))
+			if (LevelInfo.MapExists("MAP41"))
 			{
 				name checksum = LevelInfo.MapChecksum("MAP41");
 
@@ -242,11 +243,13 @@ class SevHUD : DoomStatusBar
 				{
 					// Pirate Doom
 					case 'baebc37899109027a7e26f2e5390b0b1':
-						mapset = "pirates";
+						mapset = "piratedoom";
+						powerups = mapset;
+						radsuitoffset = (1, 0);
 						break;
 				}
 			}
-*/
+
 			/*
 				if (LevelInfo.MapExists("VR"))
 			{
@@ -652,20 +655,33 @@ class SevHUD : DoomStatusBar
 
 	void DrawSevHUDAmmo(HUDFont fnt)
 	{
+		string ammo1 = "Clip";
+		string ammo2 = "Shell";
+		string ammo3 = "RocketAmmo";
+		string ammo4 = "Cell";
+
+		// Shiver me timbers! Pirate Doom uses unique ammo!
+		if (mapset == "piratedoom")
+		{
+			ammo1 = "Bullets";
+			ammo3 = "BallAmmo";
+			ammo4 = "DynamiteAmmo";
+		}
+
 		int amt1, maxamt;
-		[amt1, maxamt] = GetAmount("Clip");
+		[amt1, maxamt] = GetAmount(ammo1);
 		DrawString(fnt, FormatNumber(amt1, 3), (287, 173), DI_TEXT_ALIGN_RIGHT);
 		DrawString(fnt, FormatNumber(maxamt, 3), (313, 173), DI_TEXT_ALIGN_RIGHT);
 
-		[amt1, maxamt] = GetAmount("Shell");
+		[amt1, maxamt] = GetAmount(ammo2);
 		DrawString(fnt, FormatNumber(amt1, 3), (287, 179), DI_TEXT_ALIGN_RIGHT);
 		DrawString(fnt, FormatNumber(maxamt, 3), (313, 179), DI_TEXT_ALIGN_RIGHT);
 
-		[amt1, maxamt] = GetAmount("RocketAmmo");
+		[amt1, maxamt] = GetAmount(ammo3);
 		DrawString(fnt, FormatNumber(amt1, 3), (287, 185), DI_TEXT_ALIGN_RIGHT);
 		DrawString(fnt, FormatNumber(maxamt, 3), (313, 185), DI_TEXT_ALIGN_RIGHT);
 
-		[amt1, maxamt] = GetAmount("Cell");
+		[amt1, maxamt] = GetAmount(ammo4);
 		DrawString(fnt, FormatNumber(amt1, 3), (287, 191), DI_TEXT_ALIGN_RIGHT);
 		DrawString(fnt, FormatNumber(maxamt, 3), (313, 191), DI_TEXT_ALIGN_RIGHT);
 	}
