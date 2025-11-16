@@ -11,8 +11,6 @@
 
 class SevHUD : DoomStatusBar
 {
-	const X_PADDING = 8;
-
 	HUDFont mHUDSmallFont;
 	HUDFont mHUDConFont;
 
@@ -73,93 +71,19 @@ class SevHUD : DoomStatusBar
 		{
 			// draw crosshair etc
 			BaseStatusBar.Draw(state, TicFrac);
+
 			DrawSevHUD(state);
 			DrawHealthBar(state);
+
+			// We'll use this to draw the automap stuff
+			BeginHUD();
+			DrawSevAutomapHUD();
 		}
 	}
 
 	override void DrawAutomapHUD(double ticFrac)
 	{
-		// Map label/name
-		HUDFont fnt = mHUDSmallFont;
-		int fontHeight = fnt.mFont.GetHeight();
-
-		string maplabel = "";
-		string mapname = "";
-
-		int am_showmaplabel = CVar.GetCVar("am_showmaplabel", CPlayer).GetInt();
-		bool showmaplabel = false;
-		bool showmapname = CVar.GetCVar("am_showlevelname", CPlayer).GetBool();
-
- 		if ((am_showmaplabel == 1) || (am_showmaplabel == 2) && (!(Level.clusterflags & Level.CLUSTER_HUB)))
-			showmaplabel = true;
-
- 		if (showmaplabel)
-		{
-			maplabel = Level.MapName;
-			if (showmapname)
-				maplabel = maplabel..": ";
-		}
-
-		if (showmapname)
-		{
-			mapname = (Level.Levelname);
-		}
-
-		DrawString(fnt, maplabel.."\cj"..mapname, (160, 169-fontHeight), DI_TEXT_ALIGN_CENTER);
-		
-		// Prep for the rest of the HUD
-		fnt = littleNumbers;
-
-		// Global timer
-		if (CVar.GetCVar("am_showtotaltime", CPlayer).GetBool())
-		{
-			int amt;
-			int xoffset = 70;
-			int hoursoffset = 0;
-			int hoursdigits = 1;
-			int minsdigits = 1;
-			int timeSeconds = Thinker.Tics2Seconds(Level.totaltime);
-			int hours   = timeSeconds / 3600;
-			int minutes = (timeSeconds % 3600) / 60;
-			int seconds = timeSeconds % 60;
-
-			string basefilepath = "graphics/SevHUD/";
-			string filepath = basefilepath..mapset.."/";
-
-			// hours
-			if (hours >= 1)
-			{
-				if (hours >= 10)
-					hoursdigits = 2;
-
-				if (hours >= 100)
-					hoursdigits = 3;
-
-				hoursoffset = 1;
-				amt = hours;
-				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (274 + xoffset+2, 0), DI_TEXT_ALIGN_RIGHT);
-				DrawImage(basefilepath..stats.."/st_colon.png", (347, 1), DI_ITEM_OFFSETS);
-			}
-
-			// minutes
-			if ((minutes >= 10) || (hours >= 1))
-				minsdigits = 2;
-			amt = minutes;
-			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (286 + xoffset+hoursoffset, 0), DI_TEXT_ALIGN_RIGHT);
-
-			DrawImage(basefilepath..stats.."/st_colon.png", (358, 1), DI_ITEM_OFFSETS);
-
-			// seconds
-			amt = seconds;
-			DrawString(fnt, FormatNumber(amt, 2, format: 2), (298 + xoffset, 0), DI_TEXT_ALIGN_RIGHT);
-		}
-		
-		if (CVar.GetCVar("sevhud_extra", CPlayer).GetInt())
-			return;
-
-		int pcnt;		
-		// TODO: We're not drawing the SevHUD stats, so show kills/secrets/items/time according to user settings
+		// do nothing
 	}
 
 	//===========================================================================
@@ -692,6 +616,64 @@ class SevHUD : DoomStatusBar
 	//
 	//===========================================================================
 
+	void DrawSevAutomapHUD(void)
+	{
+		if (!automapactive)
+		return;
+	
+		HUDFont fnt = littleNumbers;
+		int fontHeight = fnt.mFont.GetHeight();
+
+		// Global timer
+		if (CVar.GetCVar("am_showtotaltime", CPlayer).GetBool())
+		{
+			int amt;
+			int hoursoffset = 0;
+			int hoursdigits = 1;
+			int minsdigits = 1;
+			int timeSeconds = Thinker.Tics2Seconds(Level.totaltime);
+			int hours   = timeSeconds / 3600;
+			int minutes = (timeSeconds % 3600) / 60;
+			int seconds = timeSeconds % 60;
+
+			string basefilepath = "graphics/SevHUD/";
+			string filepath = basefilepath..mapset.."/";
+
+			// hours
+			if (hours >= 1)
+			{
+				if (hours >= 10)
+					hoursdigits = 2;
+
+				if (hours >= 100)
+					hoursdigits = 3;
+
+				hoursoffset = 1;
+				amt = hours;
+				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (-29, 4), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(basefilepath..stats.."/st_colon.png", (-28, 5), DI_ITEM_OFFSETS);
+			}
+
+			// minutes
+			if ((minutes >= 10) || (hours >= 1))
+				minsdigits = 2;
+			amt = minutes;
+			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (hoursoffset-19, 4), DI_TEXT_ALIGN_RIGHT);
+
+			DrawImage(basefilepath..stats.."/st_colon.png", (-17, 5), DI_ITEM_OFFSETS);
+
+			// seconds
+			amt = seconds;
+			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-7, 4), DI_TEXT_ALIGN_RIGHT);
+		}
+		
+		if (CVar.GetCVar("sevhud_extra", CPlayer).GetInt())
+			return;
+
+		int pcnt;		
+		// TODO: We're not drawing the SevHUD stats, so show kills/secrets/items/time according to user settings
+	}
+
 	void DrawSevHUD(int state)
 	{
 		GetMapSet();
@@ -705,7 +687,33 @@ class SevHUD : DoomStatusBar
 		// DrawMainBar
 		if (automapactive)
 		{
-			// DrawImage(basefilepath.."STBACK.png", (0, 168), DI_ITEM_OFFSETS);
+			// Map label/name
+			HUDFont fnt = mHUDSmallFont;
+			int fontHeight = fnt.mFont.GetHeight();
+
+			string maplabel = "";
+			string mapname = "";
+
+			int am_showmaplabel = CVar.GetCVar("am_showmaplabel", CPlayer).GetInt();
+			bool showmaplabel = false;
+			bool showmapname = CVar.GetCVar("am_showlevelname", CPlayer).GetBool();
+
+			if ((am_showmaplabel == 1) || (am_showmaplabel == 2) && (!(Level.clusterflags & Level.CLUSTER_HUB)))
+				showmaplabel = true;
+
+			if (showmaplabel)
+			{
+				maplabel = Level.MapName;
+				if (showmapname)
+					maplabel = maplabel..": ";
+			}
+
+			if (showmapname)
+			{
+				mapname = (Level.Levelname);
+			}
+
+			DrawString(fnt, maplabel.."\cj"..mapname, (160, 169-fontHeight), DI_TEXT_ALIGN_CENTER);
 		}
 
 		DrawImage(filepath.."st_bar.png", (0, 168), DI_ITEM_OFFSETS);
