@@ -195,7 +195,6 @@ class SevHUD : DoomStatusBar
 						mapset = "btsx1";
 						powerups = "doom";
 						littleNumbers = mBTSX1IndexFont;
-						stats = mapset;
 						break;
 					
 					// BTSX ep 2
@@ -203,19 +202,16 @@ class SevHUD : DoomStatusBar
 						mapset = "btsx2";
 						powerups = "doom";
 						littleNumbers = mBTSX2IndexFont;
-						stats = mapset;
 						break; 
 
 					// Eviternity
 					case '9831c412420f16fa0de000fd1dbfe901':
 						mapset = "eviternity";
-						stats = mapset;
 						break;
 
 					// Eviternity 2
 					case '8eb38d5289c47bb68d64f2832efa096d':
 						mapset = "eviternity2";
-						stats = mapset;
 						break;
 
 					// Legacy of Rust
@@ -291,6 +287,32 @@ class SevHUD : DoomStatusBar
 		int basex = 326;
 
 		// Draw the background first
+		// Is there a full stats gfx? If so, use that instead of drawing the individual parts
+		int lump;
+
+		lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_stats.png");
+		if (lump >= 0)
+		{
+			DrawImage(basefilepath..mapset.."/st_stats.png", (320, 168), DI_ITEM_OFFSETS);
+		}
+		else
+		{
+			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_kill.png");
+			if (lump >= 0)
+			{
+				DrawImage(basefilepath..mapset.."/st_kill.png", (basex, 173), DI_ITEM_OFFSETS);
+				DrawImage(basefilepath..mapset.."/st_item.png", (basex, 179), DI_ITEM_OFFSETS);
+				DrawImage(basefilepath..mapset.."/st_secret.png", (basex, 185), DI_ITEM_OFFSETS);
+				DrawImage(basefilepath..mapset.."/st_time.png", (basex, 191), DI_ITEM_OFFSETS);
+			}
+			else
+			{
+				DrawImage(basefilepath.."standard/st_kill.png", (basex, 173), DI_ITEM_OFFSETS);
+				DrawImage(basefilepath.."standard/st_item.png", (basex, 179), DI_ITEM_OFFSETS);
+				DrawImage(basefilepath.."standard/st_secret.png", (basex, 185), DI_ITEM_OFFSETS);
+				DrawImage(basefilepath.."standard/st_time.png", (basex, 191), DI_ITEM_OFFSETS);
+			}
+		}
 
 		int amt;
 		int pcnt;
@@ -298,27 +320,21 @@ class SevHUD : DoomStatusBar
 		int xoffset = 32;
 
 		// kills
-		DrawImage(basefilepath..stats.."/st_kills.png", (basex, 173), DI_ITEM_OFFSETS);
 		pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
 		amt = multiplayer ? CPlayer.killcount : pcnt;
 		DrawString(fnt, FormatNumber(amt, 3), (basex + xoffset, 173), DI_TEXT_ALIGN_RIGHT);
 
 		// items
-		DrawImage(basefilepath..stats.."/st_items.png", (basex, 179), DI_ITEM_OFFSETS);
 		pcnt = Level.total_items ? 100 * Level.found_items / Level.total_items : 100;
 		amt = multiplayer ? CPlayer.itemcount : pcnt;
 		DrawString(fnt, FormatNumber(amt, 3), (basex + xoffset, 179), DI_TEXT_ALIGN_RIGHT);
 
 		// secrets
-		DrawImage(basefilepath..stats.."/st_secrets.png", (basex, 185), DI_ITEM_OFFSETS);
 		pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
 		amt = multiplayer ? CPlayer.secretcount : pcnt;
 		DrawString(fnt, FormatNumber(amt, 3), (basex + xoffset, 185), DI_TEXT_ALIGN_RIGHT);
 
 		// time stuff
-		DrawImage(basefilepath..stats.."/st_time.png", (basex, 191), DI_ITEM_OFFSETS);
-		DrawImage(basefilepath..stats.."/st_colon.png", (basex + 32, 192), DI_ITEM_OFFSETS);
-
 		bool sucks = false;
 		int hoursoffset = 0;
 		int minsdigits = 1;
@@ -350,6 +366,7 @@ class SevHUD : DoomStatusBar
 			}
 
 			// minutes
+			DrawImage(basefilepath..stats.."/st_colon.png", (basex + 32, 192), DI_ITEM_OFFSETS);
 			if ((minutes >= 10) || (hours >= 1))
 				minsdigits = 2;
 			amt = minutes;
@@ -755,7 +772,7 @@ class SevHUD : DoomStatusBar
 		if (CVar.GetCVar("am_showsecrets", CPlayer).GetBool())
 		{
 			// Draw automap secrets
-			DrawImage(basefilepath..stats.."/st_secrets.png", (-48, basey-fontHeight), DI_ITEM_OFFSETS);
+			DrawImage(basefilepath..stats.."/st_secret.png", (-48, basey-fontHeight), DI_ITEM_OFFSETS);
 			pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
 			amt = multiplayer ? CPlayer.secretcount : pcnt;
 			DrawString(fnt, FormatNumber(amt, 3), (-16, basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
@@ -766,7 +783,7 @@ class SevHUD : DoomStatusBar
 		if (CVar.GetCVar("am_showitems", CPlayer).GetBool())
 		{
 			// Draw automap items
-			DrawImage(basefilepath..stats.."/st_items.png", (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+			DrawImage(basefilepath..stats.."/st_item.png", (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
 			pcnt = Level.total_items ? 100 * Level.found_items / Level.total_items : 100;
 			amt = multiplayer ? CPlayer.itemcount : pcnt;
 			DrawString(fnt, FormatNumber(amt, 3), (-16, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
@@ -777,7 +794,7 @@ class SevHUD : DoomStatusBar
 		if (CVar.GetCVar("am_showmonsters", CPlayer).GetBool())
 		{
 			// Draw automap kills
-			DrawImage(basefilepath..stats.."/st_kills.png", (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+			DrawImage(basefilepath..stats.."/st_kill.png", (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
 			pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
 			amt = multiplayer ? CPlayer.killcount : pcnt;
 			DrawString(fnt, FormatNumber(amt, 3), (-16, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
@@ -799,6 +816,8 @@ class SevHUD : DoomStatusBar
 
 		string basefilepath = "graphics/SevHUD/";
 		string filepath = basefilepath..mapset.."/";
+		
+		int lump;
 
 		// DrawMainBar
 		if (automapactive)
@@ -885,14 +904,22 @@ class SevHUD : DoomStatusBar
 		if (deathmatch || teamplay)
 		{
 			// Draw "FRAGS" text
-			DrawImage(filepath.."st_frag.png", (104, 168), DI_ITEM_OFFSETS);
+			lump = Wads.CheckNumForFullName(filepath.."st_frag.png");
+			if (lump >= 0)
+				DrawImage(filepath.."st_frag.png", (104, 168), DI_ITEM_OFFSETS);
+			else
+				DrawImage(basefilepath.."standard/st_frag.png", (104, 168), DI_ITEM_OFFSETS);
 			// Draw amount of frags
 			DrawString(mHUDFont, FormatNumber(CPlayer.FragCount, 3), (138, 171), DI_TEXT_ALIGN_RIGHT);
 		}
 		else
 		{
 			// Draw "ARMS" text
-			DrawImage(filepath.."st_arms.png", (104, 168), DI_ITEM_OFFSETS);
+			lump = Wads.CheckNumForFullName(filepath.."st_arms.png");
+			if (lump >= 0)
+				DrawImage(filepath.."st_arms.png", (104, 168), DI_ITEM_OFFSETS);
+			else
+				DrawImage(basefilepath.."standard/st_arms.png", (104, 168), DI_ITEM_OFFSETS);
 			// Draw weapons numbers
 			if (littleNumbers == mDefaultIndexFont)
 			{
