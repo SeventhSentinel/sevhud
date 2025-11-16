@@ -587,11 +587,36 @@ class SevHUD : DoomStatusBar
 			int normalTxtColor = Font.CR_RED;
 			int nameTxtColor = Font.CR_WHITE;
 
-			// draw target name
+			// Get target name
 			String targName = prevAimTarget.GetCharacterName();
 			if (prevAimTarget is "PlayerPawn" && prevAimTarget.player && playeringame[prevAimTarget.PlayerNumber()])
 				targName = prevAimTarget.player.GetUserName();
 			txt = String.Format("%s", targName);
+
+			// Clean up target name
+			GetMapSet();
+
+			if (mapset == "legacyofrust")
+			{
+				if (txt == "Deh_Actor_150")
+					txt = "Ghoul";
+
+				if (txt == "Deh_Actor_151")
+					txt = "Banshee";
+
+				if (txt == "Deh_Actor_152")
+					txt = "Mindweaver";
+
+				if (txt == "Deh_Actor_153")
+					txt = "Shocktrooper";
+
+				if (txt == "Deh_Actor_154")
+					txt = "Vassago";
+
+				if (txt == "Deh_Actor_155")
+					txt = "Tyrant";
+			}
+
 			Screen.DrawText(fnt, nameTxtColor,
 				(Screen.GetWidth() / 2) - ((fnt.StringWidth(txt) / 2) * CleanXFac),
 				(baseYPos * CleanYFac) - (fnt.GetHeight() * CleanYFac),

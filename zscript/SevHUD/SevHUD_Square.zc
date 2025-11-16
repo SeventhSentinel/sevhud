@@ -520,11 +520,56 @@ class SevHUD_Square : DoomStatusBar
 			int normalTxtColor = Font.CR_RED;
 			int nameTxtColor = Font.CR_WHITE;
 
-			// draw target name
+			// get target name
 			String targName = prevAimTarget.GetCharacterName();
 			if (prevAimTarget is "PlayerPawn" && prevAimTarget.player && playeringame[prevAimTarget.PlayerNumber()])
 				targName = prevAimTarget.player.GetUserName();
 			txt = String.Format("%s", targName);
+			
+			// Clean up display names
+			if (txt == "FriendlySquare")
+				txt = "Friendly Square";
+			
+			if (txt == "KnifeJerk")
+				txt = "Knife Jerk";
+
+			if (txt == "PaintJerk")
+				txt = "Paintball Jerk";
+
+			if (txt == "CannonJerk")
+				txt = "Cannon Jerk";
+
+			if (txt == "OoziJerk")
+				txt = "Oozi Jerk";
+
+			if (txt == "EliteOoziJerk")
+				txt = "Elite Oozi Jerk";
+
+			if (txt == "AngleFish")
+				txt = "Angle Fish";
+
+			if (txt == "JetpackJerk")
+				txt = "Jetpack Jerk";
+
+			if (txt == "ColorCube")
+				txt = "Color Cube";
+
+			if (txt == "SpyEye")
+				txt = "Spy-Eye";
+
+			if (txt == "Dark Spectra")
+				txt = "DarkSpectra";
+
+			if (txt == "MiniDestructinator")
+				txt = "Mini-Destructinator";
+
+			if (txt == "HexasRanger")
+				txt = "Hexas Ranger";
+
+			if (txt == "HexanSheriff")
+				txt = "Hexan Sheriff";
+
+			// Draw target name
 			Screen.DrawText(fnt, nameTxtColor,
 				(Screen.GetWidth() / 2) - ((fnt.StringWidth(txt) / 2) * CleanXFac),
 				(baseYPos * CleanYFac) - (fnt.GetHeight() * CleanYFac),

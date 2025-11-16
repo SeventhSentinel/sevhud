@@ -337,6 +337,39 @@ class SevHUD_Chex : DoomStatusBar
 			if (prevAimTarget is "PlayerPawn" && prevAimTarget.player && playeringame[prevAimTarget.PlayerNumber()])
 				targName = prevAimTarget.player.GetUserName();
 			txt = String.Format("%s", targName);
+			
+			// Clean up display names
+			if (txt == "FlemoidusCommonusV3")
+				txt = "Flemoid";
+
+			if (txt == "FlemoidusBipedicusV3")
+				txt = "Bipedicus";
+
+			if (txt == "FlemoidusCycloptisCommonusV3")
+				txt = "Cycloptis";
+
+			if (txt == "ArmoredFlemoidusBipedicusV3")
+				txt = "Armored Bipedicus";
+
+			if (txt == "FlembraneV3")
+				txt = "Flembrane";
+
+			if (txt == "FlemoidusMaximus")
+				txt = "Maximus";
+
+			if (txt == "SuperCycloptis")
+				txt = "Super Cycloptis";
+
+			if (txt == "FlemoidusStridicus")
+				txt = "Stridicus";
+
+			if (txt == "FlemMine")
+				txt = "Flem Mine";
+
+			if (txt == "Snotfolus")
+				txt = "Lord Snotfolus";
+			// The rest of them look okay to me
+
 			Screen.DrawText(fnt, nameTxtColor,
 				(Screen.GetWidth() / 2) - ((fnt.StringWidth(txt) / 2) * CleanXFac),
 				(baseYPos * CleanYFac) - (fnt.GetHeight() * CleanYFac),
