@@ -293,7 +293,7 @@ class SevHUD : DoomStatusBar
 
 		int amt;
 		int pcnt;
-
+		
 		int xoffset = 70;
 
 		// kills
@@ -623,6 +623,8 @@ class SevHUD : DoomStatusBar
 	
 		HUDFont fnt = littleNumbers;
 		int fontHeight = fnt.mFont.GetHeight();
+		
+		int offsety = 0;
 
 		// Global timer
 		if (CVar.GetCVar("am_showtotaltime", CPlayer).GetBool())
@@ -665,13 +667,60 @@ class SevHUD : DoomStatusBar
 			// seconds
 			amt = seconds;
 			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-7, 4), DI_TEXT_ALIGN_RIGHT);
+			
+			// move the level timer down
+			offsety += 6;
 		}
-		
+
+		// Don't draw anything else if we're already drawing the stats
 		if (CVar.GetCVar("sevhud_extra", CPlayer).GetInt())
 			return;
+		
+		// Map time
+		if (CVar.GetCVar("am_showtime", CPlayer).GetBool())
+		{
+			int amt;
+			int hoursoffset = 0;
+			int hoursdigits = 1;
+			int minsdigits = 1;
+			int timeSeconds = Thinker.Tics2Seconds(Level.time);
+			int hours   = timeSeconds / 3600;
+			int minutes = (timeSeconds % 3600) / 60;
+			int seconds = timeSeconds % 60;
+
+			string basefilepath = "graphics/SevHUD/";
+			string filepath = basefilepath..mapset.."/";
+
+			// hours
+			if (hours >= 1)
+			{
+				if (hours >= 10)
+					hoursdigits = 2;
+
+				if (hours >= 100)
+					hoursdigits = 3;
+
+				hoursoffset = 1;
+				amt = hours;
+				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (-29, 4 + offsety), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(basefilepath..stats.."/st_colon.png", (-28, 5 + offsety), DI_ITEM_OFFSETS);
+			}
+
+			// minutes
+			if ((minutes >= 10) || (hours >= 1))
+				minsdigits = 2;
+			amt = minutes;
+			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (hoursoffset-19, 4 + offsety), DI_TEXT_ALIGN_RIGHT);
+
+			DrawImage(basefilepath..stats.."/st_colon.png", (-17, 5 + offsety), DI_ITEM_OFFSETS);
+
+			// seconds
+			amt = seconds;
+			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-7, 4 + offsety), DI_TEXT_ALIGN_RIGHT);
+		}
 
 		int pcnt;		
-		// TODO: We're not drawing the SevHUD stats, so show kills/secrets/items/time according to user settings
+		// TODO: We're not drawing the SevHUD stats, so show kills/secrets/items according to user settings
 	}
 
 	void DrawSevHUD(int state)
