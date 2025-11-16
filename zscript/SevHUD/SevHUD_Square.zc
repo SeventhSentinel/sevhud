@@ -10,6 +10,7 @@
 //===========================================================================
 
 class SevHUD_Square : DoomStatusBar
+
 {
 	const X_PADDING = 8;
 
@@ -30,6 +31,7 @@ class SevHUD_Square : DoomStatusBar
 	override void Init(void)
 	{
 		Super.Init();
+		SetSize(0, 320, 200);
 
 		mHUDSmallFont = HUDFont.Create(smallfont);
 		mHUDConFont = HUDFont.Create(confont);
@@ -49,25 +51,16 @@ class SevHUD_Square : DoomStatusBar
 	{
 		if ((state == HUD_StatusBar)||(state == HUD_Fullscreen))
 		{
+			// draw crosshair etc
 			BaseStatusBar.Draw(state, TicFrac);
 
 			// Are we in intermission or a cutscene?
 			int intermission = GetAmount("IntermissionModeItem");
 			int cutscene = GetAmount("CutsceneModeItem");
 
-			if (!cutscene)
-			{
-				// Draw the backing if the automap is open
-				if (state == HUD_StatusBar)
-				{
-					DrawImage("graphics/SevHUD/STBACK.png", (0, 168), DI_ITEM_OFFSETS);
-				}
-			}
-
 			if (intermission + cutscene == 0)
 			{
 				DrawSevHUD(state);
-				// draw crosshair etc
 				DrawHealthBar(state);
 			}
 
@@ -75,7 +68,16 @@ class SevHUD_Square : DoomStatusBar
 			{
 				DrawImage("graphics/SevHUD/square/SQSTBRI.lmp", (0, 168), DI_ITEM_OFFSETS|DI_TRANSLATABLE);
 			}
+			
+			// We basically do fullscreenoffsets = true by calling BeginHUD
+			BeginHUD();
+			DrawSevAutomapHUD();
 		}
+	}
+
+	override void DrawAutomapHUD(double ticFrac)
+	{
+		// do nothing
 	}
 
 	//===========================================================================
@@ -135,36 +137,46 @@ class SevHUD_Square : DoomStatusBar
 
 	void DrawStatusBarStats(int state, string filepath, HUDFont fnt)
 	{
+		int basex = 326;
+
+		// Draw the background first
+		DrawImage("graphics/SevHUD/square/st_kill.png", (basex, 175), DI_ITEM_OFFSETS);
+		DrawImage("graphics/SevHUD/square/st_item.png", (basex, 181), DI_ITEM_OFFSETS);
+		DrawImage("graphics/SevHUD/square/st_secret.png", (basex, 187), DI_ITEM_OFFSETS);
+		DrawImage("graphics/SevHUD/square/st_time.png", (basex, 193), DI_ITEM_OFFSETS);
+
 		int amt;
 		int pcnt;
 
-		int xoffset = 70;
+		int offsetx = 32;
 
 		// goonades
 		amt = GetAmount("NumberofGoonades");
 		if (amt > 0)
 		{
-			DrawString(fnt, FormatNumber(amt, 3), (297 + xoffset, 169), DI_TEXT_ALIGN_RIGHT, Font.CR_GREEN);
+			DrawImage("graphics/SevHUD/square/st_greenades.png", (basex, 169), DI_ITEM_OFFSETS);
+			DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx + 9, 169), DI_TEXT_ALIGN_RIGHT, Font.CR_WHITE);
 		}
 		else
 		{
-			DrawString(fnt, FormatNumber(0, 3), (297 + xoffset, 169), DI_TEXT_ALIGN_RIGHT);
+			DrawImage("graphics/SevHUD/square/st_goonades.png", (basex, 169), DI_ITEM_OFFSETS);
+			DrawString(fnt, FormatNumber(0, 3), (basex + offsetx + 9, 169), DI_TEXT_ALIGN_RIGHT);
 		}
 
 		// kills
 		pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
 		amt = multiplayer ? CPlayer.killcount : pcnt;
-		DrawString(fnt, FormatNumber(amt, 3), (288 + xoffset, 175), DI_TEXT_ALIGN_RIGHT);
+		DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 175), DI_TEXT_ALIGN_RIGHT);
 
 		// items
 		pcnt = Level.total_items ? 100 * Level.found_items / Level.total_items : 100;
 		amt = multiplayer ? CPlayer.itemcount : pcnt;
-		DrawString(fnt, FormatNumber(amt, 3), (288 + xoffset, 181), DI_TEXT_ALIGN_RIGHT);
+		DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 181), DI_TEXT_ALIGN_RIGHT);
 
 		// secrets
 		pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
 		amt = multiplayer ? CPlayer.secretcount : pcnt;
-		DrawString(fnt, FormatNumber(amt, 3), (288 + xoffset, 187), DI_TEXT_ALIGN_RIGHT);
+		DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 187), DI_TEXT_ALIGN_RIGHT);
 
 		// time stuff
 		bool sucks = false;
@@ -179,6 +191,13 @@ class SevHUD_Square : DoomStatusBar
 		if (hours >= 10)
 			sucks = true;
 
+		int debugtime = CVar.GetCVar("sevhud_debugtime", CPlayer).GetInt();
+		if (debugtime >= 1)
+		{
+			hours = debugtime;
+			minutes = debugtime;
+		}
+
 		if (!sucks)
 		{
 			// hours
@@ -186,24 +205,25 @@ class SevHUD_Square : DoomStatusBar
 			{
 				hoursoffset = 1;
 				amt = hours;
-				DrawString(fnt, FormatNumber(amt, 1, format: 2), (274 + xoffset+2, 193), DI_TEXT_ALIGN_RIGHT);
-				DrawImage(filepath.."st_colon.png", (347, 194), DI_ITEM_OFFSETS);
+				DrawString(fnt, FormatNumber(amt, 1, format: 2), (basex + 20, 193), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(filepath.."st_colon.png", (basex + 21, 194), DI_ITEM_OFFSETS);
 			}
 
 			// minutes
+			DrawImage("graphics/SevHUD/square/st_colon.png", (basex + 32, 194), DI_ITEM_OFFSETS);
 			if ((minutes >= 10) || (hours >= 1))
 				minsdigits = 2;
 			amt = minutes;
-			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (286 + xoffset+hoursoffset, 193), DI_TEXT_ALIGN_RIGHT);
+			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (basex + 30 + hoursoffset, 193), DI_TEXT_ALIGN_RIGHT);
 
 			// seconds
 			amt = seconds;
-			DrawString(fnt, FormatNumber(amt, 2, format: 2), (298 + xoffset, 193), DI_TEXT_ALIGN_RIGHT);
+			DrawString(fnt, FormatNumber(amt, 2, format: 2), (basex + 42, 193), DI_TEXT_ALIGN_RIGHT);
 		}
 		else
 		{
 			// time sucks
-			DrawImage(filepath.."st_sucks.png", (344, 193), DI_ITEM_OFFSETS);
+			DrawImage(filepath.."st_sucks.png", (basex + 18, 193), DI_ITEM_OFFSETS);
 		}
 	}
 
@@ -215,6 +235,9 @@ class SevHUD_Square : DoomStatusBar
 
 	void DrawStatusBarPowerups(void)
 	{
+		// Draw the background first
+		DrawImage("graphics/SevHUD/square/st_extra.png", (-53, 168), DI_ITEM_OFFSETS);
+
 		let invul = Powerup(CPlayer.mo.FindInventory("PowerInvulnerable"));
 		let flight = Powerup(CPlayer.mo.FindInventory("PowerFlight"));
 		if (invul&&flight)
@@ -375,6 +398,11 @@ class SevHUD_Square : DoomStatusBar
 
 	void DrawFishBowl(void)
 	{
+		// No powerup? Then no draw
+		let nodrown = Powerup(CPlayer.mo.FindInventory("PowerNoDrown"));
+		if (!nodrown)
+			return;
+
 		// draw left fishbowl glass gfx
 		let leftTex = TexMan.CheckForTexture("BOWLSCRL");
 		if (leftTex.IsValid())
@@ -553,6 +581,178 @@ class SevHUD_Square : DoomStatusBar
 	//
 	//===========================================================================
 
+	void DrawSevAutomapHUD(void)
+	{
+		// Are we in intermission or a cutscene?
+		int intermission = GetAmount("IntermissionModeItem");
+		int cutscene = GetAmount("CutsceneModeItem");
+
+		if (intermission + cutscene >= 1)
+			return;
+
+		if (!automapactive)
+			return;
+	
+		HUDFont fnt = mDefaultIndexFont;
+		int fontHeight = fnt.mFont.GetHeight();
+		
+		int lump;
+		int amt;
+
+		int basey = 4;
+		int offsety = 0;
+
+		// Global timer
+		// Square doesn't pause the timer when the level is over, it just sets
+		// a time for the intermission to display, if I'm looking at it right.
+		// So the global timer doesn't actually show you the real time taken.
+		// That's a problem for future Sev to worry about.
+		if (CVar.GetCVar("am_showtotaltime", CPlayer).GetBool())
+		{
+			int hoursoffset = 0;
+			int hoursdigits = 1;
+			int minsdigits = 1;
+			int timeSeconds = Thinker.Tics2Seconds(Level.totaltime);
+			int hours   = timeSeconds / 3600;
+			int minutes = (timeSeconds % 3600) / 60;
+			int seconds = timeSeconds % 60;
+
+			int debugtime = CVar.GetCVar("sevhud_debugtime", CPlayer).GetInt();
+			if (debugtime >= 1)
+			{
+				hours = debugtime;
+				minutes = debugtime;
+			}
+
+			// hours
+			if (hours >= 1)
+			{
+				if (hours >= 10)
+					hoursdigits = 2;
+
+				if (hours >= 100)
+					hoursdigits = 3;
+
+				hoursoffset = 1;
+				amt = hours;
+				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (-29, basey), DI_TEXT_ALIGN_RIGHT);
+				DrawImage("graphics/SevHUD/square/st_colon.png", (-28, basey + 1), DI_ITEM_OFFSETS);
+			}
+
+			// minutes
+			if ((minutes >= 10) || (hours >= 1))
+				minsdigits = 2;
+			amt = minutes;
+			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (hoursoffset-19, basey), DI_TEXT_ALIGN_RIGHT);
+
+			DrawImage("graphics/SevHUD/square/st_colon.png", (-17, basey + 1), DI_ITEM_OFFSETS);
+
+			// seconds
+			amt = seconds;
+			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-7, basey), DI_TEXT_ALIGN_RIGHT);
+			
+			// move the level timer down
+			offsety += fontHeight;
+		}
+
+		// Don't draw anything else if we're already drawing the stats on the status bar
+		if (CVar.GetCVar("sevhud_extra", CPlayer).GetInt())
+			return;
+		
+		// Map time
+		if (CVar.GetCVar("am_showtime", CPlayer).GetBool())
+		{
+			int hoursoffset = 0;
+			int hoursdigits = 1;
+			int minsdigits = 1;
+			int timeSeconds = Thinker.Tics2Seconds(Level.time);
+			int hours   = timeSeconds / 3600;
+			int minutes = (timeSeconds % 3600) / 60;
+			int seconds = timeSeconds % 60;
+
+			int debugtime = CVar.GetCVar("sevhud_debugtime", CPlayer).GetInt();
+			if (debugtime >= 1)
+			{
+				hours = debugtime;
+				minutes = debugtime;
+			}
+
+			// hours
+			if (hours >= 1)
+			{
+				if (hours >= 10)
+					hoursdigits = 2;
+
+				if (hours >= 100)
+					hoursdigits = 3;
+
+				hoursoffset = 1;
+				amt = hours;
+				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (-29, basey + offsety), DI_TEXT_ALIGN_RIGHT);
+				DrawImage("graphics/SevHUD/square/st_colon.png", (-28, basey + offsety + 1), DI_ITEM_OFFSETS);
+			}
+
+			// minutes
+			if ((minutes >= 10) || (hours >= 1))
+				minsdigits = 2;
+			amt = minutes;
+			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (hoursoffset-19, basey + offsety), DI_TEXT_ALIGN_RIGHT);
+
+			DrawImage("graphics/SevHUD/square/st_colon.png", (-17, basey + offsety + 1), DI_ITEM_OFFSETS);
+
+			// seconds
+			amt = seconds;
+			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-7, basey + offsety), DI_TEXT_ALIGN_RIGHT);
+		}
+
+		int pcnt;
+		basey = -33;
+		offsety = 0;
+		
+		// For 4:3 play, we need to make sure these stats don't overlap the goonade display
+		int nades = GetAmount("NumberofGoonades");
+
+		if (nades >= 1)
+			offsety -= 12;
+
+		if (CVar.GetCVar("am_showsecrets", CPlayer).GetBool())
+		{
+			// Draw automap secrets
+			DrawImage("graphics/SevHUD/square/st_secret.png", (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+			pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
+			amt = multiplayer ? CPlayer.secretcount : pcnt;
+			DrawString(fnt, FormatNumber(amt, 3), (-16, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+
+			offsety -= fontHeight;
+		}
+
+		if (CVar.GetCVar("am_showitems", CPlayer).GetBool())
+		{
+			// Draw automap items
+			DrawImage("graphics/SevHUD/square/st_item.png", (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+			pcnt = Level.total_items ? 100 * Level.found_items / Level.total_items : 100;
+			amt = multiplayer ? CPlayer.itemcount : pcnt;
+			DrawString(fnt, FormatNumber(amt, 3), (-16, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+
+			offsety -= fontHeight;
+		}
+
+		if (CVar.GetCVar("am_showmonsters", CPlayer).GetBool())
+		{
+			// Draw automap kills
+			DrawImage("graphics/SevHUD/square/st_kill.png", (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+			pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
+			amt = multiplayer ? CPlayer.killcount : pcnt;
+			DrawString(fnt, FormatNumber(amt, 3), (-16, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
 	void DrawSquareKeys(void)
 	{
 		bool locks[17];
@@ -617,59 +817,48 @@ class SevHUD_Square : DoomStatusBar
 	//
 	//===========================================================================
 
-	void SevHUDSetupAnnoyer(void)
-	{
-		// get fonts
-		Font fnt = mHUDSmallFont.mFont;
-
-		// fonts are invalid, cancel drawing
-		if (!fnt)
-			return;
-
-		int annoyTxtColor = Font.CR_WHITE;
-
-		String txt = "$SEVHUD_SETUP_ANNOY";
-
-		// annoy
-		Screen.DrawText(fnt, annoyTxtColor,
-		(Screen.GetWidth() / 2) - ((fnt.StringWidth(txt) / 2) * CleanXFac),
-		(Screen.GetHeight() / 2),
-		txt,
-		DTA_CleanNoMove, true,
-		DTA_KeepRatio, true);
-	}
-
-	//===========================================================================
-	//
-	//
-	//
-	//===========================================================================
-
 	void DrawSevHUD(int state)
 	{
 		string filepath = "graphics/SevHUD/square/";
 		HUDFont fnt = mDefaultIndexFont;
 
-		// If you have default screenblocks, you probably need to do setup
-		CVar s = CVar.GetCVar("screenblocks", CPlayer);
-		if (s != null)
-		{
-			int blocks = s.GetInt();
-			if (blocks <= 10)
-				SevHUDSetupAnnoyer();
-		}
-
 		// Draw the rest of the HUD over the bowl gfx
-		let nodrown = Powerup(CPlayer.mo.FindInventory("PowerNoDrown"));
-		if (nodrown)
+		DrawFishBowl();
+
+		// DrawMainBar
+		if (automapactive)
 		{
-			DrawFishBowl();
+			// Map label/name
+			HUDFont fnt = mHUDSmallFont;
+			int fontHeight = fnt.mFont.GetHeight();
+
+			string maplabel = "";
+			string mapname = "";
+
+			int am_showmaplabel = CVar.GetCVar("am_showmaplabel", CPlayer).GetInt();
+			bool showmaplabel = false;
+			bool showmapname = CVar.GetCVar("am_showlevelname", CPlayer).GetBool();
+
+			if ((am_showmaplabel == 1) || (am_showmaplabel == 2) && (!(Level.clusterflags & Level.CLUSTER_HUB)))
+				showmaplabel = true;
+
+			if (showmaplabel)
+			{
+				maplabel = Level.MapName;
+				if (showmapname)
+					maplabel = maplabel..": ";
+			}
+
+			if (showmapname)
+			{
+				mapname = (Level.Levelname);
+			}
+
+			DrawString(fnt, maplabel.."\cj"..mapname, (160, 167-fontHeight), DI_TEXT_ALIGN_CENTER);
 		}
 
 		if (CVar.GetCVar("sevhud_extra", CPlayer).GetBool())
 		{
-			DrawImage(filepath.."st_extra.png", (-53, 168), DI_ITEM_OFFSETS);
-			DrawImage(filepath.."st_stats.png", (320, 168), DI_ITEM_OFFSETS);
 			DrawStatusBarStats(state, filepath, fnt);
 			DrawStatusBarPowerups();
 		}
@@ -677,8 +866,6 @@ class SevHUD_Square : DoomStatusBar
 		{
 			DrawSquarePowerups(fnt);
 		}
-	
-		// DrawMainBar
 
 		DrawImage(filepath.."SQSTBAR.lmp", (0, 168), DI_ITEM_OFFSETS|DI_TRANSLATABLE);
 
