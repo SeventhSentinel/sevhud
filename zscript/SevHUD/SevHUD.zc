@@ -723,6 +723,12 @@ class SevHUD : DoomStatusBar
 		// TODO: We're not drawing the SevHUD stats, so show kills/secrets/items according to user settings
 	}
 
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
 	void DrawSevHUD(int state)
 	{
 		GetMapSet();
