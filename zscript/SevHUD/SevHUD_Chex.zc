@@ -56,7 +56,7 @@ class SevHUD_Chex : DoomStatusBar
 			DrawSevHUD(state);
 			DrawHealthBar(state);
 
-			// We'll use this to draw the automap stuff
+			// We basically do fullscreenoffsets = true by calling BeginHUD
 			BeginHUD();
 			DrawSevAutomapHUD();
 		}
@@ -524,7 +524,7 @@ class SevHUD_Chex : DoomStatusBar
 				mapname = (Level.Levelname);
 			}
 
-			DrawString(fnt, maplabel.."\cj"..mapname, (160, 169-fontHeight), DI_TEXT_ALIGN_CENTER);
+			DrawString(fnt, maplabel.."\cj"..mapname, (160, 167-fontHeight), DI_TEXT_ALIGN_CENTER);
 		}
 
 		if (CVar.GetCVar("sevhud_chexextra", CPlayer).GetBool())

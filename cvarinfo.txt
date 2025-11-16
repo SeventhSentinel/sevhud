@@ -1,4 +1,4 @@
 user bool sevhud_hpbar = false;
 user bool sevhud_extra = true;
-user int sevhud_style = 1;
 server noarchive bool sevhud_checksum = false;
+server noarchive int sevhud_debugtime = 0;
