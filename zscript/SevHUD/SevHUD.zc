@@ -245,7 +245,8 @@ class SevHUD : DoomStatusBar
 					case 'baebc37899109027a7e26f2e5390b0b1':
 						mapset = "piratedoom";
 						powerups = mapset;
-						radsuitoffset = (1, 0);
+						invuloffset = (6, 0);
+						invisoffset = (-6, 0);
 						break;
 				}
 			}
@@ -528,6 +529,61 @@ class SevHUD : DoomStatusBar
 			int health = prevAimTarget.Health;
 			int maxHealth = prevAimTarget.GetMaxHealth(true);
 
+			String txt;
+
+			// Get target name
+			String targName = prevAimTarget.GetCharacterName();
+			if (prevAimTarget is "PlayerPawn" && prevAimTarget.player && playeringame[prevAimTarget.PlayerNumber()])
+				targName = prevAimTarget.player.GetUserName();
+			txt = String.Format("%s", targName);
+
+			// Pirate Doom's LeChuck comes with his own health display
+			if ((mapset == "piratedoom") && ((txt == "lechuckteleport") || (txt == "LeChuck")))
+				return;
+
+			// Clean up target name
+			if (mapset == "piratedoom")
+			{
+				if ((txt == "Witch Doctor") && ((maxHealth == 80) || (maxHealth == 50)))
+					txt = "Cannibal Pygmy";
+			}
+
+			if (mapset == "legacyofrust")
+			{
+				if (txt == "Deh_Actor_150")
+					txt = "Ghoul";
+
+				if (txt == "Deh_Actor_151")
+					txt = "Banshee";
+
+				if (txt == "Deh_Actor_152")
+					txt = "Mindweaver";
+
+				if (txt == "Deh_Actor_153")
+					txt = "Shocktrooper";
+
+				if (txt == "Deh_Actor_154")
+					txt = "Vassago";
+
+				if (txt == "Deh_Actor_155")
+					txt = "Tyrant";
+			}
+
+			if (mapset == "piratedoom2")
+			{
+				if ((txt == "BOLTSHOOTER ARACHNARCH") && (maxHealth == 30))
+					txt = "Mad Tribal Minion";
+
+				if (txt == "Cyberdemon")
+					txt = "The Clompin' Cannoneer";
+
+				if (txt == "Spider Mastermind")
+					txt = "The Rusty Bootlegs Ma'am";
+
+				if (txt == "BossEye")
+					txt = "LeChuck, the Zombie Pirate";
+			}
+
 			// no need to draw 0 or negative health
 			if (health <= 0)
 				return;
@@ -563,8 +619,6 @@ class SevHUD : DoomStatusBar
 					DTA_Alpha, 0.66 * healthBarAlpha);
 			}
 
-			String txt;
-
 			// draw health bar
 			let barTex = TexMan.CheckForTexture("graphics/SevHUD/HPBarHealth.png");
 			if (barTex.IsValid())
@@ -597,36 +651,7 @@ class SevHUD : DoomStatusBar
 			int normalTxtColor = Font.CR_RED;
 			int nameTxtColor = Font.CR_WHITE;
 
-			// Get target name
-			String targName = prevAimTarget.GetCharacterName();
-			if (prevAimTarget is "PlayerPawn" && prevAimTarget.player && playeringame[prevAimTarget.PlayerNumber()])
-				targName = prevAimTarget.player.GetUserName();
-			txt = String.Format("%s", targName);
-
-			// Clean up target name
-			GetMapSet();
-
-			if (mapset == "legacyofrust")
-			{
-				if (txt == "Deh_Actor_150")
-					txt = "Ghoul";
-
-				if (txt == "Deh_Actor_151")
-					txt = "Banshee";
-
-				if (txt == "Deh_Actor_152")
-					txt = "Mindweaver";
-
-				if (txt == "Deh_Actor_153")
-					txt = "Shocktrooper";
-
-				if (txt == "Deh_Actor_154")
-					txt = "Vassago";
-
-				if (txt == "Deh_Actor_155")
-					txt = "Tyrant";
-			}
-
+			// Draw target name
 			Screen.DrawText(fnt, nameTxtColor,
 				(Screen.GetWidth() / 2) - ((fnt.StringWidth(txt) / 2) * CleanXFac),
 				(baseYPos * CleanYFac) - (fnt.GetHeight() * CleanYFac),
