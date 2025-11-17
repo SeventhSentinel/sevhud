@@ -38,4 +38,7 @@ See [SUPPORT.md](https://github.com/SeventhSentinel/sevhud/blob/master/SUPPORT.m
 - SevHUD is ZScript-based. I have only tested it in UZDoom.
 - Software renderer does not support translucent automap background.
 
-If you like SevHUD, feel free to contribute to it! :)
+### Do you like SevHUD?
+- Feel free to submit contributions!
+- SevHUD is based on work by Nash Muhandes. Consider supporting him on [Patreon](https://www.patreon.com/NashMuhandes), or check out his game, [Disdain](https://store.steampowered.com/app/2113270/DISDAIN/).
+- Check out my game, [Snap the Sentinel](https://store.steampowered.com/app/1739960/Snap_the_Sentinel/)!
