@@ -27,16 +27,16 @@ See [SUPPORT.md](https://github.com/SeventhSentinel/sevhud/blob/master/SUPPORT.m
 
 <img width="1280" height="720" alt="Screenshot_Doom_20251112_231932" src="https://github.com/user-attachments/assets/93d73012-4442-4d31-90c9-94ab777797b1" />
 
+### Compatibility
+- SevHUD is ZScript-based. I have only tested it in UZDoom.
+- Software renderer does not support translucent automap background.
+
+<img width="1280" height="720" alt="Screenshot_Square_20251112_223723" src="https://github.com/user-attachments/assets/e1e1a3de-bcec-4afb-a201-107696117b08" />
+
 ### Installation
 1. [Download the latest release](https://github.com/SeventhSentinel/sevhud/releases).
 2. Load `SevHUD.pk3` after your IWAD/PWAD in UZDoom.
 3. Tweak setup in Options > SevHUD Options.
-
-<img width="1280" height="720" alt="Screenshot_Square_20251112_223723" src="https://github.com/user-attachments/assets/e1e1a3de-bcec-4afb-a201-107696117b08" />
-
-### Compatibility
-- SevHUD is ZScript-based. I have only tested it in UZDoom.
-- Software renderer does not support translucent automap background.
 
 ### Do you like SevHUD?
 - Feel free to submit contributions!
