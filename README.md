@@ -35,7 +35,7 @@ See [SUPPORT.md](https://github.com/SeventhSentinel/sevhud/blob/master/SUPPORT.m
 
 ### Installation
 1. [Download the latest release](https://github.com/SeventhSentinel/sevhud/releases).
-2. Load `SevHUD.pk3` after your IWAD/PWAD in UZDoom.
+2. Load SevHUD after your IWAD/PWAD in UZDoom.
 3. Tweak setup in Options > SevHUD Options.
 
 ### Do you like SevHUD?
