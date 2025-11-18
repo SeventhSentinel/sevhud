@@ -5,7 +5,7 @@ Forked from the excellent [NashBar](https://github.com/nashmuhandes/nashbar) by 
 
 License: MIT
 
-<img width="1280" height="720" alt="Screenshot_Doom_20251112_202350" src="https://github.com/user-attachments/assets/8489dc5a-fda7-4c95-8396-49dea5ee4d65" />
+<img width="1280" height="720" alt="Screenshot_Doom_20251118_133004" src="https://github.com/user-attachments/assets/8a09940f-cd6c-42a4-8074-357dae70f032" />
 
 ### Features
 - Transparent status bars faithfully adapted from supported games/mods
@@ -13,7 +13,7 @@ License: MIT
 - Optional NashBar-style enemy HP, powerup, and map completion stats displays
 - Translucent automap background
 
-<img width="1280" height="720" alt="Screenshot_Chex_20251114_200432" src="https://github.com/user-attachments/assets/ed1091fe-1de1-40b0-949a-8d484d7925cf" />
+<img width="1280" height="720" alt="Screenshot_Chex_20251118_133406" src="https://github.com/user-attachments/assets/445d99c3-9dca-459a-89a5-ea38c8dd51f0" />
 
 ### Supported Games
 - Doom, Doom II, Final Doom
@@ -31,7 +31,7 @@ See [SUPPORT.md](https://github.com/SeventhSentinel/sevhud/blob/master/SUPPORT.m
 - SevHUD is ZScript-based. I have only tested it in UZDoom.
 - Software renderer does not support translucent automap background.
 
-<img width="1280" height="720" alt="Screenshot_Square_20251112_223723" src="https://github.com/user-attachments/assets/e1e1a3de-bcec-4afb-a201-107696117b08" />
+<img width="1280" height="720" alt="Screenshot_Square_20251118_134050" src="https://github.com/user-attachments/assets/a745d822-467d-454e-b93a-4b383eb51d92" />
 
 ### Installation
 1. [Download the latest release](https://github.com/SeventhSentinel/sevhud/releases/latest).
