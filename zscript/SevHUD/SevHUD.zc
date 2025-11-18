@@ -1017,12 +1017,25 @@ class SevHUD : DoomStatusBar
 		}
 		else
 		{
-			// Draw "ARMS" text
-			lump = Wads.CheckNumForFullName(filepath.."st_arms.png");
-			if (lump >= 0)
-				DrawImage(filepath.."st_arms.png", (104, 168), DI_ITEM_OFFSETS);
+			// Special case for Private Stone
+			if (LevelInfo.MapExists("STONEM1"))
+			{
+				int amt1, maxamt;
+				[amt1, maxamt] = GetAmount("BG_ZerkCharge");
+				DrawBar("BMETER1", "BMETER2", amt1, maxamt, (124, 194), 0, DI_ITEM_OFFSETS, 1.0);
+				[amt1, maxamt] = GetAmount("BG_Stone_Charge");
+				DrawBar("BMETER3", "BMETER4", amt1, maxamt, (124, 199), 0, DI_ITEM_OFFSETS, 1.0);
+			}
 			else
-				DrawImage(basefilepath.."standard/st_arms.png", (104, 168), DI_ITEM_OFFSETS);
+			{
+				// Draw "ARMS" text
+				lump = Wads.CheckNumForFullName(filepath.."st_arms.png");
+				if (lump >= 0)
+					DrawImage(filepath.."st_arms.png", (104, 168));
+				else
+					DrawImage(basefilepath.."standard/st_arms.png", (104, 168));
+			}
+
 			// Draw weapons numbers
 			if (littleNumbers == mDefaultIndexFont)
 			{
