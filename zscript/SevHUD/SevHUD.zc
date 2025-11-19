@@ -230,6 +230,8 @@ class SevHUD : DoomStatusBar
 					case '26901fc48667b76027871880e357cd0a':
 					// PRCP
 					case '4803362bd33b5e11956f6682dfd48900':
+					// PRCP 2
+					case 'dd9ee1add99d79efef7c88a5ee63aab7':
 						mapset = "pl2";
 						break; 
 				}
