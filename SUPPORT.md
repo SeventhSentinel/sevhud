@@ -1,4 +1,5 @@
 ## Supported Maps
+- Aliens TC
 - Back to Saturn X Episodes 1 & 2
 - Eviternity I & II
 - Pirate Doom 1 & 2
