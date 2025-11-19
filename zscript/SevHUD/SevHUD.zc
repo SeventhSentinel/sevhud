@@ -227,11 +227,11 @@ class SevHUD : DoomStatusBar
 						break;
 
 					// Plutonia 2
-					// case '26901fc48667b76027871880e357cd0a':
+					case '26901fc48667b76027871880e357cd0a':
 					// PRCP
-					/* case '4803362bd33b5e11956f6682dfd48900':
+					case '4803362bd33b5e11956f6682dfd48900':
 						mapset = "pl2";
-						break; */
+						break; 
 				}
 			}
 
@@ -1018,7 +1018,7 @@ class SevHUD : DoomStatusBar
 		else
 		{
 			// Special case for Private Stone
-			if (LevelInfo.MapExists("STONEM1"))
+/*			if (LevelInfo.MapExists("STONEM1"))
 			{
 				int amt1, maxamt;
 				[amt1, maxamt] = GetAmount("BG_ZerkCharge");
@@ -1027,14 +1027,14 @@ class SevHUD : DoomStatusBar
 				DrawBar("BMETER3", "BMETER4", amt1, maxamt, (124, 199), 0, DI_ITEM_OFFSETS, 1.0);
 			}
 			else
-			{
+			{*/
 				// Draw "ARMS" text
 				lump = Wads.CheckNumForFullName(filepath.."st_arms.png");
 				if (lump >= 0)
 					DrawImage(filepath.."st_arms.png", (104, 168));
 				else
 					DrawImage(basefilepath.."standard/st_arms.png", (104, 168));
-			}
+			//}
 
 			// Draw weapons numbers
 			if (littleNumbers == mDefaultIndexFont)
