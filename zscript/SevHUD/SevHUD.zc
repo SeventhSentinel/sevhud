@@ -17,6 +17,7 @@ class SevHUD : DoomStatusBar
 	HUDFont mDefaultIndexFont;
 	HUDFont mBTSX1IndexFont;
 	HUDFont mBTSX2IndexFont;
+	HUDFont mBTSX3IndexFont;
 
 	Actor prevAimTarget;
 	double healthBarAlpha;
@@ -54,6 +55,7 @@ class SevHUD : DoomStatusBar
 		mDefaultIndexFont = HUDFont.Create("DefaultIndexFont");
 		mBTSX1IndexFont = HUDFont.Create("BTSX1IndexFont");
 		mBTSX2IndexFont = HUDFont.Create("BTSX2IndexFont");
+		mBTSX3IndexFont = HUDFont.Create("BTSX3IndexFont");
 
 		InitSevHUD();
 	}
@@ -194,13 +196,20 @@ class SevHUD : DoomStatusBar
 						powerups = "doom";
 						littleNumbers = mBTSX1IndexFont;
 						break;
-					
+
 					// BTSX ep 2
 					case '067cf96073db3cc4a8d887ee240f88da':
 						mapset = "btsx2";
 						powerups = "doom";
 						littleNumbers = mBTSX2IndexFont;
-						break; 
+						break;
+
+					// BTSX ep 3 preview
+					case '04bb060c99d6592866dc95a514c2333f':
+						mapset = "btsx3";
+						powerups = "doom";
+						littleNumbers = mBTSX3IndexFont;
+						break;
 
 					// Eviternity
 					case '9831c412420f16fa0de000fd1dbfe901':
