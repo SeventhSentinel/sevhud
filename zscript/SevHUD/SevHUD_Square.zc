@@ -460,8 +460,11 @@ class SevHUD_Square : DoomStatusBar
 				return;
 
 			// retrieve target health
+			int minhpcvar = CVar.GetCVar("sevhud_hpbar_min", CPlayer).GetInt();
 			int health = prevAimTarget.Health;
 			int maxHealth = prevAimTarget.GetMaxHealth(true);
+			if (minhpcvar > maxHealth)
+				return;
 
 			// no need to draw 0 or negative health
 			if (health <= 0)

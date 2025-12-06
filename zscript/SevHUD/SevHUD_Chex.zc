@@ -260,8 +260,51 @@ class SevHUD_Chex : DoomStatusBar
 				return;
 
 			// retrieve target health
+			int minhpcvar = CVar.GetCVar("sevhud_hpbar_min", CPlayer).GetInt();
 			int health = prevAimTarget.Health;
 			int maxHealth = prevAimTarget.GetMaxHealth(true);
+			if (minhpcvar > maxHealth)
+				return;
+
+			String txt;
+
+			// Get target name
+			String targName = prevAimTarget.GetCharacterName();
+			if (prevAimTarget is "PlayerPawn" && prevAimTarget.player && playeringame[prevAimTarget.PlayerNumber()])
+				targName = prevAimTarget.player.GetUserName();
+			txt = String.Format("%s", targName);
+
+			// Clean up target name
+			if (txt == "FlemoidusCommonusV3")
+				txt = "Flemoid";
+
+			if (txt == "FlemoidusBipedicusV3")
+				txt = "Bipedicus";
+
+			if (txt == "FlemoidusCycloptisCommonusV3")
+				txt = "Cycloptis";
+
+			if (txt == "ArmoredFlemoidusBipedicusV3")
+				txt = "Armored Bipedicus";
+
+			if (txt == "FlembraneV3")
+				txt = "Flembrane";
+
+			if (txt == "FlemoidusMaximus")
+				txt = "Maximus";
+
+			if (txt == "SuperCycloptis")
+				txt = "Super Cycloptis";
+
+			if (txt == "FlemoidusStridicus")
+				txt = "Stridicus";
+
+			if (txt == "FlemMine")
+				txt = "Flem Mine";
+
+			if (txt == "Snotfolus")
+				txt = "Lord Snotfolus";
+			// The rest of them look okay to me
 
 			// no need to draw 0 or negative health
 			if (health <= 0)
@@ -298,8 +341,6 @@ class SevHUD_Chex : DoomStatusBar
 					DTA_Alpha, 0.66 * healthBarAlpha);
 			}
 
-			String txt;
-
 			// draw health bar
 			let barTex = TexMan.CheckForTexture("graphics/SevHUD/HPBarHealth.png");
 			if (barTex.IsValid())
@@ -332,44 +373,7 @@ class SevHUD_Chex : DoomStatusBar
 			int normalTxtColor = Font.CR_GREEN;
 			int nameTxtColor = Font.CR_WHITE;
 
-			// draw target name
-			String targName = prevAimTarget.GetCharacterName();
-			if (prevAimTarget is "PlayerPawn" && prevAimTarget.player && playeringame[prevAimTarget.PlayerNumber()])
-				targName = prevAimTarget.player.GetUserName();
-			txt = String.Format("%s", targName);
-			
-			// Clean up display names
-			if (txt == "FlemoidusCommonusV3")
-				txt = "Flemoid";
-
-			if (txt == "FlemoidusBipedicusV3")
-				txt = "Bipedicus";
-
-			if (txt == "FlemoidusCycloptisCommonusV3")
-				txt = "Cycloptis";
-
-			if (txt == "ArmoredFlemoidusBipedicusV3")
-				txt = "Armored Bipedicus";
-
-			if (txt == "FlembraneV3")
-				txt = "Flembrane";
-
-			if (txt == "FlemoidusMaximus")
-				txt = "Maximus";
-
-			if (txt == "SuperCycloptis")
-				txt = "Super Cycloptis";
-
-			if (txt == "FlemoidusStridicus")
-				txt = "Stridicus";
-
-			if (txt == "FlemMine")
-				txt = "Flem Mine";
-
-			if (txt == "Snotfolus")
-				txt = "Lord Snotfolus";
-			// The rest of them look okay to me
-
+			// Draw target name
 			Screen.DrawText(fnt, nameTxtColor,
 				(Screen.GetWidth() / 2) - ((fnt.StringWidth(txt) / 2) * CleanXFac),
 				(baseYPos * CleanYFac) - (fnt.GetHeight() * CleanYFac),

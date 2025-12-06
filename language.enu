@@ -1,13 +1,20 @@
 [enu default]
 
+OPTMNU_SEVHUD_VER = "SevHUD v3";
+
 OPTMNU_SEVHUD = "SevHUD Options";
 OPTMNU_SEVHUD_HP_BAR = "Target Health Display";
-OPTMNU_SEVHUD_STYLE = "SevHUD Style";
+OPTMNU_SEVHUD_HP_BAR_MIN = "Target Display Minimum Health";
 OPTMNU_SEVHUD_EXTRA = "Extended Stats";
-OPTMNU_SEVHUD_PICKER = "Style Picker...";
 OPTMNU_SEVHUD_CHEXEXTRA = "Chex Arms & Ammo";
 OPTMNU_USE_SEVHUD = "Turn this off to use SevHUD";
-SEVHUD_SETUP_ANNOY = "Please set up SevHUD!\n"
-					"Options -> SevHUD Options";
+
+OPTMNU_SEVHUD_CHEXEXTRA_DESC = "See your arms and ammo, or stick to the vanilla style";
+OPTMNU_SEVHUD_AUTOMAP_DESC = "If the automap line colors don't look good, fix them here";
+OPTMNU_SEVHUD_CROSSHAIR_DESC = "There's a custom crosshair, too, if you want it";
+OPTMNU_SEVHUD_EXTRA_DESC = "See current powerups and map completion stats";
+OPTMNU_SEVHUD_HP_BAR_MIN_DESC_A = "Enemies must have at least this much HP for the health display to show";
+OPTMNU_SEVHUD_HP_BAR_MIN_DESC_B = "(Boss enemies start at around 1000 health)";
+
 OPTMNU_SEVHUD_UPDATE = "Check for updates at https://github.com/SeventhSentinel/sevhud/releases";
 OPTMNU_SEVHUD_SHILL = "Check out Snap the Sentinel at https://snapgame.net!";

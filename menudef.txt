@@ -1,13 +1,13 @@
 AddOptionMenu "OptionsMenu"
 {
-	StaticText "SevHUD v3"
+	StaticText "$OPTMNU_SEVHUD_VER"
 	Submenu "$OPTMNU_SEVHUD", "SevHUDOptionMenu"
 	StaticText ""
 }
 
 AddOptionMenu "OptionsMenuSimple"
 {
-	StaticText "SevHUD v3"
+	StaticText "$OPTMNU_SEVHUD_VER"
 	Submenu "$OPTMNU_SEVHUD", "SEVHUDOptionMenu"
 	StaticText ""
 }
@@ -20,18 +20,23 @@ OptionMenu "SevHUDOptionMenu"
 	StaticText ""
 	IfGame(chex)
 	{
-		StaticText "See your arms and ammo, or stick to the vanilla style"
+		StaticText "$OPTMNU_SEVHUD_CHEXEXTRA_DESC"
 		Option "$OPTMNU_SEVHUD_CHEXEXTRA",			"sevhud_chexextra", 			"OnOff"
 		StaticText ""
 	}
-	StaticText "If the automap line colors don't look good, fix them here"
+	StaticText "$OPTMNU_SEVHUD_AUTOMAP_DESC"
 	Submenu "$OPTMNU_AUTOMAP",			"AutomapOptions"
 	StaticText ""
-	StaticText "There's a custom crosshair, too, if you want it"
+	StaticText "$OPTMNU_SEVHUD_CROSSHAIR_DESC"
 	Option "$HUDMNU_CROSSHAIR",				"crosshair", "Crosshairs"
 	StaticText ""
+	StaticText "$OPTMNU_SEVHUD_EXTRA_DESC"
 	Option "$OPTMNU_SEVHUD_EXTRA", "sevhud_extra", "OnOff"
+	StaticText ""
 	Option "$OPTMNU_SEVHUD_HP_BAR", "sevhud_hpbar", "OnOff"
+	StaticText "$OPTMNU_SEVHUD_HP_BAR_MIN_DESC_A"
+	StaticText "$OPTMNU_SEVHUD_HP_BAR_MIN_DESC_B"
+	TextField "$OPTMNU_SEVHUD_HP_BAR_MIN", "sevhud_hpbar_min", "sevhud_hpbar", 0
 	StaticText ""
 	StaticText "$OPTMNU_SEVHUD_UPDATE"
 	StaticText ""
