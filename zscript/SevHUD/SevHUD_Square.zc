@@ -466,6 +466,127 @@ class SevHUD_Square : DoomStatusBar
 			if (minhpcvar > maxHealth)
 				return;
 
+			String txt;
+
+			// get target name
+			String targName = prevAimTarget.GetCharacterName();
+			if (prevAimTarget is "PlayerPawn" && prevAimTarget.player && playeringame[prevAimTarget.PlayerNumber()])
+				targName = prevAimTarget.player.GetUserName();
+			txt = String.Format("%s", targName);
+			
+			// Cows don't need HP bars
+			if (txt == "Cow")
+				return;
+			
+			if (txt == "WinterCow")
+				return;
+			
+			if (txt == "SpaceCow")
+				return;
+			
+			if (txt == "SpaceCowFloating")
+				return;
+			
+			if (txt == "CowboyCow")
+				return;
+			
+			if (txt == "MummyCow")
+				return;
+
+			if (txt == "BlueCactusSmall")
+				return;
+
+			if (txt == "BlueCactusLarge")
+				return;
+
+			// Clean up display names
+			if (txt == "FriendlySquare")
+				txt = "Friendly Square";
+			
+			if (txt == "FriendlySquareWorker")
+				txt = "Friendly Square Worker";
+
+			if (txt == "FrightenedSquare")
+				txt = "Frightened Square";
+
+			if (txt == "FrightenedSquareWorker")
+				txt = "Frightened Square Worker";
+
+			if (txt == "FrightenedTriangle")
+				txt = "Frightened Triangle";
+
+			if (txt == "FriendlyTriangle")
+				txt = "Friendly Triangle";
+
+			if (txt == "FriendlyTriangleWorker")
+				txt = "Friendly Triangle Worker";
+
+			if (txt == "FrightenedTriangleWorker")
+				txt = "Frightened Triangle Worker";
+
+			if (txt == "FriendlyHexagon")
+				txt = "Friendly Hexagon";
+
+			if (txt == "FriendlyHexagonWorker")
+				txt = "Friendly Hexagon Worker";
+
+			if (txt == "FrightenedHexagon")
+				txt = "Frightened Hexagon";
+
+			if (txt == "FrightenedHexagonWorker")
+				txt = "Frightened Hexagon Worker";
+
+			if (txt == "KnifeJerk")
+				txt = "Knife Jerk";
+
+			if (txt == "PaintJerk")
+				txt = "Paintball Jerk";
+
+			if (txt == "CannonJerk")
+				txt = "Cannon Jerk";
+
+			if (txt == "OoziJerk")
+				txt = "Oozi Jerk";
+
+			if (txt == "EliteOoziJerk")
+				txt = "Elite Oozi Jerk";
+
+			if (txt == "AngleFish")
+				txt = "Angle Fish";
+
+			if (txt == "JetpackJerk")
+				txt = "Jetpack Jerk";
+
+			if (txt == "ColorCube")
+				txt = "Color Cube";
+
+			if (txt == "SpyEye")
+				txt = "Spy-Eye";
+
+			if (txt == "BossSpyEye")
+				txt = "Boss Spy-Eye";
+
+			if (txt == "DarkSpectra")
+				txt = "Dark Spectra";
+
+			if (txt == "MiniDestructinator")
+				txt = "Mini-Destructinator";
+
+			if (txt == "DestructinatorBrain")
+				txt = "Destructinator Brain";
+
+			if (txt == "HexasRanger")
+				txt = "Hexas Ranger";
+
+			if (txt == "HexanSheriff")
+				txt = "Hexan Sheriff";
+
+			if (txt == "ShadiusLeftHand")
+				txt = "Left Hand of Shadius";
+
+			if (txt == "ShadiusRightHand")
+				txt = "Right Hand of Shadius";
+
 			// no need to draw 0 or negative health
 			if (health <= 0)
 				return;
@@ -488,8 +609,6 @@ class SevHUD_Square : DoomStatusBar
 					DTA_KeepRatio, true,
 					DTA_Alpha, 0.66 * healthBarAlpha);
 			}
-
-			String txt;
 
 			// draw health bar
 			let barTex = TexMan.CheckForTexture("graphics/SevHUD/HPBarHealth.png");
@@ -522,55 +641,6 @@ class SevHUD_Square : DoomStatusBar
 			// get font colours
 			int normalTxtColor = Font.CR_RED;
 			int nameTxtColor = Font.CR_WHITE;
-
-			// get target name
-			String targName = prevAimTarget.GetCharacterName();
-			if (prevAimTarget is "PlayerPawn" && prevAimTarget.player && playeringame[prevAimTarget.PlayerNumber()])
-				targName = prevAimTarget.player.GetUserName();
-			txt = String.Format("%s", targName);
-			
-			// Clean up display names
-			if (txt == "FriendlySquare")
-				txt = "Friendly Square";
-			
-			if (txt == "KnifeJerk")
-				txt = "Knife Jerk";
-
-			if (txt == "PaintJerk")
-				txt = "Paintball Jerk";
-
-			if (txt == "CannonJerk")
-				txt = "Cannon Jerk";
-
-			if (txt == "OoziJerk")
-				txt = "Oozi Jerk";
-
-			if (txt == "EliteOoziJerk")
-				txt = "Elite Oozi Jerk";
-
-			if (txt == "AngleFish")
-				txt = "Angle Fish";
-
-			if (txt == "JetpackJerk")
-				txt = "Jetpack Jerk";
-
-			if (txt == "ColorCube")
-				txt = "Color Cube";
-
-			if (txt == "SpyEye")
-				txt = "Spy-Eye";
-
-			if (txt == "Dark Spectra")
-				txt = "DarkSpectra";
-
-			if (txt == "MiniDestructinator")
-				txt = "Mini-Destructinator";
-
-			if (txt == "HexasRanger")
-				txt = "Hexas Ranger";
-
-			if (txt == "HexanSheriff")
-				txt = "Hexan Sheriff";
 
 			// Draw target name
 			Screen.DrawText(fnt, nameTxtColor,
