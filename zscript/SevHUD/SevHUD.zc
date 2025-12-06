@@ -323,18 +323,18 @@ class SevHUD : DoomStatusBar
 			{
 				// If we're using the default font, then draw the standard numbers
 				// That way we don't have to copy st_gnum*.png into every directory
-				DrawImage(CPlayer.HasWeaponsInSlot(2)? "STYSNUM2" : "graphics/SevHUD/standard/st_gnum2.png", (basex+8, 172), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(3)? "STYSNUM3" : "graphics/SevHUD/standard/st_gnum3.png", (basex+20, 172), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(4)? "STYSNUM4" : "graphics/SevHUD/standard/st_gnum4.png", (basex+32, 172), DI_ITEM_OFFSETS);
+				DrawImage(CPlayer.HasWeaponsInSlot(2)? "STYSNUM2" : "graphics/SevHUD/standard/st_gnum2.png", (basex+8, 173), DI_ITEM_OFFSETS);
+				DrawImage(CPlayer.HasWeaponsInSlot(3)? "STYSNUM3" : "graphics/SevHUD/standard/st_gnum3.png", (basex+20, 173), DI_ITEM_OFFSETS);
+				DrawImage(CPlayer.HasWeaponsInSlot(4)? "STYSNUM4" : "graphics/SevHUD/standard/st_gnum4.png", (basex+32, 173), DI_ITEM_OFFSETS);
 				DrawImage(CPlayer.HasWeaponsInSlot(5)? "STYSNUM5" : "graphics/SevHUD/standard/st_gnum5.png", (basex+8, 182), DI_ITEM_OFFSETS);
 				DrawImage(CPlayer.HasWeaponsInSlot(6)? "STYSNUM6" : "graphics/SevHUD/standard/st_gnum6.png", (basex+20, 182), DI_ITEM_OFFSETS);
 				DrawImage(CPlayer.HasWeaponsInSlot(7)? "STYSNUM7" : "graphics/SevHUD/standard/st_gnum7.png", (basex+32, 182), DI_ITEM_OFFSETS);
 			}
 			else
 			{
-				DrawImage(CPlayer.HasWeaponsInSlot(2)? basefilepath..mapset.."/st_ynum2.png" : basefilepath..mapset.."/st_gnum2.png", (basex+8, 172), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(3)? basefilepath..mapset.."/st_ynum3.png" : basefilepath..mapset.."/st_gnum3.png", (basex+20, 172), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(4)? basefilepath..mapset.."/st_ynum4.png" : basefilepath..mapset.."/st_gnum4.png", (basex+32, 172), DI_ITEM_OFFSETS);
+				DrawImage(CPlayer.HasWeaponsInSlot(2)? basefilepath..mapset.."/st_ynum2.png" : basefilepath..mapset.."/st_gnum2.png", (basex+8, 173), DI_ITEM_OFFSETS);
+				DrawImage(CPlayer.HasWeaponsInSlot(3)? basefilepath..mapset.."/st_ynum3.png" : basefilepath..mapset.."/st_gnum3.png", (basex+20, 173), DI_ITEM_OFFSETS);
+				DrawImage(CPlayer.HasWeaponsInSlot(4)? basefilepath..mapset.."/st_ynum4.png" : basefilepath..mapset.."/st_gnum4.png", (basex+32, 173), DI_ITEM_OFFSETS);
 				DrawImage(CPlayer.HasWeaponsInSlot(5)? basefilepath..mapset.."/st_ynum5.png" : basefilepath..mapset.."/st_gnum5.png", (basex+8, 182), DI_ITEM_OFFSETS);
 				DrawImage(CPlayer.HasWeaponsInSlot(6)? basefilepath..mapset.."/st_ynum6.png" : basefilepath..mapset.."/st_gnum6.png", (basex+20, 182), DI_ITEM_OFFSETS);
 				DrawImage(CPlayer.HasWeaponsInSlot(7)? basefilepath..mapset.."/st_ynum7.png" : basefilepath..mapset.."/st_gnum7.png", (basex+32, 182), DI_ITEM_OFFSETS);
