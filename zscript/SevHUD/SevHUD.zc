@@ -241,7 +241,13 @@ class SevHUD : DoomStatusBar
 					// PRCP 2
 					case 'dd9ee1add99d79efef7c88a5ee63aab7':
 						mapset = "pl2";
-						break; 
+						break;
+					
+					// Scythe 2
+					// I'm not doing a status bar for this but it has custom monsters
+					case '009855039a4557f5f293b70c5232d473':
+						mapset = "scythe2";
+						break;
 				}
 			}
 
@@ -661,6 +667,19 @@ class SevHUD : DoomStatusBar
 				if (txt == "BossEye")
 					txt = "LeChuck, the Zombie Pirate";
 			}
+			
+			if (mapset == "scythe2")
+			{
+				if (txt == "Nazi")
+					txt = "Evil Marine";
+
+				if (txt == "CommanderKeen")
+					txt = "Afrit";
+			}
+			
+			// Fix for standard Doom 2
+			if (txt == "CommanderKeen")
+				txt = "Commander Keen";
 
 			// no need to draw 0 or negative health
 			if (health <= 0)
@@ -1064,7 +1083,11 @@ class SevHUD : DoomStatusBar
 			DrawString(fnt, maplabel.."\cj"..mapname, (160, 167-fontHeight), DI_TEXT_ALIGN_CENTER);
 		}
 
-		DrawImage(filepath.."st_bar.png", (0, 168), DI_ITEM_OFFSETS);
+		lump = Wads.CheckNumForFullName(filepath.."st_bar.png");
+		if (lump >= 0)
+			DrawImage(filepath.."st_bar.png", (0, 168), DI_ITEM_OFFSETS);
+		else
+			DrawImage(basefilepath.."standard/st_bar.png", (0, 168), DI_ITEM_OFFSETS);
 
 		// Don't draw a status bar at all in Lexicon VR
 		// if (mapset == "none")
