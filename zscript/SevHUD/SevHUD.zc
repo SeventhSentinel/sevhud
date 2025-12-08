@@ -35,8 +35,8 @@ class SevHUD : DoomStatusBar
 	vector2 radsuitoffset;
 
 	// To be used for Sentinel's Lexicon support later
-	// name curmap;
-	// name prevmap;
+	name curmap;
+	name prevmap;
 
 	//===========================================================================
 	//
@@ -123,7 +123,7 @@ class SevHUD : DoomStatusBar
 	{
 		// This feels hacky! I don't like it!
 		// I'd like it to be able to run more than once for the sake of Sentinel's Lexicon. I'll worry about that later.
-		if (!gotmapset)
+		if (level.MapTime == 1)
 		{
 			// Set defaults
 			mapset = "standard";
@@ -267,7 +267,6 @@ class SevHUD : DoomStatusBar
 				}
 			}
 
-			/*
 				if (LevelInfo.MapExists("VR"))
 			{
 				name vrchecksum = LevelInfo.MapChecksum("VR");
@@ -288,8 +287,6 @@ class SevHUD : DoomStatusBar
 					}
 				}
 			}
-			*/
-		gotmapset = true;
 		}
 	}
 
@@ -1083,15 +1080,16 @@ class SevHUD : DoomStatusBar
 			DrawString(fnt, maplabel.."\cj"..mapname, (160, 167-fontHeight), DI_TEXT_ALIGN_CENTER);
 		}
 
+		// Don't draw a status bar at all in Lexicon VR
+		if (mapset == "none")
+			return;
+
+		// Start drawin'!
 		lump = Wads.CheckNumForFullName(filepath.."st_bar.png");
 		if (lump >= 0)
 			DrawImage(filepath.."st_bar.png", (0, 168), DI_ITEM_OFFSETS);
 		else
 			DrawImage(basefilepath.."standard/st_bar.png", (0, 168), DI_ITEM_OFFSETS);
-
-		// Don't draw a status bar at all in Lexicon VR
-		// if (mapset == "none")
-			// return;
 
 		if (CVar.GetCVar("sevhud_extra", CPlayer).GetBool())
 		{
