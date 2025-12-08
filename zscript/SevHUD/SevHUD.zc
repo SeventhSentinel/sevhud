@@ -786,7 +786,7 @@ class SevHUD : DoomStatusBar
 			// Clean up target name
 			if (mapset == "400minvr")
 			{
-				if (txt == "CommanderKeen")
+				if ((txt == "CommanderKeen") || (txt == "Lexicon_4MVR_CommanderKeen"))
 					txt = "$ENEMY_400MINVR_UFO";
 			}
 
