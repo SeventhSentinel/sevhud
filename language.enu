@@ -1,5 +1,7 @@
 [enu default]
 
+// Menu
+
 OPTMNU_SEVHUD_VER = "SevHUD v3";
 
 OPTMNU_SEVHUD = "SevHUD Options";
@@ -18,3 +20,79 @@ OPTMNU_SEVHUD_HP_BAR_MIN_DESC_B = "(Boss enemies start at around 1000 health)";
 
 OPTMNU_SEVHUD_UPDATE = "Check for updates at https://github.com/SeventhSentinel/sevhud/releases";
 OPTMNU_SEVHUD_SHILL = "Check out Snap the Sentinel at https://snapgame.net!";
+
+
+// Enemy strings
+
+// Chex
+
+ENEMY_CHEX_FLEMOID = "Flemoid";
+ENEMY_CHEX_BIPEDICUS = "Bipedicus";
+ENEMY_CHEX_CYCLOPTIS = "Cycloptis";
+ENEMY_CHEX_ARMOREDBIPEDICUS = "Armored Bipedicus";
+ENEMY_CHEX_FLEMBRANE = "Flembrane";
+ENEMY_CHEX_MAXIMUS = "Maximus";
+ENEMY_CHEX_SUPERCYCLOPTIS = "Super Cycloptis";
+ENEMY_CHEX_STRIDICUS = "Stridicus";
+ENEMY_CHEX_FLEMMINE = "Flem Mine";
+ENEMY_CHEX_LORDSNOTFOLUS = "Lord Snotfolus";
+
+
+// Square
+
+ENEMY_SQUARE_FRIENDLYSQUARE = "Friendly Square";
+ENEMY_SQUARE_FRIENDLYSQUAREWORKER = "Friendly Square Worker";
+ENEMY_SQUARE_FRIGHTENEDSQUARE = "Frightened Square";
+ENEMY_SQUARE_FRIGHTENEDSQUAREWORKER = "Frightened Square Worker";
+ENEMY_SQUARE_FRIENDLYTRIANGLE = "Friendly Triangle";
+ENEMY_SQUARE_FRIENDLYTRIANGLEWORKER = "Friendly Triangle Worker";
+ENEMY_SQUARE_FRIGHTENEDTRIANGLE = "Frightened Triangle";
+ENEMY_SQUARE_FRIGHTENEDTRIANGLEWORKER = "Frightened Triangle Worker";
+ENEMY_SQUARE_FRIENDLYHEXAGON = "Friendly Hexagon";
+ENEMY_SQUARE_FRIENDLYHEXAGONWORKER = "Friendly Hexagon Worker";
+ENEMY_SQUARE_FRIGHTENEDHEXAGON = "Frightened Hexagon";
+ENEMY_SQUARE_FRIGHTENEDHEXAGONWORKER = "Frightened Hexagon Worker";
+ENEMY_SQUARE_KNIFEJERK = "Knife Jerk";
+ENEMY_SQUARE_PAINTBALLJERK = "Paintball Jerk";
+ENEMY_SQUARE_CANNONJERK = "Cannon Jerk";
+ENEMY_SQUARE_OOZIJERK = "Oozi Jerk";
+ENEMY_SQUARE_ELITEOOZIJERK = "Elite Oozi Jerk";
+ENEMY_SQUARE_ANGLEFISH = "Angle Fish";
+ENEMY_SQUARE_JETPACKJERK = "Jetpack Jerk";
+ENEMY_SQUARE_COLORCUBE = "Color Cube";
+ENEMY_SQUARE_SPYEYE = "Spy-Eye";
+ENEMY_SQUARE_BOSSSPYEYE = "Boss Spy-Eye";
+ENEMY_SQUARE_DARKSPECTRA = "Dark Spectra";
+ENEMY_SQUARE_MINIDESTRUCTINATOR = "Mini-Destructinator";
+ENEMY_SQUARE_DESTRUCTINATORBRAIN = "Destructinator Brain";
+ENEMY_SQUARE_HEXASRANGER = "Hexas Ranger";
+ENEMY_SQUARE_HEXANSHERIFF = "Hexan Sheriff";
+ENEMY_SQUARE_SHADIUSLEFTHAND = "Left Hand of Shadius";
+ENEMY_SQUARE_SHADIUSRIGHTHAND = "Right Hand of Shadius";
+
+
+// Doom 2
+
+ENEMY_DOOM2_KEEN = "Commander Keen";
+
+
+// Mapsets
+
+ENEMY_400MINVR_UFO = "UFO";
+
+ENEMY_PIRATEDOOM_CANNIBALPYGMY = "Cannibal Pygmy";
+
+ENEMY_LOR_GHOUL = "Ghoul";
+ENEMY_LOR_BANSHEE = "Banshee";
+ENEMY_LOR_MINDWEAVER = "Mindweaver";
+ENEMY_LOR_SHOCKTROOPER = "Shocktrooper";
+ENEMY_LOR_VASSAGO = "Vassago";
+ENEMY_LOR_TYRANT = "Tyrant";
+
+ENEMY_PIRATEDOOM2_MADTRIBALMINION = "Mad Tribal Minion";
+ENEMY_PIRATEDOOM2_CLOMPINCANNONEER = "The Clompin' Cannoneer";
+ENEMY_PIRATEDOOM2_RUSTYBOOTLEGSMAAM = "The Rusty Bootlegs Ma'am";
+ENEMY_PIRATEDOOM2_LECHUCK = "LeChuck, the Zombie Pirate";
+
+ENEMY_SCYTHE2_EVILMARINE = "Evil Marine";
+ENEMY_SCYTHE2_AFRIT = "Afrit";

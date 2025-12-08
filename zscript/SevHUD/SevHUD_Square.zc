@@ -501,91 +501,91 @@ class SevHUD_Square : DoomStatusBar
 
 			// Clean up display names
 			if (txt == "FriendlySquare")
-				txt = "Friendly Square";
+				txt = "$ENEMY_SQUARE_FRIENDLYSQUARE";
 			
 			if (txt == "FriendlySquareWorker")
-				txt = "Friendly Square Worker";
+				txt = "$ENEMY_SQUARE_FRIENDLYSQUAREWORKER";
 
 			if (txt == "FrightenedSquare")
-				txt = "Frightened Square";
+				txt = "$ENEMY_SQUARE_FRIGHTENEDSQUARE";
 
 			if (txt == "FrightenedSquareWorker")
-				txt = "Frightened Square Worker";
-
-			if (txt == "FrightenedTriangle")
-				txt = "Frightened Triangle";
+				txt = "$ENEMY_SQUARE_FRIGHTENEDSQUAREWORKER";
 
 			if (txt == "FriendlyTriangle")
-				txt = "Friendly Triangle";
+				txt = "$ENEMY_SQUARE_FRIENDLYTRIANGLE";
 
 			if (txt == "FriendlyTriangleWorker")
-				txt = "Friendly Triangle Worker";
+				txt = "$ENEMY_SQUARE_FRIENDLYTRIANGLEWORKER";
+
+			if (txt == "FrightenedTriangle")
+				txt = "$ENEMY_SQUARE_FRIGHTENEDTRIANGLE";
 
 			if (txt == "FrightenedTriangleWorker")
-				txt = "Frightened Triangle Worker";
+				txt = "$ENEMY_SQUARE_FRIGHTENEDTRIANGLEWORKER";
 
 			if (txt == "FriendlyHexagon")
-				txt = "Friendly Hexagon";
+				txt = "$ENEMY_SQUARE_FRIENDLYHEXAGON";
 
 			if (txt == "FriendlyHexagonWorker")
-				txt = "Friendly Hexagon Worker";
+				txt = "$ENEMY_SQUARE_FRIENDLYHEXAGONWORKER";
 
 			if (txt == "FrightenedHexagon")
-				txt = "Frightened Hexagon";
+				txt = "$ENEMY_SQUARE_FRIGHTENEDHEXAGON";
 
 			if (txt == "FrightenedHexagonWorker")
-				txt = "Frightened Hexagon Worker";
+				txt = "$ENEMY_SQUARE_FRIGHTENEDHEXAGONWORKER";
 
 			if (txt == "KnifeJerk")
-				txt = "Knife Jerk";
+				txt = "$ENEMY_SQUARE_KNIFEJERK";
 
 			if (txt == "PaintJerk")
-				txt = "Paintball Jerk";
+				txt = "$ENEMY_SQUARE_PAINTBALLJERK";
 
 			if (txt == "CannonJerk")
-				txt = "Cannon Jerk";
+				txt = "$ENEMY_SQUARE_CANNONJERK";
 
 			if (txt == "OoziJerk")
-				txt = "Oozi Jerk";
+				txt = "$ENEMY_SQUARE_OOZIJERK";
 
 			if (txt == "EliteOoziJerk")
-				txt = "Elite Oozi Jerk";
+				txt = "$ENEMY_SQUARE_ELITEOOZIJERK";
 
 			if (txt == "AngleFish")
-				txt = "Angle Fish";
+				txt = "$ENEMY_SQUARE_ANGLEFISH";
 
 			if (txt == "JetpackJerk")
-				txt = "Jetpack Jerk";
+				txt = "$ENEMY_SQUARE_JETPACKJERK";
 
 			if (txt == "ColorCube")
-				txt = "Color Cube";
+				txt = "$ENEMY_SQUARE_COLORCUBE";
 
 			if (txt == "SpyEye")
-				txt = "Spy-Eye";
+				txt = "$ENEMY_SQUARE_SPYEYE";
 
 			if (txt == "BossSpyEye")
-				txt = "Boss Spy-Eye";
+				txt = "$ENEMY_SQUARE_BOSSSPYEYE";
 
 			if (txt == "DarkSpectra")
-				txt = "Dark Spectra";
+				txt = "$ENEMY_SQUARE_DARKSPECTRA";
 
 			if (txt == "MiniDestructinator")
-				txt = "Mini-Destructinator";
+				txt = "$ENEMY_SQUARE_MINIDESTRUCTINATOR";
 
 			if (txt == "DestructinatorBrain")
-				txt = "Destructinator Brain";
+				txt = "$ENEMY_SQUARE_DESTRUCTINATORBRAIN";
 
 			if (txt == "HexasRanger")
-				txt = "Hexas Ranger";
+				txt = "$ENEMY_SQUARE_HEXASRANGER";
 
 			if (txt == "HexanSheriff")
-				txt = "Hexan Sheriff";
+				txt = "$ENEMY_SQUARE_HEXANSHERIFF";
 
 			if (txt == "ShadiusLeftHand")
-				txt = "Left Hand of Shadius";
+				txt = "$ENEMY_SQUARE_SHADIUSLEFTHAND";
 
 			if (txt == "ShadiusRightHand")
-				txt = "Right Hand of Shadius";
+				txt = "$ENEMY_SQUARE_SHADIUSRIGHTHAND";
 
 			// no need to draw 0 or negative health
 			if (health <= 0)

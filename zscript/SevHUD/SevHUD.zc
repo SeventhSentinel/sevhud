@@ -787,63 +787,63 @@ class SevHUD : DoomStatusBar
 			if (mapset == "400minvr")
 			{
 				if (txt == "CommanderKeen")
-					txt = "UFO";
-			}
-
-			if (mapset == "piratedoom")
-			{
-				if ((txt == "Witch Doctor") && ((maxHealth == 80) || (maxHealth == 50)))
-					txt = "Cannibal Pygmy";
+					txt = "$ENEMY_400MINVR_UFO";
 			}
 
 			if (mapset == "legacyofrust")
 			{
 				if (txt == "Deh_Actor_150")
-					txt = "Ghoul";
+					txt = "$ENEMY_LOR_GHOUL";
 
 				if (txt == "Deh_Actor_151")
-					txt = "Banshee";
+					txt = "$ENEMY_LOR_BANSHEE";
 
 				if (txt == "Deh_Actor_152")
-					txt = "Mindweaver";
+					txt = "$ENEMY_LOR_MINDWEAVER";
 
 				if (txt == "Deh_Actor_153")
-					txt = "Shocktrooper";
+					txt = "$ENEMY_LOR_SHOCKTROOPER";
 
 				if (txt == "Deh_Actor_154")
-					txt = "Vassago";
+					txt = "$ENEMY_LOR_VASSAGO";
 
 				if (txt == "Deh_Actor_155")
-					txt = "Tyrant";
+					txt = "$ENEMY_LOR_TYRANT";
+			}
+
+			if (mapset == "piratedoom")
+			{
+				if ((txt == "Witch Doctor") && ((maxHealth == 80) || (maxHealth == 50)))
+					txt = "$ENEMY_PIRATEDOOM_CANNIBALPYGMY";
 			}
 
 			if (mapset == "piratedoom2")
 			{
 				if ((txt == "BOLTSHOOTER ARACHNARCH") && (maxHealth == 30))
-					txt = "Mad Tribal Minion";
+					txt = "$ENEMY_PIRATEDOOM2_MADTRIBALMINION";
 
 				if (txt == "Cyberdemon")
-					txt = "The Clompin' Cannoneer";
+					txt = "$ENEMY_PIRATEDOOM2_CLOMPINCANNONEER";
 
 				if (txt == "Spider Mastermind")
-					txt = "The Rusty Bootlegs Ma'am";
+					txt = "$ENEMY_PIRATEDOOM2_RUSTYBOOTLEGSMAAM";
 
 				if (txt == "BossEye")
-					txt = "LeChuck, the Zombie Pirate";
+					txt = "$ENEMY_PIRATEDOOM2_LECHUCK";
 			}
 			
 			if (mapset == "scythe2")
 			{
 				if (txt == "Nazi")
-					txt = "Evil Marine";
+					txt = "$ENEMY_SCYTHE2_EVILMARINE";
 
 				if (txt == "CommanderKeen")
-					txt = "Afrit";
+					txt = "$ENEMY_SCYTHE2_AFRIT";
 			}
 			
 			// Fix for standard Doom 2
 			if (txt == "CommanderKeen")
-				txt = "Commander Keen";
+				txt = "$ENEMY_DOOM2_KEEN";
 
 			// no need to draw 0 or negative health
 			if (health <= 0)

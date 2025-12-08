@@ -276,34 +276,34 @@ class SevHUD_Chex : DoomStatusBar
 
 			// Clean up target name
 			if (txt == "FlemoidusCommonusV3")
-				txt = "Flemoid";
+				txt = "$ENEMY_CHEX_FLEMOID";
 
 			if (txt == "FlemoidusBipedicusV3")
-				txt = "Bipedicus";
+				txt = "$ENEMY_CHEX_BIPEDICUS";
 
 			if (txt == "FlemoidusCycloptisCommonusV3")
-				txt = "Cycloptis";
+				txt = "$ENEMY_CHEX_CYCLOPTIS";
 
 			if (txt == "ArmoredFlemoidusBipedicusV3")
-				txt = "Armored Bipedicus";
+				txt = "$ENEMY_CHEX_ARMOREDBIPEDICUS";
 
 			if (txt == "FlembraneV3")
-				txt = "Flembrane";
+				txt = "$ENEMY_CHEX_FLEMBRANE";
 
 			if (txt == "FlemoidusMaximus")
-				txt = "Maximus";
+				txt = "$ENEMY_CHEX_MAXIMUS";
 
 			if (txt == "SuperCycloptis")
-				txt = "Super Cycloptis";
+				txt = "$ENEMY_CHEX_SUPERCYCLOPTIS";
 
 			if (txt == "FlemoidusStridicus")
-				txt = "Stridicus";
+				txt = "$ENEMY_CHEX_STRIDICUS";
 
 			if (txt == "FlemMine")
-				txt = "Flem Mine";
+				txt = "$ENEMY_CHEX_FLEMMINE";
 
 			if (txt == "Snotfolus")
-				txt = "Lord Snotfolus";
+				txt = "$ENEMY_CHEX_LORDSNOTFOLUS";
 			// The rest of them look okay to me
 
 			// no need to draw 0 or negative health
