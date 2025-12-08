@@ -12,6 +12,20 @@ DefaultIndexFont
    9 STYSNUM9
 }
 
+BTSXHUDFont
+{
+	0 "graphics/SevHUD/btsx1/st_tnum0.png"
+	1 "graphics/SevHUD/btsx1/st_tnum1.png"
+	2 "graphics/SevHUD/btsx1/st_tnum2.png"
+	3 "graphics/SevHUD/btsx1/st_tnum3.png"
+	4 "graphics/SevHUD/btsx1/st_tnum4.png"
+	5 "graphics/SevHUD/btsx1/st_tnum5.png"
+	6 "graphics/SevHUD/btsx1/st_tnum6.png"
+	7 "graphics/SevHUD/btsx1/st_tnum7.png"
+	8 "graphics/SevHUD/btsx1/st_tnum8.png"
+	9 "graphics/SevHUD/btsx1/st_tnum9.png"
+}
+
 BTSX1IndexFont
 {
 	0 "graphics/SevHUD/btsx1/st_ynum0.png"

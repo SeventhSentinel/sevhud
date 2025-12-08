@@ -15,6 +15,7 @@ class SevHUD : DoomStatusBar
 	HUDFont mHUDConFont;
 
 	HUDFont mDefaultIndexFont;
+	HUDFont mBTSXHUDFont;
 	HUDFont mBTSX1IndexFont;
 	HUDFont mBTSX2IndexFont;
 	HUDFont mBTSX3IndexFont;
@@ -26,6 +27,7 @@ class SevHUD : DoomStatusBar
 	string checksum;
 	bool gotmapset;
 	string mapset;
+	HUDFont bigNumbers;
 	HUDFont littleNumbers;
 	string powerups;
 
@@ -53,6 +55,7 @@ class SevHUD : DoomStatusBar
 		mHUDConFont = HUDFont.Create(confont);
 
 		mDefaultIndexFont = HUDFont.Create("DefaultIndexFont");
+		mBTSXHUDFont = HUDFont.Create("BTSXHUDFont");
 		mBTSX1IndexFont = HUDFont.Create("BTSX1IndexFont");
 		mBTSX2IndexFont = HUDFont.Create("BTSX2IndexFont");
 		mBTSX3IndexFont = HUDFont.Create("BTSX3IndexFont");
@@ -68,6 +71,18 @@ class SevHUD : DoomStatusBar
 
 	override void Draw(int state, double TicFrac)
 	{
+		if (level.MapTime == 1)
+		{
+			GetMapset();
+			if ((CVar.GetCVar("sevhud_checksum", CPlayer).GetBool())&&(!gotchecksum))
+				PrintChecksum();
+		}
+		
+		if (!gotmapset)
+		{
+			GetMapset();		
+		}
+			
 		if ((state == HUD_StatusBar)||(state == HUD_Fullscreen))
 		{
 			// draw crosshair etc
@@ -121,170 +136,200 @@ class SevHUD : DoomStatusBar
 
 	void GetMapSet(void)
 	{
-		// This feels hacky! I don't like it!
-		// I'd like it to be able to run more than once for the sake of Sentinel's Lexicon. I'll worry about that later.
-		if (level.MapTime == 1)
+		// Do this once (?)
+		gotmapset = true;
+		
+		// Set defaults
+		mapset = "standard";
+		powerups = "standard";
+		bigNumbers = mHUDFont;
+		littleNumbers = mDefaultIndexFont;
+
+		// Graphic offsets don't work for drawing bars, so we'll add them here instead
+		invuloffset = (0, 0);
+		lightampoffset = (0, 0);
+		invisoffset = (0, 0);
+		radsuitoffset = (0, 0);
+
+		// Console.Printf("Running!");
+
+		// Any mapsets commented out have license text or similar stating that reuse of their assets is not permitted,
+		// but I've left the checksums in if you'd like to make your own for private use.
+
+		// Grab a map checksum to figure out what mapset we're in
+		/* if (LevelInfo.MapExists("E1M1"))
 		{
-			// Set defaults
-			mapset = "standard";
-			powerups = "standard";
-			littleNumbers = mDefaultIndexFont;
+			name checksum = LevelInfo.MapChecksum("E1M1");
 
-			// Graphic offsets don't work for drawing bars, so we'll add them here instead
-			invuloffset = (0, 0);
-			lightampoffset = (0, 0);
-			invisoffset = (0, 0);
-			radsuitoffset = (0, 0);
-
-			// Console.Printf("Running!");
-
-			// Any mapsets commented out have license text or similar stating that reuse of their assets is not permitted,
-			// but I've left the checksums in if you'd like to make your own for private use.
-
-			// Grab a map checksum to figure out what mapset we're in
-			/* if (LevelInfo.MapExists("E1M1"))
+			switch (checksum)
 			{
-				name checksum = LevelInfo.MapChecksum("E1M1");
-
-				switch (checksum)
-				{
-					// TODO: add some Doom 1 wads
-				}
-			} */
-			
-			if (LevelInfo.MapExists("E2M1"))
-			{
-				name checksum = LevelInfo.MapChecksum("E2M1");
-
-				switch (checksum)
-				{
-					// Aliens TC
-					// First version
-					case '1c95f245b71e5daf4824d4c715abcf7c':
-					// Second version
-					case 'ec2fb7f588a298d232923aa3b986ffd2':
-					// Some version of it I found on Reddit that claims to make it work better in GZDoom
-					// I don't think it does, but I already got the checksum, so here ya go
-					case 'f27e523702be6c2d14b2e83983af218a':
-						mapset = "alienstc";
-						break;
-				}
+				// TODO: add some Doom 1 wads
 			}
+		} */
+		
+		if (LevelInfo.MapExists("E2M1"))
+		{
+			name checksum = LevelInfo.MapChecksum("E2M1");
 
-			if (LevelInfo.MapExists("MAP01"))
+			switch (checksum)
 			{
-				name checksum = LevelInfo.MapChecksum("MAP01");
+				// Aliens TC
+				// First version
+				case '1c95f245b71e5daf4824d4c715abcf7c':
+				// Second version
+				case 'ec2fb7f588a298d232923aa3b986ffd2':
+				// Some version of it I found on Reddit that claims to make it work better in GZDoom
+				// I don't think it does, but I already got the checksum, so here ya go
+				case 'f27e523702be6c2d14b2e83983af218a':
+					mapset = "alienstc";
+					break;
+			}
+		}
 
-				switch (checksum)
+		if (LevelInfo.MapExists("MAP01"))
+		{
+			name checksum = LevelInfo.MapChecksum("MAP01");
+
+			switch (checksum)
+			{
+				// Aliens TC Doom 2 version
+				case '6ef79e89e562aab57199af1d572033f4':
+					mapset = "alienstc";
+					break;
+
+				// Ancient Aliens
+				// This one has a pretty normal status bar, but it replaces the powerup gfx
+				// So we'll make a folder just for the doom ones and set it
+				// That way it looks correct in Freedoom
+				case 'acac693dd139d067a57b17620e624c31':
+					powerups = "doom";
+					break;
+
+				// BTSX ep 1
+				 case 'ff9c6545037c5e5e27ce0dacd24cdd37':
+					mapset = "btsx1";
+					powerups = "doom";
+					littleNumbers = mBTSX1IndexFont;
+					break;
+
+				// BTSX ep 2
+				case '067cf96073db3cc4a8d887ee240f88da':
+					mapset = "btsx2";
+					powerups = "doom";
+					littleNumbers = mBTSX2IndexFont;
+					break;
+
+				// BTSX ep 3 preview
+				case '04bb060c99d6592866dc95a514c2333f':
+					mapset = "btsx3";
+					powerups = "doom";
+					littleNumbers = mBTSX3IndexFont;
+					break;
+
+				// Eviternity
+				case '9831c412420f16fa0de000fd1dbfe901':
+					mapset = "eviternity";
+					break;
+
+				// Eviternity 2
+				case '8eb38d5289c47bb68d64f2832efa096d':
+					mapset = "eviternity2";
+					break;
+
+				// Legacy of Rust
+				// Despite the map label saying it's E1M1, it is in fact MAP01
+				case 'bf34c34c5dfc8bb47228cc304f9a6748':
+					mapset = "legacyofrust";
+					break;
+
+				// Pirate Doom 2
+				case '8af76bf89a864c1e2b3b21865c277298':
+					mapset = "piratedoom2";
+					powerups = mapset;
+					radsuitoffset = (-15, 1);
+					break;
+
+				// Plutonia 2
+				case '26901fc48667b76027871880e357cd0a':
+				// PRCP
+				case '4803362bd33b5e11956f6682dfd48900':
+				// PRCP 2
+				case 'dd9ee1add99d79efef7c88a5ee63aab7':
+					mapset = "pl2";
+					break;
+				
+				// Scythe 2
+				// I'm not doing a status bar for this but it has custom monsters
+				case '009855039a4557f5f293b70c5232d473':
+					mapset = "scythe2";
+					break;
+			}
+		}
+
+		if (LevelInfo.MapExists("MAP41"))
+		{
+			name checksum = LevelInfo.MapChecksum("MAP41");
+
+			switch (checksum)
+			{
+				// Pirate Doom
+				case 'baebc37899109027a7e26f2e5390b0b1':
+					mapset = "piratedoom";
+					powerups = mapset;
+					invuloffset = (6, 0);
+					invisoffset = (-6, 0);
+					break;
+			}
+		}
+
+		if (LevelInfo.MapExists("VR"))
+		{
+			name vrchecksum = LevelInfo.MapChecksum("VR");
+			if (vrchecksum = '47b55a4612b6c2891607c52a39ea62ef')
+			{
+				// Sentinel's Lexicon support
+				// Console.Printf("You're playing The Sentinel's Lexicon!");
+				if (curmap)
+					prevmap = curmap;
+
+				curmap = level.Mapname;
+
+				switch (curmap)
 				{
-					// Aliens TC Doom 2 version
-					case '6ef79e89e562aab57199af1d572033f4':
-						mapset = "alienstc";
+					case 'vr':
+						mapset = "none";
 						break;
-
-					// Ancient Aliens
-					// This one has a pretty normal status bar, but it replaces the powerup gfx
-					// So we'll make a folder just for the doom ones and set it
-					// That way it looks correct in Freedoom
-					case 'acac693dd139d067a57b17620e624c31':
-						powerups = "doom";
-						break;
-
-					// BTSX ep 1
-					 case 'ff9c6545037c5e5e27ce0dacd24cdd37':
+						
+					case 'BX101':
+					case 'BX102':
+					case 'BX103':
+					case 'BX104':
+					case 'BX105':
+					case 'BX106':
+					case 'BX107':
+					case 'BX108':
+					case 'BX109':
+					case 'BX110':
+					case 'BX111':
+					case 'BX112':
+					case 'BX113':
+					case 'BX114':
+					case 'BX115':
+					case 'BX116':
+					case 'BX117':
+					case 'BX118':
+					case 'BX119':
+					case 'BX120':
+					case 'BX121':
+					case 'BX122':
+					case 'BX123':
+					case 'BX124':
+					case 'BX131':
 						mapset = "btsx1";
 						powerups = "doom";
+						bigNumbers = mBTSXHUDFont;
 						littleNumbers = mBTSX1IndexFont;
 						break;
-
-					// BTSX ep 2
-					case '067cf96073db3cc4a8d887ee240f88da':
-						mapset = "btsx2";
-						powerups = "doom";
-						littleNumbers = mBTSX2IndexFont;
-						break;
-
-					// BTSX ep 3 preview
-					case '04bb060c99d6592866dc95a514c2333f':
-						mapset = "btsx3";
-						powerups = "doom";
-						littleNumbers = mBTSX3IndexFont;
-						break;
-
-					// Eviternity
-					case '9831c412420f16fa0de000fd1dbfe901':
-						mapset = "eviternity";
-						break;
-
-					// Eviternity 2
-					case '8eb38d5289c47bb68d64f2832efa096d':
-						mapset = "eviternity2";
-						break;
-
-					// Legacy of Rust
-					// Despite the map label saying it's E1M1, it is in fact MAP01
-					case 'bf34c34c5dfc8bb47228cc304f9a6748':
-						mapset = "legacyofrust";
-						break;
-
-					// Pirate Doom 2
-					case '8af76bf89a864c1e2b3b21865c277298':
-						mapset = "piratedoom2";
-						powerups = mapset;
-						radsuitoffset = (-15, 1);
-						break;
-
-					// Plutonia 2
-					case '26901fc48667b76027871880e357cd0a':
-					// PRCP
-					case '4803362bd33b5e11956f6682dfd48900':
-					// PRCP 2
-					case 'dd9ee1add99d79efef7c88a5ee63aab7':
-						mapset = "pl2";
-						break;
-					
-					// Scythe 2
-					// I'm not doing a status bar for this but it has custom monsters
-					case '009855039a4557f5f293b70c5232d473':
-						mapset = "scythe2";
-						break;
-				}
-			}
-
-			if (LevelInfo.MapExists("MAP41"))
-			{
-				name checksum = LevelInfo.MapChecksum("MAP41");
-
-				switch (checksum)
-				{
-					// Pirate Doom
-					case 'baebc37899109027a7e26f2e5390b0b1':
-						mapset = "piratedoom";
-						powerups = mapset;
-						invuloffset = (6, 0);
-						invisoffset = (-6, 0);
-						break;
-				}
-			}
-
-				if (LevelInfo.MapExists("VR"))
-			{
-				name vrchecksum = LevelInfo.MapChecksum("VR");
-				if (vrchecksum = '47b55a4612b6c2891607c52a39ea62ef')
-				{
-					// Sentinel's Lexicon support
-					// Console.Printf("You're playing The Sentinel's Lexicon!");
-					if (curmap)
-						prevmap = curmap;
-
-					curmap = level.Mapname;
-
-					switch (curmap)
-					{
-						case 'vr':
-							mapset = "none";
-							break;
-					}
 				}
 			}
 		}
@@ -1038,11 +1083,6 @@ class SevHUD : DoomStatusBar
 
 	void DrawSevHUD(int state)
 	{
-		GetMapSet();
-
-		if ((CVar.GetCVar("sevhud_checksum", CPlayer).GetBool())&&(!gotchecksum))
-			PrintChecksum();
-
 		string basefilepath = "graphics/SevHUD/";
 		string filepath = basefilepath..mapset.."/";
 		
@@ -1096,13 +1136,23 @@ class SevHUD : DoomStatusBar
 			DrawStatusBarStats(state, basefilepath, littleNumbers);
 			DrawStatusBarPowerups(basefilepath);
 		}
-		DrawImage("STTPRCNT", (90, 171), DI_ITEM_OFFSETS);
-		DrawImage("STTPRCNT", (221, 171), DI_ITEM_OFFSETS);
+
+		lump = Wads.CheckNumForFullName(filepath.."st_prcnt.png");
+		if (lump >= 0)
+		{
+			DrawImage(filepath.."st_prcnt.png", (90, 171), DI_ITEM_OFFSETS);
+			DrawImage(filepath.."st_prcnt.png", (221, 171), DI_ITEM_OFFSETS);
+		}
+		else
+		{
+			DrawImage("STTPRCNT", (90, 171), DI_ITEM_OFFSETS);
+			DrawImage("STTPRCNT", (221, 171), DI_ITEM_OFFSETS);
+		}
 
 		Inventory a1 = GetCurrentAmmo();
-		if (a1 != null) DrawString(mHUDFont, FormatNumber(a1.Amount, 3), (44, 171), DI_TEXT_ALIGN_RIGHT|DI_NOSHADOW);
-		DrawString(mHUDFont, FormatNumber(CPlayer.health, 3), (90, 171), DI_TEXT_ALIGN_RIGHT|DI_NOSHADOW);
-		DrawString(mHUDFont, FormatNumber(GetArmorAmount(), 3), (221, 171), DI_TEXT_ALIGN_RIGHT|DI_NOSHADOW);
+		if (a1 != null) DrawString(bigNumbers, FormatNumber(a1.Amount, 3), (44, 171), DI_TEXT_ALIGN_RIGHT|DI_NOSHADOW);
+		DrawString(bigNumbers, FormatNumber(CPlayer.health, 3), (90, 171), DI_TEXT_ALIGN_RIGHT|DI_NOSHADOW);
+		DrawString(bigNumbers, FormatNumber(GetArmorAmount(), 3), (221, 171), DI_TEXT_ALIGN_RIGHT|DI_NOSHADOW);
 
 		DoomStatusBar.DrawBarKeys();
 
@@ -1110,7 +1160,7 @@ class SevHUD : DoomStatusBar
 
 		if (deathmatch || teamplay)
 		{
-			DrawString(mHUDFont, FormatNumber(CPlayer.FragCount, 3), (138, 171), DI_TEXT_ALIGN_RIGHT);
+			DrawString(bigNumbers, FormatNumber(CPlayer.FragCount, 3), (138, 171), DI_TEXT_ALIGN_RIGHT);
 		}
 
 		if (multiplayer)
@@ -1148,7 +1198,7 @@ class SevHUD : DoomStatusBar
 			else
 				DrawImage(basefilepath.."standard/st_frag.png", (104, 168), DI_ITEM_OFFSETS);
 			// Draw amount of frags
-			DrawString(mHUDFont, FormatNumber(CPlayer.FragCount, 3), (138, 171), DI_TEXT_ALIGN_RIGHT);
+			DrawString(bigNumbers, FormatNumber(CPlayer.FragCount, 3), (138, 171), DI_TEXT_ALIGN_RIGHT);
 		}
 		else
 		{
