@@ -71,18 +71,12 @@ class SevHUD : DoomStatusBar
 
 	override void Draw(int state, double TicFrac)
 	{
-		if (level.MapTime == 1)
-		{
-			GetMapset();
-			if ((CVar.GetCVar("sevhud_checksum", CPlayer).GetBool())&&(!gotchecksum))
-				PrintChecksum();
-		}
-		
 		if (!gotmapset)
-		{
-			GetMapset();		
-		}
+			GetMapset();
 			
+		if ((CVar.GetCVar("sevhud_checksum", CPlayer).GetBool())&&((!gotchecksum)||(level.MapTime == 1)))
+			PrintChecksum();
+		
 		if ((state == HUD_StatusBar)||(state == HUD_Fullscreen))
 		{
 			// draw crosshair etc
