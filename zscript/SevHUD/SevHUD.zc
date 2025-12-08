@@ -11,24 +11,33 @@
 
 class SevHUD : DoomStatusBar
 {
+	// Fonts
 	HUDFont mHUDSmallFont;
 	HUDFont mHUDConFont;
 
 	HUDFont mDefaultIndexFont;
+	
+	HUDFont m400minvrHUDFont;
+	HUDFont m400minvrIndexFont;
+	HUDFont m400minvrStatsFont;
+	
 	HUDFont mBTSXHUDFont;
 	HUDFont mBTSX1IndexFont;
 	HUDFont mBTSX2IndexFont;
 	HUDFont mBTSX3IndexFont;
 
+	// HP bar
 	Actor prevAimTarget;
 	double healthBarAlpha;
 	
+	// Mapset
 	bool gotchecksum;
 	string checksum;
 	bool gotmapset;
 	string mapset;
 	HUDFont bigNumbers;
 	HUDFont littleNumbers;
+	HUDFont statNumbers;
 	string powerups;
 
 	vector2 invuloffset;
@@ -36,9 +45,11 @@ class SevHUD : DoomStatusBar
 	vector2 invisoffset;
 	vector2 radsuitoffset;
 
-	// To be used for Sentinel's Lexicon support later
+	// Sentinel's Lexicon support
 	name curmap;
-	name prevmap;
+	
+	string basefilepath;
+
 
 	//===========================================================================
 	//
@@ -55,6 +66,11 @@ class SevHUD : DoomStatusBar
 		mHUDConFont = HUDFont.Create(confont);
 
 		mDefaultIndexFont = HUDFont.Create("DefaultIndexFont");
+
+		m400minvrHUDFont = HUDFont.Create("400minvrHUDFont");
+		m400minvrIndexFont = HUDFont.Create("400minvrIndexFont");
+		m400minvrStatsFont = HUDFont.Create("400minvrStatsFont");
+
 		mBTSXHUDFont = HUDFont.Create("BTSXHUDFont");
 		mBTSX1IndexFont = HUDFont.Create("BTSX1IndexFont");
 		mBTSX2IndexFont = HUDFont.Create("BTSX2IndexFont");
@@ -130,15 +146,13 @@ class SevHUD : DoomStatusBar
 
 	void GetMapSet(void)
 	{
-		// Do this once (?)
-		gotmapset = true;
-		
 		// Set defaults
 		mapset = "standard";
 		powerups = "standard";
 		bigNumbers = mHUDFont;
 		littleNumbers = mDefaultIndexFont;
-
+		basefilepath = "graphics/SevHUD/";
+		
 		// Graphic offsets don't work for drawing bars, so we'll add them here instead
 		invuloffset = (0, 0);
 		lightampoffset = (0, 0);
@@ -186,6 +200,13 @@ class SevHUD : DoomStatusBar
 
 			switch (checksum)
 			{
+				// 400 Minutes of /vr/
+				case 'fb1ddc26588e0dffdb5cd13a1965c4c8':
+					mapset = "400minvr";
+					littleNumbers = m400minvrIndexFont;
+					statNumbers = m400minvrStatsFont;
+					break;
+					
 				// Aliens TC Doom 2 version
 				case '6ef79e89e562aab57199af1d572033f4':
 					mapset = "alienstc";
@@ -283,17 +304,63 @@ class SevHUD : DoomStatusBar
 			{
 				// Sentinel's Lexicon support
 				// Console.Printf("You're playing The Sentinel's Lexicon!");
-				if (curmap)
-					prevmap = curmap;
+				// if (curmap)
+					// prevmap = curmap;
 
 				curmap = level.Mapname;
 
 				switch (curmap)
 				{
+					// No stbar in VR
 					case 'vr':
 						mapset = "none";
 						break;
 						
+					// 400 Minutes of /vr/
+					case '4MVR01':
+					case '4MVR02':
+					case '4MVR03':
+					case '4MVR04':
+					case '4MVR05':
+					case '4MVR06':
+					case '4MVR07':
+					case '4MVR08':
+					case '4MVR09':
+					case '4MVR10':
+					case '4MVR11':
+					case '4MVR12':
+					case '4MVR13':
+					case '4MVR14':
+					case '4MVR15':
+					case '4MVR16':
+					case '4MVR17':
+					case '4MVR18':
+					case '4MVR19':
+					case '4MVR20':
+					case '4MVR21':
+					case '4MVR22':
+					case '4MVR23':
+					case '4MVR24':
+					case '4MVR25':
+					case '4MVR26':
+					case '4MVR27':
+					case '4MVR28':
+					case '4MVR29':
+					case '4MVR30':
+					case '4MVR31':
+					case '4MVR32':
+					case '4MVR33':
+					case '4MVR34':
+					case '4MVR35':
+					case '4MVR36':
+					case '4MVR37':
+						mapset = "400minvr";
+						bigNumbers = m400minvrHUDFont;
+						littleNumbers = m400minvrIndexFont;
+						statNumbers = m400minvrStatsFont;
+						break;
+					
+					// BTSX Episode 1 (old Lexicon)
 					case 'BX101':
 					case 'BX102':
 					case 'BX103':
@@ -327,6 +394,11 @@ class SevHUD : DoomStatusBar
 				}
 			}
 		}
+
+		// Mapset is now known
+		gotmapset = true;
+		
+		// Set vars for non-font small numbers
 	}
 
 	//===========================================================================
@@ -349,6 +421,8 @@ class SevHUD : DoomStatusBar
 
 		if (deathmatch || teamplay)
 		{
+			// Deathmatch
+			
 			// Draw time label
 			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_time.png");
 			if (lump >= 0)
@@ -361,30 +435,78 @@ class SevHUD : DoomStatusBar
 			}
 			
 			// Move arms here
-			if (littleNumbers == mDefaultIndexFont)
+
+			// Determine active weapons gfx
+			
+			// Set defaults
+			string armsy2 = "STYSNUM2";
+			string armsy3 = "STYSNUM3";
+			string armsy4 = "STYSNUM4";
+			string armsy5 = "STYSNUM5";
+			string armsy6 = "STYSNUM6";
+			string armsy7 = "STYSNUM7";
+
+			// Use mapset-specific numbers if available
+			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_ynum2.png");
+			if (lump >= 0)
 			{
-				// If we're using the default font, then draw the standard numbers
-				// That way we don't have to copy st_gnum*.png into every directory
-				DrawImage(CPlayer.HasWeaponsInSlot(2)? "STYSNUM2" : "graphics/SevHUD/standard/st_gnum2.png", (basex+8, 173), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(3)? "STYSNUM3" : "graphics/SevHUD/standard/st_gnum3.png", (basex+20, 173), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(4)? "STYSNUM4" : "graphics/SevHUD/standard/st_gnum4.png", (basex+32, 173), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(5)? "STYSNUM5" : "graphics/SevHUD/standard/st_gnum5.png", (basex+8, 182), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(6)? "STYSNUM6" : "graphics/SevHUD/standard/st_gnum6.png", (basex+20, 182), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(7)? "STYSNUM7" : "graphics/SevHUD/standard/st_gnum7.png", (basex+32, 182), DI_ITEM_OFFSETS);
+				armsy2 = basefilepath..mapset.."/st_ynum2.png";
+				armsy3 = basefilepath..mapset.."/st_ynum3.png";
+				armsy4 = basefilepath..mapset.."/st_ynum4.png";
+				armsy5 = basefilepath..mapset.."/st_ynum5.png";
+				armsy6 = basefilepath..mapset.."/st_ynum6.png";
+				armsy7 = basefilepath..mapset.."/st_ynum7.png";
 			}
-			else
+			
+			// Use stats-specific numbers if available
+			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_snum2.png");
+			if (lump >= 0)
 			{
-				DrawImage(CPlayer.HasWeaponsInSlot(2)? basefilepath..mapset.."/st_ynum2.png" : basefilepath..mapset.."/st_gnum2.png", (basex+8, 173), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(3)? basefilepath..mapset.."/st_ynum3.png" : basefilepath..mapset.."/st_gnum3.png", (basex+20, 173), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(4)? basefilepath..mapset.."/st_ynum4.png" : basefilepath..mapset.."/st_gnum4.png", (basex+32, 173), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(5)? basefilepath..mapset.."/st_ynum5.png" : basefilepath..mapset.."/st_gnum5.png", (basex+8, 182), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(6)? basefilepath..mapset.."/st_ynum6.png" : basefilepath..mapset.."/st_gnum6.png", (basex+20, 182), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(7)? basefilepath..mapset.."/st_ynum7.png" : basefilepath..mapset.."/st_gnum7.png", (basex+32, 182), DI_ITEM_OFFSETS);
+				armsy2 = basefilepath..mapset.."/st_snum2.png";
+				armsy3 = basefilepath..mapset.."/st_snum3.png";
+				armsy4 = basefilepath..mapset.."/st_snum4.png";
+				armsy5 = basefilepath..mapset.."/st_snum5.png";
+				armsy6 = basefilepath..mapset.."/st_snum6.png";
+				armsy7 = basefilepath..mapset.."/st_snum7.png";
 			}
+
+			// Determine inactive weapons gfx
+
+			// Set defaults
+			string armsg2 = "graphics/SevHUD/standard/st_gnum2.png";
+			string armsg3 = "graphics/SevHUD/standard/st_gnum3.png";
+			string armsg4 = "graphics/SevHUD/standard/st_gnum4.png";
+			string armsg5 = "graphics/SevHUD/standard/st_gnum5.png";
+			string armsg6 = "graphics/SevHUD/standard/st_gnum6.png";
+			string armsg7 = "graphics/SevHUD/standard/st_gnum7.png";
+
+			// Use mapset-specific numbers if available
+			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_gnum2.png");
+			if (lump >= 0)
+			{
+				armsg2 = basefilepath..mapset.."/st_gnum2.png";
+				armsg3 = basefilepath..mapset.."/st_gnum3.png";
+				armsg4 = basefilepath..mapset.."/st_gnum4.png";
+				armsg5 = basefilepath..mapset.."/st_gnum5.png";
+				armsg6 = basefilepath..mapset.."/st_gnum6.png";
+				armsg7 = basefilepath..mapset.."/st_gnum7.png";
+			}
+			
+			// Draw the numbers
+			DrawImage(CPlayer.HasWeaponsInSlot(2)? armsy2 : armsg2, (basex+8, 173), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(3)? armsy3 : armsg3, (basex+20, 173), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(4)? armsy4 : armsg4, (basex+32, 173), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(5)? armsy5 : armsg5, (basex+8, 182), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(6)? armsy6 : armsg6, (basex+20, 182), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(7)? armsy7 : armsg7, (basex+32, 182), DI_ITEM_OFFSETS);
 		}
+		
 		else
 		{
+			// Singleplayer/co-op
+			
 			// Draw the background first
+			
 			// Is there a full stats gfx? If so, use that instead of drawing the individual parts
 
 			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_stats.png");
@@ -856,6 +978,9 @@ class SevHUD : DoomStatusBar
 		return;
 	
 		HUDFont fnt = littleNumbers;
+		if (statNumbers)
+			fnt = statNumbers;
+
 		int fontHeight = fnt.mFont.GetHeight();
 		
 		int lump;
@@ -864,7 +989,6 @@ class SevHUD : DoomStatusBar
 		int basey = 4;
 		int offsety = 0;
 
-		string basefilepath = "graphics/SevHUD/";
 		string filepath = basefilepath..mapset.."/";
 
 		// Which colon gfx to use?
@@ -1074,6 +1198,82 @@ class SevHUD : DoomStatusBar
 	//
 	//
 	//===========================================================================
+	
+	void DrawSevHUDKeys(void)
+	{
+		string basefilepath = "graphics/SevHUD/";
+		string filepath = basefilepath..mapset.."/";
+		int lump;
+
+		// key 1
+		string key6 = "STKEYS6";
+		lump = Wads.CheckNumForFullName(filepath.."st_key6.png");
+		if (lump >= 0)
+			key6 = filepath.."st_key6.png";
+
+		string key0 = "STKEYS0";
+		lump = Wads.CheckNumForFullName(filepath.."st_key0.png");
+		if (lump >= 0)
+			key0 = filepath.."st_key0.png";
+
+		string key3 = "STKEYS3";
+		lump = Wads.CheckNumForFullName(filepath.."st_key3.png");
+		if (lump >= 0)
+			key3 = filepath.."st_key3.png";
+		
+		// key 2
+		string key7 = "STKEYS7";
+		lump = Wads.CheckNumForFullName(filepath.."st_key7.png");
+		if (lump >= 0)
+			key7 = filepath.."st_key7.png";
+
+		string key1 = "STKEYS1";
+		lump = Wads.CheckNumForFullName(filepath.."st_key1.png");
+		if (lump >= 0)
+			key1 = filepath.."st_key1.png";
+
+		string key4 = "STKEYS4";
+		lump = Wads.CheckNumForFullName(filepath.."st_key4.png");
+		if (lump >= 0)
+			key4 = filepath.."st_key4.png";
+		
+		// key 3
+		string key8 = "STKEYS8";
+		lump = Wads.CheckNumForFullName(filepath.."st_key8.png");
+		if (lump >= 0)
+			key8 = filepath.."st_key8.png";
+
+		string key2 = "STKEYS2";
+		lump = Wads.CheckNumForFullName(filepath.."st_key2.png");
+		if (lump >= 0)
+			key2 = filepath.."st_key2.png";
+
+		string key5 = "STKEYS5";
+		lump = Wads.CheckNumForFullName(filepath.."st_key5.png");
+		if (lump >= 0)
+			key5 = filepath.."st_key5.png";
+
+		bool locks[6];
+		String image;
+		for(int i = 0; i < 6; i++) locks[i] = CPlayer.mo.CheckKeys(i + 1, false, true);
+		// key 1
+		if (locks[1] && locks[4]) image = key6;
+		else if (locks[1]) image = key0;
+		else if (locks[4]) image = key3;
+		DrawImage(image, (239, 171), DI_ITEM_OFFSETS);
+		// key 2
+		if (locks[2] && locks[5]) image = key7;
+		else if (locks[2]) image = key1;
+		else if (locks[5]) image = key4;
+		else image = "";
+		DrawImage(image, (239, 181), DI_ITEM_OFFSETS);
+		// key 3
+		if (locks[0] && locks[3]) image = key8;
+		else if (locks[0]) image = key2;
+		else if (locks[3]) image = key5;
+		else image = "";
+		DrawImage(image, (239, 191), DI_ITEM_OFFSETS);
+	}
 
 	void DrawSevHUD(int state)
 	{
@@ -1127,7 +1327,15 @@ class SevHUD : DoomStatusBar
 
 		if (CVar.GetCVar("sevhud_extra", CPlayer).GetBool())
 		{
-			DrawStatusBarStats(state, basefilepath, littleNumbers);
+			
+			if (statNumbers)
+			{
+				DrawStatusBarStats(state, basefilepath, statNumbers);
+			}
+			else
+			{
+				DrawStatusBarStats(state, basefilepath, littleNumbers);
+			}
 			DrawStatusBarPowerups(basefilepath);
 		}
 
@@ -1148,7 +1356,7 @@ class SevHUD : DoomStatusBar
 		DrawString(bigNumbers, FormatNumber(CPlayer.health, 3), (90, 171), DI_TEXT_ALIGN_RIGHT|DI_NOSHADOW);
 		DrawString(bigNumbers, FormatNumber(GetArmorAmount(), 3), (221, 171), DI_TEXT_ALIGN_RIGHT|DI_NOSHADOW);
 
-		DoomStatusBar.DrawBarKeys();
+		DrawSevHUDKeys();
 
 		DrawSevHUDAmmo(littleNumbers);
 
@@ -1204,26 +1412,57 @@ class SevHUD : DoomStatusBar
 				DrawImage(basefilepath.."standard/st_arms.png", (104, 168), DI_ITEM_OFFSETS);
 
 			// Draw weapons numbers
-			if (littleNumbers == mDefaultIndexFont)
+
+			// Determine active weapons gfx
+			
+			// Set defaults
+			string armsy2 = "STYSNUM2";
+			string armsy3 = "STYSNUM3";
+			string armsy4 = "STYSNUM4";
+			string armsy5 = "STYSNUM5";
+			string armsy6 = "STYSNUM6";
+			string armsy7 = "STYSNUM7";
+
+			// Use mapset-specific numbers if available
+			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_ynum2.png");
+			if (lump >= 0)
 			{
-				// If we're using the default font, then draw the standard numbers
-				// That way we don't have to copy st_gnum*.png into every directory
-				DrawImage(CPlayer.HasWeaponsInSlot(2)? "STYSNUM2" : "graphics/SevHUD/standard/st_gnum2.png", (111, 172), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(3)? "STYSNUM3" : "graphics/SevHUD/standard/st_gnum3.png", (123, 172), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(4)? "STYSNUM4" : "graphics/SevHUD/standard/st_gnum4.png", (135, 172), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(5)? "STYSNUM5" : "graphics/SevHUD/standard/st_gnum5.png", (111, 182), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(6)? "STYSNUM6" : "graphics/SevHUD/standard/st_gnum6.png", (123, 182), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(7)? "STYSNUM7" : "graphics/SevHUD/standard/st_gnum7.png", (135, 182), DI_ITEM_OFFSETS);
+				armsy2 = basefilepath..mapset.."/st_ynum2.png";
+				armsy3 = basefilepath..mapset.."/st_ynum3.png";
+				armsy4 = basefilepath..mapset.."/st_ynum4.png";
+				armsy5 = basefilepath..mapset.."/st_ynum5.png";
+				armsy6 = basefilepath..mapset.."/st_ynum6.png";
+				armsy7 = basefilepath..mapset.."/st_ynum7.png";
 			}
-			else
+			
+			// Determine inactive weapons gfx
+
+			// Set defaults
+			string armsg2 = "graphics/SevHUD/standard/st_gnum2.png";
+			string armsg3 = "graphics/SevHUD/standard/st_gnum3.png";
+			string armsg4 = "graphics/SevHUD/standard/st_gnum4.png";
+			string armsg5 = "graphics/SevHUD/standard/st_gnum5.png";
+			string armsg6 = "graphics/SevHUD/standard/st_gnum6.png";
+			string armsg7 = "graphics/SevHUD/standard/st_gnum7.png";
+
+			// Use mapset-specific numbers if available
+			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_gnum2.png");
+			if (lump >= 0)
 			{
-				DrawImage(CPlayer.HasWeaponsInSlot(2)? filepath.."st_ynum2.png" : filepath.."st_gnum2.png", (111, 172), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(3)? filepath.."st_ynum3.png" : filepath.."st_gnum3.png", (123, 172), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(4)? filepath.."st_ynum4.png" : filepath.."st_gnum4.png", (135, 172), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(5)? filepath.."st_ynum5.png" : filepath.."st_gnum5.png", (111, 182), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(6)? filepath.."st_ynum6.png" : filepath.."st_gnum6.png", (123, 182), DI_ITEM_OFFSETS);
-				DrawImage(CPlayer.HasWeaponsInSlot(7)? filepath.."st_ynum7.png" : filepath.."st_gnum7.png", (135, 182), DI_ITEM_OFFSETS);
+				armsg2 = basefilepath..mapset.."/st_gnum2.png";
+				armsg3 = basefilepath..mapset.."/st_gnum3.png";
+				armsg4 = basefilepath..mapset.."/st_gnum4.png";
+				armsg5 = basefilepath..mapset.."/st_gnum5.png";
+				armsg6 = basefilepath..mapset.."/st_gnum6.png";
+				armsg7 = basefilepath..mapset.."/st_gnum7.png";
 			}
+
+			DrawImage(CPlayer.HasWeaponsInSlot(2)? armsy2 : armsg2, (111, 172), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(3)? armsy3 : armsg3, (123, 172), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(4)? armsy4 : armsg4, (135, 172), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(5)? armsy5 : armsg5, (111, 182), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(6)? armsy6 : armsg6, (123, 182), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(7)? armsy7 : armsg7, (135, 182), DI_ITEM_OFFSETS);
 		}
 	}
 }

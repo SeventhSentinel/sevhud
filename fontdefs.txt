@@ -12,6 +12,48 @@ DefaultIndexFont
    9 STYSNUM9
 }
 
+400minvrHUDFont
+{
+	0 "graphics/SevHUD/400minvr/st_tnum0.png"
+	1 "graphics/SevHUD/400minvr/st_tnum1.png"
+	2 "graphics/SevHUD/400minvr/st_tnum2.png"
+	3 "graphics/SevHUD/400minvr/st_tnum3.png"
+	4 "graphics/SevHUD/400minvr/st_tnum4.png"
+	5 "graphics/SevHUD/400minvr/st_tnum5.png"
+	6 "graphics/SevHUD/400minvr/st_tnum6.png"
+	7 "graphics/SevHUD/400minvr/st_tnum7.png"
+	8 "graphics/SevHUD/400minvr/st_tnum8.png"
+	9 "graphics/SevHUD/400minvr/st_tnum9.png"
+}
+
+400minvrIndexFont
+{
+	0 "graphics/SevHUD/400minvr/st_ynum0.png"
+	1 "graphics/SevHUD/400minvr/st_ynum1.png"
+	2 "graphics/SevHUD/400minvr/st_ynum2.png"
+	3 "graphics/SevHUD/400minvr/st_ynum3.png"
+	4 "graphics/SevHUD/400minvr/st_ynum4.png"
+	5 "graphics/SevHUD/400minvr/st_ynum5.png"
+	6 "graphics/SevHUD/400minvr/st_ynum6.png"
+	7 "graphics/SevHUD/400minvr/st_ynum7.png"
+	8 "graphics/SevHUD/400minvr/st_ynum8.png"
+	9 "graphics/SevHUD/400minvr/st_ynum9.png"
+}
+
+400minvrStatsFont
+{
+	0 "graphics/SevHUD/400minvr/st_snum0.png"
+	1 "graphics/SevHUD/400minvr/st_snum1.png"
+	2 "graphics/SevHUD/400minvr/st_snum2.png"
+	3 "graphics/SevHUD/400minvr/st_snum3.png"
+	4 "graphics/SevHUD/400minvr/st_snum4.png"
+	5 "graphics/SevHUD/400minvr/st_snum5.png"
+	6 "graphics/SevHUD/400minvr/st_snum6.png"
+	7 "graphics/SevHUD/400minvr/st_snum7.png"
+	8 "graphics/SevHUD/400minvr/st_snum8.png"
+	9 "graphics/SevHUD/400minvr/st_snum9.png"
+}
+
 BTSXHUDFont
 {
 	0 "graphics/SevHUD/btsx1/st_tnum0.png"
