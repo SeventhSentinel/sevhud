@@ -170,8 +170,8 @@ class SevHUD : DoomStatusBar
 		// Grab a map checksum to figure out what mapset we're in
 
 		// I used to use names instead of strings so I could use a switch
-		// case, but that resulted in Claustrophobia 1024 having the same 
-		// checksum as Eviternity. So strings it is!
+		// case, but that resulted in different mapsets having the same 
+		// checksum as each other. So strings it is!
 
 		string checksum;
 
@@ -179,7 +179,7 @@ class SevHUD : DoomStatusBar
 		{
 			checksum = LevelInfo.MapChecksum("E1M1");
 
-			if ((checksum == "someverylongthirtytwodigitnumber")
+			if (checksum == "someverylongthirtytwodigitnumber")
 			{
 				// TODO: add some Doom 1 wads
 			}
@@ -318,6 +318,10 @@ class SevHUD : DoomStatusBar
 			// new Lexicon
 			(checksum == "1f22b75b66f0a79c84fcccc8d697918f"))
 			{
+				bool oldLexicon = false;
+				if (checksum == "47b55a4612b6c2891607c52a39ea62ef")
+					oldLexicon = true;
+					
 				string curmap = level.Mapname;
 				string mapcode = curmap.Left(4);
 				
@@ -335,7 +339,7 @@ class SevHUD : DoomStatusBar
 				}
 				
 				// Ancient Aliens
-				if (mapcode == "AALI")
+				if ((mapcode == "AALI") || (oldLexicon && (mapcode.Left(3) == "AA1")))
 				{
 					mapset = "aaliens";
 					bigNumbers = mAaliensHUDFont;
@@ -343,7 +347,7 @@ class SevHUD : DoomStatusBar
 				}
 
 				// BTSX Episode 1 (old Lexicon)
-				if (mapcode.Left(3) == "BX1")
+				if (oldLexicon && (mapcode.Left(3) == "BX1"))
 				{
 					mapset = "btsx1";
 					powerups = "doom";
@@ -351,8 +355,16 @@ class SevHUD : DoomStatusBar
 					littleNumbers = mBTSX1IndexFont;
 				}
 
-				// Claustrophobia 1024 1 & 2
-				if ((mapcode == "C242") || (mapcode == "C243"))
+				// Claustrophobia 1024
+				if ((mapcode == "C242") ||
+				// Claustrophobia 1024 2
+				(mapcode == "C243") ||
+				// old Lexicon
+				(oldLexicon && (
+				// Claustrophobia 1024
+				(mapcode.Left(3) == "TT3") ||
+				// Claustrophobia 1024 2
+				(mapcode.Left(3) == "TT2"))))
 				{
 					mapset = "clau1024";
 					bigNumbers = mClau1024HUDFont;
