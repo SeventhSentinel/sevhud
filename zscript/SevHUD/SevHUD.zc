@@ -21,10 +21,16 @@ class SevHUD : DoomStatusBar
 	HUDFont m400minvrIndexFont;
 	HUDFont m400minvrStatsFont;
 	
+	HUDFont mAaliensHUDFont;
+	HUDFont mAaliensIndexFont;
+
 	HUDFont mBTSXHUDFont;
 	HUDFont mBTSX1IndexFont;
 	HUDFont mBTSX2IndexFont;
 	HUDFont mBTSX3IndexFont;
+	
+	HUDFont mClau1024HUDFont;
+	HUDFont mClau1024IndexFont;
 
 	// HP bar
 	Actor prevAimTarget;
@@ -32,7 +38,6 @@ class SevHUD : DoomStatusBar
 	
 	// Mapset
 	bool gotchecksum;
-	string checksum;
 	bool gotmapset;
 	string mapset;
 	HUDFont bigNumbers;
@@ -44,9 +49,6 @@ class SevHUD : DoomStatusBar
 	vector2 lightampoffset;
 	vector2 invisoffset;
 	vector2 radsuitoffset;
-
-	// Sentinel's Lexicon support
-	name curmap;
 	
 	string basefilepath;
 
@@ -71,10 +73,16 @@ class SevHUD : DoomStatusBar
 		m400minvrIndexFont = HUDFont.Create("400minvrIndexFont");
 		m400minvrStatsFont = HUDFont.Create("400minvrStatsFont");
 
+		mAaliensHUDFont = HUDFont.Create("AaliensHUDFont");
+		mAaliensIndexFont = HUDFont.Create("AaliensIndexFont");
+
 		mBTSXHUDFont = HUDFont.Create("BTSXHUDFont");
 		mBTSX1IndexFont = HUDFont.Create("BTSX1IndexFont");
 		mBTSX2IndexFont = HUDFont.Create("BTSX2IndexFont");
 		mBTSX3IndexFont = HUDFont.Create("BTSX3IndexFont");
+		
+		mClau1024HUDFont = HUDFont.Create("Clau1024HUDFont");
+		mClau1024IndexFont = HUDFont.Create("Clau1024IndexFont");
 
 		InitSevHUD();
 	}
@@ -133,7 +141,7 @@ class SevHUD : DoomStatusBar
 
 	void PrintChecksum(void)
 	{
-		checksum = Level.GetChecksum();
+		string checksum = Level.GetChecksum();
 		Console.Printf("Current map checksum: %s", checksum);
 		gotchecksum = true;
 	}
@@ -159,17 +167,19 @@ class SevHUD : DoomStatusBar
 		invisoffset = (0, 0);
 		radsuitoffset = (0, 0);
 
-		// Console.Printf("Running!");
-
-		// Any mapsets commented out have license text or similar stating that reuse of their assets is not permitted,
-		// but I've left the checksums in if you'd like to make your own for private use.
-
 		// Grab a map checksum to figure out what mapset we're in
+
+		// I used to use names instead of strings so I could use a switch
+		// case, but that resulted in Claustrophobia 1024 having the same 
+		// checksum as Eviternity. So strings it is!
+
+		string checksum;
+
 		/* if (LevelInfo.MapExists("E1M1"))
 		{
-			name checksum = LevelInfo.MapChecksum("E1M1");
+			checksum = LevelInfo.MapChecksum("E1M1");
 
-			switch (checksum)
+			if ((checksum == "someverylongthirtytwodigitnumber")
 			{
 				// TODO: add some Doom 1 wads
 			}
@@ -177,228 +187,182 @@ class SevHUD : DoomStatusBar
 		
 		if (LevelInfo.MapExists("E2M1"))
 		{
-			name checksum = LevelInfo.MapChecksum("E2M1");
+			checksum = LevelInfo.MapChecksum("E2M1");
 
-			switch (checksum)
-			{
-				// Aliens TC
-				// First version
-				case '1c95f245b71e5daf4824d4c715abcf7c':
-				// Second version
-				case 'ec2fb7f588a298d232923aa3b986ffd2':
-				// Some version of it I found on Reddit that claims to make it work better in GZDoom
-				// I don't think it does, but I already got the checksum, so here ya go
-				case 'f27e523702be6c2d14b2e83983af218a':
-					mapset = "alienstc";
-					break;
-			}
+			// Aliens TC
+			// First version
+			if ((checksum == "1c95f245b71e5daf4824d4c715abcf7c") ||
+			// Second version
+			(checksum == "ec2fb7f588a298d232923aa3b986ffd2") ||
+			// Some version of it I found on Reddit that claims to make it work better in GZDoom
+			// I don't think it does, but I already got the checksum, so here ya go
+			(checksum == "f27e523702be6c2d14b2e83983af218a"))
+				mapset = "alienstc";
 		}
 
 		if (LevelInfo.MapExists("MAP01"))
 		{
-			name checksum = LevelInfo.MapChecksum("MAP01");
-
-			switch (checksum)
+			checksum = LevelInfo.MapChecksum("MAP01");
+			
+			// 400 Minutes of /vr/
+			if (checksum == "fb1ddc26588e0dffdb5cd13a1965c4c8")
 			{
-				// 400 Minutes of /vr/
-				case 'fb1ddc26588e0dffdb5cd13a1965c4c8':
-					mapset = "400minvr";
-					littleNumbers = m400minvrIndexFont;
-					statNumbers = m400minvrStatsFont;
-					break;
-					
-				// Aliens TC Doom 2 version
-				case '6ef79e89e562aab57199af1d572033f4':
-					mapset = "alienstc";
-					break;
-
-				// Ancient Aliens
-				// This one has a pretty normal status bar, but it replaces the powerup gfx
-				// So we'll make a folder just for the doom ones and set it
-				// That way it looks correct in Freedoom
-				case 'acac693dd139d067a57b17620e624c31':
-					powerups = "doom";
-					break;
-
-				// BTSX ep 1
-				 case 'ff9c6545037c5e5e27ce0dacd24cdd37':
-					mapset = "btsx1";
-					powerups = "doom";
-					littleNumbers = mBTSX1IndexFont;
-					break;
-
-				// BTSX ep 2
-				case '067cf96073db3cc4a8d887ee240f88da':
-					mapset = "btsx2";
-					powerups = "doom";
-					littleNumbers = mBTSX2IndexFont;
-					break;
-
-				// BTSX ep 3 preview
-				case '04bb060c99d6592866dc95a514c2333f':
-					mapset = "btsx3";
-					powerups = "doom";
-					littleNumbers = mBTSX3IndexFont;
-					break;
-
-				// Eviternity
-				case '9831c412420f16fa0de000fd1dbfe901':
-					mapset = "eviternity";
-					break;
-
-				// Eviternity 2
-				case '8eb38d5289c47bb68d64f2832efa096d':
-					mapset = "eviternity2";
-					break;
-
-				// Legacy of Rust
-				// Despite the map label saying it's E1M1, it is in fact MAP01
-				case 'bf34c34c5dfc8bb47228cc304f9a6748':
-					mapset = "legacyofrust";
-					break;
-
-				// Pirate Doom 2
-				case '8af76bf89a864c1e2b3b21865c277298':
-					mapset = "piratedoom2";
-					powerups = mapset;
-					radsuitoffset = (-15, 1);
-					break;
-
-				// Plutonia 2
-				case '26901fc48667b76027871880e357cd0a':
-				// PRCP
-				case '4803362bd33b5e11956f6682dfd48900':
-				// PRCP 2
-				case 'dd9ee1add99d79efef7c88a5ee63aab7':
-					mapset = "pl2";
-					break;
-				
-				// Scythe 2
-				// I'm not doing a status bar for this but it has custom monsters
-				case '009855039a4557f5f293b70c5232d473':
-					mapset = "scythe2";
-					break;
+				mapset = "400minvr";
+				statNumbers = m400minvrStatsFont;
 			}
+					
+			// Aliens TC Doom 2 version
+			if (checksum == "6ef79e89e562aab57199af1d572033f4")
+				mapset = "alienstc";
+
+			// Ancient Aliens
+			// This one has a pretty normal status bar, but it replaces the powerup gfx
+			// So we'll make a folder just for the doom ones and set it
+			if (checksum == "acac693dd139d067a57b17620e624c31")
+			{
+				mapset = "aaliens";
+				powerups = "doom";
+			}
+
+			// BTSX ep 1
+			if (checksum == "ff9c6545037c5e5e27ce0dacd24cdd37")
+			{
+				mapset = "btsx1";
+				powerups = "doom";
+				littleNumbers = mBTSX1IndexFont;
+			}
+
+			// BTSX ep 2
+			if (checksum == "067cf96073db3cc4a8d887ee240f88da")
+			{
+				mapset = "btsx2";
+				powerups = "doom";
+				littleNumbers = mBTSX2IndexFont;
+			}
+
+			// BTSX ep 3 preview
+			if (checksum == "04bb060c99d6592866dc95a514c2333f")
+			{
+				mapset = "btsx3";
+				powerups = "doom";
+				littleNumbers = mBTSX3IndexFont;
+			}
+			
+			// Claustrophobia 1024
+			if (checksum == "91e173901e6f3800b81ab646976247cd")
+			{
+				mapset = "clau1024";
+			}
+
+			// Eviternity
+			if (checksum == "9831c412420f16fa0de000fd1dbfe901")
+			{
+				mapset = "eviternity";
+			}
+
+			// Eviternity 2
+			if (checksum == "8eb38d5289c47bb68d64f2832efa096d")
+			{
+				mapset = "eviternity2";
+			}
+
+			// Legacy of Rust
+			// Despite the map label saying it's E1M1, it is in fact MAP01
+			if (checksum == "bf34c34c5dfc8bb47228cc304f9a6748")
+			{
+				mapset = "legacyofrust";
+			}
+
+			// Pirate Doom 2
+			if (checksum == "8af76bf89a864c1e2b3b21865c277298")
+			{
+				mapset = "piratedoom2";
+				powerups = mapset;
+				radsuitoffset = (-15, 1);
+			}
+
+			// Plutonia 2
+			if ((checksum == "26901fc48667b76027871880e357cd0a") ||
+			// PRCP
+			(checksum == "4803362bd33b5e11956f6682dfd48900") ||
+			// PRCP 2
+			(checksum == "dd9ee1add99d79efef7c88a5ee63aab7"))
+				mapset = "pl2";
+			
+			// Scythe 2
+			// I'm not doing a status bar for this but it has custom monsters
+			if (checksum == "009855039a4557f5f293b70c5232d473")
+				mapset = "scythe2";
 		}
 
 		if (LevelInfo.MapExists("MAP41"))
 		{
-			name checksum = LevelInfo.MapChecksum("MAP41");
+			checksum = LevelInfo.MapChecksum("MAP41");
 
-			switch (checksum)
+			// Pirate Doom
+			if (checksum == "baebc37899109027a7e26f2e5390b0b1")
 			{
-				// Pirate Doom
-				case 'baebc37899109027a7e26f2e5390b0b1':
-					mapset = "piratedoom";
-					powerups = mapset;
-					invuloffset = (6, 0);
-					invisoffset = (-6, 0);
-					break;
+				mapset = "piratedoom";
+				powerups = mapset;
+				invuloffset = (6, 0);
+				invisoffset = (-6, 0);
 			}
 		}
 
+		// Sentinel's Lexicon support
 		if (LevelInfo.MapExists("VR"))
 		{
-			name vrchecksum = LevelInfo.MapChecksum("VR");
-			if (vrchecksum = '47b55a4612b6c2891607c52a39ea62ef')
+			checksum = LevelInfo.MapChecksum("VR");
+			// old Lexicon
+			if ((checksum == "47b55a4612b6c2891607c52a39ea62ef") ||
+			// new Lexicon
+			(checksum == "1f22b75b66f0a79c84fcccc8d697918f"))
 			{
-				// Sentinel's Lexicon support
-				// Console.Printf("You're playing The Sentinel's Lexicon!");
-				// if (curmap)
-					// prevmap = curmap;
-
-				curmap = level.Mapname;
-
-				switch (curmap)
-				{
-					// No stbar in VR
-					case 'vr':
-						mapset = "none";
-						break;
+				string curmap = level.Mapname;
+				string mapcode = curmap.Left(4);
+				
+				// No stbar in VR
+				if (mapcode == "VR")
+					mapset = "none";
 						
-					// 400 Minutes of /vr/
-					case '4MVR01':
-					case '4MVR02':
-					case '4MVR03':
-					case '4MVR04':
-					case '4MVR05':
-					case '4MVR06':
-					case '4MVR07':
-					case '4MVR08':
-					case '4MVR09':
-					case '4MVR10':
-					case '4MVR11':
-					case '4MVR12':
-					case '4MVR13':
-					case '4MVR14':
-					case '4MVR15':
-					case '4MVR16':
-					case '4MVR17':
-					case '4MVR18':
-					case '4MVR19':
-					case '4MVR20':
-					case '4MVR21':
-					case '4MVR22':
-					case '4MVR23':
-					case '4MVR24':
-					case '4MVR25':
-					case '4MVR26':
-					case '4MVR27':
-					case '4MVR28':
-					case '4MVR29':
-					case '4MVR30':
-					case '4MVR31':
-					case '4MVR32':
-					case '4MVR33':
-					case '4MVR34':
-					case '4MVR35':
-					case '4MVR36':
-					case '4MVR37':
-						mapset = "400minvr";
-						bigNumbers = m400minvrHUDFont;
-						littleNumbers = m400minvrIndexFont;
-						statNumbers = m400minvrStatsFont;
-						break;
-					
-					// BTSX Episode 1 (old Lexicon)
-					case 'BX101':
-					case 'BX102':
-					case 'BX103':
-					case 'BX104':
-					case 'BX105':
-					case 'BX106':
-					case 'BX107':
-					case 'BX108':
-					case 'BX109':
-					case 'BX110':
-					case 'BX111':
-					case 'BX112':
-					case 'BX113':
-					case 'BX114':
-					case 'BX115':
-					case 'BX116':
-					case 'BX117':
-					case 'BX118':
-					case 'BX119':
-					case 'BX120':
-					case 'BX121':
-					case 'BX122':
-					case 'BX123':
-					case 'BX124':
-					case 'BX131':
-						mapset = "btsx1";
-						powerups = "doom";
-						bigNumbers = mBTSXHUDFont;
-						littleNumbers = mBTSX1IndexFont;
-						break;
+				// 400 Minutes of /vr/
+				if (mapcode == "4MVR")
+				{
+					mapset = "400minvr";
+					bigNumbers = m400minvrHUDFont;
+					littleNumbers = m400minvrIndexFont;
+					statNumbers = m400minvrStatsFont;
+				}
+				
+				// Ancient Aliens
+				if (mapcode == "AALI")
+				{
+					mapset = "aaliens";
+					bigNumbers = mAaliensHUDFont;
+					littleNumbers = mAaliensIndexFont;
+				}
+
+				// BTSX Episode 1 (old Lexicon)
+				if (mapcode.Left(3) == "BX1")
+				{
+					mapset = "btsx1";
+					powerups = "doom";
+					bigNumbers = mBTSXHUDFont;
+					littleNumbers = mBTSX1IndexFont;
+				}
+
+				// Claustrophobia 1024 1 & 2
+				if ((mapcode == "C242") || (mapcode == "C243"))
+				{
+					mapset = "clau1024";
+					bigNumbers = mClau1024HUDFont;
+					littleNumbers = mClau1024IndexFont;
 				}
 			}
 		}
 
 		// Mapset is now known
 		gotmapset = true;
-		
-		// Set vars for non-font small numbers
 	}
 
 	//===========================================================================
@@ -788,6 +752,15 @@ class SevHUD : DoomStatusBar
 			{
 				if ((txt == "CommanderKeen") || (txt == "Lexicon_4MVR_CommanderKeen"))
 					txt = "$ENEMY_400MINVR_UFO";
+			}
+
+			if (mapset == "aaliens")
+			{
+				if (txt == "CommanderKeen")
+					txt = "$ENEMY_AALIENS_ALIENGUARDIAN";
+
+				if (txt == "Nazi")
+					txt = "$ENEMY_AALIENS_PLASMAALIEN";
 			}
 
 			if (mapset == "legacyofrust")

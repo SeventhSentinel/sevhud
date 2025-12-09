@@ -24,6 +24,7 @@ DefaultIndexFont
 	7 "graphics/SevHUD/400minvr/st_tnum7.png"
 	8 "graphics/SevHUD/400minvr/st_tnum8.png"
 	9 "graphics/SevHUD/400minvr/st_tnum9.png"
+	- "graphics/SevHUD/400minvr/st_minus.png"
 }
 
 400minvrIndexFont
@@ -54,6 +55,35 @@ DefaultIndexFont
 	9 "graphics/SevHUD/400minvr/st_snum9.png"
 }
 
+AaliensHUDFont
+{
+	0 "graphics/SevHUD/aaliens/st_tnum0.png"
+	1 "graphics/SevHUD/aaliens/st_tnum1.png"
+	2 "graphics/SevHUD/aaliens/st_tnum2.png"
+	3 "graphics/SevHUD/aaliens/st_tnum3.png"
+	4 "graphics/SevHUD/aaliens/st_tnum4.png"
+	5 "graphics/SevHUD/aaliens/st_tnum5.png"
+	6 "graphics/SevHUD/aaliens/st_tnum6.png"
+	7 "graphics/SevHUD/aaliens/st_tnum7.png"
+	8 "graphics/SevHUD/aaliens/st_tnum8.png"
+	9 "graphics/SevHUD/aaliens/st_tnum9.png"
+	- "graphics/SevHUD/aaliens/st_minus.png"
+}
+
+AaliensIndexFont
+{
+	0 "graphics/SevHUD/aaliens/st_ynum0.png"
+	1 "graphics/SevHUD/aaliens/st_ynum1.png"
+	2 "graphics/SevHUD/aaliens/st_ynum2.png"
+	3 "graphics/SevHUD/aaliens/st_ynum3.png"
+	4 "graphics/SevHUD/aaliens/st_ynum4.png"
+	5 "graphics/SevHUD/aaliens/st_ynum5.png"
+	6 "graphics/SevHUD/aaliens/st_ynum6.png"
+	7 "graphics/SevHUD/aaliens/st_ynum7.png"
+	8 "graphics/SevHUD/aaliens/st_ynum8.png"
+	9 "graphics/SevHUD/aaliens/st_ynum9.png"
+}
+
 BTSXHUDFont
 {
 	0 "graphics/SevHUD/btsx1/st_tnum0.png"
@@ -66,6 +96,7 @@ BTSXHUDFont
 	7 "graphics/SevHUD/btsx1/st_tnum7.png"
 	8 "graphics/SevHUD/btsx1/st_tnum8.png"
 	9 "graphics/SevHUD/btsx1/st_tnum9.png"
+	// BTSX doesn't have a minus graphic since it doesn't support deathmatch
 }
 
 BTSX1IndexFont
@@ -122,4 +153,33 @@ ChexIndexFont
 	7 "graphics/SevHUD/chex/st_ynum7.png"
 	8 "graphics/SevHUD/chex/st_ynum8.png"
 	9 "graphics/SevHUD/chex/st_ynum9.png"
+}
+
+Clau1024HUDFont
+{
+	0 "graphics/SevHUD/clau1024/st_num0.png"
+	1 "graphics/SevHUD/clau1024/st_num1.png"
+	2 "graphics/SevHUD/clau1024/st_num2.png"
+	3 "graphics/SevHUD/clau1024/st_num3.png"
+	4 "graphics/SevHUD/clau1024/st_num4.png"
+	5 "graphics/SevHUD/clau1024/st_num5.png"
+	6 "graphics/SevHUD/clau1024/st_num6.png"
+	7 "graphics/SevHUD/clau1024/st_num7.png"
+	8 "graphics/SevHUD/clau1024/st_num8.png"
+	9 "graphics/SevHUD/clau1024/st_num9.png"
+	- "graphics/SevHUD/clau1024/st_minus.png"
+}
+
+Clau1024IndexFont
+{
+	0 "graphics/SevHUD/clau1024/st_ynum0.png"
+	1 "graphics/SevHUD/clau1024/st_ynum1.png"
+	2 "graphics/SevHUD/clau1024/st_ynum2.png"
+	3 "graphics/SevHUD/clau1024/st_ynum3.png"
+	4 "graphics/SevHUD/clau1024/st_ynum4.png"
+	5 "graphics/SevHUD/clau1024/st_ynum5.png"
+	6 "graphics/SevHUD/clau1024/st_ynum6.png"
+	7 "graphics/SevHUD/clau1024/st_ynum7.png"
+	8 "graphics/SevHUD/clau1024/st_ynum8.png"
+	9 "graphics/SevHUD/clau1024/st_ynum9.png"
 }
