@@ -5,6 +5,7 @@
 - Back to Saturn X Episodes 1 & 2
 - Claustrophobia 1024 1 & 2
 - Eviternity 1 & 2
+- Gridlock 64
 - Jenesis
 - Pirate Doom 1 & 2
 - Plutonia 2
@@ -13,7 +14,6 @@
 ### Supported HP Bar Custom Enemy Names
 - Epic 2
 - Going Down & Going Down Turbo
-- Gridlock 64
 - Hell to Pay
 - Hadephobia
 - Scythe 2
