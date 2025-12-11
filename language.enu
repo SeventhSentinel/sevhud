@@ -83,7 +83,27 @@ ENEMY_400MINVR_UFO = "UFO";
 ENEMY_AALIENS_ALIENGUARDIAN = "Alien Guardian";
 ENEMY_AALIENS_PLASMAALIEN = "Stealth Plasma Alien";
 
-ENEMY_PIRATEDOOM_CANNIBALPYGMY = "Cannibal Pygmy";
+ENEMY_EPIC2_ALIEN = "Alien";
+
+ENEMY_GOINGDOWN_FORBIDDENFRUIT = "Forbidden Fruit";
+ENEMY_GOINGDOWN_REDSPIDERMASTERMIND = "Red Spider Mastermind";
+
+// Gridlock 64 uses a Realm667 monster. Probably other stuff uses it,
+// so let's keep this label generic
+ENEMY_SEVHUD_DARKCARDINAL = "Dark Cardinal";
+
+ENEMY_HADEPHOBIA_HADEPHOBE = "Hadephobe";
+
+ENEMY_HELLTOPAY_BARBARIQUE = "Barbarique";
+ENEMY_HELLTOPAY_COLONIST = "Colonist";
+ENEMY_HELLTOPAY_METALBLOB = "Liquid Metal Blob";
+ENEMY_HELLTOPAY_METALGLOB = "Liquid Metal Glob";
+ENEMY_HELLTOPAY_POWERCORE = "Power Core";
+ENEMY_HELLTOPAY_REAPER = "Reaper";
+ENEMY_HELLTOPAY_SENTINEL = "Sentinel";
+
+ENEMY_JENESIS_ABOMINATION = "Abomination";
+ENEMY_JENESIS_MUTANTMARINE = "Mutant Marine";
 
 ENEMY_LOR_GHOUL = "Ghoul";
 ENEMY_LOR_BANSHEE = "Banshee";
@@ -91,6 +111,8 @@ ENEMY_LOR_MINDWEAVER = "Mindweaver";
 ENEMY_LOR_SHOCKTROOPER = "Shocktrooper";
 ENEMY_LOR_VASSAGO = "Vassago";
 ENEMY_LOR_TYRANT = "Tyrant";
+
+ENEMY_PIRATEDOOM_CANNIBALPYGMY = "Cannibal Pygmy";
 
 ENEMY_PIRATEDOOM2_MADTRIBALMINION = "Mad Tribal Minion";
 ENEMY_PIRATEDOOM2_CLOMPINCANNONEER = "The Clompin' Cannoneer";

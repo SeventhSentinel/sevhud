@@ -11,27 +11,6 @@
 
 class SevHUD : DoomStatusBar
 {
-	// Fonts
-	HUDFont mHUDSmallFont;
-	HUDFont mHUDConFont;
-
-	HUDFont mDefaultIndexFont;
-	
-	HUDFont m400minvrHUDFont;
-	HUDFont m400minvrIndexFont;
-	HUDFont m400minvrStatsFont;
-	
-	HUDFont mAaliensHUDFont;
-	HUDFont mAaliensIndexFont;
-
-	HUDFont mBTSXHUDFont;
-	HUDFont mBTSX1IndexFont;
-	HUDFont mBTSX2IndexFont;
-	HUDFont mBTSX3IndexFont;
-	
-	HUDFont mClau1024HUDFont;
-	HUDFont mClau1024IndexFont;
-
 	// HP bar
 	Actor prevAimTarget;
 	double healthBarAlpha;
@@ -52,6 +31,39 @@ class SevHUD : DoomStatusBar
 	
 	string basefilepath;
 
+	// Fonts
+	HUDFont mHUDSmallFont;
+	HUDFont mHUDConFont;
+
+	HUDFont mDefaultIndexFont;
+	
+	HUDFont m400minvrHUDFont;
+	HUDFont m400minvrIndexFont;
+	HUDFont m400minvrStatsFont;
+	
+	HUDFont mAaliensHUDFont;
+	HUDFont mAaliensIndexFont;
+
+	HUDFont mBTSXHUDFont;
+	HUDFont mBTSX1IndexFont;
+	HUDFont mBTSX2IndexFont;
+	HUDFont mBTSX3IndexFont;
+	
+	HUDFont mClau1024HUDFont;
+	HUDFont mClau1024IndexFont;
+	
+	HUDFont mGarruloIndexFont;
+	
+	HUDFont mGridlock64HUDFont;
+	HUDFont mGridlock64IndexFont;
+	
+	HUDFont mHellboundHUDFont;
+
+	HUDFont mJenesisHUDFont;
+	HUDFont mJenesisIndexFont;
+	
+	HUDFont mLastEp1IndexFont;
+
 
 	//===========================================================================
 	//
@@ -69,20 +81,33 @@ class SevHUD : DoomStatusBar
 
 		mDefaultIndexFont = HUDFont.Create("DefaultIndexFont");
 
-		m400minvrHUDFont = HUDFont.Create("400minvrHUDFont");
+		// Manually set the width to 13, or whatever the width of the 0 char is
+		m400minvrHUDFont = HUDFont.Create("400minvrHUDFont", 13, Mono_CellLeft, 1, 1);
 		m400minvrIndexFont = HUDFont.Create("400minvrIndexFont");
 		m400minvrStatsFont = HUDFont.Create("400minvrStatsFont");
 
-		mAaliensHUDFont = HUDFont.Create("AaliensHUDFont");
+		mAaliensHUDFont = HUDFont.Create("AaliensHUDFont", 13, Mono_CellLeft, 1, 1);
 		mAaliensIndexFont = HUDFont.Create("AaliensIndexFont");
 
-		mBTSXHUDFont = HUDFont.Create("BTSXHUDFont");
+		mBTSXHUDFont = HUDFont.Create("BTSXHUDFont", 14, Mono_CellLeft, 1, 1);
 		mBTSX1IndexFont = HUDFont.Create("BTSX1IndexFont");
 		mBTSX2IndexFont = HUDFont.Create("BTSX2IndexFont");
 		mBTSX3IndexFont = HUDFont.Create("BTSX3IndexFont");
 		
-		mClau1024HUDFont = HUDFont.Create("Clau1024HUDFont");
+		mClau1024HUDFont = HUDFont.Create("Clau1024HUDFont", 14, Mono_CellLeft, 1, 1);
 		mClau1024IndexFont = HUDFont.Create("Clau1024IndexFont");
+		
+		mGarruloIndexFont = HUDFont.Create("GarruloIndexFont");
+
+		mGridlock64HUDFont = HUDFont.Create("Gridlock64HUDFont", 13, Mono_CellLeft, 1, 1);
+		mGridlock64IndexFont = HUDFont.Create("Gridlock64IndexFont");
+		
+		mHellboundHUDFont = HUDFont.Create("HellboundHUDFont");
+
+		mJenesisHUDFont = HUDFont.Create("JenesisHUDFont", 13, Mono_CellLeft, 1, 1);
+		mJenesisIndexFont = HUDFont.Create("JenesisIndexFont");
+		
+		mLastEp1IndexFont = HUDFont.Create("LastEp1IndexFont");
 
 		InitSevHUD();
 	}
@@ -253,6 +278,12 @@ class SevHUD : DoomStatusBar
 			{
 				mapset = "clau1024";
 			}
+			
+			// Epic 2
+			if (checksum == "c6a0fb52a42a66adc91d0c5acb066db9")
+			{
+				mapset = "epic2";
+			}
 
 			// Eviternity
 			if (checksum == "9831c412420f16fa0de000fd1dbfe901")
@@ -265,7 +296,50 @@ class SevHUD : DoomStatusBar
 			{
 				mapset = "eviternity2";
 			}
+			
+			// Going Down
+			if ((checksum == "1dfcba1353e9bbf720f17639f294490d") ||
+			// Going Down Turbo
+			(checksum == "ef04a8560a7a447cc9efd03b893f72d3"))
+			{
+				mapset = "goingdown";
+			}
+			
+			// Gridlock 64
+			if (checksum == "6e3fcb12744e8c36b47fa4e67d973d03")
+			{
+				mapset = "gridlock64";
+				littleNumbers = mGridlock64IndexFont;
+			}
 
+			// Hadephobia
+			if (checksum == "cfb4c9fed8dcf5ad583dc2543996a473")
+			{
+				mapset = "hadephobia";
+			}
+			
+			// Hell to Pay
+/*			if (checksum == "alongnumber")
+			{
+				mapset = "helltopay";
+			}
+*/			
+			
+			// Hellbound
+			// I made a minus graphic for this, that's it lol
+			if (checksum == "8f87eeb6b35ce90744f7287ec5a1d145")
+			{
+				mapset = "hellbound";
+				bigNumbers = mHellboundHUDFont;
+			}
+			
+			// Jenesis
+			if (checksum == "4319a664371a3ae927f46261035b170b")
+			{
+				mapset = "jenesis";
+				littlenumbers = mJenesisIndexFont;
+			}
+			
 			// Legacy of Rust
 			// Despite the map label saying it's E1M1, it is in fact MAP01
 			if (checksum == "bf34c34c5dfc8bb47228cc304f9a6748")
@@ -324,6 +398,7 @@ class SevHUD : DoomStatusBar
 					
 				string curmap = level.Mapname;
 				string mapcode = curmap.Left(4);
+				string oldcode = curmap.Left(3);
 				
 				// No stbar in VR
 				if (mapcode == "VR")
@@ -339,7 +414,7 @@ class SevHUD : DoomStatusBar
 				}
 				
 				// Ancient Aliens
-				if ((mapcode == "AALI") || (oldLexicon && (mapcode.Left(3) == "AA1")))
+				if ((mapcode == "AALI") || (oldLexicon && (oldcode == "AA1")))
 				{
 					mapset = "aaliens";
 					bigNumbers = mAaliensHUDFont;
@@ -347,7 +422,7 @@ class SevHUD : DoomStatusBar
 				}
 
 				// BTSX Episode 1 (old Lexicon)
-				if (oldLexicon && (mapcode.Left(3) == "BX1"))
+				if (oldLexicon && (oldcode == "BX1"))
 				{
 					mapset = "btsx1";
 					powerups = "doom";
@@ -362,19 +437,83 @@ class SevHUD : DoomStatusBar
 				// old Lexicon
 				(oldLexicon && (
 				// Claustrophobia 1024
-				(mapcode.Left(3) == "TT3") ||
+				(oldcode == "TT3") ||
 				// Claustrophobia 1024 2
-				(mapcode.Left(3) == "TT2"))))
+				(oldcode == "TT2"))))
 				{
 					mapset = "clau1024";
 					bigNumbers = mClau1024HUDFont;
 					littleNumbers = mClau1024IndexFont;
+				}
+				
+				// Epic 2
+				if (mapcode == "EPC2")
+				{
+					mapset = "epic2";
+				}
+				
+				// Garrulismo
+				if (mapcode == "GRLS")
+				{
+					mapset = "garrulo";
+					littleNumbers = mGarruloIndexFont;
+				}
+				
+				// Going Down
+				if (mapcode == "GDWN")
+				{
+					mapset = "goingdown";
+				}
+				
+				// Gridlock 64
+				if (mapcode == "GD64")
+				{
+					mapset = "gridlock64";
+					bigNumbers = mGridlock64HUDFont;
+					littleNumbers = mGridlock64IndexFont;
+				}
+				
+				// Hadephobia
+				if (mapcode == "HADP")
+				{
+					mapset = "hadephobia";
+				}
+				
+				// Hell to Pay
+				if (mapcode == "HLTP")
+				{
+					mapset = "helltopay";
+				}
+				
+				// Hellbound
+				if (mapcode == "HLBD" || (oldLexicon && (oldcode == "HLB")))
+				{
+					mapset = "hellbound";
+					bigNumbers = mHellboundHUDFont;
+				}
+
+				// Jenesis
+				if (mapcode == "JENS")
+				{
+					mapset = "jenesis";
+					bigNumbers = mJenesisHUDFont;
+					littleNumbers = mJenesisIndexFont;
+				}
+
+				// Last Day On Earth
+				if (mapcode == "LDOE")
+				{
+					mapset = "lastep1";
+					littleNumbers = mLastEp1IndexFont;
 				}
 			}
 		}
 
 		// Mapset is now known
 		gotmapset = true;
+		
+		// Debug
+		// console.printf(mapset);
 	}
 
 	//===========================================================================
@@ -740,26 +879,36 @@ class SevHUD : DoomStatusBar
 			if (!fnt)
 				return;
 
-			// retrieve target health
-			int minhpcvar = CVar.GetCVar("sevhud_hpbar_min", CPlayer).GetInt();
-			int health = prevAimTarget.Health;
-			int maxHealth = prevAimTarget.GetMaxHealth(true);
-			if (minhpcvar > maxHealth)
-				return;
-
 			String txt;
+			Bool aimingatplayer = false;
 
 			// Get target name
 			String targName = prevAimTarget.GetCharacterName();
 			if (prevAimTarget is "PlayerPawn" && prevAimTarget.player && playeringame[prevAimTarget.PlayerNumber()])
+			{
 				targName = prevAimTarget.player.GetUserName();
+				aimingatplayer = true;
+			}
 			txt = String.Format("%s", targName);
+
+			// retrieve target health
+			int minhpcvar = CVar.GetCVar("sevhud_hpbar_min", CPlayer).GetInt();
+			int health = prevAimTarget.Health;
+			int maxHealth = prevAimTarget.GetMaxHealth(true);
+
+			// See player health regardless of min health threshold
+			If ((aimingatplayer == false) && (minhpcvar > maxHealth))
+				return;
 
 			// Pirate Doom's LeChuck comes with his own health display
 			if ((mapset == "piratedoom") && ((txt == "lechuckteleport") || (txt == "LeChuck")))
 				return;
 
 			// Clean up target name
+			bool keen = false;
+			bool nazi = false;
+			bool deadsoul = false;
+			
 			if (mapset == "400minvr")
 			{
 				if ((txt == "CommanderKeen") || (txt == "Lexicon_4MVR_CommanderKeen"))
@@ -773,6 +922,48 @@ class SevHUD : DoomStatusBar
 
 				if (txt == "Nazi")
 					txt = "$ENEMY_AALIENS_PLASMAALIEN";
+			}
+			
+			if (mapset == "epic2")
+			{
+				if (txt == "Nazi")
+					txt = "$ENEMY_EPIC2_ALIEN";
+			}
+			
+			if (mapset == "goingdown")
+			{
+				if ((txt == "CommanderKeen") || (txt == "Lexicon_GDWN_CommanderKeen"))
+					txt = "$ENEMY_GOINGDOWN_FORBIDDENFRUIT";
+				
+				if (txt == "Nazi")
+					txt = "$ENEMY_GOINGDOWN_REDSPIDERMASTERMIND";
+			}
+			
+			if (mapset == "gridlock64")
+			{
+				if ((txt == "DeadLostSoul") || (txt == "Lexicon_GD64_DeadLostSoul"))
+					txt = "$ENEMY_SEVHUD_DARKCARDINAL";
+			}
+
+			if (mapset == "hadephobia")
+			{
+				if ((txt == "CommanderKeen") || (txt == "Lexicon_HADP_CommanderKeen"))
+					txt = "$ENEMY_HADEPHOBIA_HADEPHOBE";
+			}
+			
+			if (mapset == "helltopay")
+			{
+				if ((txt == "CommanderKeen") || (txt == "Lexicon_HLTP_CommanderKeen"))
+					txt = "$ENEMY_HELLTOPAY_FUSE";
+			}
+			
+			if (mapset == "jenesis")
+			{
+				if ((txt == "CommanderKeen") || (txt == "Lexicon_JENS_CommanderKeen"))
+					txt = "$ENEMY_JENESIS_ABOMINATION";
+
+				if ((txt == "Nazi") || (txt == "Lexicon_JENS_WolfensteinSS"))
+					txt = "$ENEMY_JENESIS_MUTANTMARINE";
 			}
 
 			if (mapset == "legacyofrust")

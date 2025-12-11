@@ -79,7 +79,10 @@ class SevHUDHealthTracer : Inventory
 		}
 
 		let at = GetAimTarget(Owner.player.camera);
-		bool isLiveTarget = (at && at.bIsMonster) || at is "PlayerPawn";
+		bool isLiveTarget = (at && at.bIsMonster) || at is "PlayerPawn" ||
+		// There's a monster in Gridlock 64 that's not flagged as a monster,
+		// so let's throw in anything that can be shot and counts as as a kill
+		(at && at.bSHOOTABLE && at.bCOUNTKILL);
 		if (isLiveTarget || at == NULL)
 		{
 			currentAimTarget = at;

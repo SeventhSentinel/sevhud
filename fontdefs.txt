@@ -183,3 +183,105 @@ Clau1024IndexFont
 	8 "graphics/SevHUD/clau1024/st_ynum8.png"
 	9 "graphics/SevHUD/clau1024/st_ynum9.png"
 }
+
+GarruloIndexFont
+{
+	0 "graphics/SevHUD/garrulo/st_ynum0.png"
+	1 "graphics/SevHUD/garrulo/st_ynum1.png"
+	2 "graphics/SevHUD/garrulo/st_ynum2.png"
+	3 "graphics/SevHUD/garrulo/st_ynum3.png"
+	4 "graphics/SevHUD/garrulo/st_ynum4.png"
+	5 "graphics/SevHUD/garrulo/st_ynum5.png"
+	6 "graphics/SevHUD/garrulo/st_ynum6.png"
+	7 "graphics/SevHUD/garrulo/st_ynum7.png"
+	8 "graphics/SevHUD/garrulo/st_ynum8.png"
+	9 "graphics/SevHUD/garrulo/st_ynum9.png"
+}
+
+HellboundHUDFont
+{
+	0 "graphics/SevHUD/hellbound/st_num0.png"
+	1 "graphics/SevHUD/hellbound/st_num1.png"
+	2 "graphics/SevHUD/hellbound/st_num2.png"
+	3 "graphics/SevHUD/hellbound/st_num3.png"
+	4 "graphics/SevHUD/hellbound/st_num4.png"
+	5 "graphics/SevHUD/hellbound/st_num5.png"
+	6 "graphics/SevHUD/hellbound/st_num6.png"
+	7 "graphics/SevHUD/hellbound/st_num7.png"
+	8 "graphics/SevHUD/hellbound/st_num8.png"
+	9 "graphics/SevHUD/hellbound/st_num9.png"
+	- "graphics/SevHUD/hellbound/st_minus.png"
+}
+
+JenesisHUDFont
+{
+	0 "graphics/SevHUD/jenesis/st_num0.png"
+	1 "graphics/SevHUD/jenesis/st_num1.png"
+	2 "graphics/SevHUD/jenesis/st_num2.png"
+	3 "graphics/SevHUD/jenesis/st_num3.png"
+	4 "graphics/SevHUD/jenesis/st_num4.png"
+	5 "graphics/SevHUD/jenesis/st_num5.png"
+	6 "graphics/SevHUD/jenesis/st_num6.png"
+	7 "graphics/SevHUD/jenesis/st_num7.png"
+	8 "graphics/SevHUD/jenesis/st_num8.png"
+	9 "graphics/SevHUD/jenesis/st_num9.png"
+	- "graphics/SevHUD/jenesis/st_minus.png"
+}
+
+JenesisIndexFont
+{
+	// We use a different name on purpose so that the arms numbers can be unique
+	0 "graphics/SevHUD/jenesis/st_anum0.png"
+	1 "graphics/SevHUD/jenesis/st_anum1.png"
+	2 "graphics/SevHUD/jenesis/st_anum2.png"
+	3 "graphics/SevHUD/jenesis/st_anum3.png"
+	4 "graphics/SevHUD/jenesis/st_anum4.png"
+	5 "graphics/SevHUD/jenesis/st_anum5.png"
+	6 "graphics/SevHUD/jenesis/st_anum6.png"
+	7 "graphics/SevHUD/jenesis/st_anum7.png"
+	8 "graphics/SevHUD/jenesis/st_anum8.png"
+	9 "graphics/SevHUD/jenesis/st_anum9.png"
+}
+
+LastEp1IndexFont
+{
+	0 "graphics/SevHUD/lastep1/st_ynum0.png"
+	1 "graphics/SevHUD/lastep1/st_ynum1.png"
+	2 "graphics/SevHUD/lastep1/st_ynum2.png"
+	3 "graphics/SevHUD/lastep1/st_ynum3.png"
+	4 "graphics/SevHUD/lastep1/st_ynum4.png"
+	5 "graphics/SevHUD/lastep1/st_ynum5.png"
+	6 "graphics/SevHUD/lastep1/st_ynum6.png"
+	7 "graphics/SevHUD/lastep1/st_ynum7.png"
+	8 "graphics/SevHUD/lastep1/st_ynum8.png"
+	9 "graphics/SevHUD/lastep1/st_ynum9.png"
+}
+
+Gridlock64HUDFont
+{
+	0 "graphics/SevHUD/gridlock64/st_num0.png"
+	1 "graphics/SevHUD/gridlock64/st_num1.png"
+	2 "graphics/SevHUD/gridlock64/st_num2.png"
+	3 "graphics/SevHUD/gridlock64/st_num3.png"
+	4 "graphics/SevHUD/gridlock64/st_num4.png"
+	5 "graphics/SevHUD/gridlock64/st_num5.png"
+	6 "graphics/SevHUD/gridlock64/st_num6.png"
+	7 "graphics/SevHUD/gridlock64/st_num7.png"
+	8 "graphics/SevHUD/gridlock64/st_num8.png"
+	9 "graphics/SevHUD/gridlock64/st_num9.png"
+	- "graphics/SevHUD/gridlock64/st_minus.png"
+}
+
+Gridlock64IndexFont
+{
+	0 "graphics/SevHUD/gridlock64/st_ynum0.png"
+	1 "graphics/SevHUD/gridlock64/st_ynum1.png"
+	2 "graphics/SevHUD/gridlock64/st_ynum2.png"
+	3 "graphics/SevHUD/gridlock64/st_ynum3.png"
+	4 "graphics/SevHUD/gridlock64/st_ynum4.png"
+	5 "graphics/SevHUD/gridlock64/st_ynum5.png"
+	6 "graphics/SevHUD/gridlock64/st_ynum6.png"
+	7 "graphics/SevHUD/gridlock64/st_ynum7.png"
+	8 "graphics/SevHUD/gridlock64/st_ynum8.png"
+	9 "graphics/SevHUD/gridlock64/st_ynum9.png"
+}
