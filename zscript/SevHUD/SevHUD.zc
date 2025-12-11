@@ -14,6 +14,7 @@ class SevHUD : DoomStatusBar
 	// HP bar
 	Actor prevAimTarget;
 	double healthBarAlpha;
+	bool dontdrawnames;
 	
 	// Mapset
 	bool gotchecksum;
@@ -23,6 +24,7 @@ class SevHUD : DoomStatusBar
 	HUDFont littleNumbers;
 	HUDFont statNumbers;
 	string powerups;
+	bool oldLexicon;
 
 	vector2 invuloffset;
 	vector2 lightampoffset;
@@ -82,7 +84,7 @@ class SevHUD : DoomStatusBar
 		mDefaultIndexFont = HUDFont.Create("DefaultIndexFont");
 
 		// Manually set the width to 13, or whatever the width of the 0 char is
-		m400minvrHUDFont = HUDFont.Create("400minvrHUDFont", 13, Mono_CellLeft, 1, 1);
+		m400minvrHUDFont = HUDFont.Create("400minvrHUDFont", 14, Mono_CellLeft, 1, 1);
 		m400minvrIndexFont = HUDFont.Create("400minvrIndexFont");
 		m400minvrStatsFont = HUDFont.Create("400minvrStatsFont");
 
@@ -121,7 +123,10 @@ class SevHUD : DoomStatusBar
 	override void Draw(int state, double TicFrac)
 	{
 		if ((!gotmapset)||(level.MapTime == 1))
+		{
 			GetMapset();
+			dontdrawnames = false;
+		}
 			
 		if ((CVar.GetCVar("sevhud_checksum", CPlayer).GetBool())&&((!gotchecksum)||(level.MapTime == 1)))
 			PrintChecksum();
@@ -156,6 +161,10 @@ class SevHUD : DoomStatusBar
 		prevAimTarget = NULL;
 		healthBarAlpha = 0.;
 		gotchecksum = false;
+
+		// During the LeChuck fight, I'd like to stop drawing enemy names.
+		// They overlap with LeChuck's health. Looks bad.
+		dontdrawnames = false;
 	}
 
 	//===========================================================================
@@ -319,11 +328,10 @@ class SevHUD : DoomStatusBar
 			}
 			
 			// Hell to Pay
-/*			if (checksum == "alongnumber")
+			if (checksum == "b51f5e816b21bef3c36f92f0aada1618")
 			{
 				mapset = "helltopay";
-			}
-*/			
+			}			
 			
 			// Hellbound
 			// I made a minus graphic for this, that's it lol
@@ -392,7 +400,6 @@ class SevHUD : DoomStatusBar
 			// new Lexicon
 			(checksum == "1f22b75b66f0a79c84fcccc8d697918f"))
 			{
-				bool oldLexicon = false;
 				if (checksum == "47b55a4612b6c2891607c52a39ea62ef")
 					oldLexicon = true;
 					
@@ -447,7 +454,7 @@ class SevHUD : DoomStatusBar
 				}
 				
 				// Epic 2
-				if (mapcode == "EPC2")
+				if ((mapcode == "EPC2") || (oldLexicon && (oldcode == "EP2")))
 				{
 					mapset = "epic2";
 				}
@@ -460,7 +467,7 @@ class SevHUD : DoomStatusBar
 				}
 				
 				// Going Down
-				if (mapcode == "GDWN")
+				if ((mapcode == "GDWN") || (oldLexicon && (oldcode.Left(2) == "GD")))
 				{
 					mapset = "goingdown";
 				}
@@ -474,7 +481,7 @@ class SevHUD : DoomStatusBar
 				}
 				
 				// Hadephobia
-				if (mapcode == "HADP")
+				if ((mapcode == "HADP") || (oldLexicon && (oldcode == "HPH")))
 				{
 					mapset = "hadephobia";
 				}
@@ -888,8 +895,7 @@ class SevHUD : DoomStatusBar
 			{
 				targName = prevAimTarget.player.GetUserName();
 				aimingatplayer = true;
-			}
-			txt = String.Format("%s", targName);
+			}		
 
 			// retrieve target health
 			int minhpcvar = CVar.GetCVar("sevhud_hpbar_min", CPlayer).GetInt();
@@ -898,44 +904,157 @@ class SevHUD : DoomStatusBar
 
 			// See player health regardless of min health threshold
 			If ((aimingatplayer == false) && (minhpcvar > maxHealth))
+			{
 				return;
+			}
+
+			// Get vanilla class names so we can get specific
+			// Fucking Yandere Sim ass code
+			// I'd do this with names + switch case but that didn't work out for
+			// map checksums so I no longer trust it
+			
+			string classtype;
+			bool shadowed = prevAimTarget.bShadow;
+			
+			if (!(mapset == "standard"))
+			{
+				if (prevAimTarget is "Zombieman")
+				{
+					classtype = "zombie";
+				}
+
+				else if (prevAimTarget is "ShotgunGuy")
+				{
+					classtype = "sarge";
+				}
+
+				else if (prevAimTarget is "ChaingunGuy")
+				{
+					classtype = "chain";
+				}
+
+				else if (prevAimTarget is "DoomImp")
+				{
+					classtype = "imp";
+				}
+				
+				else if (prevAimTarget is "Demon")
+				{
+					classtype = "pinkie";
+					if (shadowed == true)
+					{
+						classtype = "spectre";
+					}
+				}
+
+				else if (prevAimTarget is "LostSoul")
+				{
+					classtype = "lostsoul";
+				}
+
+				else if (prevAimTarget is "Cacodemon")
+				{
+					classtype = "caco";
+				}
+
+				else if (prevAimTarget is "PainElemental")
+				{
+					classtype = "painelemental";
+				}
+
+				else if (prevAimTarget is "Fatso")
+				{
+					classtype = "fatso";
+				}
+
+				else if (prevAimTarget is "Hellknight")
+				{
+					classtype = "knight";
+				}
+
+				else if (prevAimTarget is "BaronOfHell")
+				{
+					classtype = "baron";
+				}
+
+				else if (prevAimTarget is "Revenant")
+				{
+					classtype = "rev";
+				}
+
+				else if (prevAimTarget is "Archvile")
+				{
+					classtype = "vile";
+				}
+
+				else if (prevAimTarget is "Arachnotron")
+				{
+					classtype = "arach";
+				}
+
+				else if (prevAimTarget is "Cyberdemon")
+				{
+					classtype = "cybie";
+				}
+
+				else if (prevAimTarget is "SpiderMastermind")
+				{
+					classtype = "mastermind";
+				}
+
+				else if (prevAimTarget is "WolfensteinSS")
+				{
+					classtype = "wolfss";
+				}
+
+				else if (prevAimTarget is "CommanderKeen")
+				{
+					classtype = "keen";
+				}
+			}
+
+			// Set default text
+			txt = String.Format("%s", targName);	
 
 			// Pirate Doom's LeChuck comes with his own health display
-			if ((mapset == "piratedoom") && ((txt == "lechuckteleport") || (txt == "LeChuck")))
-				return;
+			if (mapset == "piratedoom")
+			{
+				// Disable name drawing during the LeChuck fight
+				if (txt == "LeChuck")
+					dontdrawnames = true;
 
-			// Clean up target name
-			bool keen = false;
-			bool nazi = false;
-			bool deadsoul = false;
+				if ((txt == "lechuckteleport") || (txt == "LeChuck"))
+					return;
+			}
 			
+			// Clean up target name			
 			if (mapset == "400minvr")
 			{
-				if ((txt == "CommanderKeen") || (txt == "Lexicon_4MVR_CommanderKeen"))
+				if ((classtype == "keen") || (txt == "Lexicon_4MVR_CommanderKeen"))
 					txt = "$ENEMY_400MINVR_UFO";
 			}
 
 			if (mapset == "aaliens")
 			{
-				if (txt == "CommanderKeen")
+				if (classtype == "keen")
 					txt = "$ENEMY_AALIENS_ALIENGUARDIAN";
 
-				if (txt == "Nazi")
+				if (classtype == "wolfss")
 					txt = "$ENEMY_AALIENS_PLASMAALIEN";
 			}
 			
 			if (mapset == "epic2")
 			{
-				if (txt == "Nazi")
+				if (classtype == "wolfss")
 					txt = "$ENEMY_EPIC2_ALIEN";
 			}
 			
 			if (mapset == "goingdown")
 			{
-				if ((txt == "CommanderKeen") || (txt == "Lexicon_GDWN_CommanderKeen"))
+				if ((classtype == "keen") || (txt == "Lexicon_GDWN_CommanderKeen"))
 					txt = "$ENEMY_GOINGDOWN_FORBIDDENFRUIT";
 				
-				if (txt == "Nazi")
+				if (classtype == "wolfss")
 					txt = "$ENEMY_GOINGDOWN_REDSPIDERMASTERMIND";
 			}
 			
@@ -947,22 +1066,43 @@ class SevHUD : DoomStatusBar
 
 			if (mapset == "hadephobia")
 			{
-				if ((txt == "CommanderKeen") || (txt == "Lexicon_HADP_CommanderKeen"))
+				if ((classtype == "keen") || (txt == "Lexicon_HADP_CommanderKeen"))
 					txt = "$ENEMY_HADEPHOBIA_HADEPHOBE";
 			}
 			
 			if (mapset == "helltopay")
 			{
-				if ((txt == "CommanderKeen") || (txt == "Lexicon_HLTP_CommanderKeen"))
-					txt = "$ENEMY_HELLTOPAY_FUSE";
+				if ((classtype == "imp") || (txt == "Lexicon_HLTP_DoomImp"))
+					txt = "$ENEMY_HELLTOPAY_COLONIST";
+
+				if ((classtype == "pinkie") || (txt == "Lexicon_HLTP_Demon"))
+					txt = "$ENEMY_HELLTOPAY_REAPER";
+
+				if ((classtype == "spectre") || (txt == "Lexicon_HLTP_Spectre"))
+					txt = "$ENEMY_HELLTOPAY_STEALTHREAPER";
+
+				if ((classtype == "caco") || (txt == "Lexicon_HLTP_Cacodemon"))
+					txt = "$ENEMY_HELLTOPAY_SENTINEL";
+
+				if ((classtype == "lostsoul") || (txt == "Lexicon_HLTP_LostSoul"))
+					txt = "$ENEMY_HELLTOPAY_METALBLOB";
+
+				if ((classtype == "painelemental") || (txt == "Lexicon_HLTP_PainElemental"))
+					txt = "$ENEMY_HELLTOPAY_METALGLOB";
+
+				if ((classtype == "fatso") || (txt == "Lexicon_HLTP_Fatso"))
+					txt = "$ENEMY_HELLTOPAY_BARBARIQUE";
+
+				if ((classtype == "keen") || (txt == "Lexicon_HLTP_CommanderKeen"))
+					txt = "$ENEMY_HELLTOPAY_POWERCORE";
 			}
 			
 			if (mapset == "jenesis")
 			{
-				if ((txt == "CommanderKeen") || (txt == "Lexicon_JENS_CommanderKeen"))
+				if ((classtype == "keen") || (txt == "Lexicon_JENS_CommanderKeen"))
 					txt = "$ENEMY_JENESIS_ABOMINATION";
 
-				if ((txt == "Nazi") || (txt == "Lexicon_JENS_WolfensteinSS"))
+				if ((classtype == "wolfss") || (txt == "Lexicon_JENS_WolfensteinSS"))
 					txt = "$ENEMY_JENESIS_MUTANTMARINE";
 			}
 
@@ -989,8 +1129,31 @@ class SevHUD : DoomStatusBar
 
 			if (mapset == "piratedoom")
 			{
-				if ((txt == "Witch Doctor") && ((maxHealth == 80) || (maxHealth == 50)))
+				if (classtype == "sarge")
+					txt = "$CC_SHOTGUN";
+					
+				if (classtype == "chain")
+					txt = "$CC_HEAVY";
+					
+				if ((classtype == "pinkie") && (maxHealth == 60))
+					txt = "$ENEMY_PIRATEDOOM_RABIDDEMON";
+
+				if (classtype == "spectre")
+					txt = "$FN_SPECTRE";
+
+				if ((txt == "Witch Doctor") && ((maxHealth == 80) || (maxHealth == 50) || (maxHealth == 60)))
 					txt = "$ENEMY_PIRATEDOOM_CANNIBALPYGMY";
+				
+				// If the actor doesn't exist, the game crashes, so I dunno how
+				// to make these strings show up
+/*				if (prevAimTarget is "GhostDemon")
+					txt = "$ENEMY_PIRATEDOOM_GHOSTDEMON";
+
+				if (prevAimTarget is "GhostImp")
+					txt = "$ENEMY_PIRATEDOOM_GHOSTIMP";
+
+				if (prevAimTarget is "GhostSoul")
+					txt = "$ENEMY_PIRATEDOOM_GHOSTSOUL";	*/
 			}
 
 			if (mapset == "piratedoom2")
@@ -998,10 +1161,10 @@ class SevHUD : DoomStatusBar
 				if ((txt == "BOLTSHOOTER ARACHNARCH") && (maxHealth == 30))
 					txt = "$ENEMY_PIRATEDOOM2_MADTRIBALMINION";
 
-				if (txt == "Cyberdemon")
+				if (classtype == "cybie")
 					txt = "$ENEMY_PIRATEDOOM2_CLOMPINCANNONEER";
 
-				if (txt == "Spider Mastermind")
+				if (classtype == "mastermind")
 					txt = "$ENEMY_PIRATEDOOM2_RUSTYBOOTLEGSMAAM";
 
 				if (txt == "BossEye")
@@ -1010,16 +1173,83 @@ class SevHUD : DoomStatusBar
 			
 			if (mapset == "scythe2")
 			{
-				if (txt == "Nazi")
+				if (classtype == "wolfss")
 					txt = "$ENEMY_SCYTHE2_EVILMARINE";
 
-				if (txt == "CommanderKeen")
+				if (classtype == "keen")
 					txt = "$ENEMY_SCYTHE2_AFRIT";
 			}
 			
+			// Old Lexicon has replacements for vanilla enemies
+			// Which is frankly quite weird considering they're the same as
+			// the vanilla enemies
+			if (oldLexicon == true)
+			{
+				if (txt == "LZombieMan")
+					txt = "$CC_ZOMBIE";
+
+				if (txt == "LShotgunGuy")
+					txt = "$FN_SHOTGUN";
+
+				if (txt == "LChaingunGuy")
+					txt = "$FN_HEAVY";
+
+				if (txt == "LDoomImp")
+					txt = "$CC_IMP";
+
+				if (txt == "LDemon")
+					txt = "$CC_DEMON";
+
+				if (txt == "LSpectre")
+					txt = "$FN_SPECTRE";
+
+				if (txt == "LLostSoul")
+					txt = "$CC_LOST";
+
+				if (txt == "LCacodemon")
+					txt = "$CC_CACO";
+
+				if (txt == "LBaronOfHell")
+					txt = "$CC_BARON";
+
+				// They just fucked the tag on this one, this is the best I can do
+				// When new Lexicon properly releases I'm gutting support for the old one lol
+				if ((txt == "Baron of Hell") && (maxHealth == 500))
+					txt = "$CC_HELL";
+
+				if (txt == "LArachnotron")
+					txt = "$CC_ARACH";
+
+				if (txt == "LPainElemental")
+					txt = "$CC_PAIN";
+
+				if (txt == "LRevenant")
+					txt = "$CC_REVEN";
+
+				if (txt == "LFatso")
+					txt = "$CC_MANCU";
+
+				if (txt == "LArchvile")
+					txt = "$CC_ARCH";
+
+				if (txt == "LSpiderMastermind")
+					txt = "$FN_SPIDER";
+
+				if (txt == "LCyberdemon")
+					txt = "$FN_CYBER";
+
+				if (txt == "LWolfensteinSS")
+					txt = "$FN_WOLFSS";
+			}
+			
 			// Fix for standard Doom 2
+			// We're checking the string instead of classtype on purpose!
 			if (txt == "CommanderKeen")
 				txt = "$ENEMY_DOOM2_KEEN";
+				
+			if (dontdrawnames == true)
+				txt = "";
+			
 
 			// no need to draw 0 or negative health
 			if (health <= 0)
