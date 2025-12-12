@@ -1,4 +1,5 @@
-## Fully Supported Mapsets
+## Supported Mapsets
+### Full support
 - 400 Minutes of /vr/
 - Aliens TC
 - Ancient Aliens
