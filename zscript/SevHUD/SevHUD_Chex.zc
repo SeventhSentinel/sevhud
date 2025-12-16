@@ -263,8 +263,12 @@ class SevHUD_Chex : DoomStatusBar
 			int minhpcvar = CVar.GetCVar("sevhud_hpbar_min", CPlayer).GetInt();
 			int health = prevAimTarget.Health;
 			int maxHealth = prevAimTarget.GetMaxHealth(true);
-			if (minhpcvar > maxHealth)
+			
+			// See player health regardless of min health threshold
+			If ((aimingatplayer == false) && (minhpcvar > maxHealth))
+			{
 				return;
+			}
 
 			String txt;
 
