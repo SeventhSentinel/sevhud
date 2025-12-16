@@ -398,7 +398,7 @@ class SevHUD : DoomStatusBar
 			// old Lexicon
 			if ((checksum == "47b55a4612b6c2891607c52a39ea62ef") ||
 			// new Lexicon
-			(checksum == "1f22b75b66f0a79c84fcccc8d697918f"))
+			(checksum == "e27cf1d2abde554b01da761f7fba499c"))
 			{
 				if (checksum == "47b55a4612b6c2891607c52a39ea62ef")
 					oldLexicon = true;
@@ -1011,6 +1011,10 @@ class SevHUD : DoomStatusBar
 				{
 					classtype = "keen";
 				}
+				else if (prevAimTarget is "MBFHelperDog")
+				{
+					classtype = "dog";
+				}
 			}
 
 			// Set default text
@@ -1049,6 +1053,57 @@ class SevHUD : DoomStatusBar
 					txt = "$ENEMY_EPIC2_ALIEN";
 			}
 			
+			if (mapset == "eviternity")
+			{
+				if (txt == "NightmareDemon")
+					txt = "$ENEMY_EVITERNITY_NIGHTMAREDEMON";
+			
+				if (txt == "FormerCaptain")
+					txt = "$ENEMY_EVITERNITY_FORMERCAPTAIN";
+					
+				if (txt == "AstralCaco")
+					txt = "$ENEMY_EVITERNITY_ASTRALCACO";
+			}
+			
+			if (mapset == "eviternity2")
+			{
+				if (txt == "NightmareDemon")
+					txt = "$ENEMY_EVITERNITY_NIGHTMAREDEMON";
+			
+				if (txt == "FormerCaptain")
+					txt = "$ENEMY_EVITERNITY_FORMERCAPTAIN";
+					
+				if (txt == "AstralCaco")
+					txt = "$ENEMY_EVITERNITY_ASTRALCACO";
+					
+				if (txt == "LostSoulCount")
+					txt = "$CC_LOST";
+
+				if (txt == "FormerCorporal")
+					txt = "$ENEMY_EVITERNITY2_FORMERCORPORAL";
+
+				if (txt == "GoldenAstralCaco")
+					txt = "$ENEMY_EVITERNITY2_GOLDENASTRALCACO";
+
+				if (txt == "DukeOfHell")
+					txt = "$ENEMY_EVITERNITY2_DUKEOFHELL";
+
+				if (txt == "AstralBabyCaco")
+					txt = "$ENEMY_EVITERNITY2_ASTRALBABYCACO";
+
+				if (txt == "NightmareCacodemon")
+					txt = "$ENEMY_EVITERNITY2_NIGHTMARECACODEMON";
+
+				if (txt == "SpecralAstralCacodemon")
+					txt = "$ENEMY_EVITERNITY2_SPECTRALASTRALCACO";
+
+				if (txt == "GrandDukeOfHell")
+					txt = "$ENEMY_EVITERNITY2_GRANDDUKEOFHELL";
+
+				if (txt == "GoldenAstralCacoBoss")
+					txt = "$ENEMY_EVITERNITY2_GOLDENASTRALCACOBOSS";
+			}
+
 			if (mapset == "goingdown")
 			{
 				if ((classtype == "keen") || (txt == "Lexicon_GDWN_CommanderKeen"))
