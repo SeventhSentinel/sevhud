@@ -464,20 +464,24 @@ class SevHUD_Square : DoomStatusBar
 			int health = prevAimTarget.Health;
 			int maxHealth = prevAimTarget.GetMaxHealth(true);
 			
+			String txt;
+			Bool aimingatplayer = false;
+
+			// get target name
+			String targName = prevAimTarget.GetCharacterName();
+			if (prevAimTarget is "PlayerPawn" && prevAimTarget.player && playeringame[prevAimTarget.PlayerNumber()])
+			{
+				targName = prevAimTarget.player.GetUserName();
+				aimingatplayer = true;
+			}		
+			txt = String.Format("%s", targName);
+			
 			// See player health regardless of min health threshold
 			If ((aimingatplayer == false) && (minhpcvar > maxHealth))
 			{
 				return;
 			}
 
-			String txt;
-
-			// get target name
-			String targName = prevAimTarget.GetCharacterName();
-			if (prevAimTarget is "PlayerPawn" && prevAimTarget.player && playeringame[prevAimTarget.PlayerNumber()])
-				targName = prevAimTarget.player.GetUserName();
-			txt = String.Format("%s", targName);
-			
 			// Cows don't need HP bars
 			if (txt == "Cow")
 				return;

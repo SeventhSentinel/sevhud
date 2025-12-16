@@ -264,19 +264,23 @@ class SevHUD_Chex : DoomStatusBar
 			int health = prevAimTarget.Health;
 			int maxHealth = prevAimTarget.GetMaxHealth(true);
 			
+			String txt;
+			Bool aimingatplayer = false;
+
+			// Get target name
+			String targName = prevAimTarget.GetCharacterName();
+			if (prevAimTarget is "PlayerPawn" && prevAimTarget.player && playeringame[prevAimTarget.PlayerNumber()])
+			{
+				targName = prevAimTarget.player.GetUserName();
+				aimingatplayer = true;
+			}		
+			txt = String.Format("%s", targName);
+
 			// See player health regardless of min health threshold
 			If ((aimingatplayer == false) && (minhpcvar > maxHealth))
 			{
 				return;
 			}
-
-			String txt;
-
-			// Get target name
-			String targName = prevAimTarget.GetCharacterName();
-			if (prevAimTarget is "PlayerPawn" && prevAimTarget.player && playeringame[prevAimTarget.PlayerNumber()])
-				targName = prevAimTarget.player.GetUserName();
-			txt = String.Format("%s", targName);
 
 			// Clean up target name
 			if (txt == "FlemoidusCommonusV3")
