@@ -211,12 +211,21 @@ extend class SevHUD
 			(checksum == "4803362bd33b5e11956f6682dfd48900") ||
 			// PRCP 2
 			(checksum == "dd9ee1add99d79efef7c88a5ee63aab7"))
+			{
 				mapset = "pl2";
+			}
 			
 			// Scythe 2
-			// I'm not doing a status bar for this but it has custom monsters
 			if (checksum == "009855039a4557f5f293b70c5232d473")
+			{
 				mapset = "scythe2";
+			}
+
+			// Stardate 20X7
+			if (checksum == "c1574566a9b7eca114e55178dfb64cb9")
+			{
+				mapset = "sd20x7";
+			}
 		}
 
 		if (LevelInfo.MapExists("MAP41"))
@@ -369,6 +378,19 @@ extend class SevHUD
 				{
 					mapset = "pg-resurge";
 					bigNumbers = mPGResurgeHUDFont;
+				}
+				
+				// Scythe 2
+				if (mapcode == "SCY2")
+				{
+					mapset = "scythe2";
+				}
+				
+				// Stardate 20X7
+				if (mapcode == "SDX7")
+				{
+					mapset = "sd20x7";
+					littlenumbers = mSD20X7IndexFont;
 				}
 			}
 		}

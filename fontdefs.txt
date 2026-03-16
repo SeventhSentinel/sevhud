@@ -330,3 +330,17 @@ PGResurgeHUDFont
 	9 "graphics/SevHUD/pg-resurge/st_num9.png"
 	- "graphics/SevHUD/pg-resurge/st_minus.png"
 }
+
+SD20X7IndexFont
+{
+	0 "graphics/SevHUD/sd20x7/st_ynum0.png"
+	1 "graphics/SevHUD/sd20x7/st_ynum1.png"
+	2 "graphics/SevHUD/sd20x7/st_ynum2.png"
+	3 "graphics/SevHUD/sd20x7/st_ynum3.png"
+	4 "graphics/SevHUD/sd20x7/st_ynum4.png"
+	5 "graphics/SevHUD/sd20x7/st_ynum5.png"
+	6 "graphics/SevHUD/sd20x7/st_ynum6.png"
+	7 "graphics/SevHUD/sd20x7/st_ynum7.png"
+	8 "graphics/SevHUD/sd20x7/st_ynum8.png"
+	9 "graphics/SevHUD/sd20x7/st_ynum9.png"
+}
