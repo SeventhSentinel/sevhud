@@ -12,6 +12,7 @@
 - Pirate Doom 1 & 2
 - Plutonia 2
 - Plutonia Revisited Community Project 1 & 2
+- Stardate 20X7
 
 ### Supported HP Bar Custom Enemy Names
 - Epic 2
