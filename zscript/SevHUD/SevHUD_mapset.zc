@@ -189,6 +189,13 @@ extend class SevHUD
 				bigNumbers = mNeoDoomHUDFont;
 				littlenumbers = mNeoDoomIndexFont;
 			}
+			
+			// Perdition's Gate: Resurgeance
+			if (checksum == "9c76fa1bf321d4b0704f291b6f233c0e")
+			{
+				mapset = "pg-resurge";
+				bigNumbers = mPGResurgeHUDFont;
+			}
 
 			// Pirate Doom 2
 			if (checksum == "8af76bf89a864c1e2b3b21865c277298")
@@ -357,6 +364,12 @@ extend class SevHUD
 					littlenumbers = mNeoDoomIndexFont;
 				}
 
+				// Perdition's Gate: Resurgeance
+				if (mapcode == "PDGR")
+				{
+					mapset = "pg-resurge";
+					bigNumbers = mPGResurgeHUDFont;
+				}
 			}
 		}
 
