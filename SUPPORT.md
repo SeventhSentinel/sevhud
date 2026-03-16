@@ -13,6 +13,7 @@
 - Plutonia 2
 - Plutonia Revisited Community Project 1 & 2
 - Stardate 20X7
+- UAC Ultra
 
 ### Supported HP Bar Custom Enemy Names
 - Epic 2

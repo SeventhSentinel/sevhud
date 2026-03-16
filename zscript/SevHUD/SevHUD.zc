@@ -73,6 +73,8 @@ class SevHUD : DoomStatusBar
 	
 	HUDFont mSD20X7IndexFont;
 
+	HUDFont mUACUltraHUDFont;
+
 
 	//===========================================================================
 	//
@@ -124,6 +126,8 @@ class SevHUD : DoomStatusBar
 		mPGResurgeHUDFont = HUDFont.Create("PGResurgeHUDFont", 13, Mono_CellLeft, 1, 1);
 		
 		mSD20X7IndexFont = HUDFont.Create("SD20X7IndexFont");
+		
+		mUACUltraHUDFont = HUDFont.Create("UACUltraHUDFont", 13, Mono_CellLeft, 1, 1);
 
 		InitSevHUD();
 	}
@@ -893,6 +897,12 @@ class SevHUD : DoomStatusBar
 					txt = "$ENEMY_SCYTHE2_AFRIT";
 			}
 			
+			if (mapset == "uacultra")
+			{
+				if (classtype == "wolfss")
+					txt = "$ENEMY_UACULTRA_HAYMAKER";
+			}
+
 			// Old Lexicon has replacements for vanilla enemies
 			// Which is frankly quite weird considering they're the same as
 			// the vanilla enemies

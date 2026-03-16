@@ -226,6 +226,13 @@ extend class SevHUD
 			{
 				mapset = "sd20x7";
 			}
+			
+			// UAC Ultra
+			if (checksum == "ff1d357dd259a8733e420ad42ffd1c87")
+			{
+				mapset = "uacultra";
+				bigNumbers = mUACUltraHUDFont;
+			}
 		}
 
 		if (LevelInfo.MapExists("MAP41"))
@@ -391,6 +398,13 @@ extend class SevHUD
 				{
 					mapset = "sd20x7";
 					littlenumbers = mSD20X7IndexFont;
+				}
+				
+				// UAC Ultra
+				if (mapcode == "UACU")
+				{
+					mapset = "uacultra";
+					bigNumbers = mUACUltraHUDFont;
 				}
 			}
 		}
