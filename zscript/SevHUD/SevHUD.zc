@@ -65,6 +65,9 @@ class SevHUD : DoomStatusBar
 	HUDFont mJenesisIndexFont;
 	
 	HUDFont mLastEp1IndexFont;
+	
+	HUDFont mNeoDoomHUDFont;
+	HUDFont mNeoDoomIndexFont;
 
 
 	//===========================================================================
@@ -110,6 +113,9 @@ class SevHUD : DoomStatusBar
 		mJenesisIndexFont = HUDFont.Create("JenesisIndexFont");
 		
 		mLastEp1IndexFont = HUDFont.Create("LastEp1IndexFont");
+		
+		mNeoDoomHUDFont = HUDFont.Create("NeoDoomHUDFont", 12, Mono_CellLeft, 1, 1);
+		mNeoDoomIndexFont = HUDFont.Create("NeoDoomIndexFont");
 
 		InitSevHUD();
 	}

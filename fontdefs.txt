@@ -285,3 +285,33 @@ Gridlock64IndexFont
 	8 "graphics/SevHUD/gridlock64/st_ynum8.png"
 	9 "graphics/SevHUD/gridlock64/st_ynum9.png"
 }
+
+NeoDoomHUDFont
+{
+	0 "graphics/SevHUD/neodoom/st_num0.png"
+	1 "graphics/SevHUD/neodoom/st_num1.png"
+	2 "graphics/SevHUD/neodoom/st_num2.png"
+	3 "graphics/SevHUD/neodoom/st_num3.png"
+	4 "graphics/SevHUD/neodoom/st_num4.png"
+	5 "graphics/SevHUD/neodoom/st_num5.png"
+	6 "graphics/SevHUD/neodoom/st_num6.png"
+	7 "graphics/SevHUD/neodoom/st_num7.png"
+	8 "graphics/SevHUD/neodoom/st_num8.png"
+	9 "graphics/SevHUD/neodoom/st_num9.png"
+	- "graphics/SevHUD/neodoom/st_minus.png"
+}
+
+NeoDoomIndexFont
+{
+	// We use a different name on purpose so that the arms numbers can be unique
+	0 "graphics/SevHUD/neodoom/st_anum0.png"
+	1 "graphics/SevHUD/neodoom/st_anum1.png"
+	2 "graphics/SevHUD/neodoom/st_anum2.png"
+	3 "graphics/SevHUD/neodoom/st_anum3.png"
+	4 "graphics/SevHUD/neodoom/st_anum4.png"
+	5 "graphics/SevHUD/neodoom/st_anum5.png"
+	6 "graphics/SevHUD/neodoom/st_anum6.png"
+	7 "graphics/SevHUD/neodoom/st_anum7.png"
+	8 "graphics/SevHUD/neodoom/st_anum8.png"
+	9 "graphics/SevHUD/neodoom/st_anum9.png"
+}

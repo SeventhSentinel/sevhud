@@ -8,6 +8,7 @@
 - Eviternity 1 & 2
 - Gridlock 64
 - Jenesis
+- NeoDoom: Vaccinated Edition
 - Pirate Doom 1 & 2
 - Plutonia 2
 - Plutonia Revisited Community Project 1 & 2

@@ -181,6 +181,14 @@ extend class SevHUD
 			{
 				mapset = "legacyofrust";
 			}
+			
+			// NeoDoom Vaccinated
+			if (checksum == "2f76aec2841db70bcf0ba07fc9cf4763")
+			{
+				mapset = "neodoom";
+				bigNumbers = mNeoDoomHUDFont;
+				littlenumbers = mNeoDoomIndexFont;
+			}
 
 			// Pirate Doom 2
 			if (checksum == "8af76bf89a864c1e2b3b21865c277298")
@@ -340,6 +348,15 @@ extend class SevHUD
 					mapset = "lastep1";
 					littleNumbers = mLastEp1IndexFont;
 				}
+				
+				// NeoDoom Vaccinated
+				if (mapcode == "NEOD")
+				{
+					mapset = "neodoom";
+					bigNumbers = mNeoDoomHUDFont;
+					littlenumbers = mNeoDoomIndexFont;
+				}
+
 			}
 		}
 
