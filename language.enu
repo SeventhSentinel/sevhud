@@ -143,3 +143,16 @@ ENEMY_SCYTHE2_EVILMARINE = "Evil Marine";
 ENEMY_SCYTHE2_AFRIT = "Afrit";
 
 ENEMY_UACULTRA_HAYMAKER = "Haymaker";
+
+// Valiant
+ENEMY_VALIANT_IMP = "Super Imp";
+ENEMY_VALIANT_PINKIE = "Super Demon";
+ENEMY_VALIANT_SPECTRE = "Super Spectre";
+ENEMY_VALIANT_SUPERMANCUBUS = "Super Mancubus";
+ENEMY_VALIANT_PYRODEMON = "Pyro Knight";
+ENEMY_VALIANT_CYBRUISER = "Cybruiser";
+ENEMY_VALIANT_ARACHNORB = "Arachnorb";
+ENEMY_SEVHUD_SUICIDEBOMBER = "Suicide Bomber";	// "Suicide Bomber" is pretty generic, may as well make it generic
+ENEMY_VALIANT_SUPERVILE = "Super Vile";
+ENEMY_VALIANT_GHOSTVILE = "Ghost Vile";
+ENEMY_VALIANT_GHOSTREVENANT = "Ghost Revenant";

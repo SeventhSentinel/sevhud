@@ -233,6 +233,20 @@ extend class SevHUD
 				mapset = "uacultra";
 				bigNumbers = mUACUltraHUDFont;
 			}
+			
+			// Valiant
+			if (checksum == "cb8e6a80f7f4f13f5ad0a334ca6c1a66")
+			{
+				mapset = "valiant";
+			}
+			
+			// Vanguard
+			if (checksum == "3da2cc1483e7569872c95f98b5cd5e9d")
+			{
+				mapset = "vanguard";
+				bigNumbers = mVanguardHUDFont;
+				littlenumbers = mVanguardIndexFont;			
+			}
 		}
 
 		if (LevelInfo.MapExists("MAP41"))
@@ -405,6 +419,22 @@ extend class SevHUD
 				{
 					mapset = "uacultra";
 					bigNumbers = mUACUltraHUDFont;
+				}
+				
+				// Valiant: Vaccinated Edition
+				if (mapcode == "VLNT")
+				{
+					mapset = "valiantve";
+					bignumbers = mValiantVEHUDFont;
+					littlenumbers = mValiantVEIndexFont;
+				}
+
+				// Vanguard
+				if (mapcode == "VNGD")
+				{
+					mapset = "vanguard";
+					bigNumbers = mVanguardHUDFont;
+					littlenumbers = mVanguardIndexFont;
 				}
 			}
 		}

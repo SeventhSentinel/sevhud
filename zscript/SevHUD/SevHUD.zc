@@ -75,6 +75,12 @@ class SevHUD : DoomStatusBar
 
 	HUDFont mUACUltraHUDFont;
 
+	HUDFont mValiantVEHUDFont;
+	HUDFont mValiantVEIndexFont;
+
+	HUDFont mVanguardHUDFont;
+	HUDFont mVanguardIndexFont;
+
 
 	//===========================================================================
 	//
@@ -128,6 +134,13 @@ class SevHUD : DoomStatusBar
 		mSD20X7IndexFont = HUDFont.Create("SD20X7IndexFont");
 		
 		mUACUltraHUDFont = HUDFont.Create("UACUltraHUDFont", 13, Mono_CellLeft, 1, 1);
+
+		mValiantVEHUDFont = HUDFont.Create("ValiantVEHUDFont", 13, Mono_CellLeft, 1, 1);
+		mValiantVEIndexFont = HUDFont.Create("ValiantVEIndexFont");
+
+		mVanguardHUDFont = HUDFont.Create("VanguardHUDFont", 13, Mono_CellLeft, 1, 1);
+		mVanguardIndexFont = HUDFont.Create("VanguardIndexFont");
+
 
 		InitSevHUD();
 	}
@@ -848,10 +861,10 @@ class SevHUD : DoomStatusBar
 			{
 				if (classtype == "sarge")
 					txt = "$CC_SHOTGUN";
-					
+				
 				if (classtype == "chain")
 					txt = "$CC_HEAVY";
-					
+				
 				if ((classtype == "pinkie") && (maxHealth == 60))
 					txt = "$ENEMY_PIRATEDOOM_RABIDDEMON";
 
@@ -895,6 +908,48 @@ class SevHUD : DoomStatusBar
 
 				if (classtype == "keen")
 					txt = "$ENEMY_SCYTHE2_AFRIT";
+			}
+			
+			if (mapset == "valiant")
+			{
+				if (txt == "ValiantImp")
+					txt = "$ENEMY_VALIANT_IMP";
+
+				if (txt == "ValiantDemon")
+					txt = "$ENEMY_VALIANT_PINKIE";
+
+				if (txt == "ValiantSpectre")
+					txt = "$ENEMY_VALIANT_SPECTRE";
+				
+				if (txt == "ValiantSuperMancubus")
+					txt = "$ENEMY_VALIANT_SUPERMANCUBUS";
+				
+				if (txt == "ValiantArachnotron")
+					txt = "$CC_ARACH";
+				
+				if (classtype == "wolfss")
+					txt = "$FN_HEAVY";
+
+				if (txt == "ValiantPyroDemon")
+					txt = "$ENEMY_VALIANT_PYRODEMON";
+				
+				if (txt == "ValiantCybruiser")
+					txt = "$ENEMY_VALIANT_CYBRUISER";
+				
+				if (txt == "ValiantArachnorb")
+					txt = "$ENEMY_VALIANT_ARACHNORB";
+				
+				if (txt == "SuicideBomber")
+					txt = "$ENEMY_SEVHUD_SUICIDEBOMBER";
+				
+				if (txt == "ValiantFinalBoss")
+					txt = "$ENEMY_VALIANT_SUPERVILE";
+				
+				if (txt == "TorchTree")
+					txt = "$ENEMY_VALIANT_GHOSTVILE";
+				
+				if (txt == "BigTree")
+					txt = "$ENEMY_VALIANT_GHOSTREVENANT";
 			}
 			
 			if (mapset == "uacultra")
