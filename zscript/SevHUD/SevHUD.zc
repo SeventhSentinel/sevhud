@@ -46,6 +46,9 @@ class SevHUD : DoomStatusBar
 	HUDFont mAaliensHUDFont;
 	HUDFont mAaliensIndexFont;
 
+	HUDFont mAVLexiconHUDFont;
+	HUDFont mAVLexiconIndexFont;
+
 	HUDFont mBTSXHUDFont;
 	HUDFont mBTSX1IndexFont;
 	HUDFont mBTSX2IndexFont;
@@ -71,6 +74,8 @@ class SevHUD : DoomStatusBar
 
 	HUDFont mPGResurgeHUDFont;
 	
+	HUDFont mScythe2HUDFont;
+
 	HUDFont mSD20X7IndexFont;
 
 	HUDFont mUACUltraHUDFont;
@@ -106,6 +111,9 @@ class SevHUD : DoomStatusBar
 		mAaliensHUDFont = HUDFont.Create("AaliensHUDFont", 13, Mono_CellLeft, 1, 1);
 		mAaliensIndexFont = HUDFont.Create("AaliensIndexFont");
 
+		mAVLexiconHUDFont = HUDFont.Create("AVLexiconHUDFont", 13, Mono_CellCenter, 1, 1);
+		mAVLexiconIndexFont = HUDFont.Create("AVLexiconIndexFont");
+
 		mBTSXHUDFont = HUDFont.Create("BTSXHUDFont", 14, Mono_CellLeft, 1, 1);
 		mBTSX1IndexFont = HUDFont.Create("BTSX1IndexFont");
 		mBTSX2IndexFont = HUDFont.Create("BTSX2IndexFont");
@@ -131,6 +139,8 @@ class SevHUD : DoomStatusBar
 
 		mPGResurgeHUDFont = HUDFont.Create("PGResurgeHUDFont", 13, Mono_CellLeft, 1, 1);
 		
+		mScythe2HUDFont = HUDFont.Create("Scythe2HUDFont", 13, Mono_CellLeft, 1, 1);
+
 		mSD20X7IndexFont = HUDFont.Create("SD20X7IndexFont");
 		
 		mUACUltraHUDFont = HUDFont.Create("UACUltraHUDFont", 13, Mono_CellLeft, 1, 1);

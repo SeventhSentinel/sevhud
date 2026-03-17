@@ -71,6 +71,12 @@ extend class SevHUD
 				mapset = "400minvr";
 				statNumbers = m400minvrStatsFont;
 			}
+
+			// Alien Vendetta
+			if (checksum == "5a24fc83a3f9a2d6d54af04e2e96684f")
+			{
+				mapset = "av";
+			}
 					
 			// Aliens TC Doom 2 version
 			if (checksum == "6ef79e89e562aab57199af1d572033f4")
@@ -292,6 +298,15 @@ extend class SevHUD
 					statNumbers = m400minvrStatsFont;
 				}
 				
+				// Alien Vendetta
+				// Draw Lexicon-specific gfx
+				if (mapcode == "ALVD")
+				{
+					mapset = "avlexicon";
+					bigNumbers = mAVLexiconHUDFont;
+					littleNumbers = mAVLexiconIndexFont;
+				}				
+
 				// Ancient Aliens
 				if ((mapcode == "AALI") || (oldLexicon && (oldcode == "AA1")))
 				{
@@ -299,7 +314,7 @@ extend class SevHUD
 					bigNumbers = mAaliensHUDFont;
 					littleNumbers = mAaliensIndexFont;
 				}
-
+				
 				// BTSX Episode 1 (old Lexicon)
 				if (oldLexicon && (oldcode == "BX1"))
 				{
@@ -405,6 +420,7 @@ extend class SevHUD
 				if (mapcode == "SCY2")
 				{
 					mapset = "scythe2";
+					bigNumbers = mScythe2HUDFont;
 				}
 				
 				// Stardate 20X7
