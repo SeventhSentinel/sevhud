@@ -196,6 +196,14 @@ extend class SevHUD
 				mapset = "legacyofrust";
 			}
 			
+			// Lost Civilization
+			if (checksum == "a18357279f731d57c38596abafba10b2")
+			{
+				mapset = "lostcivilization";		
+				bigNumbers = mLostCivHUDFont;
+				littlenumbers = mLostCivIndexFont;
+			}
+			
 			// NeoDoom Vaccinated
 			if (checksum == "2f76aec2841db70bcf0ba07fc9cf4763")
 			{
@@ -417,6 +425,14 @@ extend class SevHUD
 				{
 					mapset = "lastep1";
 					littleNumbers = mLastEp1IndexFont;
+				}
+				
+				// Lost Civilization
+				if (mapcode == "LSCV")
+				{
+					mapset = "lostcivilization";		
+					bigNumbers = mLostCivHUDFont;
+					littlenumbers = mLostCivIndexFont;
 				}
 				
 				// NeoDoom Vaccinated
