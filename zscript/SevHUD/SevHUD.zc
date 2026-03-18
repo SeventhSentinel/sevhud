@@ -98,6 +98,8 @@ class SevHUD : DoomStatusBar
 	HUDFont mVanguardHUDFont;
 	HUDFont mVanguardIndexFont;
 
+	HUDFont mVXRelocHUDFont;
+
 
 	//===========================================================================
 	//
@@ -174,6 +176,8 @@ class SevHUD : DoomStatusBar
 
 		mVanguardHUDFont = HUDFont.Create("VanguardHUDFont", 13, Mono_CellLeft, 1, 1);
 		mVanguardIndexFont = HUDFont.Create("VanguardIndexFont");
+		
+		mVXRelocHUDFont = HUDFont.Create("VXRelocHUDFont", 13, Mono_CellLeft, 1, 1);
 
 
 		InitSevHUD();

@@ -5,10 +5,13 @@
 - Alien Vendetta
 - Ancient Aliens
 - Back to Saturn X (All Episodes)
+- Bloodspeed
 - Claustrophobia 1024 1 & 2
 - Eviternity 1 & 2
 - Gridlock 64
+- Hadephobia
 - Jenesis
+- Lost Civilization
 - NeoDoom (both editions)
 - Pirate Doom 1 & 2
 - Plutonia 2
@@ -21,9 +24,10 @@
 - Epic 2
 - Going Down & Going Down Turbo
 - Hell to Pay
-- Hadephobia
 
 ### Special support in The Sentinel's Lexicon
 - Garrulismo
 - Hellbound
 - Last Day On Earth (2000)
+- Sunlust
+- Vertex Relocation

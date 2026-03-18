@@ -494,6 +494,13 @@ extend class SevHUD
 					bigNumbers = mVanguardHUDFont;
 					littlenumbers = mVanguardIndexFont;
 				}
+				
+				// Vertex Relocation
+				if (mapcode == "VXRL")
+				{
+					mapset = "vx_reloc";
+					bigNumbers = mVXRelocHUDFont;
+				}
 			}
 		}
 
