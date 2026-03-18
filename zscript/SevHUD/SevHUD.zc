@@ -62,6 +62,9 @@ class SevHUD : DoomStatusBar
 	HUDFont mGridlock64HUDFont;
 	HUDFont mGridlock64IndexFont;
 	
+	HUDFont mHadephobiaHUDFont;
+	HUDFont mHadephobiaIndexFont;
+
 	HUDFont mHellboundHUDFont;
 
 	HUDFont mJenesisHUDFont;
@@ -130,6 +133,9 @@ class SevHUD : DoomStatusBar
 		mGridlock64HUDFont = HUDFont.Create("Gridlock64HUDFont", 13, Mono_CellLeft, 1, 1);
 		mGridlock64IndexFont = HUDFont.Create("Gridlock64IndexFont");
 		
+		mHadephobiaHUDFont = HUDFont.Create("HadephobiaHUDFont", 13, Mono_CellLeft, 1, 1);
+		mHadephobiaIndexFont = HUDFont.Create("HadephobiaIndexFont");
+
 		mHellboundHUDFont = HUDFont.Create("HellboundHUDFont");
 
 		mJenesisHUDFont = HUDFont.Create("JenesisHUDFont", 13, Mono_CellLeft, 1, 1);

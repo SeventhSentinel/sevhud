@@ -371,6 +371,8 @@ extend class SevHUD
 				if ((mapcode == "HADP") || (oldLexicon && (oldcode == "HPH")))
 				{
 					mapset = "hadephobia";
+					bigNumbers = mHadephobiaHUDFont;
+					littleNumbers = mHadephobiaIndexFont;
 				}
 				
 				// Hell to Pay
