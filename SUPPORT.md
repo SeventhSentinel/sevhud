@@ -13,12 +13,15 @@
 - Jenesis
 - Lost Civilization
 - NeoDoom (both editions)
+- Perdition's Gate Resurgeance
 - Pirate Doom 1 & 2
 - Plutonia 2
 - Plutonia Revisited Community Project 1 & 2
 - Scythe 2
 - Stardate 20X7
 - UAC Ultra
+- Valiant (both editions)
+- Vanguard
 
 ### Supported HP Bar Custom Enemy Names
 - Epic 2
