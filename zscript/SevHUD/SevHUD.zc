@@ -49,6 +49,9 @@ class SevHUD : DoomStatusBar
 	HUDFont mAVLexiconHUDFont;
 	HUDFont mAVLexiconIndexFont;
 
+	HUDFont mBloodspeedHUDFont;
+	HUDFont mBloodspeedIndexFont;
+
 	HUDFont mBTSXHUDFont;
 	HUDFont mBTSX1IndexFont;
 	HUDFont mBTSX2IndexFont;
@@ -119,6 +122,9 @@ class SevHUD : DoomStatusBar
 
 		mAVLexiconHUDFont = HUDFont.Create("AVLexiconHUDFont", 13, Mono_CellCenter, 1, 1);
 		mAVLexiconIndexFont = HUDFont.Create("AVLexiconIndexFont");
+
+		mBloodspeedHUDFont = HUDFont.Create("BloodspeedHUDFont", 13, Mono_CellCenter, 1, 1);
+		mBloodspeedIndexFont = HUDFont.Create("BloodspeedIndexFont");
 
 		mBTSXHUDFont = HUDFont.Create("BTSXHUDFont", 14, Mono_CellLeft, 1, 1);
 		mBTSX1IndexFont = HUDFont.Create("BTSX1IndexFont");

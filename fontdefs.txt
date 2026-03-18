@@ -113,6 +113,35 @@ AVLexiconIndexFont
 	9 "graphics/SevHUD/avlexicon/st_ynum9.png"
 }
 
+BloodspeedHUDFont
+{
+	0 "graphics/SevHUD/bloodspeed/st_num0.png"
+	1 "graphics/SevHUD/bloodspeed/st_num1.png"
+	2 "graphics/SevHUD/bloodspeed/st_num2.png"
+	3 "graphics/SevHUD/bloodspeed/st_num3.png"
+	4 "graphics/SevHUD/bloodspeed/st_num4.png"
+	5 "graphics/SevHUD/bloodspeed/st_num5.png"
+	6 "graphics/SevHUD/bloodspeed/st_num6.png"
+	7 "graphics/SevHUD/bloodspeed/st_num7.png"
+	8 "graphics/SevHUD/bloodspeed/st_num8.png"
+	9 "graphics/SevHUD/bloodspeed/st_num9.png"
+	- "graphics/SevHUD/bloodspeed/st_minus.png"
+}
+
+BloodspeedIndexFont
+{
+	0 "graphics/SevHUD/bloodspeed/st_ynum0.png"
+	1 "graphics/SevHUD/bloodspeed/st_ynum1.png"
+	2 "graphics/SevHUD/bloodspeed/st_ynum2.png"
+	3 "graphics/SevHUD/bloodspeed/st_ynum3.png"
+	4 "graphics/SevHUD/bloodspeed/st_ynum4.png"
+	5 "graphics/SevHUD/bloodspeed/st_ynum5.png"
+	6 "graphics/SevHUD/bloodspeed/st_ynum6.png"
+	7 "graphics/SevHUD/bloodspeed/st_ynum7.png"
+	8 "graphics/SevHUD/bloodspeed/st_ynum8.png"
+	9 "graphics/SevHUD/bloodspeed/st_ynum9.png"
+}
+
 BTSXHUDFont
 {
 	0 "graphics/SevHUD/btsx1/st_tnum0.png"

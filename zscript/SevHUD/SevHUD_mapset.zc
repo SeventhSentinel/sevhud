@@ -91,6 +91,14 @@ extend class SevHUD
 				powerups = "doom";
 			}
 
+			// Bloodspeed
+			if (checksum == "43a4ddf268d41dfd4abdf898a0d125f7")
+			{
+				mapset = "bloodspeed";
+				bigNumbers = mBloodspeedHUDFont;
+				littleNumbers = mBloodspeedIndexFont;
+			}
+
 			// BTSX ep 1
 			if (checksum == "ff9c6545037c5e5e27ce0dacd24cdd37")
 			{
@@ -276,7 +284,7 @@ extend class SevHUD
 			// old Lexicon
 			if ((checksum == "47b55a4612b6c2891607c52a39ea62ef") ||
 			// new Lexicon
-			(checksum == "e27cf1d2abde554b01da761f7fba499c"))
+			(checksum == "00b812ee9050fcea7782c7251acc145d"))
 			{
 				if (checksum == "47b55a4612b6c2891607c52a39ea62ef")
 					oldLexicon = true;
@@ -313,6 +321,14 @@ extend class SevHUD
 					mapset = "aaliens";
 					bigNumbers = mAaliensHUDFont;
 					littleNumbers = mAaliensIndexFont;
+				}
+				
+				// Bloodspeed
+				if (mapcode == "BDSP")
+				{
+					mapset = "bloodspeed";
+					bigNumbers = mBloodspeedHUDFont;
+					littleNumbers = mBloodspeedIndexFont;
 				}
 				
 				// BTSX Episode 1 (old Lexicon)
