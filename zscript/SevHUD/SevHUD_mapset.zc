@@ -316,7 +316,8 @@ extend class SevHUD
 				
 				// Alien Vendetta
 				// Draw Lexicon-specific gfx
-				if (mapcode == "ALVD")
+				if ((mapcode == "ALVD") || (oldLexicon && (oldcode.Left(2) == "AV")))
+				//
 				{
 					mapset = "avlexicon";
 					bigNumbers = mAVLexiconHUDFont;
@@ -456,16 +457,21 @@ extend class SevHUD
 					mapset = "scythe2";
 					bigNumbers = mScythe2HUDFont;
 				}
+				if (oldLexicon && (oldcode == "SC2"))
+				// Afrits are Keens in old Lexicon, so let's draw no stbar to discourage playing this way
+				{
+					mapset = "none";
+				}
 				
 				// Stardate 20X7
-				if (mapcode == "SDX7")
+				if (mapcode == "SDX7" || (oldLexicon && (oldcode == "SD7")))
 				{
 					mapset = "sd20x7";
 					littlenumbers = mSD20X7IndexFont;
 				}
 				
 				// Sunlust
-				if (mapcode == "SNLU")
+				if (mapcode == "SNLU" || (oldLexicon && (oldcode == "SLU")))
 				{
 					mapset = "sunlust";
 					bigNumbers = mSunlustHUDFont;
@@ -473,14 +479,14 @@ extend class SevHUD
 				}
 				
 				// UAC Ultra
-				if (mapcode == "UACU")
+				if (mapcode == "UACU" || (oldLexicon && (oldcode == "UAC")))
 				{
 					mapset = "uacultra";
 					bigNumbers = mUACUltraHUDFont;
 				}
 				
 				// Valiant: Vaccinated Edition
-				if (mapcode == "VLNT")
+				if (mapcode == "VLNT" || (oldLexicon && (oldcode == "VAL")))
 				{
 					mapset = "valiantve";
 					bignumbers = mValiantVEHUDFont;
@@ -488,7 +494,7 @@ extend class SevHUD
 				}
 
 				// Vanguard
-				if (mapcode == "VNGD")
+				if (mapcode == "VNGD" || (oldLexicon && (oldcode == "VAN")))
 				{
 					mapset = "vanguard";
 					bigNumbers = mVanguardHUDFont;
