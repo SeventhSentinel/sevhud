@@ -389,6 +389,35 @@ SD20X7IndexFont
 	9 "graphics/SevHUD/sd20x7/st_ynum9.png"
 }
 
+SunlustHUDFont
+{
+	0 "graphics/SevHUD/sunlust/st_num0.png"
+	1 "graphics/SevHUD/sunlust/st_num1.png"
+	2 "graphics/SevHUD/sunlust/st_num2.png"
+	3 "graphics/SevHUD/sunlust/st_num3.png"
+	4 "graphics/SevHUD/sunlust/st_num4.png"
+	5 "graphics/SevHUD/sunlust/st_num5.png"
+	6 "graphics/SevHUD/sunlust/st_num6.png"
+	7 "graphics/SevHUD/sunlust/st_num7.png"
+	8 "graphics/SevHUD/sunlust/st_num8.png"
+	9 "graphics/SevHUD/sunlust/st_num9.png"
+	- "graphics/SevHUD/sunlust/st_minus.png"
+}
+
+SunlustIndexFont
+{
+	0 "graphics/SevHUD/sunlust/st_ynum0.png"
+	1 "graphics/SevHUD/sunlust/st_ynum1.png"
+	2 "graphics/SevHUD/sunlust/st_ynum2.png"
+	3 "graphics/SevHUD/sunlust/st_ynum3.png"
+	4 "graphics/SevHUD/sunlust/st_ynum4.png"
+	5 "graphics/SevHUD/sunlust/st_ynum5.png"
+	6 "graphics/SevHUD/sunlust/st_ynum6.png"
+	7 "graphics/SevHUD/sunlust/st_ynum7.png"
+	8 "graphics/SevHUD/sunlust/st_ynum8.png"
+	9 "graphics/SevHUD/sunlust/st_ynum9.png"
+}
+
 UACUltraHUDFont
 {
 	0 "graphics/SevHUD/uacultra/st_num0.png"

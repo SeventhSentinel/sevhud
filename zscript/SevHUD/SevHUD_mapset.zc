@@ -430,6 +430,14 @@ extend class SevHUD
 					littlenumbers = mSD20X7IndexFont;
 				}
 				
+				// Sunlust
+				if (mapcode == "SNLU")
+				{
+					mapset = "sunlust";
+					bigNumbers = mSunlustHUDFont;
+					littlenumbers = mSunlustIndexFont;					
+				}
+				
 				// UAC Ultra
 				if (mapcode == "UACU")
 				{
