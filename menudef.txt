@@ -12,6 +12,12 @@ AddOptionMenu "OptionsMenuSimple"
 	StaticText ""
 }
 
+OptionValue "SevHUD_Counts"
+{
+	0, "$OPTMNU_SEVHUD_EXTRA_PERCENTAGES"
+	1, "$OPTMNU_SEVHUD_EXTRA_COUNTS"
+}
+
 OptionMenu "SevHUDOptionMenu"
 {
 	Title "$OPTMNU_SEVHUD"
@@ -32,6 +38,7 @@ OptionMenu "SevHUDOptionMenu"
 	StaticText ""
 	StaticText "$OPTMNU_SEVHUD_EXTRA_DESC"
 	Option "$OPTMNU_SEVHUD_EXTRA", "sevhud_extra", "OnOff"
+	Option "$OPTMNU_SEVHUD_EXTRA_STYLE", "sevhud_extra_counts", "SevHUD_Counts"
 	StaticText ""
 	Option "$OPTMNU_SEVHUD_HP_BAR", "sevhud_hpbar", "OnOff"
 	StaticText "$OPTMNU_SEVHUD_HP_BAR_MIN_DESC_A"

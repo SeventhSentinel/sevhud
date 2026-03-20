@@ -119,6 +119,7 @@ class SevHUD : DoomStatusBar
 
 		mDefaultIndexFont = HUDFont.Create("DefaultIndexFont");
 
+		// Wad-specific fonts
 		// Manually set the width to 13, or whatever the width of the 0 char is
 		m400minvrHUDFont = HUDFont.Create("400minvrHUDFont", 14, Mono_CellLeft, 1, 1);
 		m400minvrIndexFont = HUDFont.Create("400minvrIndexFont");
@@ -252,6 +253,7 @@ class SevHUD : DoomStatusBar
 		int lump;
 		int amt;
 		string imgcolon;
+		string statimgfilepath;
 		lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_colon.png");
 		if (lump >= 0)
 			imgcolon = basefilepath..mapset.."/st_colon.png";
@@ -351,25 +353,33 @@ class SevHUD : DoomStatusBar
 			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_stats.png");
 			if (lump >= 0)
 			{
-				DrawImage(basefilepath..mapset.."/st_stats.png", (320, 168), DI_ITEM_OFFSETS);
+				if (CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt())
+				{
+					DrawImage(basefilepath..mapset.."/st_stats.png", (320, 168), DI_ITEM_OFFSETS);
+				}
+				else
+				{
+					DrawImage(basefilepath..mapset.."/st_statsprcnt.png", (320, 168), DI_ITEM_OFFSETS);
+				}
 			}
 			else
 			{
 				lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_kill.png");
 				if (lump >= 0)
 				{
-					DrawImage(basefilepath..mapset.."/st_kill.png", (basex, 173), DI_ITEM_OFFSETS);
-					DrawImage(basefilepath..mapset.."/st_item.png", (basex, 179), DI_ITEM_OFFSETS);
-					DrawImage(basefilepath..mapset.."/st_secret.png", (basex, 185), DI_ITEM_OFFSETS);
-					DrawImage(basefilepath..mapset.."/st_time.png", (basex, 191), DI_ITEM_OFFSETS);
+					statimgfilepath = basefilepath..mapset;
 				}
 				else
 				{
-					DrawImage(basefilepath.."standard/st_kill.png", (basex, 173), DI_ITEM_OFFSETS);
-					DrawImage(basefilepath.."standard/st_item.png", (basex, 179), DI_ITEM_OFFSETS);
-					DrawImage(basefilepath.."standard/st_secret.png", (basex, 185), DI_ITEM_OFFSETS);
-					DrawImage(basefilepath.."standard/st_time.png", (basex, 191), DI_ITEM_OFFSETS);
+					statimgfilepath = basefilepath.."standard";					
 				}
+				DrawImage(statimgfilepath.."/st_kill.png", (basex, 173), DI_ITEM_OFFSETS);
+				DrawImage(statimgfilepath.."/st_item.png", (basex, 179), DI_ITEM_OFFSETS);
+				DrawImage(statimgfilepath.."/st_secret.png", (basex, 185), DI_ITEM_OFFSETS);
+				DrawImage(statimgfilepath.."/st_time.png", (basex, 191), DI_ITEM_OFFSETS);
+				
+				// Debug
+				// Console.Printf(statimgfilepath);
 			}
 			
 			int pcnt;
@@ -377,47 +387,71 @@ class SevHUD : DoomStatusBar
 			
 			int offsetx = 32;
 
-			// kills
-			pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
-	/*		if (Level.total_monsters == 0)
+			// Completion stats
+			if (CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt())
 			{
-				mppcnt = 100;
+				// Display raw counts
+				offsetx = offsetx + 10;
+				// kills
+				amt = Level.total_monsters - Level.killed_monsters;
+				DrawString(fnt, FormatNumber(amt), (basex + offsetx, 173), DI_TEXT_ALIGN_RIGHT);
+				// items
+				amt = Level.total_items - Level.found_items;
+				DrawString(fnt, FormatNumber(amt), (basex + offsetx, 179), DI_TEXT_ALIGN_RIGHT);
+				// secrets
+				amt = Level.total_secrets - Level.found_secrets;
+				DrawString(fnt, FormatNumber(amt), (basex + offsetx, 185), DI_TEXT_ALIGN_RIGHT);
 			}
 			else
 			{
-				mppcnt = 100 * CPlayer.killcount / Level.total_monsters;
-			}
-			amt = multiplayer ? mppcnt : pcnt;	*/
-			amt = pcnt;
-			DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 173), DI_TEXT_ALIGN_RIGHT);
+				// Display percentages
+				// kills
+				pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
+		/*		if (Level.total_monsters == 0)
+				{
+					mppcnt = 100;
+				}
+				else
+				{
+					mppcnt = 100 * CPlayer.killcount / Level.total_monsters;
+				}
+				amt = multiplayer ? mppcnt : pcnt;	*/
+				amt = pcnt;
+				DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 173), DI_TEXT_ALIGN_RIGHT);
 
-			// items
-			pcnt = Level.total_items ? 100 * Level.found_items / Level.total_items : 100;
-	/*		if (Level.total_items == 0)
-			{
-				mppcnt = 100;
-			}
-			else
-			{
-				mppcnt = 100 * CPlayer.itemcount / Level.total_items;
-			}
-			amt = multiplayer ? mppcnt : pcnt;	*/
-			amt = pcnt;
-			DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 179), DI_TEXT_ALIGN_RIGHT);
+				// items
+				pcnt = Level.total_items ? 100 * Level.found_items / Level.total_items : 100;
+		/*		if (Level.total_items == 0)
+				{
+					mppcnt = 100;
+				}
+				else
+				{
+					mppcnt = 100 * CPlayer.itemcount / Level.total_items;
+				}
+				amt = multiplayer ? mppcnt : pcnt;	*/
+				amt = pcnt;
+				DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 179), DI_TEXT_ALIGN_RIGHT);
 
-			// secrets
-			pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
-	/*		if (Level.total_secrets == 0)
-			{
-				mppcnt = 100;
+				// secrets
+				pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
+		/*		if (Level.total_secrets == 0)
+				{
+					mppcnt = 100;
+				}
+				else
+				{
+					mppcnt = 100 * CPlayer.secretcount / Level.total_secrets;
+				}
+				amt = multiplayer ? mppcnt : pcnt;	*/
+				amt = pcnt;		
+				DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 185), DI_TEXT_ALIGN_RIGHT);
+				
+				// Draw % symbols
+				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + offsetx + 5, 173), DI_ITEM_OFFSETS);
+				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + offsetx + 5, 179), DI_ITEM_OFFSETS);
+				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + offsetx + 5, 185), DI_ITEM_OFFSETS);
 			}
-			else
-			{
-				mppcnt = 100 * CPlayer.secretcount / Level.total_secrets;
-			}
-			amt = multiplayer ? mppcnt : pcnt;	*/
-			amt = pcnt;		
-			DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 185), DI_TEXT_ALIGN_RIGHT);
 		}
 
 		// time stuff
@@ -1342,6 +1376,29 @@ class SevHUD : DoomStatusBar
 		basey = -33;
 		offsety = 0;
 
+
+
+		// Completion stats
+		bool usecounts = (CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt());
+/*		{
+			// Display raw counts
+			offsetx = offsetx + 9;
+			// kills
+			amt = Level.total_monsters - Level.killed_monsters;
+			DrawString(fnt, FormatNumber(amt), (basex + offsetx, 173), DI_TEXT_ALIGN_RIGHT);
+			// items
+			amt = Level.total_items - Level.found_items;
+			DrawString(fnt, FormatNumber(amt), (basex + offsetx, 179), DI_TEXT_ALIGN_RIGHT);
+			// secrets
+			amt = Level.total_secrets - Level.found_secrets;
+			DrawString(fnt, FormatNumber(amt), (basex + offsetx, 185), DI_TEXT_ALIGN_RIGHT);
+		}
+		else
+*/
+
+
+
+
 		if (CVar.GetCVar("am_showsecrets", CPlayer).GetBool())
 		{
 			// Which secrets gfx to use?
@@ -1354,18 +1411,30 @@ class SevHUD : DoomStatusBar
 
 			// Draw automap secrets
 			DrawImage(imgsecret, (-48, basey-fontHeight), DI_ITEM_OFFSETS);
-			pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
-/*			if (Level.total_secrets == 0)
+			if (usecounts == false)
 			{
-				mppcnt = 100;
+				pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
+	/*			if (Level.total_secrets == 0)
+				{
+					mppcnt = 100;
+				}
+				else
+				{
+					mppcnt = 100 * CPlayer.secretcount / Level.total_secrets;
+				}
+				amt = multiplayer ? mppcnt : pcnt;	*/
+				amt = pcnt;
+				DrawString(fnt, FormatNumber(amt, 3), (-16, basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				if (lump >= 0)
+					DrawImage(basefilepath..mapset.."/st_prcnt2.png", (-11, basey-fontHeight), DI_ITEM_OFFSETS);
+				else
+					DrawImage(basefilepath.."standard/st_prcnt2.png", (-11, basey-fontHeight), DI_ITEM_OFFSETS);
 			}
 			else
 			{
-				mppcnt = 100 * CPlayer.secretcount / Level.total_secrets;
+				amt = Level.total_secrets - Level.found_secrets;
+				DrawString(fnt, FormatNumber(amt), (-7, basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
 			}
-			amt = multiplayer ? mppcnt : pcnt;	*/
-			amt = pcnt;
-			DrawString(fnt, FormatNumber(amt, 3), (-16, basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
 
 			offsety -= fontHeight;
 		}
@@ -1382,18 +1451,30 @@ class SevHUD : DoomStatusBar
 
 			// Draw automap items
 			DrawImage(imgitem, (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
-			pcnt = Level.total_items ? 100 * Level.found_items / Level.total_items : 100;
-/*			if (Level.total_items == 0)
+			if (usecounts == false)
 			{
-				mppcnt = 100;
+				pcnt = Level.total_items ? 100 * Level.found_items / Level.total_items : 100;
+		/*			if (Level.total_items == 0)
+				{
+					mppcnt = 100;
+				}
+				else
+				{
+					mppcnt = 100 * CPlayer.itemcount / Level.total_items;
+				}
+				amt = multiplayer ? mppcnt : pcnt;	*/
+				amt = pcnt;
+				DrawString(fnt, FormatNumber(amt, 3), (-16, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				if (lump >= 0)
+					DrawImage(basefilepath..mapset.."/st_prcnt2.png", (-11, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+				else
+					DrawImage(basefilepath.."standard/st_prcnt2.png", (-11, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
 			}
 			else
 			{
-				mppcnt = 100 * CPlayer.itemcount / Level.total_items;
+				amt = Level.total_items - Level.found_items;
+				DrawString(fnt, FormatNumber(amt), (-7, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
 			}
-			amt = multiplayer ? mppcnt : pcnt;	*/
-			amt = pcnt;
-			DrawString(fnt, FormatNumber(amt, 3), (-16, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
 
 			offsety -= fontHeight;
 		}
@@ -1410,18 +1491,30 @@ class SevHUD : DoomStatusBar
 
 			// Draw automap kills
 			DrawImage(imgkill, (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
-			pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
-/*			if (Level.total_monsters == 0)
+			if (usecounts == false)
 			{
-				mppcnt = 100;
+				pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
+	/*			if (Level.total_monsters == 0)
+				{
+					mppcnt = 100;
+				}
+				else
+				{
+					mppcnt = 100 * CPlayer.killcount / Level.total_monsters;
+				}
+				amt = multiplayer ? mppcnt : pcnt;	*/
+				amt = pcnt;
+				DrawString(fnt, FormatNumber(amt, 3), (-16, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				if (lump >= 0)
+					DrawImage(basefilepath..mapset.."/st_prcnt2.png", (-11, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+				else
+					DrawImage(basefilepath.."standard/st_prcnt2.png", (-11, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
 			}
 			else
 			{
-				mppcnt = 100 * CPlayer.killcount / Level.total_monsters;
-			}
-			amt = multiplayer ? mppcnt : pcnt;	*/
-			amt = pcnt;
-			DrawString(fnt, FormatNumber(amt, 3), (-16, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				amt = Level.total_monsters - Level.killed_monsters;
+				DrawString(fnt, FormatNumber(amt), (-7, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+			}			
 		}
 	}
 
