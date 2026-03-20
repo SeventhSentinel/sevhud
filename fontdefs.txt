@@ -415,6 +415,21 @@ NeoDoomHUDFont
 	- "graphics/SevHUD/neodoom/st_minus.png"
 }
 
+NewDoom1HUDFont
+{
+	0 "graphics/SevHUD/ndcp/st_num0.png"
+	1 "graphics/SevHUD/ndcp/st_num1.png"
+	2 "graphics/SevHUD/ndcp/st_num2.png"
+	3 "graphics/SevHUD/ndcp/st_num3.png"
+	4 "graphics/SevHUD/ndcp/st_num4.png"
+	5 "graphics/SevHUD/ndcp/st_num5.png"
+	6 "graphics/SevHUD/ndcp/st_num6.png"
+	7 "graphics/SevHUD/ndcp/st_num7.png"
+	8 "graphics/SevHUD/ndcp/st_num8.png"
+	9 "graphics/SevHUD/ndcp/st_num9.png"
+	- "graphics/SevHUD/ndcp/st_minus.png"
+}
+
 NeoDoomIndexFont
 {
 	// We use a different name on purpose so that the arms numbers can be unique

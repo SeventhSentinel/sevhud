@@ -18,7 +18,7 @@ OPTMNU_SEVHUD_EXTRA_DESC = "See current powerups and map completion stats";
 OPTMNU_SEVHUD_HP_BAR_MIN_DESC_A = "Enemies must have at least this much HP for the health display to show";
 OPTMNU_SEVHUD_HP_BAR_MIN_DESC_B = "(Boss enemies start at around 1000 health)";
 
-OPTMNU_SEVHUD_UPDATE = "Check for updates at https://github.com/SeventhSentinel/sevhud/releases";
+OPTMNU_SEVHUD_UPDATE = "Check for updates at https://seventhsentinel.net/sevhud/latest";
 OPTMNU_SEVHUD_SHILL = "Check out Snap the Sentinel at https://snapgame.net!";
 
 

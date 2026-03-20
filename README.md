@@ -3,7 +3,7 @@ A "vanilla plus" status bar mod for [UZDoom](https://github.com/UZDoom/UZDoom)
 
 Forked from the excellent [NashBar](https://github.com/nashmuhandes/nashbar) by Nash Muhandes
 
-License: MIT
+Code license: MIT
 
 <img width="1280" height="720" alt="Screenshot_Doom_20251118_133004" src="https://github.com/user-attachments/assets/8a09940f-cd6c-42a4-8074-357dae70f032" />
 

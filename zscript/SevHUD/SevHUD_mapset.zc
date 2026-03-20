@@ -443,7 +443,14 @@ extend class SevHUD
 					bigNumbers = mNeoDoomHUDFont;
 					littlenumbers = mNeoDoomIndexFont;
 				}
-
+				
+				// NewDoom Community Project 1
+				if (mapcode == "NDC1")
+				{
+					mapset = "ndcp";
+					bigNumbers = mNewDoom1HUDFont;
+				}
+				
 				// Perdition's Gate: Resurgeance
 				if (mapcode == "PDGR")
 				{

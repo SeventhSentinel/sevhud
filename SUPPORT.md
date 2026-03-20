@@ -12,7 +12,7 @@
 - Hadephobia
 - Jenesis
 - Lost Civilization
-- NeoDoom (both editions)
+- NeoDoom: Vaccinated Edition
 - Perdition's Gate Resurgeance
 - Pirate Doom 1 & 2
 - Plutonia 2
