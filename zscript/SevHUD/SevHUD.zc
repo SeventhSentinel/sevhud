@@ -826,6 +826,9 @@ class SevHUD : DoomStatusBar
 					
 				if (txt == "AstralCaco")
 					txt = "$ENEMY_EVITERNITY_ASTRALCACO";
+
+				if (txt == "AstralCacodemon")
+					txt = "$ENEMY_EVITERNITY_ASTRALCACO";
 					
 				if (txt == "LostSoulCount")
 					txt = "$CC_LOST";
