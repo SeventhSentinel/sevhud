@@ -36,15 +36,16 @@ extend class SevHUD
 
 		string checksum;
 
-		/* if (LevelInfo.MapExists("E1M1"))
+		if (LevelInfo.MapExists("E1M1"))
 		{
 			checksum = LevelInfo.MapChecksum("E1M1");
 
-			if (checksum == "someverylongthirtytwodigitnumber")
+			// ConCERNed
+			if (checksum == "1c393bb6a7b07bbdfa633b921922fad5")
 			{
-				// TODO: add some Doom 1 wads
+				mapset = "concern";
 			}
-		} */
+		}
 		
 		if (LevelInfo.MapExists("E2M1"))
 		{
@@ -347,6 +348,12 @@ extend class SevHUD
 					powerups = "doom";
 					bigNumbers = mBTSXHUDFont;
 					littleNumbers = mBTSX1IndexFont;
+				}
+
+				// ConCERNed
+				if (mapcode == "CCRN")
+				{
+					mapset = "concern";
 				}
 
 				// Claustrophobia 1024
