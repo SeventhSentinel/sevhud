@@ -458,6 +458,14 @@ extend class SevHUD
 					bigNumbers = mNewDoom1HUDFont;
 				}
 				
+				// No End In Sight
+				if (mapcode == "NEIS")
+				{
+					mapset = "neis";
+					bigNumbers = mNoEndInSightHUDFont;
+					littlenumbers = mNoEndInSightIndexFont;
+				}
+								
 				// Perdition's Gate: Resurgeance
 				if (mapcode == "PDGR")
 				{
