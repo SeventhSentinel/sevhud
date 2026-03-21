@@ -103,20 +103,43 @@ class SevHUD_Chex : DoomStatusBar
 		
 		int offsetx = 32;
 
-		// kills
-		pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
-		amt = multiplayer ? CPlayer.killcount : pcnt;
-		DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 173), DI_TEXT_ALIGN_RIGHT);
+		if (CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt())
+		{
+			// Display raw counts
+			offsetx = offsetx + 10;
+			// kills
+			amt = Level.total_monsters - Level.killed_monsters;
+			DrawString(fnt, FormatNumber(amt), (basex + offsetx, 173), DI_TEXT_ALIGN_RIGHT);
+			// items
+			amt = Level.total_items - Level.found_items;
+			DrawString(fnt, FormatNumber(amt), (basex + offsetx, 179), DI_TEXT_ALIGN_RIGHT);
+			// secrets
+			amt = Level.total_secrets - Level.found_secrets;
+			DrawString(fnt, FormatNumber(amt), (basex + offsetx, 185), DI_TEXT_ALIGN_RIGHT);
+		}
+		else
+		{
+			// Display percentages
+			// kills
+			pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
+			amt = multiplayer ? CPlayer.killcount : pcnt;
+			DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 173), DI_TEXT_ALIGN_RIGHT);
 
-		// items
-		pcnt = Level.total_items ? 100 * Level.found_items / Level.total_items : 100;
-		amt = multiplayer ? CPlayer.itemcount : pcnt;
-		DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 179), DI_TEXT_ALIGN_RIGHT);
+			// items
+			pcnt = Level.total_items ? 100 * Level.found_items / Level.total_items : 100;
+			amt = multiplayer ? CPlayer.itemcount : pcnt;
+			DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 179), DI_TEXT_ALIGN_RIGHT);
 
-		// secrets
-		pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
-		amt = multiplayer ? CPlayer.secretcount : pcnt;
-		DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 185), DI_TEXT_ALIGN_RIGHT);
+			// secrets
+			pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
+			amt = multiplayer ? CPlayer.secretcount : pcnt;
+			DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 185), DI_TEXT_ALIGN_RIGHT);
+
+			// Draw % symbols
+			DrawImage("graphics/SevHUD/chex/st_prcnt2.png", (basex + offsetx + 5, 173), DI_ITEM_OFFSETS);
+			DrawImage("graphics/SevHUD/chex/st_prcnt2.png", (basex + offsetx + 5, 179), DI_ITEM_OFFSETS);
+			DrawImage("graphics/SevHUD/chex/st_prcnt2.png", (basex + offsetx + 5, 185), DI_ITEM_OFFSETS);
+		}
 
 		// time stuff
 		bool sucks = false;
@@ -551,35 +574,67 @@ class SevHUD_Chex : DoomStatusBar
 		basey = -33;
 		offsety = 0;
 
-		if (CVar.GetCVar("am_showsecrets", CPlayer).GetBool())
+		if (CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt())
 		{
-			// Draw automap secrets
-			DrawImage("graphics/SevHUD/chex/st_secret.png", (-48, basey-fontHeight), DI_ITEM_OFFSETS);
-			pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
-			amt = multiplayer ? CPlayer.secretcount : pcnt;
-			DrawString(fnt, FormatNumber(amt, 3), (-16, basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
-
-			offsety -= fontHeight;
+			if (CVar.GetCVar("am_showsecrets", CPlayer).GetBool())
+			{
+				// Draw automap secrets
+				DrawImage("graphics/SevHUD/chex/st_secret.png", (-48, basey-fontHeight), DI_ITEM_OFFSETS);
+				amt = Level.total_secrets - Level.found_secrets;
+				DrawString(fnt, FormatNumber(amt), (-7, basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				offsety -= fontHeight;
+			}
+			if (CVar.GetCVar("am_showitems", CPlayer).GetBool())
+			{
+				// Draw automap items
+				DrawImage("graphics/SevHUD/chex/st_item.png", (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+				amt = Level.total_items - Level.found_items;
+				DrawString(fnt, FormatNumber(amt), (-7, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				offsety -= fontHeight;
+			}
+			if (CVar.GetCVar("am_showmonsters", CPlayer).GetBool())
+			{
+				// Draw automap kills
+				DrawImage("graphics/SevHUD/chex/st_kill.png", (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+				amt = Level.total_monsters - Level.killed_monsters;
+				DrawString(fnt, FormatNumber(amt), (-7, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+			}		
 		}
-
-		if (CVar.GetCVar("am_showitems", CPlayer).GetBool())
+		else
 		{
-			// Draw automap items
-			DrawImage("graphics/SevHUD/chex/st_item.png", (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
-			pcnt = Level.total_items ? 100 * Level.found_items / Level.total_items : 100;
-			amt = multiplayer ? CPlayer.itemcount : pcnt;
-			DrawString(fnt, FormatNumber(amt, 3), (-16, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+			if (CVar.GetCVar("am_showsecrets", CPlayer).GetBool())
+			{
+				// Draw automap secrets
+				DrawImage("graphics/SevHUD/chex/st_secret.png", (-48, basey-fontHeight), DI_ITEM_OFFSETS);
+				pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
+				amt = multiplayer ? CPlayer.secretcount : pcnt;
+				DrawString(fnt, FormatNumber(amt, 3), (-16, basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				DrawImage("graphics/SevHUD/chex/st_prcnt2.png", (-11, basey-fontHeight), DI_ITEM_OFFSETS);
 
-			offsety -= fontHeight;
-		}
+				offsety -= fontHeight;
+			}
 
-		if (CVar.GetCVar("am_showmonsters", CPlayer).GetBool())
-		{
-			// Draw automap kills
-			DrawImage("graphics/SevHUD/chex/st_kill.png", (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
-			pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
-			amt = multiplayer ? CPlayer.killcount : pcnt;
-			DrawString(fnt, FormatNumber(amt, 3), (-16, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+			if (CVar.GetCVar("am_showitems", CPlayer).GetBool())
+			{
+				// Draw automap items
+				DrawImage("graphics/SevHUD/chex/st_item.png", (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+				pcnt = Level.total_items ? 100 * Level.found_items / Level.total_items : 100;
+				amt = multiplayer ? CPlayer.itemcount : pcnt;
+				DrawString(fnt, FormatNumber(amt, 3), (-16, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				DrawImage("graphics/SevHUD/chex/st_prcnt2.png", (-11, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+
+				offsety -= fontHeight;
+			}
+
+			if (CVar.GetCVar("am_showmonsters", CPlayer).GetBool())
+			{
+				// Draw automap kills
+				DrawImage("graphics/SevHUD/chex/st_kill.png", (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+				pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
+				amt = multiplayer ? CPlayer.killcount : pcnt;
+				DrawString(fnt, FormatNumber(amt, 3), (-16, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				DrawImage("graphics/SevHUD/chex/st_prcnt2.png", (-11, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+			}
 		}
 	}
 

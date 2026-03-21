@@ -1380,25 +1380,6 @@ class SevHUD : DoomStatusBar
 
 		// Completion stats
 		bool usecounts = (CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt());
-/*		{
-			// Display raw counts
-			offsetx = offsetx + 9;
-			// kills
-			amt = Level.total_monsters - Level.killed_monsters;
-			DrawString(fnt, FormatNumber(amt), (basex + offsetx, 173), DI_TEXT_ALIGN_RIGHT);
-			// items
-			amt = Level.total_items - Level.found_items;
-			DrawString(fnt, FormatNumber(amt), (basex + offsetx, 179), DI_TEXT_ALIGN_RIGHT);
-			// secrets
-			amt = Level.total_secrets - Level.found_secrets;
-			DrawString(fnt, FormatNumber(amt), (basex + offsetx, 185), DI_TEXT_ALIGN_RIGHT);
-		}
-		else
-*/
-
-
-
-
 		if (CVar.GetCVar("am_showsecrets", CPlayer).GetBool())
 		{
 			// Which secrets gfx to use?
