@@ -242,6 +242,20 @@ Clau1024IndexFont
 	9 "graphics/SevHUD/clau1024/st_ynum9.png"
 }
 
+CShock2HUDFont
+{
+	0 "graphics/SevHUD/c-shock2/st_num0.png"
+	1 "graphics/SevHUD/c-shock2/st_num1.png"
+	2 "graphics/SevHUD/c-shock2/st_num2.png"
+	3 "graphics/SevHUD/c-shock2/st_num3.png"
+	4 "graphics/SevHUD/c-shock2/st_num4.png"
+	5 "graphics/SevHUD/c-shock2/st_num5.png"
+	6 "graphics/SevHUD/c-shock2/st_num6.png"
+	7 "graphics/SevHUD/c-shock2/st_num7.png"
+	8 "graphics/SevHUD/c-shock2/st_num8.png"
+	9 "graphics/SevHUD/c-shock2/st_num9.png"
+}
+
 GarruloIndexFont
 {
 	0 "graphics/SevHUD/garrulo/st_ynum0.png"

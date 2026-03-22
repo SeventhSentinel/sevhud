@@ -60,6 +60,8 @@ class SevHUD : DoomStatusBar
 	HUDFont mClau1024HUDFont;
 	HUDFont mClau1024IndexFont;
 	
+	HUDFont mCShock2HUDFont;
+
 	HUDFont mGarruloIndexFont;
 	
 	HUDFont mGridlock64HUDFont;
@@ -150,6 +152,8 @@ class SevHUD : DoomStatusBar
 		
 		mClau1024HUDFont = HUDFont.Create("Clau1024HUDFont", 14, Mono_CellLeft, 1, 1);
 		mClau1024IndexFont = HUDFont.Create("Clau1024IndexFont");
+		
+		mCShock2HUDFont = HUDFont.Create("CShock2HUDFont", 13, Mono_CellLeft, 1, 1);
 		
 		mGarruloIndexFont = HUDFont.Create("GarruloIndexFont");
 
