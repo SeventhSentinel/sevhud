@@ -45,6 +45,12 @@ extend class SevHUD
 			{
 				mapset = "concern";
 			}
+
+			// Return to Hadron (Ultimate)
+			if (checksum == "41411a0082b8017035188cb711af61fc")
+			{
+				mapset = "uhadron";
+			}
 		}
 		
 		if (LevelInfo.MapExists("E2M1"))
@@ -464,6 +470,14 @@ extend class SevHUD
 					mapset = "neis";
 					bigNumbers = mNoEndInSightHUDFont;
 					littlenumbers = mNoEndInSightIndexFont;
+				}
+								
+				// Nostalgia Zero
+				if (mapcode == "NSGZ")
+				{
+					mapset = "nostzero";
+					bigNumbers = mNostZeroHUDFont;
+					littlenumbers = mNostZeroIndexFont;
 				}
 								
 				// Perdition's Gate: Resurgeance
