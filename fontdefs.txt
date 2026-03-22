@@ -591,6 +591,35 @@ UACUltraHUDFont
 	- "graphics/SevHUD/uacultra/st_minus.png"
 }
 
+UDINOHUDFont
+{
+	0 "graphics/SevHUD/udino/st_num0.png"
+	1 "graphics/SevHUD/udino/st_num1.png"
+	2 "graphics/SevHUD/udino/st_num2.png"
+	3 "graphics/SevHUD/udino/st_num3.png"
+	4 "graphics/SevHUD/udino/st_num4.png"
+	5 "graphics/SevHUD/udino/st_num5.png"
+	6 "graphics/SevHUD/udino/st_num6.png"
+	7 "graphics/SevHUD/udino/st_num7.png"
+	8 "graphics/SevHUD/udino/st_num8.png"
+	9 "graphics/SevHUD/udino/st_num9.png"
+	- "graphics/SevHUD/udino/st_minus.png"
+}
+
+UDINOIndexFont
+{
+	0 "graphics/SevHUD/udino/st_ynum0.png"
+	1 "graphics/SevHUD/udino/st_ynum1.png"
+	2 "graphics/SevHUD/udino/st_ynum2.png"
+	3 "graphics/SevHUD/udino/st_ynum3.png"
+	4 "graphics/SevHUD/udino/st_ynum4.png"
+	5 "graphics/SevHUD/udino/st_ynum5.png"
+	6 "graphics/SevHUD/udino/st_ynum6.png"
+	7 "graphics/SevHUD/udino/st_ynum7.png"
+	8 "graphics/SevHUD/udino/st_ynum8.png"
+	9 "graphics/SevHUD/udino/st_ynum9.png"
+}
+
 ValiantVEHUDFont
 {
 	0 "graphics/SevHUD/valiantve/st_num0.png"

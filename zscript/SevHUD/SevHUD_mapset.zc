@@ -51,6 +51,14 @@ extend class SevHUD
 			{
 				mapset = "uhadron";
 			}
+			
+			// Ultimate Doom in Name Only
+			if (checksum == "622f22f54b70aab23e2e8566b53b92c1")
+			{
+				mapset = "udino";
+				bigNumbers = mUDINOHUDFont;
+				littlenumbers = mUDINOIndexFont;
+			}
 		}
 		
 		if (LevelInfo.MapExists("E2M1"))
@@ -519,6 +527,14 @@ extend class SevHUD
 				{
 					mapset = "uacultra";
 					bigNumbers = mUACUltraHUDFont;
+				}
+				
+				// Ultimate Doom in Name Only
+				if (mapcode == "UDIN")
+				{
+					mapset = "udino";
+					bigNumbers = mUDINOHUDFont;
+					littlenumbers = mUDINOIndexFont;
 				}
 				
 				// Valiant: Vaccinated Edition
