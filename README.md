@@ -13,7 +13,7 @@ Code license: MIT
 - Optional NashBar-style enemy HP, powerup, and map completion stats displays
 - Translucent automap background
 
-<img width="1280" height="720" alt="Screenshot_Doom_20251118_140536" src="https://github.com/user-attachments/assets/caf17642-f787-4f98-acc0-f63da777e03e" />
+<img width="1280" height="720" alt="Screenshot_Chex_20251118_133406" src="https://github.com/user-attachments/assets/445d99c3-9dca-459a-89a5-ea38c8dd51f0" />
 
 ### Supported Games
 - Doom, Doom II, Final Doom
@@ -22,16 +22,16 @@ Code license: MIT
 - FreeDoom
 - Adventures of Square
 
+<img width="1280" height="720" alt="Screenshot_Square_20251118_134050" src="https://github.com/user-attachments/assets/a745d822-467d-454e-b93a-4b383eb51d92" />
+
 ### Supported Mapsets
 See [SUPPORT.md](https://github.com/SeventhSentinel/sevhud/blob/master/SUPPORT.md).
 
-<img width="1280" height="720" alt="Screenshot_Chex_20251118_133406" src="https://github.com/user-attachments/assets/445d99c3-9dca-459a-89a5-ea38c8dd51f0" />
+<img style="width:640px; height:360px" alt="demo gif" src="https://github.com/user-attachments/assets/a56c99f2-656c-4ed8-b368-f0ce6086e6db" />
 
 ### Compatibility
 - SevHUD is ZScript-based. I have only tested it in UZDoom.
 - Software renderer does not support translucent automap background.
-
-<img width="1280" height="720" alt="Screenshot_Square_20251118_134050" src="https://github.com/user-attachments/assets/a745d822-467d-454e-b93a-4b383eb51d92" />
 
 ### Installation
 1. [Download the latest release](https://github.com/SeventhSentinel/sevhud/releases/latest).
