@@ -13,7 +13,7 @@ Code license: MIT
 - Optional NashBar-style enemy HP, powerup, and map completion stats displays
 - Translucent automap background
 
-<img width="1280" height="720" alt="Screenshot_Chex_20251118_133406" src="https://github.com/user-attachments/assets/445d99c3-9dca-459a-89a5-ea38c8dd51f0" />
+<img width="640" height="360" alt="Screenshot_Chex_20251118_133406" src="https://github.com/user-attachments/assets/445d99c3-9dca-459a-89a5-ea38c8dd51f0" />
 
 ### Supported Games
 - Doom, Doom II, Final Doom
@@ -22,7 +22,7 @@ Code license: MIT
 - FreeDoom
 - Adventures of Square
 
-<img width="1280" height="720" alt="Screenshot_Square_20251118_134050" src="https://github.com/user-attachments/assets/a745d822-467d-454e-b93a-4b383eb51d92" />
+<img width="640" height="360" alt="Screenshot_Square_20251118_134050" src="https://github.com/user-attachments/assets/a745d822-467d-454e-b93a-4b383eb51d92" />
 
 ### Supported Mapsets
 See [SUPPORT.md](https://github.com/SeventhSentinel/sevhud/blob/master/SUPPORT.md).
