@@ -100,6 +100,8 @@ class SevHUD : DoomStatusBar
 
 	HUDFont mSD20X7IndexFont;
 
+	HUDFont mSF2011HUDFont;
+
 	HUDFont mSodHUDFont;
 
 	HUDFont mSunlustHUDFont;
@@ -198,6 +200,8 @@ class SevHUD : DoomStatusBar
 
 		mSD20X7IndexFont = HUDFont.Create("SD20X7IndexFont");
 		
+		mSF2011HUDFont = HUDFont.Create("SF2011HUDFont", 11, Mono_CellLeft, 1, 1);
+
 		mSodHUDFont = HUDFont.Create("SodHUDFont", 11, Mono_CellLeft, 1, 1);
 
 		mSunlustHUDFont = HUDFont.Create("SunlustHUDFont", 13, Mono_CellLeft, 1, 1);

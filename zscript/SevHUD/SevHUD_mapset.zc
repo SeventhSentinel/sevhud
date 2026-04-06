@@ -268,9 +268,16 @@ extend class SevHUD
 			}
 			
 			// Scythe 2
-			if ((checksum == "009855039a4557f5f293b70c5232d473") || (checksum == "b1228d5758ad1a5a86df6264e71bfa83"))	// Support for my personal Scythe 2 patch; if you're reading this don't ask me for it
+			if ((checksum == "009855039a4557f5f293b70c5232d473") ||
+			(checksum == "b1228d5758ad1a5a86df6264e71bfa83"))	// Support for my personal Scythe 2 patch; if you're reading this don't ask me for it
 			{
 				mapset = "scythe2";
+			}
+
+			// Slaughterfest 2011
+			if (checksum == "76bc3739cae7986d31b424dc993de458")
+			{
+				mapset = "sf2011";
 			}
 			
 			// Speed of Doom
@@ -550,6 +557,13 @@ extend class SevHUD
 				// Afrits are Keens in old Lexicon, so let's draw no stbar to discourage playing this way
 				{
 					mapset = "none";
+				}
+				
+				// Slaughterfest 2011
+				if (mapcode == "SF11")
+				{
+					mapset = "sf2011";
+					bigNumbers = mSF2011HUDFont;
 				}
 
 				// Speed of Doom

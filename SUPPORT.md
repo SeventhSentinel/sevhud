@@ -27,6 +27,7 @@
 - Plutonia 2
 - Plutonia Revisited Community Project 1 & 2
 - Scythe 2
+- Slaughterfest 2011
 - Speed of Doom
 - Stardate 20X7
 - Sunlust
