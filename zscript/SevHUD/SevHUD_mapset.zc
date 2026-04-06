@@ -583,6 +583,14 @@ extend class SevHUD
 					bigNumbers = mSF2012HUDFont;
 					littlenumbers = mSF2012IndexFont;
 				}
+				
+				// Slaughterfest 3
+				if (mapcode == "SF13")
+				{
+					mapset = "sf3";
+					bigNumbers = mSF3HUDFont;
+					littlenumbers = mSF3IndexFont;
+				}
 
 				// Speed of Doom
 				if (mapcode == "SPOD")
