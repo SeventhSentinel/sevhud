@@ -264,6 +264,13 @@ extend class SevHUD
 			{
 				mapset = "scythe2";
 			}
+			
+			// Speed of Doom
+			if (checksum == "d1da55e343ff5d72781704c1852fceaf")
+			{
+				mapset = "sod";
+				bigNumbers = mSodHUDFont;
+			}
 
 			// Stardate 20X7
 			if (checksum == "c1574566a9b7eca114e55178dfb64cb9")
@@ -519,6 +526,13 @@ extend class SevHUD
 				// Afrits are Keens in old Lexicon, so let's draw no stbar to discourage playing this way
 				{
 					mapset = "none";
+				}
+
+				// Speed of Doom
+				if (mapcode == "SPOD")
+				{
+					mapset = "sod";
+					bigNumbers = mSodHUDFont;
 				}
 				
 				// Stardate 20X7

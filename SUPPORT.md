@@ -26,6 +26,7 @@
 - Plutonia 2
 - Plutonia Revisited Community Project 1 & 2
 - Scythe 2
+- Speed of Doom
 - Stardate 20X7
 - Sunlust
 - UAC Ultra
