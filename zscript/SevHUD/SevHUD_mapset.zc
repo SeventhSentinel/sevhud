@@ -280,6 +280,15 @@ extend class SevHUD
 				mapset = "sf2011";
 			}
 			
+			// Slaughterfest 2012
+			if (checksum == "f9ca26938ad7021aa92eec5868c1c9b0")
+			{
+				mapset = "sf2012";
+				powerups = mapset;
+				bigNumbers = mSF2012HUDFont;
+				littlenumbers = mSF2012IndexFont;
+			}
+
 			// Speed of Doom
 			if (checksum == "d1da55e343ff5d72781704c1852fceaf")
 			{
@@ -564,6 +573,15 @@ extend class SevHUD
 				{
 					mapset = "sf2011";
 					bigNumbers = mSF2011HUDFont;
+				}
+
+				// Slaughterfest 2012
+				if (mapcode == "SF12")
+				{
+					mapset = "sf2012";
+					powerups = mapset;
+					bigNumbers = mSF2012HUDFont;
+					littlenumbers = mSF2012IndexFont;
 				}
 
 				// Speed of Doom

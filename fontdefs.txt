@@ -604,6 +604,34 @@ SF2011HUDFont
 	9 "graphics/SevHUD/sf2011/st_num9.png"
 }
 
+SF2012HUDFont
+{
+	0 "graphics/SevHUD/sf2012/st_num0.png"
+	1 "graphics/SevHUD/sf2012/st_num1.png"
+	2 "graphics/SevHUD/sf2012/st_num2.png"
+	3 "graphics/SevHUD/sf2012/st_num3.png"
+	4 "graphics/SevHUD/sf2012/st_num4.png"
+	5 "graphics/SevHUD/sf2012/st_num5.png"
+	6 "graphics/SevHUD/sf2012/st_num6.png"
+	7 "graphics/SevHUD/sf2012/st_num7.png"
+	8 "graphics/SevHUD/sf2012/st_num8.png"
+	9 "graphics/SevHUD/sf2012/st_num9.png"
+}
+
+SF2012IndexFont
+{
+	0 "graphics/SevHUD/sf2012/st_anum0.png"
+	1 "graphics/SevHUD/sf2012/st_anum1.png"
+	2 "graphics/SevHUD/sf2012/st_anum2.png"
+	3 "graphics/SevHUD/sf2012/st_anum3.png"
+	4 "graphics/SevHUD/sf2012/st_anum4.png"
+	5 "graphics/SevHUD/sf2012/st_anum5.png"
+	6 "graphics/SevHUD/sf2012/st_anum6.png"
+	7 "graphics/SevHUD/sf2012/st_anum7.png"
+	8 "graphics/SevHUD/sf2012/st_anum8.png"
+	9 "graphics/SevHUD/sf2012/st_anum9.png"
+}
+
 SodHUDFont
 {
 	0 "graphics/SevHUD/sod/st_num0.png"
