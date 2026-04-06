@@ -321,7 +321,7 @@ extend class SevHUD
 			// old Lexicon
 			if ((checksum == "47b55a4612b6c2891607c52a39ea62ef") ||
 			// new Lexicon
-			(checksum == "00b812ee9050fcea7782c7251acc145d"))
+			(checksum == "aa902408089a20d7b751bf4c4afc7db6"))
 			{
 				if (checksum == "47b55a4612b6c2891607c52a39ea62ef")
 					oldLexicon = true;
