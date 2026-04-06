@@ -150,6 +150,14 @@ extend class SevHUD
 				mapset = "c-shock2";
 				bigNumbers = mCShock2HUDFont;
 			}
+
+			// Deus Vult II (same as Vanguard stbar)
+			if (checksum == "ccd34d9a0eab1309691f657855e53cf8")
+			{
+				mapset = "vanguard";
+				bigNumbers = mVanguardHUDFont;
+				littlenumbers = mVanguardIndexFont;			
+			}
 			
 			// Epic 2
 			if (checksum == "c6a0fb52a42a66adc91d0c5acb066db9")
@@ -407,6 +415,14 @@ extend class SevHUD
 					bigNumbers = mCShock2HUDFont;
 				}
 
+				// Deus Vult II (same as Vanguard stbar)
+				if (mapcode == "DSV2")
+				{
+					mapset = "vanguard";
+					bigNumbers = mVanguardHUDFont;
+					littlenumbers = mVanguardIndexFont;			
+				}				
+
 				// Epic 2
 				if ((mapcode == "EPC2") || (oldLexicon && (oldcode == "EP2")))
 				{
@@ -440,6 +456,14 @@ extend class SevHUD
 					mapset = "hadephobia";
 					bigNumbers = mHadephobiaHUDFont;
 					littleNumbers = mHadephobiaIndexFont;
+				}
+				
+				// Haste
+				if (mapcode == "HSTE")
+				{
+					mapset = "haste";
+					bigNumbers = mHasteHUDFont;
+					littleNumbers = mHasteIndexFont;
 				}
 				
 				// Hell to Pay

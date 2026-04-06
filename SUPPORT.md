@@ -13,6 +13,7 @@
 - Garrulismo
 - Gridlock 64
 - Hadephobia
+- Haste
 - Hellbound
 - Jenesis
 - Last Day On Earth (2000)
