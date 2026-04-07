@@ -81,6 +81,8 @@ class SevHUD : DoomStatusBar
 	HUDFont mHasteIndexFont;
 
 	HUDFont mHellboundHUDFont;
+	
+	HUDFont mIPXMatchHUDFont;
 
 	HUDFont mJenesisHUDFont;
 	HUDFont mJenesisIndexFont;
@@ -196,6 +198,8 @@ class SevHUD : DoomStatusBar
 		mHasteIndexFont = HUDFont.Create("HasteIndexFont");
 
 		mHellboundHUDFont = HUDFont.Create("HellboundHUDFont");
+
+		mIPXMatchHUDFont = HUDFont.Create("IPXMatchHUDFont", 14, Mono_CellLeft, 1, 1);
 
 		mJenesisHUDFont = HUDFont.Create("JenesisHUDFont", 13, Mono_CellLeft, 1, 1);
 		mJenesisIndexFont = HUDFont.Create("JenesisIndexFont");

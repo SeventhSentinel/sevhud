@@ -430,6 +430,21 @@ HellboundHUDFont
 	- "graphics/SevHUD/hellbound/st_minus.png"
 }
 
+IPXMatchHUDFont
+{
+	0 "graphics/SevHUD/ipxmatch/st_num0.png"
+	1 "graphics/SevHUD/ipxmatch/st_num1.png"
+	2 "graphics/SevHUD/ipxmatch/st_num2.png"
+	3 "graphics/SevHUD/ipxmatch/st_num3.png"
+	4 "graphics/SevHUD/ipxmatch/st_num4.png"
+	5 "graphics/SevHUD/ipxmatch/st_num5.png"
+	6 "graphics/SevHUD/ipxmatch/st_num6.png"
+	7 "graphics/SevHUD/ipxmatch/st_num7.png"
+	8 "graphics/SevHUD/ipxmatch/st_num8.png"
+	9 "graphics/SevHUD/ipxmatch/st_num9.png"
+	- "graphics/SevHUD/ipxmatch/st_minus.png"
+}
+
 JenesisHUDFont
 {
 	0 "graphics/SevHUD/jenesis/st_num0.png"

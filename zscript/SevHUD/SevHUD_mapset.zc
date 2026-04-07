@@ -240,6 +240,13 @@ extend class SevHUD
 				bigNumbers = mHellboundHUDFont;
 			}
 			
+			// IPXMatch
+			if (checksum == "1cb2f5d140cc0974cbc24427addd1dc0")
+			{
+				mapset = "ipxmatch";
+				bigNumbers = mIPXMatchHUDFont;
+			}
+			
 			// Jenesis
 			if (checksum == "4319a664371a3ae927f46261035b170b")
 			{
@@ -550,6 +557,13 @@ extend class SevHUD
 				{
 					mapset = "hellbound";
 					bigNumbers = mHellboundHUDFont;
+				}
+				
+				// IPXMatch
+				if (mapcode == "IPXM")
+				{
+					mapset = "ipxmatch";
+					bigNumbers = mIPXMatchHUDFont;
 				}
 
 				// Jenesis
