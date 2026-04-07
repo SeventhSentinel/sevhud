@@ -61,6 +61,8 @@ class SevHUD : DoomStatusBar
 	HUDFont mClau1024IndexFont;
 	
 	HUDFont mCShock2HUDFont;
+	
+	HUDFont mDwango2HUDFont;
 
 	HUDFont mGarruloIndexFont;
 	
@@ -170,6 +172,8 @@ class SevHUD : DoomStatusBar
 		
 		mCShock2HUDFont = HUDFont.Create("CShock2HUDFont", 14, Mono_CellLeft, 1, 1);
 		
+		mDwango2HUDFont = HUDFont.Create("Dwango2HUDFont", 14, Mono_CellLeft, 1, 1);
+
 		mGarruloIndexFont = HUDFont.Create("GarruloIndexFont");
 
 		mGridlock64HUDFont = HUDFont.Create("Gridlock64HUDFont", 13, Mono_CellLeft, 1, 1);
@@ -248,7 +252,7 @@ class SevHUD : DoomStatusBar
 
 	override void Draw(int state, double TicFrac)
 	{
-		if ((!gotmapset)||(level.MapTime == 1))
+		if ((!gotmapset)||(level.MapTime <= 2))
 		{
 			GetMapset();
 			dontdrawnames = false;

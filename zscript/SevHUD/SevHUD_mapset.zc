@@ -159,6 +159,21 @@ extend class SevHUD
 				littlenumbers = mVanguardIndexFont;			
 			}
 			
+			// DWANGO2, DWANGO3, DWANGO4, DWANGO5, DWANGO6, DWANGO7, DWANGO10, DWANGO11, DWANGO12
+			if ((checksum == "e3e183ec0d098bb80e666fbe35144d50") ||	// 2
+			(checksum == "bddedb9cd1d8187e0ae60a3c01cb6265") ||		// 3
+			(checksum == "11c1dedd52f82d0b0d109bca28ef6a3c") ||		// 4
+			(checksum == "030e68ca20a567e96d1c8a3d09abad43") ||		// 5
+			(checksum == "7e5db0d90bad984a5a0b34c852d21bc0") ||		// 6
+			(checksum == "85e71042d599ae88ece0abf010c90639") ||		// 7
+			(checksum == "c3b0abec42a1a9c2aba74665fa4a8659") ||		// 10
+			(checksum == "2c037416029c2f23430e817f295cbada") ||		// 11
+			(checksum == "ff24fbeaf3ad7de0bc84a6ad6ee52356"))		// 12
+			{
+				mapset = "dwango2";
+				bigNumbers = mDwango2HUDFont;
+			}
+			
 			// Epic 2
 			if (checksum == "c6a0fb52a42a66adc91d0c5acb066db9")
 			{
@@ -444,7 +459,14 @@ extend class SevHUD
 					mapset = "vanguard";
 					bigNumbers = mVanguardHUDFont;
 					littlenumbers = mVanguardIndexFont;			
-				}				
+				}
+				
+				// DWANGO2, DWANGO3, DWANGO4, DWANGO5, DWANGO6, DWANGO7, DWANGO10, DWANGO11, DWANGO12
+				if ((mapcode == "DW02") || (mapcode == "DW03") || (mapcode == "DW04") || (mapcode == "DW05") || (mapcode == "DW06") || (mapcode == "DW07") || (mapcode == "DW10") || (mapcode == "DW11") || (mapcode == "DW12"))
+				{
+					mapset = "dwango2";
+					bigNumbers = mDwango2HUDFont;				
+				}
 
 				// Epic 2
 				if ((mapcode == "EPC2") || (oldLexicon && (oldcode == "EP2")))
