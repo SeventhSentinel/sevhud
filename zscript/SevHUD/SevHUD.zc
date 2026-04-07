@@ -62,6 +62,8 @@ class SevHUD : DoomStatusBar
 	
 	HUDFont mCShock2HUDFont;
 	
+	HUDFont mD64D2IndexFont;
+
 	HUDFont mDKDMHUDFont;
 
 	HUDFont mDwango2HUDFont;
@@ -127,6 +129,8 @@ class SevHUD : DoomStatusBar
 	HUDFont mUDINOHUDFont;
 	HUDFont mUDINOIndexFont;
 
+	HUDFont mUDMXHUDFont;
+
 	HUDFont mUHadronHUDFont;
 
 	HUDFont mValiantVEHUDFont;
@@ -179,6 +183,8 @@ class SevHUD : DoomStatusBar
 		
 		mCShock2HUDFont = HUDFont.Create("CShock2HUDFont", 14, Mono_CellLeft, 1, 1);
 		
+		mD64D2IndexFont = HUDFont.Create("D64D2IndexFont");
+
 		mDKDMHUDFont = HUDFont.Create("DKDMHUDFont", 14, Mono_CellLeft, 1, 1);
 
 		mDwango2HUDFont = HUDFont.Create("Dwango2HUDFont", 14, Mono_CellLeft, 1, 1);
@@ -243,6 +249,8 @@ class SevHUD : DoomStatusBar
 
 		mUDINOHUDFont = HUDFont.Create("UDINOHUDFont", 14, Mono_CellLeft, 1, 1);
 		mUDINOIndexFont = HUDFont.Create("UDINOIndexFont");
+
+		mUDMXHUDFont = HUDFont.Create("UDMXHUDFont", 14, Mono_CellLeft, 1, 1);
 
 		mUHadronHUDFont = HUDFont.Create("UHadronHUDFont", 11, Mono_CellLeft, 1, 1);
 
@@ -866,6 +874,18 @@ class SevHUD : DoomStatusBar
 
 				if (classtype == "wolfss")
 					txt = "$ENEMY_AALIENS_PLASMAALIEN";
+			}
+			
+			if (mapset == "d64d2")
+			{
+				if ((classtype == "imp") && (shadowed == true))
+					txt = "$ENEMY_D64D2_NIGHTMAREIMP";
+
+				if ((classtype == "caco") && (shadowed == true))
+					txt = "$ENEMY_D64D2_NIGHTMARECACO";
+				
+				if (txt == "Motherdemon")
+					txt = "$ENEMY_D64D2_MOTHERDEMON";
 			}
 			
 			if (mapset == "epic2")

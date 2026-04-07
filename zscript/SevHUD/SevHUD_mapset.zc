@@ -156,7 +156,14 @@ extend class SevHUD
 			{
 				mapset = "vanguard";
 				bigNumbers = mVanguardHUDFont;
-				littlenumbers = mVanguardIndexFont;			
+				littlenumbers = mVanguardIndexFont;
+			}
+			
+			// Doom 64 for Doom 2
+			if (checksum == "ee6f67839988e888ce9a6a817024e482")
+			{
+				mapset = "d64d2";
+				littlenumbers = mD64D2IndexFont;
 			}
 			
 			// DWANGO!, Glory Tag, LBDWANGO
@@ -344,11 +351,26 @@ extend class SevHUD
 				mapset = "sd20x7";
 			}
 			
+			// TWANGO1
+			if (checksum == "723c981777e53ba9f89e8b7294a15a74")
+			{
+				mapset = "twango1";				// reuses D64D2 stbar
+				bigNumbers = mIPXMatchHUDFont;	// more polished blue numbers
+				littleNumbers = mD64D2IndexFont;
+			}
+			
 			// UAC Ultra
 			if (checksum == "ff1d357dd259a8733e420ad42ffd1c87")
 			{
 				mapset = "uacultra";
 				bigNumbers = mUACUltraHUDFont;
+			}
+			
+			// UDMX
+			if (checksum == "7f4b63b3194c638e5fd3aa5bffe65489")
+			{
+				mapset = "udmx";
+				bigNumbers = mUDMXHUDFont;				
 			}
 			
 			// Valiant
@@ -689,7 +711,15 @@ extend class SevHUD
 				{
 					mapset = "sunlust";
 					bigNumbers = mSunlustHUDFont;
-					littlenumbers = mSunlustIndexFont;					
+					littlenumbers = mSunlustIndexFont;
+				}
+				
+				// TWANGO1
+				if (mapcode == "TWN1")
+				{
+					mapset = "twango1";
+					bigNumbers = mIPXMatchHUDFont;				
+					littlenumbers = mD64D2IndexFont;
 				}
 				
 				// UAC Ultra
@@ -705,6 +735,13 @@ extend class SevHUD
 					mapset = "udino";
 					bigNumbers = mUDINOHUDFont;
 					littlenumbers = mUDINOIndexFont;
+				}
+				
+				// UDMX
+				if (mapcode == "UDMX")
+				{
+					mapset = "udmx";
+					bigNumbers = mUDMXHUDFont;				
 				}
 				
 				// Valiant: Vaccinated Edition

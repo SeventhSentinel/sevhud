@@ -9,6 +9,7 @@
 - Claustrophobia 1024 1 & 2
 - Combat Shock 2
 - ConCERNed
+- Doom 64 for Doom II
 - Doomkid's Deathmatch Series
 - DWANGO2, 3, 4, 5, 6, 7, 10, 11, 12, !, X, 20th Anniversary
 - Eviternity 1 & 2
@@ -36,7 +37,9 @@
 - Speed of Doom
 - Stardate 20X7
 - Sunlust
+- TWANGO1
 - UAC Ultra
+- UDMX
 - Ultimate Doom in Name Only
 - Ultimate Return to Hadron
 - Valiant (both editions)
