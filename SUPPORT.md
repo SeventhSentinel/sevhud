@@ -10,7 +10,7 @@
 - Combat Shock 2
 - ConCERNed
 - Doomkid's Deathmatch Series
-- DWANGO2, 3, 4, 5, 6, 7, 10, 11, 12, !
+- DWANGO2, 3, 4, 5, 6, 7, 10, 11, 12, !, X, 20th Anniversary
 - Eviternity 1 & 2
 - Garrulismo
 - Glory Tag

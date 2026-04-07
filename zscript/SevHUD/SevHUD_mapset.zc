@@ -169,7 +169,7 @@ extend class SevHUD
 				littleNumbers = mGloryTagIndexFont;
 			}
 			
-			// DWANGO2, DWANGO3, DWANGO4, DWANGO5, DWANGO6, DWANGO7, DWANGO10, DWANGO11, DWANGO12
+			// DWANGO2, DWANGO3, DWANGO4, DWANGO5, DWANGO6, DWANGO7, DWANGO10, DWANGO11, DWANGO12, DWANGO 20th Anniversary, DWANGOX
 			// DWANGO8 does not have a custom STBAR :(
 			if ((checksum == "e3e183ec0d098bb80e666fbe35144d50") ||	// 2
 			(checksum == "bddedb9cd1d8187e0ae60a3c01cb6265") ||		// 3
@@ -179,7 +179,9 @@ extend class SevHUD
 			(checksum == "85e71042d599ae88ece0abf010c90639") ||		// 7
 			(checksum == "c3b0abec42a1a9c2aba74665fa4a8659") ||		// 10
 			(checksum == "2c037416029c2f23430e817f295cbada") ||		// 11
-			(checksum == "ff24fbeaf3ad7de0bc84a6ad6ee52356"))		// 12
+			(checksum == "ff24fbeaf3ad7de0bc84a6ad6ee52356") ||		// 12
+			(checksum == "5e7799e25e3063e5b6239990d50ac0a7") ||		// 20th
+			(checksum == "44bdc8778737b590c03776b768312e14"))		// X
 			{
 				mapset = "dwango2";
 				bigNumbers = mDwango2HUDFont;
@@ -487,8 +489,8 @@ extend class SevHUD
 					littleNumbers = mGloryTagIndexFont;
 				}
 				
-				// DWANGO2, DWANGO3, DWANGO4, DWANGO5, DWANGO6, DWANGO7, DWANGO10, DWANGO11, DWANGO12
-				if ((mapcode == "DW02") || (mapcode == "DW03") || (mapcode == "DW04") || (mapcode == "DW05") || (mapcode == "DW06") || (mapcode == "DW07") || (mapcode == "DW10") || (mapcode == "DW11") || (mapcode == "DW12"))
+				// DWANGO2, DWANGO3, DWANGO4, DWANGO5, DWANGO6, DWANGO7, DWANGO10, DWANGO11, DWANGO12, DWANGO 20th Anniversary
+				if ((mapcode == "DW02") || (mapcode == "DW03") || (mapcode == "DW04") || (mapcode == "DW05") || (mapcode == "DW06") || (mapcode == "DW07") || (mapcode == "DW10") || (mapcode == "DW11") || (mapcode == "DW12") || (mapcode == "DW21") || (mapcode == "DW0X"))
 				{
 					mapset = "dwango2";
 					bigNumbers = mDwango2HUDFont;				
