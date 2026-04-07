@@ -62,6 +62,8 @@ class SevHUD : DoomStatusBar
 	
 	HUDFont mCShock2HUDFont;
 	
+	HUDFont mDKDMHUDFont;
+
 	HUDFont mDwango2HUDFont;
 
 	HUDFont mGarruloIndexFont;
@@ -175,6 +177,8 @@ class SevHUD : DoomStatusBar
 		
 		mCShock2HUDFont = HUDFont.Create("CShock2HUDFont", 14, Mono_CellLeft, 1, 1);
 		
+		mDKDMHUDFont = HUDFont.Create("DKDMHUDFont", 14, Mono_CellLeft, 1, 1);
+
 		mDwango2HUDFont = HUDFont.Create("Dwango2HUDFont", 14, Mono_CellLeft, 1, 1);
 
 		mGarruloIndexFont = HUDFont.Create("GarruloIndexFont");

@@ -158,7 +158,7 @@ extend class SevHUD
 				bigNumbers = mVanguardHUDFont;
 				littlenumbers = mVanguardIndexFont;			
 			}
-
+			
 			// DWANGO!, Glory Tag, LBDWANGO
 			if ((checksum == "f16b06366fc6c6437de31b7f9bbe6f56") ||	// !
 			(checksum == "8e0a34e808c31d93da0079ddaf88fbc5") ||		// Glory
@@ -470,6 +470,13 @@ extend class SevHUD
 					mapset = "vanguard";
 					bigNumbers = mVanguardHUDFont;
 					littlenumbers = mVanguardIndexFont;			
+				}
+
+				// Doomkid's Deathmatch Series
+				if (mapcode == "DKDS")
+				{
+					mapset = "dkdm";
+					bigNumbers = mDKDMHUDFont;
 				}
 
 				// DWANGO!, LBDWANGO

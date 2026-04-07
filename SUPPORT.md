@@ -9,14 +9,18 @@
 - Claustrophobia 1024 1 & 2
 - Combat Shock 2
 - ConCERNed
+- Doomkid's Deathmatch Series
+- DWANGO2, 3, 4, 5, 6, 7, 10, 11, 12, !
 - Eviternity 1 & 2
 - Garrulismo
+- Glory Tag
 - Gridlock 64
 - Hadephobia
 - Haste
 - Hellbound
 - Jenesis
 - Last Day On Earth (2000)
+- LBDWANGO
 - Lost Civilization
 - NeoDoom: Vaccinated Edition
 - NewDoom Community Project 1
