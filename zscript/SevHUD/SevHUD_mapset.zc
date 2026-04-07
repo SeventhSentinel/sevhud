@@ -267,6 +267,13 @@ extend class SevHUD
 				mapset = "pl2";
 			}
 			
+			// Return to Hadron (Ultimate)
+			if (checksum == "41411a0082b8017035188cb711af61fc")
+			{
+				mapset = "uhadron";
+				bigNumbers = mPGResurgeHUDFont;				
+			}
+
 			// Scythe 2
 			if ((checksum == "009855039a4557f5f293b70c5232d473") ||
 			(checksum == "b1228d5758ad1a5a86df6264e71bfa83"))	// Support for my personal Scythe 2 patch; if you're reading this don't ask me for it
@@ -556,6 +563,13 @@ extend class SevHUD
 					bigNumbers = mPGResurgeHUDFont;
 				}
 				
+				// Scythe 2
+				if (mapcode == "URTH")
+				{
+					mapset = "uhadron";
+					bigNumbers = mUHadronHUDFont;
+				}
+
 				// Scythe 2
 				if (mapcode == "SCY2")
 				{

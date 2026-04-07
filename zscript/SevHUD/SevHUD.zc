@@ -118,6 +118,8 @@ class SevHUD : DoomStatusBar
 	HUDFont mUDINOHUDFont;
 	HUDFont mUDINOIndexFont;
 
+	HUDFont mUHadronHUDFont;
+
 	HUDFont mValiantVEHUDFont;
 	HUDFont mValiantVEIndexFont;
 
@@ -144,7 +146,7 @@ class SevHUD : DoomStatusBar
 		mDefaultIndexFont = HUDFont.Create("DefaultIndexFont");
 
 		// Wad-specific fonts
-		// Manually set the width to 13, or whatever the width of the 0 char is
+		// Manually set the width to 14, or whatever the width of the 0 char is
 		m400minvrHUDFont = HUDFont.Create("400minvrHUDFont", 14, Mono_CellLeft, 1, 1);
 		m400minvrIndexFont = HUDFont.Create("400minvrIndexFont");
 		m400minvrStatsFont = HUDFont.Create("400minvrStatsFont");
@@ -166,17 +168,17 @@ class SevHUD : DoomStatusBar
 		mClau1024HUDFont = HUDFont.Create("Clau1024HUDFont", 14, Mono_CellLeft, 1, 1);
 		mClau1024IndexFont = HUDFont.Create("Clau1024IndexFont");
 		
-		mCShock2HUDFont = HUDFont.Create("CShock2HUDFont", 13, Mono_CellLeft, 1, 1);
+		mCShock2HUDFont = HUDFont.Create("CShock2HUDFont", 14, Mono_CellLeft, 1, 1);
 		
 		mGarruloIndexFont = HUDFont.Create("GarruloIndexFont");
 
 		mGridlock64HUDFont = HUDFont.Create("Gridlock64HUDFont", 13, Mono_CellLeft, 1, 1);
 		mGridlock64IndexFont = HUDFont.Create("Gridlock64IndexFont");
 		
-		mHadephobiaHUDFont = HUDFont.Create("HadephobiaHUDFont", 13, Mono_CellLeft, 1, 1);
+		mHadephobiaHUDFont = HUDFont.Create("HadephobiaHUDFont", 14, Mono_CellLeft, 1, 1);
 		mHadephobiaIndexFont = HUDFont.Create("HadephobiaIndexFont");
 
-		mHasteHUDFont = HUDFont.Create("HasteHUDFont", 13, Mono_CellLeft, 1, 1);
+		mHasteHUDFont = HUDFont.Create("HasteHUDFont", 14, Mono_CellLeft, 1, 1);
 		mHasteIndexFont = HUDFont.Create("HasteIndexFont");
 
 		mHellboundHUDFont = HUDFont.Create("HellboundHUDFont");
@@ -186,7 +188,7 @@ class SevHUD : DoomStatusBar
 		
 		mLastEp1IndexFont = HUDFont.Create("LastEp1IndexFont");
 		
-		mLostCivHUDFont = HUDFont.Create("LostCivHUDFont", 13, Mono_CellLeft, 1, 1);
+		mLostCivHUDFont = HUDFont.Create("LostCivHUDFont", 14, Mono_CellLeft, 1, 1);
 		mLostCivIndexFont = HUDFont.Create("LostCivIndexFont");
 		
 		mNeoDoomHUDFont = HUDFont.Create("NeoDoomHUDFont", 12, Mono_CellLeft, 1, 1);
@@ -194,43 +196,45 @@ class SevHUD : DoomStatusBar
 
 		mNewDoom1HUDFont = HUDFont.Create("NewDoom1HUDFont", 13, Mono_CellLeft, 1, 1);
 
-		mNoEndInSightHUDFont = HUDFont.Create("NoEndInSightHUDFont", 13, Mono_CellLeft, 1, 1);
+		mNoEndInSightHUDFont = HUDFont.Create("NoEndInSightHUDFont", 14, Mono_CellLeft, 1, 1);
 		mNoEndInSightIndexFont = HUDFont.Create("NoEndInSightIndexFont");
 
-		mNostZeroHUDFont = HUDFont.Create("NostZeroHUDFont", 13, Mono_CellLeft, 1, 1);
+		mNostZeroHUDFont = HUDFont.Create("NostZeroHUDFont", 14, Mono_CellLeft, 1, 1);
 		mNostZeroIndexFont = HUDFont.Create("NostZeroIndexFont");
 
 		mPGResurgeHUDFont = HUDFont.Create("PGResurgeHUDFont", 13, Mono_CellLeft, 1, 1);
 		
-		mScythe2HUDFont = HUDFont.Create("Scythe2HUDFont", 13, Mono_CellLeft, 1, 1);
+		mScythe2HUDFont = HUDFont.Create("Scythe2HUDFont", 14, Mono_CellLeft, 1, 1);
 
 		mSD20X7IndexFont = HUDFont.Create("SD20X7IndexFont");
 		
-		mSF2011HUDFont = HUDFont.Create("SF2011HUDFont", 13, Mono_CellLeft, 1, 1);
+		mSF2011HUDFont = HUDFont.Create("SF2011HUDFont", 14, Mono_CellLeft, 1, 1);
 
 		mSF2012HUDFont = HUDFont.Create("SF2012HUDFont", 14, Mono_CellLeft, 1, 1);
 		mSF2012IndexFont = HUDFont.Create("SF2012IndexFont");
 
-		mSF3HUDFont = HUDFont.Create("SF3HUDFont", 13, Mono_CellLeft, 1, 1);
+		mSF3HUDFont = HUDFont.Create("SF3HUDFont", 14, Mono_CellLeft, 1, 1);
 		mSF3IndexFont = HUDFont.Create("SF3IndexFont");
 
 		mSodHUDFont = HUDFont.Create("SodHUDFont", 11, Mono_CellLeft, 1, 1);
 
-		mSunlustHUDFont = HUDFont.Create("SunlustHUDFont", 13, Mono_CellLeft, 1, 1);
+		mSunlustHUDFont = HUDFont.Create("SunlustHUDFont", 14, Mono_CellLeft, 1, 1);
 		mSunlustIndexFont = HUDFont.Create("SunlustIndexFont");
 
-		mUACUltraHUDFont = HUDFont.Create("UACUltraHUDFont", 13, Mono_CellLeft, 1, 1);
+		mUACUltraHUDFont = HUDFont.Create("UACUltraHUDFont", 14, Mono_CellLeft, 1, 1);
 
-		mUDINOHUDFont = HUDFont.Create("UDINOHUDFont", 13, Mono_CellLeft, 1, 1);
+		mUDINOHUDFont = HUDFont.Create("UDINOHUDFont", 14, Mono_CellLeft, 1, 1);
 		mUDINOIndexFont = HUDFont.Create("UDINOIndexFont");
+
+		mUHadronHUDFont = HUDFont.Create("UHadronHUDFont", 11, Mono_CellLeft, 1, 1);
 
 		mValiantVEHUDFont = HUDFont.Create("ValiantVEHUDFont", 13, Mono_CellLeft, 1, 1);
 		mValiantVEIndexFont = HUDFont.Create("ValiantVEIndexFont");
 
-		mVanguardHUDFont = HUDFont.Create("VanguardHUDFont", 13, Mono_CellLeft, 1, 1);
+		mVanguardHUDFont = HUDFont.Create("VanguardHUDFont", 14, Mono_CellLeft, 1, 1);
 		mVanguardIndexFont = HUDFont.Create("VanguardIndexFont");
 		
-		mVXRelocHUDFont = HUDFont.Create("VXRelocHUDFont", 13, Mono_CellLeft, 1, 1);
+		mVXRelocHUDFont = HUDFont.Create("VXRelocHUDFont", 14, Mono_CellLeft, 1, 1);
 
 
 		InitSevHUD();
