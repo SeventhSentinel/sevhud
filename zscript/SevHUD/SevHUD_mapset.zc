@@ -158,8 +158,19 @@ extend class SevHUD
 				bigNumbers = mVanguardHUDFont;
 				littlenumbers = mVanguardIndexFont;			
 			}
+
+			// DWANGO!, Glory Tag, LBDWANGO
+			if ((checksum == "f16b06366fc6c6437de31b7f9bbe6f56") ||	// !
+			(checksum == "8e0a34e808c31d93da0079ddaf88fbc5") ||		// Glory
+			(checksum == "2a0cbb431f92502322c51420ba4b5c8b"))		// LB
+			{
+				mapset = "glorytag";
+				bigNumbers = mGloryTagHUDFont;
+				littleNumbers = mGloryTagIndexFont;
+			}
 			
 			// DWANGO2, DWANGO3, DWANGO4, DWANGO5, DWANGO6, DWANGO7, DWANGO10, DWANGO11, DWANGO12
+			// DWANGO8 does not have a custom STBAR :(
 			if ((checksum == "e3e183ec0d098bb80e666fbe35144d50") ||	// 2
 			(checksum == "bddedb9cd1d8187e0ae60a3c01cb6265") ||		// 3
 			(checksum == "11c1dedd52f82d0b0d109bca28ef6a3c") ||		// 4
@@ -459,6 +470,14 @@ extend class SevHUD
 					mapset = "vanguard";
 					bigNumbers = mVanguardHUDFont;
 					littlenumbers = mVanguardIndexFont;			
+				}
+
+				// DWANGO!, LBDWANGO
+				if ((mapcode == "DWEX") || (mapcode == "DWLB"))
+				{
+					mapset = "glorytag";
+					bigNumbers = mGloryTagHUDFont;
+					littleNumbers = mGloryTagIndexFont;
 				}
 				
 				// DWANGO2, DWANGO3, DWANGO4, DWANGO5, DWANGO6, DWANGO7, DWANGO10, DWANGO11, DWANGO12

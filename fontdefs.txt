@@ -285,6 +285,35 @@ GarruloIndexFont
 	9 "graphics/SevHUD/garrulo/st_ynum9.png"
 }
 
+GloryTagHUDFont
+{
+	0 "graphics/SevHUD/glorytag/st_num0.png"
+	1 "graphics/SevHUD/glorytag/st_num1.png"
+	2 "graphics/SevHUD/glorytag/st_num2.png"
+	3 "graphics/SevHUD/glorytag/st_num3.png"
+	4 "graphics/SevHUD/glorytag/st_num4.png"
+	5 "graphics/SevHUD/glorytag/st_num5.png"
+	6 "graphics/SevHUD/glorytag/st_num6.png"
+	7 "graphics/SevHUD/glorytag/st_num7.png"
+	8 "graphics/SevHUD/glorytag/st_num8.png"
+	9 "graphics/SevHUD/glorytag/st_num9.png"
+	- "graphics/SevHUD/glorytag/st_minus.png"
+}
+
+GloryTagIndexFont
+{
+	0 "graphics/SevHUD/glorytag/st_ynum0.png"
+	1 "graphics/SevHUD/glorytag/st_ynum1.png"
+	2 "graphics/SevHUD/glorytag/st_ynum2.png"
+	3 "graphics/SevHUD/glorytag/st_ynum3.png"
+	4 "graphics/SevHUD/glorytag/st_ynum4.png"
+	5 "graphics/SevHUD/glorytag/st_ynum5.png"
+	6 "graphics/SevHUD/glorytag/st_ynum6.png"
+	7 "graphics/SevHUD/glorytag/st_ynum7.png"
+	8 "graphics/SevHUD/glorytag/st_ynum8.png"
+	9 "graphics/SevHUD/glorytag/st_ynum9.png"
+}
+
 Gridlock64HUDFont
 {
 	0 "graphics/SevHUD/gridlock64/st_num0.png"
