@@ -785,6 +785,12 @@ extend class SevHUD
 					mapset = "vx_reloc";
 					bigNumbers = mVXRelocHUDFont;
 				}
+				
+				// DEBUG: Force pester about outdated version in test map
+				if (curmap == "sevhud")
+				{
+					mapset = "old-lexicon";
+				}
 			}
 		}
 

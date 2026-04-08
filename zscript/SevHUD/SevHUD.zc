@@ -1720,6 +1720,13 @@ class SevHUD : DoomStatusBar
 		// Don't draw a status bar at all in Lexicon VR
 		if (mapset == "none")
 			return;
+		
+		// Pester people still running old Lexicon
+		if (mapset == "old-lexicon")
+		{
+			DrawImage(filepath.."st_bar.png", (0, 168), DI_ITEM_OFFSETS);
+			return;
+		}
 
 		// Start drawin'!
 		lump = Wads.CheckNumForFullName(filepath.."st_bar.png");
