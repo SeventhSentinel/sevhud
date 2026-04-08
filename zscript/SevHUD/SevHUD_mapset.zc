@@ -547,6 +547,7 @@ extend class SevHUD
 				if ((mapcode == "EPC2") || (oldLexicon && (oldcode == "EP2")))
 				{
 					mapset = "epic2";
+					bigNumbers = mGloryTagHUDFont;
 				}
 				
 				// Garrulismo
