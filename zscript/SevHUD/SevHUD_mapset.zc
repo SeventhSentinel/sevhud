@@ -151,11 +151,14 @@ extend class SevHUD
 				bigNumbers = mCShock2HUDFont;
 			}
 
-			// Community Chest 4
-			if (checksum == "3355243e43c274b92046a4c89a7f52fd")
+			// Community Chest series
+			if ((checksum == "22f16de0bb582d810555f94e146de781") ||	// 1
+			(checksum == "3a29c1f8d722079d1a6acf06fc6a1349") ||		// 2
+			(checksum == "8f2a070bca0f049af7ab2145f6e968e1") ||		// 3
+			(checksum == "3355243e43c274b92046a4c89a7f52fd"))		// 4
 			{
-				mapset = "cchest4";
-				bigNumbers = mCChest4HUDFont;
+				mapset = "cchest";
+				bigNumbers = mCChestHUDFont;
 				littlenumbers = mGloryTagIndexFont;			
 			}
 
@@ -414,10 +417,9 @@ extend class SevHUD
 		if (LevelInfo.MapExists("VR"))
 		{
 			checksum = LevelInfo.MapChecksum("VR");
-			// old Lexicon
-			if ((checksum == "47b55a4612b6c2891607c52a39ea62ef") ||
-			// new Lexicon
-			(checksum == "aa902408089a20d7b751bf4c4afc7db6"))
+			if ((checksum == "47b55a4612b6c2891607c52a39ea62ef") ||	// old Lexicon
+			(checksum == "aa902408089a20d7b751bf4c4afc7db6") ||		// new, RC1
+			(checksum == "5d3242e1aca7076e84e71cdb5436e86a"))		// new, dev
 			{
 				if (checksum == "47b55a4612b6c2891607c52a39ea62ef")
 					oldLexicon = true;
@@ -503,11 +505,11 @@ extend class SevHUD
 					bigNumbers = mCShock2HUDFont;
 				}
 
-				// Community Chest 4
-				if (mapcode == "CCH4")
+				// Community Chest series
+				if ((mapcode == "CCH1") || (mapcode == "CCH2") || (mapcode == "CCH3") || (mapcode == "CCH4"))
 				{
-					mapset = "cchest4";
-					bigNumbers = mCChest4HUDFont;
+					mapset = "cchest";
+					bigNumbers = mCChestHUDFont;
 					littlenumbers = mGloryTagIndexFont;			
 				}
 
