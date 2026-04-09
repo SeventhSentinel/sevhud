@@ -25,6 +25,16 @@ OPTMNU_SEVHUD_UPDATE = "Check for updates at https://seventhsentinel.net/sevhud/
 OPTMNU_SEVHUD_SHILL = "Check out Snap the Sentinel at https://snapgame.net!";
 
 
+// Error messages
+
+SEVHUD_VERSION_MISMATCH_1 = "\cgWarning:\cj Version Mismatch\c-";
+SEVHUD_VERSION_MISMATCH_2 = "\cjPlease download the latest SevHUD at\c-";
+SEVHUD_VERSION_MISMATCH_3 = "\cngithub.com/SeventhSentinel/sevhud\c-";
+SEVHUD_VERSION_MISMATCH_4 = "\cn/releases/latest\c-";
+SEVHUD_VERSION_MISMATCH_5 = "\cjand the latest The Sentinel's Lexicon at\c-";
+SEVHUD_VERSION_MISMATCH_6 = "\cngithub.com/Mythotic-Tinker-Station/lexicon\c-";
+
+
 // Enemy strings
 
 // Chex

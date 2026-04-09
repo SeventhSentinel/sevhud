@@ -826,7 +826,7 @@ extend class SevHUD
 				// DEBUG: Force pester about outdated version in test map
 				if (curmap == "sevhud")
 				{
-					mapset = "old-lexicon";
+					mapset = "version-mismatch";
 				}
 			}
 		}

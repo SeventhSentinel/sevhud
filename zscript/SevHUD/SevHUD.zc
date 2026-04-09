@@ -1708,11 +1708,11 @@ class SevHUD : DoomStatusBar
 		int lump;
 
 		// DrawMainBar
+		HUDFont fnt = mHUDSmallFont;
+		int fontHeight = fnt.mFont.GetHeight();
 		if (automapactive)
 		{
 			// Map label/name
-			HUDFont fnt = mHUDSmallFont;
-			int fontHeight = fnt.mFont.GetHeight();
 
 			string maplabel = "";
 			string mapname = "";
@@ -1744,9 +1744,21 @@ class SevHUD : DoomStatusBar
 			return;
 		
 		// Pester people still running old Lexicon
-		if (mapset == "old-lexicon")
+		if (mapset == "version-mismatch")
 		{
-			DrawImage(filepath.."st_bar.png", (0, 168), DI_ITEM_OFFSETS);
+			string txt1 = Stringtable.Localize("$SEVHUD_VERSION_MISMATCH_1");
+			string txt2 = Stringtable.Localize("$SEVHUD_VERSION_MISMATCH_2");
+			string txt3 = Stringtable.Localize("$SEVHUD_VERSION_MISMATCH_3");
+			string txt4 = Stringtable.Localize("$SEVHUD_VERSION_MISMATCH_4");
+			string txt5 = Stringtable.Localize("$SEVHUD_VERSION_MISMATCH_5");
+			string txt6 = Stringtable.Localize("$SEVHUD_VERSION_MISMATCH_6");
+			DrawString(fnt, txt1, (160, 100-(fontHeight*7)), DI_TEXT_ALIGN_CENTER);
+			DrawString(fnt, txt2, (160, 100-(fontHeight*6)), DI_TEXT_ALIGN_CENTER);
+			DrawString(fnt, txt3, (160, 100-(fontHeight*5)), DI_TEXT_ALIGN_CENTER);
+			DrawString(fnt, txt4, (160, 100-(fontHeight*4)), DI_TEXT_ALIGN_CENTER);
+			DrawString(fnt, txt5, (160, 100-(fontHeight*3)), DI_TEXT_ALIGN_CENTER);
+			DrawString(fnt, txt6, (160, 100-(fontHeight*2)), DI_TEXT_ALIGN_CENTER);
+			DrawString(fnt, txt4, (160, 100-fontHeight), DI_TEXT_ALIGN_CENTER);
 			return;
 		}
 
