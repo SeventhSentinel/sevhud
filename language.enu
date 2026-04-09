@@ -93,6 +93,23 @@ ENEMY_DOOM2_KEEN = "Commander Keen";
 
 ENEMY_400MINVR_UFO = "UFO";
 
+ENEMY_AALIENS_HEAVY = "Illegal Alien";
+ENEMY_AALIENS_CACO = "Alien UFO";
+ENEMY_AALIENS_PAIN = "Alien :(";
+ENEMY_AALIENS_HELL = "Little Green Alien";
+ENEMY_AALIENS_LOST = "Alien Invader";
+ENEMY_AALIENS_REVEN = "Gray Alien";
+ENEMY_AALIENS_DEMON = "Amphibian Alien";
+ENEMY_AALIENS_SPECTRE = "Sneaky Alien";
+ENEMY_AALIENS_IMP = "An Alien";
+ENEMY_AALIENS_ZOMBIE = "A Alien";
+ENEMY_AALIENS_SPIDER = "Alien Queen";
+ENEMY_AALIENS_MANCU = "Alien Pastry Chef";
+ENEMY_AALIENS_SARGE = "Alien Sympathizer";
+ENEMY_AALIENS_ARACH = "Robo-Alien";
+ENEMY_AALIENS_ARCH = "Reptilian Alien";
+ENEMY_AALIENS_BARON = "Big Green Alien";
+ENEMY_AALIENS_CYBIE = "Xenu, Alien Emperor";
 ENEMY_AALIENS_ALIENGUARDIAN = "Alien Guardian";
 ENEMY_AALIENS_PLASMAALIEN = "Stealth Plasma Alien";
 

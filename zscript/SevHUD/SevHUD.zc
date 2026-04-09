@@ -16,6 +16,7 @@ class SevHUD : DoomStatusBar
 	double healthBarAlpha;
 	bool dontdrawnames;
 	int normalTxtColor;
+	int nameTxtColor;
 	
 	// Mapset
 	bool gotchecksum;
@@ -872,8 +873,59 @@ class SevHUD : DoomStatusBar
 					txt = "$ENEMY_400MINVR_UFO";
 			}
 
-			if (mapset == "aaliens")
+			if ((mapset == "aaliens") || (mapset == "aalienslexicon"))
 			{
+				if (classtype == "zombie")
+					txt = "$ENEMY_AALIENS_ZOMBIE";
+
+				if (classtype == "sarge")
+					txt = "$ENEMY_AALIENS_SARGE";
+
+				if (classtype == "chain")
+					txt = "$ENEMY_AALIENS_HEAVY";
+
+				if (classtype == "imp")
+					txt = "$ENEMY_AALIENS_IMP";
+
+				if (classtype == "pinkie")
+					txt = "$ENEMY_AALIENS_DEMON";
+
+				if (classtype == "spectre")
+					txt = "$ENEMY_AALIENS_SPECTRE";
+
+				if (classtype == "caco")
+					txt = "$ENEMY_AALIENS_CACO";
+
+				if (classtype == "painelemental")
+					txt = "$ENEMY_AALIENS_PAIN";
+
+				if (classtype == "knight")
+					txt = "$ENEMY_AALIENS_HELL";
+
+				if (classtype == "baron")
+					txt = "$ENEMY_AALIENS_BARON";
+
+				if (classtype == "lostsoul")
+					txt = "$ENEMY_AALIENS_LOST";
+
+				if (classtype == "rev")
+					txt = "$ENEMY_AALIENS_REVEN";
+
+				if (classtype == "fatso")
+					txt = "$ENEMY_AALIENS_MANCU";
+
+				if (classtype == "mastermind")
+					txt = "$ENEMY_AALIENS_SPIDER";
+
+				if (classtype == "vile")
+					txt = "$ENEMY_AALIENS_ARCH";
+
+				if (classtype == "arach")
+					txt = "$ENEMY_AALIENS_ARACH";
+
+				if (classtype == "cybie")
+					txt = "$ENEMY_AALIENS_CYBIE";
+
 				if (classtype == "keen")
 					txt = "$ENEMY_AALIENS_ALIENGUARDIAN";
 
@@ -1289,7 +1341,7 @@ class SevHUD : DoomStatusBar
 
 			// get font colours
 			// normalTxtColor is handled in SevHUD_mapset.zc, default red
-			int nameTxtColor = Font.CR_WHITE;
+			// nameTxtColor is handled in SevHUD_mapset.zc, default white
 
 			// Draw target name
 			Screen.DrawText(fnt, nameTxtColor,

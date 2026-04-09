@@ -22,6 +22,7 @@ extend class SevHUD
 		littleNumbers = mDefaultIndexFont;
 		basefilepath = "graphics/SevHUD/";
 		normalTxtColor = Font.CR_RED;
+		nameTxtColor = Font.CR_WHITE;
 		
 		// Graphic offsets don't work for drawing bars, so we'll add them here instead
 		invuloffset = (0, 0);
@@ -385,6 +386,14 @@ extend class SevHUD
 			if (checksum == "c1574566a9b7eca114e55178dfb64cb9")
 			{
 				mapset = "sd20x7";
+				normalTxtColor = Font.CR_PURPLE;
+			}
+			
+			// Sunlust
+			if (checksum == "56f7ec7f82136186fd133d644d36c28d")
+			{
+				mapset = "sunlust";
+				normalTxtColor = Font.CR_UNTRANSLATED;
 			}
 			
 			// TWANGO1
@@ -413,6 +422,15 @@ extend class SevHUD
 			if (checksum == "cb8e6a80f7f4f13f5ad0a334ca6c1a66")
 			{
 				mapset = "valiant";
+				nameTxtColor = Font.CR_UNTRANSLATED;
+			}
+			
+			// Valiant Vaxx'd
+			if (checksum == "ef1f9c78fd1018594aa2b4d079b5a891")
+			{
+				mapset = "valiantve";
+				nameTxtColor = Font.CR_UNTRANSLATED;
+				normalTxtColor = Font.CR_UNTRANSLATED;	// Still red, but easier to read
 			}
 			
 			// Vanguard
@@ -479,7 +497,7 @@ extend class SevHUD
 				// Ancient Aliens
 				if ((mapcode == "AALI") || (oldLexicon && (oldcode == "AA1")))
 				{
-					mapset = "aaliens";
+					mapset = "aalienslexicon";
 					bigNumbers = mAaliensHUDFont;
 					littleNumbers = mAaliensIndexFont;
 				}
@@ -769,6 +787,7 @@ extend class SevHUD
 				{
 					mapset = "sd20x7";
 					littlenumbers = mSD20X7IndexFont;
+					normalTxtColor = Font.CR_PURPLE;
 				}
 				
 				// Sunlust
@@ -777,6 +796,7 @@ extend class SevHUD
 					mapset = "sunlust";
 					bigNumbers = mSunlustHUDFont;
 					littlenumbers = mSunlustIndexFont;
+					normalTxtColor = Font.CR_ORANGE;
 				}
 				
 				// TWANGO1
