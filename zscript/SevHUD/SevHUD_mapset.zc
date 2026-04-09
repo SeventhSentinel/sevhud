@@ -162,7 +162,7 @@ extend class SevHUD
 			(checksum == "3355243e43c274b92046a4c89a7f52fd"))		// 4
 			{
 				mapset = "cchest";
-				bigNumbers = mCChestHUDFont;
+				bigNumbers = mRequiemHUDFont;
 				littlenumbers = mGloryTagIndexFont;			
 			}
 
@@ -344,13 +344,14 @@ extend class SevHUD
 				mapset = "pl2";
 			}
 			
-			// Return to Hadron (Ultimate)
-			if (checksum == "41411a0082b8017035188cb711af61fc")
+			// Requiem
+			if (checksum == "5052c313953175798ad9f6933737f5aa")
 			{
-				mapset = "uhadron";
-				bigNumbers = mPGResurgeHUDFont;				
+				mapset = "requiem";
+				bigNumbers = mRequiemHUDFont;
+				littlenumbers = mGloryTagIndexFont;			
 			}
-
+			
 			// Scythe 2
 			if ((checksum == "009855039a4557f5f293b70c5232d473") ||
 			(checksum == "b1228d5758ad1a5a86df6264e71bfa83"))	// Support for my personal Scythe 2 patch; if you're reading this don't ask me for it
@@ -533,7 +534,7 @@ extend class SevHUD
 				if ((mapcode == "CCH1") || (mapcode == "CCH2") || (mapcode == "CCH3") || (mapcode == "CCH4"))
 				{
 					mapset = "cchest";
-					bigNumbers = mCChestHUDFont;
+					bigNumbers = mRequiemHUDFont;
 					littlenumbers = mGloryTagIndexFont;			
 				}
 
@@ -703,6 +704,14 @@ extend class SevHUD
 				{
 					mapset = "pg-resurge";
 					bigNumbers = mPGResurgeHUDFont;
+				}
+				
+				// Requiem
+				if (mapcode == "REQU")
+				{
+					mapset = "requiem";
+					bigNumbers = mRequiemHUDFont;
+					littlenumbers = mGloryTagIndexFont;			
 				}
 				
 				// Scythe 2

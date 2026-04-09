@@ -199,21 +199,6 @@ BTSX3IndexFont
 	9 "graphics/SevHUD/btsx3/st_ynum9.png"
 }
 
-CChestHUDFont
-{
-	0 "graphics/SevHUD/cchest/st_num0.png"
-	1 "graphics/SevHUD/cchest/st_num1.png"
-	2 "graphics/SevHUD/cchest/st_num2.png"
-	3 "graphics/SevHUD/cchest/st_num3.png"
-	4 "graphics/SevHUD/cchest/st_num4.png"
-	5 "graphics/SevHUD/cchest/st_num5.png"
-	6 "graphics/SevHUD/cchest/st_num6.png"
-	7 "graphics/SevHUD/cchest/st_num7.png"
-	8 "graphics/SevHUD/cchest/st_num8.png"
-	9 "graphics/SevHUD/cchest/st_num9.png"
-	- "graphics/SevHUD/cchest/st_minus.png"
-}
-
 ChexIndexFont
 {
 	0 "graphics/SevHUD/chex/st_ynum0.png"
@@ -662,6 +647,21 @@ PGResurgeHUDFont
 	8 "graphics/SevHUD/pg-resurge/st_num8.png"
 	9 "graphics/SevHUD/pg-resurge/st_num9.png"
 	- "graphics/SevHUD/pg-resurge/st_minus.png"
+}
+
+RequiemHUDFont
+{
+	0 "graphics/SevHUD/requiem/st_num0.png"
+	1 "graphics/SevHUD/requiem/st_num1.png"
+	2 "graphics/SevHUD/requiem/st_num2.png"
+	3 "graphics/SevHUD/requiem/st_num3.png"
+	4 "graphics/SevHUD/requiem/st_num4.png"
+	5 "graphics/SevHUD/requiem/st_num5.png"
+	6 "graphics/SevHUD/requiem/st_num6.png"
+	7 "graphics/SevHUD/requiem/st_num7.png"
+	8 "graphics/SevHUD/requiem/st_num8.png"
+	9 "graphics/SevHUD/requiem/st_num9.png"
+	- "graphics/SevHUD/requiem/st_minus.png"
 }
 
 Scythe2HUDFont

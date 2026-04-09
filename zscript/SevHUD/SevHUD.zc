@@ -58,8 +58,6 @@ class SevHUD : DoomStatusBar
 	HUDFont mBTSX2IndexFont;
 	HUDFont mBTSX3IndexFont;
 	
-	HUDFont mCChestHUDFont;
-
 	HUDFont mClau1024HUDFont;
 	HUDFont mClau1024IndexFont;
 	
@@ -110,6 +108,8 @@ class SevHUD : DoomStatusBar
 	
 	HUDFont mPGResurgeHUDFont;
 	
+	HUDFont mRequiemHUDFont;
+
 	HUDFont mScythe2HUDFont;
 
 	HUDFont mSD20X7IndexFont;
@@ -181,8 +181,6 @@ class SevHUD : DoomStatusBar
 		mBTSX2IndexFont = HUDFont.Create("BTSX2IndexFont");
 		mBTSX3IndexFont = HUDFont.Create("BTSX3IndexFont");
 		
-		mCChestHUDFont = HUDFont.Create("CChestHUDFont", 14, Mono_CellLeft, 1, 1);
-
 		mClau1024HUDFont = HUDFont.Create("Clau1024HUDFont", 14, Mono_CellLeft, 1, 1);
 		mClau1024IndexFont = HUDFont.Create("Clau1024IndexFont");
 		
@@ -233,6 +231,8 @@ class SevHUD : DoomStatusBar
 
 		mPGResurgeHUDFont = HUDFont.Create("PGResurgeHUDFont", 13, Mono_CellLeft, 1, 1);
 		
+		mRequiemHUDFont = HUDFont.Create("RequiemHUDFont", 14, Mono_CellLeft, 1, 1);
+
 		mScythe2HUDFont = HUDFont.Create("Scythe2HUDFont", 14, Mono_CellLeft, 1, 1);
 
 		mSD20X7IndexFont = HUDFont.Create("SD20X7IndexFont");
