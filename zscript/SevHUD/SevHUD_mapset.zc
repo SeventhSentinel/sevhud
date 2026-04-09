@@ -21,6 +21,7 @@ extend class SevHUD
 		bigNumbers = mHUDFont;
 		littleNumbers = mDefaultIndexFont;
 		basefilepath = "graphics/SevHUD/";
+		normalTxtColor = Font.CR_RED;
 		
 		// Graphic offsets don't work for drawing bars, so we'll add them here instead
 		invuloffset = (0, 0);
@@ -120,6 +121,7 @@ extend class SevHUD
 				mapset = "btsx1";
 				powerups = "doom";
 				littleNumbers = mBTSX1IndexFont;
+				normalTxtColor = Font.CR_UNTRANSLATED;
 			}
 
 			// BTSX ep 2
@@ -128,6 +130,7 @@ extend class SevHUD
 				mapset = "btsx2";
 				powerups = "doom";
 				littleNumbers = mBTSX2IndexFont;
+				normalTxtColor = Font.CR_UNTRANSLATED;
 			}
 
 			// BTSX ep 3 preview
@@ -136,6 +139,7 @@ extend class SevHUD
 				mapset = "btsx3";
 				powerups = "doom";
 				littleNumbers = mBTSX3IndexFont;
+				normalTxtColor = Font.CR_UNTRANSLATED;
 			}
 			
 			// Claustrophobia 1024

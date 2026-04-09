@@ -15,6 +15,7 @@ class SevHUD : DoomStatusBar
 	Actor prevAimTarget;
 	double healthBarAlpha;
 	bool dontdrawnames;
+	int normalTxtColor;
 	
 	// Mapset
 	bool gotchecksum;
@@ -1213,7 +1214,15 @@ class SevHUD : DoomStatusBar
 			baseYPos += fnt.GetHeight();
 
 			// draw HP bar background and border
-			let brdTex = TexMan.CheckForTexture("graphics/SevHUD/HPBarBorder.png");
+			int lump;
+			string img;
+			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/hp_border.png");
+			if (lump >= 0)
+				img = basefilepath..mapset.."/hp_border.png";
+			else
+				img = basefilepath.."standard/hp_border.png";
+
+			let brdTex = TexMan.CheckForTexture(img);
 			if (brdTex.IsValid())
 			{
 				Vector2 brdTexSize = TexMan.GetScaledSize(brdTex);
@@ -1225,7 +1234,13 @@ class SevHUD : DoomStatusBar
 					DTA_Alpha, healthBarAlpha);
 			}
 
-			let bgTex = TexMan.CheckForTexture("graphics/SevHUD/HPBarShade.png");
+			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/hp_back.png");
+			if (lump >= 0)
+				img = basefilepath..mapset.."/hp_back.png";
+			else
+				img = basefilepath.."standard/hp_back.png";
+
+			let bgTex = TexMan.CheckForTexture(img);
 			if (bgTex.IsValid())
 			{
 				Vector2 bgTexSize = TexMan.GetScaledSize(bgTex);
@@ -1238,7 +1253,13 @@ class SevHUD : DoomStatusBar
 			}
 
 			// draw health bar
-			let barTex = TexMan.CheckForTexture("graphics/SevHUD/HPBarHealth.png");
+			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/hp_bar.png");
+			if (lump >= 0)
+				img = basefilepath..mapset.."/hp_bar.png";
+			else
+				img = basefilepath.."standard/hp_bar.png";
+
+			let barTex = TexMan.CheckForTexture(img);
 			if (barTex.IsValid())
 			{
 				Vector2 barTexSize = TexMan.GetScaledSize(barTex);
@@ -1266,7 +1287,7 @@ class SevHUD : DoomStatusBar
 			}
 
 			// get font colours
-			int normalTxtColor = Font.CR_RED;
+			// normalTxtColor is handled in SevHUD_mapset.zc, default red
 			int nameTxtColor = Font.CR_WHITE;
 
 			// Draw target name
