@@ -114,6 +114,7 @@ extend class SevHUD
 				mapset = "bloodspeed";
 				bigNumbers = mBloodspeedHUDFont;
 				littleNumbers = mBloodspeedIndexFont;
+				nameTxtColor = Font.CR_GOLD;
 			}
 
 			// BTSX ep 1
@@ -332,6 +333,7 @@ extend class SevHUD
 			{
 				mapset = "piratedoom2";
 				powerups = mapset;
+				nameTxtColor = Font.CR_ORANGE;
 				radsuitoffset = (-15, 1);
 			}
 
@@ -409,6 +411,7 @@ extend class SevHUD
 			{
 				mapset = "uacultra";
 				bigNumbers = mUACUltraHUDFont;
+				nameTxtColor = Font.CR_ORANGE;
 			}
 			
 			// UDMX
@@ -429,7 +432,7 @@ extend class SevHUD
 			if (checksum == "ef1f9c78fd1018594aa2b4d079b5a891")
 			{
 				mapset = "valiantve";
-				nameTxtColor = Font.CR_UNTRANSLATED;
+				nameTxtColor = Font.CR_UNTRANSLATED;	// Still red, but easier to read
 				normalTxtColor = Font.CR_UNTRANSLATED;	// Still red, but easier to read
 			}
 			
@@ -508,6 +511,7 @@ extend class SevHUD
 					mapset = "bloodspeed";
 					bigNumbers = mBloodspeedHUDFont;
 					littleNumbers = mBloodspeedIndexFont;
+					nameTxtColor = Font.CR_GOLD;
 				}
 				
 				// BTSX Episode 1 (old Lexicon)
@@ -812,6 +816,7 @@ extend class SevHUD
 				{
 					mapset = "uacultra";
 					bigNumbers = mUACUltraHUDFont;
+					nameTxtColor = Font.CR_ORANGE;
 				}
 				
 				// Ultimate Doom in Name Only
