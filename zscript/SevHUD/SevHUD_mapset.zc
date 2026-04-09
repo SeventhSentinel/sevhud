@@ -227,6 +227,13 @@ extend class SevHUD
 				mapset = "eviternity2";
 			}
 			
+			// Firefly
+			if (checksum == "0b904ff09f74101c5d0c5ee0b0e247d4")
+			{
+				mapset = "firefly";
+				normalTxtColor = Font.CR_ORANGE;
+			}
+			
 			// Going Down
 			if ((checksum == "1dfcba1353e9bbf720f17639f294490d") ||
 			// Going Down Turbo
@@ -262,6 +269,12 @@ extend class SevHUD
 				bigNumbers = mHellboundHUDFont;
 			}
 			
+			// Interception
+			if (checksum == "f28c65cfa8d0baadef2918ac996d83bb")
+			{
+				mapset = "interception";
+			}
+			
 			// IPXMatch
 			if (checksum == "1cb2f5d140cc0974cbc24427addd1dc0")
 			{
@@ -276,6 +289,12 @@ extend class SevHUD
 				littlenumbers = mJenesisIndexFont;
 			}
 			
+			// Jiffy Bag
+			if (checksum == "9478d8f91efc7548a7d607d011c28a57")
+			{
+				mapset = "jiffybag";
+			}
+
 			// Legacy of Rust
 			// Despite the map label saying it's E1M1, it is in fact MAP01
 			if (checksum == "bf34c34c5dfc8bb47228cc304f9a6748")
@@ -289,6 +308,7 @@ extend class SevHUD
 				mapset = "lostcivilization";		
 				bigNumbers = mLostCivHUDFont;
 				littlenumbers = mLostCivIndexFont;
+				normalTxtColor = Font.CR_GREEN;
 			}
 			
 			// NeoDoom Vaccinated
@@ -604,6 +624,12 @@ extend class SevHUD
 					bigNumbers = mHellboundHUDFont;
 				}
 				
+				// Interception
+				if (mapcode == "ITC1")
+				{
+					mapset = "interception";
+				}
+				
 				// IPXMatch
 				if (mapcode == "IPXM")
 				{
@@ -619,6 +645,12 @@ extend class SevHUD
 					littleNumbers = mJenesisIndexFont;
 				}
 
+				// Jiffy Bag
+				if (mapcode == "JFBG")
+				{
+					mapset = "jiffybag";
+				}
+
 				// Last Day On Earth
 				if (mapcode == "LDOE")
 				{
@@ -632,6 +664,7 @@ extend class SevHUD
 					mapset = "lostcivilization";		
 					bigNumbers = mLostCivHUDFont;
 					littlenumbers = mLostCivIndexFont;
+					normalTxtColor = Font.CR_GREEN;
 				}
 				
 				// NeoDoom Vaccinated

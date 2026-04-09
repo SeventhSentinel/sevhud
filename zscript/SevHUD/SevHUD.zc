@@ -1213,27 +1213,9 @@ class SevHUD : DoomStatusBar
 			baseYPos /= CleanYFac;
 			baseYPos += fnt.GetHeight();
 
-			// draw HP bar background and border
+			// draw background
 			int lump;
 			string img;
-			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/hp_border.png");
-			if (lump >= 0)
-				img = basefilepath..mapset.."/hp_border.png";
-			else
-				img = basefilepath.."standard/hp_border.png";
-
-			let brdTex = TexMan.CheckForTexture(img);
-			if (brdTex.IsValid())
-			{
-				Vector2 brdTexSize = TexMan.GetScaledSize(brdTex);
-				Screen.DrawTexture(brdTex, false,
-					(Screen.GetWidth() / 2) - ((brdTexSize.X / 2) * CleanXFac),
-					(baseYPos * CleanYFac),
-					DTA_CleanNoMove, true,
-					DTA_KeepRatio, true,
-					DTA_Alpha, healthBarAlpha);
-			}
-
 			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/hp_back.png");
 			if (lump >= 0)
 				img = basefilepath..mapset.."/hp_back.png";
@@ -1281,6 +1263,25 @@ class SevHUD : DoomStatusBar
 					(Screen.GetWidth() / 2) - ((barTexSize.X / 2) * CleanXFac),
 					(baseYPos * CleanYFac),
 					DTA_ClipRight, int(clipX),
+					DTA_CleanNoMove, true,
+					DTA_KeepRatio, true,
+					DTA_Alpha, healthBarAlpha);
+			}
+
+			// draw HP bar border
+			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/hp_border.png");
+			if (lump >= 0)
+				img = basefilepath..mapset.."/hp_border.png";
+			else
+				img = basefilepath.."standard/hp_border.png";
+
+			let brdTex = TexMan.CheckForTexture(img);
+			if (brdTex.IsValid())
+			{
+				Vector2 brdTexSize = TexMan.GetScaledSize(brdTex);
+				Screen.DrawTexture(brdTex, false,
+					(Screen.GetWidth() / 2) - ((brdTexSize.X / 2) * CleanXFac),
+					(baseYPos * CleanYFac),
 					DTA_CleanNoMove, true,
 					DTA_KeepRatio, true,
 					DTA_Alpha, healthBarAlpha);
