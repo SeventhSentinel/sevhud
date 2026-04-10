@@ -18,6 +18,14 @@ OptionValue "SevHUD_Counts"
 	1, "$OPTMNU_SEVHUD_EXTRA_COUNTS"
 }
 
+OptionValue "SevHUD_HideStealthHPBars"
+{
+	0, "$OPTVAL_NEVER"
+	1, "$OPTMNU_SEVHUD_HP_BAR_HIDE_STEALTH_SOMETIMES"
+	2, "$OPTVAL_ALWAYS"
+}
+
+
 OptionMenu "SevHUDOptionMenu"
 {
 	Title "$OPTMNU_SEVHUD"
@@ -44,6 +52,7 @@ OptionMenu "SevHUDOptionMenu"
 	StaticText "$OPTMNU_SEVHUD_HP_BAR_MIN_DESC_A"
 	StaticText "$OPTMNU_SEVHUD_HP_BAR_MIN_DESC_B"
 	TextField "$OPTMNU_SEVHUD_HP_BAR_MIN", "sevhud_hpbar_min", "sevhud_hpbar", 0
+	Option "$OPTMNU_SEVHUD_HP_BAR_HIDE_STEALTH", "sevhud_hpbar_hidestealth", "SevHUD_HideStealthHPBars"
 	StaticText ""
 	StaticText "$OPTMNU_SEVHUD_UPDATE"
 	StaticText ""

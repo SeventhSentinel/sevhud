@@ -752,6 +752,27 @@ class SevHUD : DoomStatusBar
 			string classtype;
 			bool shadowed = prevAimTarget.bShadow;
 			
+			// Hide stealth monster HP bars
+			int hidestealth = CVar.GetCVar("sevhud_hpbar_hidestealth", CPlayer).GetInt();
+			if (hidestealth > 0)
+			{
+				if (shadowed == true)
+				{
+					// Always hide
+					if (hidestealth > 1)
+					{
+						return;
+					}
+					else
+					// Hide if full health -- lets them sneak up on ya
+					{
+						if (health == maxHealth)
+							return;
+					}
+				}
+			}
+			
+			
 			if (!(mapset == "standard"))
 			{
 				if (prevAimTarget is "Zombieman")
