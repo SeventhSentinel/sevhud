@@ -1860,7 +1860,13 @@ class SevHUD : DoomStatusBar
 			if (lump >= 0)
 				DrawImage(filepath.."st_barfuel.png", (0, 168), DI_ITEM_OFFSETS);
 			else
+			{
+			lump = Wads.CheckNumForFullName(filepath.."st_bar.png");
+			if (lump >= 0)
+				DrawImage(filepath.."st_bar.png", (0, 168), DI_ITEM_OFFSETS);
+			else
 				DrawImage(basefilepath.."standard/st_barfuel.png", (0, 168), DI_ITEM_OFFSETS);
+			}
 		}
 
 		if (CVar.GetCVar("sevhud_extra", CPlayer).GetBool())
