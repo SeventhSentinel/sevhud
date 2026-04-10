@@ -1,7 +1,0 @@
-Are you a mod that wants to check if SevHUD is loaded?
-
-If so, check if this lump exists!
-
-Not sure who would need this, but here you go!
-
-Play Snap the Sentinel!
