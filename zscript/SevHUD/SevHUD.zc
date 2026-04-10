@@ -751,12 +751,13 @@ class SevHUD : DoomStatusBar
 			
 			string classtype;
 			bool shadowed = prevAimTarget.bShadow;
+			bool stealthed = prevAimTarget.bStealth;
 			
 			// Hide stealth monster HP bars
 			int hidestealth = CVar.GetCVar("sevhud_hpbar_hidestealth", CPlayer).GetInt();
 			if (hidestealth > 0)
 			{
-				if (shadowed == true)
+				if ((shadowed == true) || (stealthed == true))
 				{
 					// Always hide
 					if (hidestealth > 1)
