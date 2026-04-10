@@ -15,11 +15,13 @@
 - DWANGO2, 3, 4, 5, 6, 7, 10, 11, 12, !, X, 20th Anniversary
 - Epic 2
 - Eviternity 1 & 2
+- Firefly
 - Garrulismo
 - Gridlock 64
 - Hadephobia
 - Haste
 - Hellbound
+- Interception
 - IPXMatch
 - Jenesis
 - Last Day On Earth (2000)
