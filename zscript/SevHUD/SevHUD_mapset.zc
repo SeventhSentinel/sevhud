@@ -17,6 +17,7 @@ extend class SevHUD
 	{
 		// Set defaults
 		mapset = "standard";
+		useFuel = false;
 		powerups = "standard";
 		bigNumbers = mHUDFont;
 		littleNumbers = mDefaultIndexFont;
@@ -76,6 +77,14 @@ extend class SevHUD
 			// I don't think it does, but I already got the checksum, so here ya go
 			(checksum == "f27e523702be6c2d14b2e83983af218a"))
 				mapset = "alienstc";
+		}
+		
+		// Legacy of Rust (WadFusion)
+		int lump;
+		lump = Wads.CheckNumForFullName("wadfused.txt");		//  WadFusion check
+		if ((lump >= 0) && (level.Mapname.Left(6) == "LR_MAP"))	// if in WadFusion and in an LoR map
+		{
+			mapset = "legacyofrust";
 		}
 
 		if (LevelInfo.MapExists("MAP01"))
@@ -302,6 +311,7 @@ extend class SevHUD
 			if (checksum == "bf34c34c5dfc8bb47228cc304f9a6748")
 			{
 				mapset = "legacyofrust";
+				useFuel = true;
 			}
 			
 			// Lost Civilization
