@@ -27,7 +27,6 @@ class SevHUD : DoomStatusBar
 	HUDFont littleNumbers;
 	HUDFont statNumbers;
 	string powerups;
-	bool oldLexicon;
 	
 	vector2 invuloffset;
 	vector2 lightampoffset;
@@ -1205,68 +1204,6 @@ class SevHUD : DoomStatusBar
 			{
 				if (classtype == "wolfss")
 					txt = "$ENEMY_UACULTRA_HAYMAKER";
-			}
-
-			// Old Lexicon has replacements for vanilla enemies
-			// Which is frankly quite weird considering they're the same as
-			// the vanilla enemies
-			if (oldLexicon == true)
-			{
-				if (txt == "LZombieMan")
-					txt = "$CC_ZOMBIE";
-
-				if (txt == "LShotgunGuy")
-					txt = "$FN_SHOTGUN";
-
-				if (txt == "LChaingunGuy")
-					txt = "$FN_HEAVY";
-
-				if (txt == "LDoomImp")
-					txt = "$CC_IMP";
-
-				if (txt == "LDemon")
-					txt = "$CC_DEMON";
-
-				if (txt == "LSpectre")
-					txt = "$FN_SPECTRE";
-
-				if (txt == "LLostSoul")
-					txt = "$CC_LOST";
-
-				if (txt == "LCacodemon")
-					txt = "$CC_CACO";
-
-				if (txt == "LBaronOfHell")
-					txt = "$CC_BARON";
-
-				// They just fucked the tag on this one, this is the best I can do
-				// When new Lexicon properly releases I'm gutting support for the old one lol
-				if ((txt == "Baron of Hell") && (maxHealth == 500))
-					txt = "$CC_HELL";
-
-				if (txt == "LArachnotron")
-					txt = "$CC_ARACH";
-
-				if (txt == "LPainElemental")
-					txt = "$CC_PAIN";
-
-				if (txt == "LRevenant")
-					txt = "$CC_REVEN";
-
-				if (txt == "LFatso")
-					txt = "$CC_MANCU";
-
-				if (txt == "LArchvile")
-					txt = "$CC_ARCH";
-
-				if (txt == "LSpiderMastermind")
-					txt = "$FN_SPIDER";
-
-				if (txt == "LCyberdemon")
-					txt = "$FN_CYBER";
-
-				if (txt == "LWolfensteinSS")
-					txt = "$FN_WOLFSS";
 			}
 			
 			// Fix for standard Doom 2

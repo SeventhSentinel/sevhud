@@ -473,16 +473,10 @@ extend class SevHUD
 		if (LevelInfo.MapExists("VR"))
 		{
 			lump = Wads.CheckNumForFullName("acs/LexGUI.acs");
-			checksum = LevelInfo.MapChecksum("VR");
-			if ((checksum == "47b55a4612b6c2891607c52a39ea62ef") ||	// old Lexicon
-			(lump >= 0))											// new Lexicon
+			if (lump >= 0)
 			{
-				if (checksum == "47b55a4612b6c2891607c52a39ea62ef")
-					oldLexicon = true;
-					
 				string curmap = level.Mapname;
 				string mapcode = curmap.Left(4);
-				string oldcode = curmap.Left(3);
 				
 				// No stbar in VR
 				if (mapcode == "VR")
@@ -499,7 +493,7 @@ extend class SevHUD
 				
 				// Alien Vendetta
 				// Draw Lexicon-specific gfx
-				if ((mapcode == "ALVD") || (oldLexicon && (oldcode.Left(2) == "AV")))
+				if (mapcode == "ALVD")
 				//
 				{
 					mapset = "avlexicon";
@@ -508,7 +502,7 @@ extend class SevHUD
 				}				
 
 				// Ancient Aliens
-				if ((mapcode == "AALI") || (oldLexicon && (oldcode == "AA1")))
+				if (mapcode == "AALI")
 				{
 					mapset = "aalienslexicon";
 					bigNumbers = mAaliensHUDFont;
@@ -523,26 +517,11 @@ extend class SevHUD
 					littleNumbers = mBloodspeedIndexFont;
 					nameTxtColor = Font.CR_GOLD;
 				}
-				
-				// BTSX Episode 1 (old Lexicon)
-				if (oldLexicon && (oldcode == "BX1"))
-				{
-					mapset = "btsx1";
-					powerups = "doom";
-					bigNumbers = mBTSXHUDFont;
-					littleNumbers = mBTSX1IndexFont;
-				}
 
 				// Claustrophobia 1024
 				if ((mapcode == "C242") ||
 				// Claustrophobia 1024 2
-				(mapcode == "C243") ||
-				// old Lexicon
-				(oldLexicon && (
-				// Claustrophobia 1024
-				(oldcode == "TT3") ||
-				// Claustrophobia 1024 2
-				(oldcode == "TT2"))))
+				(mapcode == "C243"))
 				{
 					mapset = "clau1024";
 					bigNumbers = mClau1024HUDFont;
@@ -601,7 +580,7 @@ extend class SevHUD
 				}
 
 				// Epic 2
-				if ((mapcode == "EPC2") || (oldLexicon && (oldcode == "EP2")))
+				if (mapcode == "EPC2")
 				{
 					mapset = "epic2";
 					bigNumbers = mGloryTagHUDFont;
@@ -615,7 +594,7 @@ extend class SevHUD
 				}
 				
 				// Going Down
-				if ((mapcode == "GDWN") || (oldLexicon && (oldcode.Left(2) == "GD")))
+				if (mapcode == "GDWN")
 				{
 					mapset = "goingdown";
 				}
@@ -629,7 +608,7 @@ extend class SevHUD
 				}
 				
 				// Hadephobia
-				if ((mapcode == "HADP") || (oldLexicon && (oldcode == "HPH")))
+				if (mapcode == "HADP")
 				{
 					mapset = "hadephobia";
 					bigNumbers = mHadephobiaHUDFont;
@@ -651,7 +630,7 @@ extend class SevHUD
 				}
 				
 				// Hellbound
-				if (mapcode == "HLBD" || (oldLexicon && (oldcode == "HLB")))
+				if (mapcode == "HLBD")
 				{
 					mapset = "hellbound";
 					bigNumbers = mHellboundHUDFont;
@@ -759,11 +738,6 @@ extend class SevHUD
 					mapset = "scythe2";
 					bigNumbers = mScythe2HUDFont;
 				}
-				if (oldLexicon && (oldcode == "SC2"))
-				// Afrits are Keens in old Lexicon, so let's draw no stbar to discourage playing this way
-				{
-					mapset = "none";
-				}
 				
 				// Slaughterfest 2011
 				if (mapcode == "SF11")
@@ -797,7 +771,7 @@ extend class SevHUD
 				}
 				
 				// Stardate 20X7
-				if (mapcode == "SDX7" || (oldLexicon && (oldcode == "SD7")))
+				if (mapcode == "SDX7")
 				{
 					mapset = "sd20x7";
 					littlenumbers = mSD20X7IndexFont;
@@ -805,7 +779,7 @@ extend class SevHUD
 				}
 				
 				// Sunlust
-				if (mapcode == "SNLU" || (oldLexicon && (oldcode == "SLU")))
+				if (mapcode == "SNLU")
 				{
 					mapset = "sunlust";
 					bigNumbers = mSunlustHUDFont;
@@ -822,7 +796,7 @@ extend class SevHUD
 				}
 				
 				// UAC Ultra
-				if (mapcode == "UACU" || (oldLexicon && (oldcode == "UAC")))
+				if (mapcode == "UACU")
 				{
 					mapset = "uacultra";
 					bigNumbers = mUACUltraHUDFont;
@@ -845,7 +819,7 @@ extend class SevHUD
 				}
 				
 				// Valiant: Vaccinated Edition
-				if (mapcode == "VLNT" || (oldLexicon && (oldcode == "VAL")))
+				if (mapcode == "VLNT")
 				{
 					mapset = "valiantve";
 					bignumbers = mValiantVEHUDFont;
@@ -853,7 +827,7 @@ extend class SevHUD
 				}
 
 				// Vanguard
-				if (mapcode == "VNGD" || (oldLexicon && (oldcode == "VAN")))
+				if (mapcode == "VNGD")
 				{
 					mapset = "vanguard";
 					bigNumbers = mVanguardHUDFont;
@@ -872,6 +846,10 @@ extend class SevHUD
 				{
 					mapset = "version-mismatch";
 				}
+			}
+			else
+			{
+				mapset = "version-mismatch";
 			}
 		}
 
