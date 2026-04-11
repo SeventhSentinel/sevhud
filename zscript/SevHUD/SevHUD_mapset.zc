@@ -472,10 +472,10 @@ extend class SevHUD
 		// Sentinel's Lexicon support
 		if (LevelInfo.MapExists("VR"))
 		{
+			lump = Wads.CheckNumForFullName("acs/LexGUI.acs");
 			checksum = LevelInfo.MapChecksum("VR");
 			if ((checksum == "47b55a4612b6c2891607c52a39ea62ef") ||	// old Lexicon
-			(checksum == "aa902408089a20d7b751bf4c4afc7db6") ||		// new, RC1
-			(checksum == "5d3242e1aca7076e84e71cdb5436e86a"))		// new, dev
+			(lump >= 0))											// new Lexicon
 			{
 				if (checksum == "47b55a4612b6c2891607c52a39ea62ef")
 					oldLexicon = true;
