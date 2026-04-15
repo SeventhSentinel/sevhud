@@ -40,5 +40,6 @@ See [SUPPORT.md](https://github.com/SeventhSentinel/sevhud/blob/master/SUPPORT.m
 
 ### Do you like SevHUD?
 - Feel free to submit contributions!
+- Try my mod that corrects monster blood colors, [SevHUD](https://github.com/SeventhSentinel/cblood-dynamic)!
 - SevHUD is based on work by Nash Muhandes. Consider supporting him on [Patreon](https://www.patreon.com/NashMuhandes), or check out his game, [Disdain](https://store.steampowered.com/app/2113270/DISDAIN/).
 - Check out my game, [Snap the Sentinel](https://store.steampowered.com/app/1739960/Snap_the_Sentinel/)!
