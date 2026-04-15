@@ -26,9 +26,11 @@ extend class SevHUD
 		nameTxtColor = Font.CR_WHITE;
 		
 		// Graphic offsets don't work for drawing bars, so we'll add them here instead
+		allmapoffset = (0, 0);
+		berserkoffset = (0, 0);
+		invisoffset = (0, 0);
 		invuloffset = (0, 0);
 		lightampoffset = (0, 0);
-		invisoffset = (0, 0);
 		radsuitoffset = (0, 0);
 
 		// Grab a map checksum to figure out what mapset we're in
@@ -401,6 +403,26 @@ extend class SevHUD
 				normalTxtColor = Font.CR_PURPLE;
 			}
 			
+			// Super MAYhem '17
+			// TODO: make this one optional
+			if (checksum == "685c150bd4ea2beab227fe1fd78ac434")
+			{
+				mapset = "supermayhem17";
+				bigNumbers = mSMWHUDFont;
+				littlenumbers = mSMWIndexFont;
+				powerups = mapset;
+				berserkoffset = (0, -3);
+				invisoffset = (-1, 0);
+				radsuitoffset = (1, 0);
+			}
+			
+			// Sunder
+			if (checksum == "3c8309ead9332e47e3241abcd11467fd")
+			{
+				mapset = "Sunder";
+				bigNumbers = mNoEndInSightHUDFont;
+			}
+
 			// Sunlust
 			if (checksum == "56f7ec7f82136186fd133d644d36c28d")
 			{
@@ -802,6 +824,19 @@ extend class SevHUD
 					mapset = "sd20x7";
 					littlenumbers = mSD20X7IndexFont;
 					normalTxtColor = Font.CR_PURPLE;
+				}
+				
+				// Super MAYhem '17
+				// TODO: make this one optional
+				if (mapcode == "MY17")
+				{
+					mapset = "supermayhem17";
+					bigNumbers = mSMWHUDFont;
+					littlenumbers = mSMWIndexFont;
+					powerups = mapset;
+					berserkoffset = (0, -3);
+					invisoffset = (-1, 0);
+					radsuitoffset = (1, 0);
 				}
 				
 				// Sunlust
