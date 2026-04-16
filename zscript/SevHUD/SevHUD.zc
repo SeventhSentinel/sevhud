@@ -1127,6 +1127,12 @@ class SevHUD : DoomStatusBar
 					txt = "$ENEMY_LOR_TYRANT";
 			}
 			
+			if (mapset == "lostcivilization")
+			{
+				if (classtype == "wolfss")
+					txt = "$ENEMY_LOSTCIV_SOLDIER";
+			}
+
 			if (mapset == "neodoom")
 			{			
 				if (txt == "FriendlyBabe")
