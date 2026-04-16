@@ -367,6 +367,12 @@ extend class SevHUD
 				littlenumbers = mGloryTagIndexFont;			
 			}
 			
+			// Rowdy Rudy II
+			if (checksum == "88f4ef69b728de1e6e9bcfb3b02400a6")
+			{
+				mapset = "Rudy2";
+			}
+			
 			// Scythe 2
 			if ((checksum == "009855039a4557f5f293b70c5232d473") ||
 			(checksum == "b1228d5758ad1a5a86df6264e71bfa83"))	// Support for my personal Scythe 2 patch; if you're reading this don't ask me for it
@@ -410,6 +416,7 @@ extend class SevHUD
 				mapset = "supermayhem17";
 				bigNumbers = mSMWHUDFont;
 				littlenumbers = mSMWIndexFont;
+				nameTxtColor = Font.CR_UNTRANSLATED;
 				powerups = mapset;
 				berserkoffset = (0, -3);
 				invisoffset = (-1, 0);
@@ -830,7 +837,7 @@ extend class SevHUD
 				// TODO: make this one optional
 				if (mapcode == "MY17")
 				{
-					mapset = "supermayhem17";
+					mapset = "supermayhem17lexicon";
 					bigNumbers = mSMWHUDFont;
 					littlenumbers = mSMWIndexFont;
 					powerups = mapset;

@@ -1180,6 +1180,20 @@ class SevHUD : DoomStatusBar
 					txt = "$ENEMY_SCYTHE2_AFRIT";
 			}
 			
+			if (mapset == "supermayhem17")
+			{
+				if (classtype == "keen")
+					txt = "$ENEMY_SUPERMAYHEM17_KINGKOOPA";
+			}
+				
+			if (mapset == "supermayhem17lexicon")
+			{
+				// Lexicon: don't give the Bowser shell an HP bar
+				// Is this thing even used?
+				if (classtype == "wolfss")
+					return;
+			}
+
 			if (mapset == "valiant")
 			{
 				if (txt == "ValiantImp")

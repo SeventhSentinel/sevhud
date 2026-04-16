@@ -77,12 +77,34 @@ class SevHUDHealthTracer : Inventory
 			currentAimTarget = NULL;
 			return;
 		}
-
+		
 		let at = GetAimTarget(Owner.player.camera);
+		
+		// Mapset specific fixes
+		bool forceHPbar = false;
+		string checksum;
+		
+		if (at)
+		{
+			if (LevelInfo.MapExists("MAP01"))
+			{
+				checksum = LevelInfo.MapChecksum("MAP01");
+				
+				// Super MAYhem '17: Bowser
+				// I wonder why they removed Bowser's CountKill flag in the patch
+				// There must have been a very good reason to do that 🤔
+				if ((checksum == "685c150bd4ea2beab227fe1fd78ac434") && (at.GetMaxHealth(true) == 8000))
+					forceHPbar = true;
+			}
+		}
+
+		
 		bool isLiveTarget = (at && at.bIsMonster) || at is "PlayerPawn" ||
 		// There's a monster in Gridlock 64 that's not flagged as a monster,
 		// so let's throw in anything that can be shot and counts as as a kill
-		(at && at.bSHOOTABLE && at.bCOUNTKILL);
+		(at && at.bSHOOTABLE && at.bCOUNTKILL) ||
+		// Force mapset specific HP bars
+		(at && forceHPbar == true);
 		if (isLiveTarget || at == NULL)
 		{
 			currentAimTarget = at;
