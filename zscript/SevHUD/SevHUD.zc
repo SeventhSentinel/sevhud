@@ -1126,6 +1126,16 @@ class SevHUD : DoomStatusBar
 				if (txt == "Deh_Actor_155")
 					txt = "$ENEMY_LOR_TYRANT";
 			}
+			
+			if (mapset == "neodoom")
+			{			
+				if (txt == "FriendlyBabe")
+					txt = "$NEODOOM_FRIENDLYBABE";
+				
+				// VictoryBabe is not an enemy
+				if ((txt == "VictoryBabe") || (txt == "Lexicon_NEOD_VictoryBabe"))
+					return;
+			}
 
 			if (mapset == "piratedoom")
 			{
