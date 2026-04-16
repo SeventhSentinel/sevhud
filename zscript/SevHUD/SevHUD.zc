@@ -993,6 +993,9 @@ class SevHUD : DoomStatusBar
 			{
 				if (classtype == "wolfss")
 					txt = "$ENEMY_EPIC2_ALIEN";
+
+				if (classtype == "keen")
+					txt = "$ENEMY_EPIC2_KEEN";
 			}
 			
 			if (mapset == "eviternity")
