@@ -1225,6 +1225,12 @@ class SevHUD : DoomStatusBar
 					return;
 			}
 			
+			if (mapset == "teamrocket1")
+			{
+				if (classtype == "keen")
+					txt = "$ENEMY_TEAMROCKET1_KEEN";				
+			}
+			
 			if (mapset == "tvr")
 			{
 				if (classtype == "keen")

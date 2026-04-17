@@ -359,12 +359,6 @@ extend class SevHUD
 				mapset = "pl2";
 			}
 			
-			// Rise of the Triangles
-			if (checksum == "3e4ae2dd71e542923c2807151de6a9a7")
-			{
-				mapset = "rotr";
-			}
-			
 			// Requiem
 			if (checksum == "5052c313953175798ad9f6933737f5aa")
 			{
@@ -379,6 +373,12 @@ extend class SevHUD
 				mapset = "tvr";
 			}
 			
+			// Rise of the Triangles
+			if (checksum == "3e4ae2dd71e542923c2807151de6a9a7")
+			{
+				mapset = "rotr";
+			}
+
 			// Rowdy Rudy II
 			if (checksum == "88f4ef69b728de1e6e9bcfb3b02400a6")
 			{
@@ -447,6 +447,12 @@ extend class SevHUD
 			{
 				mapset = "sunlust";
 				normalTxtColor = Font.CR_UNTRANSLATED;
+			}
+			
+			// Team Rocket
+			if (checksum == "a500a960f4693ca2754e1c7c119b5f0d")
+			{
+				mapset = "teamrocket1";
 			}
 			
 			// TWANGO1
@@ -879,6 +885,12 @@ extend class SevHUD
 					normalTxtColor = Font.CR_ORANGE;
 				}
 				
+				// Team Rocket
+				if (mapcode == "TMR1")
+				{
+					mapset = "teamrocket1";
+				}
+
 				// TWANGO1
 				if (mapcode == "TWN1")
 				{

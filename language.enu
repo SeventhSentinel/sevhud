@@ -189,6 +189,8 @@ ENEMY_SCYTHE2_AFRIT = "Afrit";
 
 ENEMY_SUPERMAYHEM17_KINGKOOPA = "King Koopa";
 
+ENEMY_TEAMROCKET1_KEEN = "Demonic Pillar";
+
 ENEMY_TVR_KEEN = "Zombie Prisoner";
 
 ENEMY_UACULTRA_HAYMAKER = "Haymaker";
