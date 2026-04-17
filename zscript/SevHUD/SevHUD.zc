@@ -1051,6 +1051,27 @@ class SevHUD : DoomStatusBar
 				if (txt == "GoldenAstralCacoBoss")
 					txt = "$ENEMY_EVITERNITY2_GOLDENASTRALCACOBOSS";
 			}
+
+			if (mapset == "exomoon")
+			{
+				if (classtype == "pinkie")
+					txt = "$ENEMY_EXOMOON_BLOODDEMON";
+
+				if (classtype == "lostsoul")
+					txt = "$ENEMY_EXOMOON_TERROR";
+
+				if (classtype == "caco")
+					txt = "$ENEMY_VALIANT_ARACHNORB";
+
+				if (classtype == "baron")
+					txt = "$ENEMY_EXOMOON_ENCHANTRESS";
+
+				if (classtype == "wolfss")
+					txt = "$ENEMY_EXOMOON_SINNER";
+
+				if (classtype == "mastermind")
+					txt = "$ENEMY_EXOMOON_FLYINGSPIDERDEMON";
+			}
 			
 			if (mapset == "goingdown")
 			{
