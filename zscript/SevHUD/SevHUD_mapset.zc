@@ -359,12 +359,24 @@ extend class SevHUD
 				mapset = "pl2";
 			}
 			
+			// Rise of the Triangles
+			if (checksum == "3e4ae2dd71e542923c2807151de6a9a7")
+			{
+				mapset = "rotr";
+			}
+			
 			// Requiem
 			if (checksum == "5052c313953175798ad9f6933737f5aa")
 			{
 				mapset = "requiem";
 				bigNumbers = mRequiemHUDFont;
 				littlenumbers = mGloryTagIndexFont;			
+			}
+			
+			// Revolution! TV
+			if (checksum == "f99c0a1b6d7214a699637fb9d5367ca5")
+			{
+				mapset = "tvr";
 			}
 			
 			// Rowdy Rudy II
@@ -773,6 +785,18 @@ extend class SevHUD
 					mapset = "requiem";
 					bigNumbers = mRequiemHUDFont;
 					littlenumbers = mGloryTagIndexFont;			
+				}
+				
+				// Rise of the Triangles
+				if (mapcode == "ROTR")
+				{
+					mapset = "rotr";
+				}
+
+				// Revolution! TV
+				if (mapcode == "TVRV")
+				{
+					mapset = "tvr";
 				}
 				
 				// Scythe 2

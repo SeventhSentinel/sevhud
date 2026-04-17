@@ -1137,7 +1137,10 @@ class SevHUD : DoomStatusBar
 			}
 
 			if (mapset == "neodoom")
-			{			
+			{
+				if (classtype == "keen")
+					txt = "$ENEMY_NEODOOM_KEEN";
+				
 				if (txt == "FriendlyBabe")
 					txt = "$NEODOOM_FRIENDLYBABE";
 				
@@ -1190,6 +1193,15 @@ class SevHUD : DoomStatusBar
 					txt = "$ENEMY_PIRATEDOOM2_LECHUCK";
 			}
 			
+			if (mapset == "rotr")
+			{
+				if ((classtype == "lostsoul") || (txt == "LostSoul@rottriangle.zip@rottriangle.wad@DECORATE"))
+					txt = "$CC_LOST";
+
+				if ((classtype == "wolfss") || (txt == "WolfensteinSS@rottriangle.zip@rottriangle.wad@DECORATE"))
+					txt = "$ENEMY_ROTR_CAT";
+			}
+			
 			if (mapset == "scythe2")
 			{
 				if (classtype == "wolfss")
@@ -1211,6 +1223,12 @@ class SevHUD : DoomStatusBar
 				// Is this thing even used?
 				if (classtype == "wolfss")
 					return;
+			}
+			
+			if (mapset == "tvr")
+			{
+				if (classtype == "keen")
+					txt = "$ENEMY_TVR_KEEN";			
 			}
 
 			if (mapset == "valiant")
