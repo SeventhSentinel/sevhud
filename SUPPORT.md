@@ -25,6 +25,7 @@
 - Haste
 - Hell to Pay
 - Hellbound
+- Infection
 - Interception
 - IPXMatch
 - Jenesis

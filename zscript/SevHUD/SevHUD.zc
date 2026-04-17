@@ -1051,7 +1051,7 @@ class SevHUD : DoomStatusBar
 				if (txt == "GoldenAstralCacoBoss")
 					txt = "$ENEMY_EVITERNITY2_GOLDENASTRALCACOBOSS";
 			}
-
+			
 			if (mapset == "goingdown")
 			{
 				if ((classtype == "keen") || (txt == "Lexicon_GDWN_CommanderKeen"))
@@ -1100,6 +1100,18 @@ class SevHUD : DoomStatusBar
 					txt = "$ENEMY_HELLTOPAY_POWERCORE";
 			}
 			
+			if (mapset == "infection")
+			{
+				if (txt == "Deh_Actor_200")	// corrupt imp
+					txt = "$ENEMY_INFECTION_IMP";
+					
+				if (txt == "Deh_Actor_201")	// corrupt demon
+					txt = "$ENEMY_INFECTION_DEMON";
+					
+				if (txt == "Deh_Actor_202")	// corrupt chaingunner
+					txt = "$ENEMY_INFECTION_CHAIN";
+			}
+
 			if (mapset == "jenesis")
 			{
 				if ((classtype == "keen") || (txt == "Lexicon_JENS_CommanderKeen"))

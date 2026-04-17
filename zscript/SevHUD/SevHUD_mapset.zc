@@ -287,7 +287,13 @@ extend class SevHUD
 				mapset = "hellbound";
 				bigNumbers = mHellboundHUDFont;
 			}
-			
+
+			// Infection
+			if (checksum == "dc5cecfe9bbca65b3d09ca6537eb2ade")
+			{
+				mapset = "infection";
+			}
+						
 			// Interception
 			if (checksum == "f28c65cfa8d0baadef2918ac996d83bb")
 			{
