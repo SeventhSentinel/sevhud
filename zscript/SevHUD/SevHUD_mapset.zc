@@ -240,6 +240,12 @@ extend class SevHUD
 				mapset = "eviternity2";
 			}
 			
+			// Exomoon
+			if (checksum == "b07c4219ff188b36fa8c8af3676363c3")
+			{
+				mapset = "exomoon";
+			}
+			
 			// Firefly
 			if (checksum == "0b904ff09f74101c5d0c5ee0b0e247d4")
 			{
