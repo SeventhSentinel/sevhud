@@ -36,6 +36,7 @@
 - Plutonia 2
 - Plutonia Revisited Community Project 1 & 2
 - Requiem
+- Rise of the Triangles
 - Scythe 2
 - Slaughterfest 2011, 2012, and 3
 - Speed of Doom
