@@ -1233,6 +1233,9 @@ class SevHUD : DoomStatusBar
 
 				if ((classtype == "wolfss") || (txt == "WolfensteinSS@rottriangle.zip@rottriangle.wad@DECORATE"))
 					txt = "$ENEMY_ROTR_CAT";
+					
+				if ((classtype == "mastermind") || (txt == "SpiderMastermind@rottriangle.zip@rottriangle.wad@DECORATE"))
+					txt = "$FN_SPIDER";
 			}
 			
 			if (mapset == "scythe2")
