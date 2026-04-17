@@ -336,7 +336,13 @@ extend class SevHUD
 				littlenumbers = mLostCivIndexFont;
 				normalTxtColor = Font.CR_GREEN;
 			}
-			
+
+			// Necromantic Thirst
+			if (checksum == "ee8ec91a8fb68b5d2614e46cfd925222")
+			{
+				mapset = "nt";
+			}
+						
 			// NeoDoom Vaccinated
 			if (checksum == "2f76aec2841db70bcf0ba07fc9cf4763")
 			{

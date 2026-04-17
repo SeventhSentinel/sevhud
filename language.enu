@@ -178,6 +178,9 @@ ENEMY_LOR_TYRANT = "Tyrant";
 
 ENEMY_LOSTCIV_SOLDIER = "Soldier";
 
+// Necromantic Thirst: Realm667 monster
+ENEMY_SEVHUD_LORDOFHERESY = "Lord of Heresy"
+
 ENEMY_NEODOOM_KEEN = "Tortured Marine";
 NEODOOM_FRIENDLYBABE = "Babe Magia";
 

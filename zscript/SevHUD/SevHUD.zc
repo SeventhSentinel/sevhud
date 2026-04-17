@@ -1182,6 +1182,12 @@ class SevHUD : DoomStatusBar
 					return;
 			}
 
+			if (mapset == "nt")
+			{
+				if (txt == "DeadLostSoul")
+					txt = "$ENEMY_SEVHUD_LORDOFHERESY";
+			}
+
 			if (mapset == "piratedoom")
 			{
 				if (classtype == "sarge")
