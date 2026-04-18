@@ -59,4 +59,8 @@
 - Vanguard
 - Vertex Relocation
 
+### Name Tag Support Only
+- Necromantic Thirst
+- Scientist 2023
+
 Above mapsets will also show correct graphics/enemy names when played within The Sentinel's Lexicon where applicable.

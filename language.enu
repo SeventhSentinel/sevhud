@@ -197,6 +197,9 @@ ENEMY_PIRATEDOOM2_LECHUCK = "LeChuck, the Zombie Pirate";
 
 ENEMY_ROTR_CAT = "Cat";
 
+ENEMY_SCI23_SCIENTIST = "Scientist";
+ENEMY_SCI23_SCISCORPION = "Sciscorpion";
+
 ENEMY_SCYTHE2_EVILMARINE = "Evil Marine";
 ENEMY_SCYTHE2_AFRIT = "Afrit";
 

@@ -403,6 +403,12 @@ extend class SevHUD
 				mapset = "Rudy2";
 			}
 			
+			// Scientist 2023
+			if (checksum == "ac1595a4ae4a557a3400602d6bf473bb")
+			{
+				mapset = "scientist2023";
+			}
+			
 			// Scythe 2
 			if ((checksum == "009855039a4557f5f293b70c5232d473") ||
 			(checksum == "b1228d5758ad1a5a86df6264e71bfa83"))	// Support for my personal Scythe 2 patch; if you're reading this don't ask me for it

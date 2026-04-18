@@ -1244,6 +1244,16 @@ class SevHUD : DoomStatusBar
 					txt = "$FN_SPIDER";
 			}
 			
+			// Scientist 2023
+			if (mapset == "scientist2023")
+			{
+				if (classtype == "wolfss")
+					txt = "$ENEMY_SCI23_SCIENTIST";
+
+				if (classtype == "cybie")
+					txt = "$ENEMY_SCI23_SCISCORPION";
+			}
+			
 			if (mapset == "scythe2")
 			{
 				if (classtype == "wolfss")
