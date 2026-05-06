@@ -89,7 +89,13 @@ class SevHUD_Chex : DoomStatusBar
 	{
 		int basex = 326;
 
-		// Draw the background first
+		// Draw the background
+		
+		// First, which completion display to use?
+		bool extracounts = CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt();
+		bool extracountsautomap = CVar.GetCVar("sevhud_extra_counts_am", CPlayer).GetInt();
+		bool showrawcounts = automapactive ? extracountsautomap : extracounts;
+
 		// Is there a full stats gfx? If so, use that instead of drawing the individual parts
 		int lump;
 
@@ -103,7 +109,7 @@ class SevHUD_Chex : DoomStatusBar
 		
 		int offsetx = 32;
 
-		if (CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt())
+		if (showrawcounts)
 		{
 			// Display raw counts
 			offsetx = offsetx + 10;
@@ -574,7 +580,7 @@ class SevHUD_Chex : DoomStatusBar
 		basey = -33;
 		offsety = 0;
 
-		if (CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt())
+		if (CVar.GetCVar("sevhud_extra_counts_am", CPlayer).GetInt())
 		{
 			if (CVar.GetCVar("am_showsecrets", CPlayer).GetBool())
 			{

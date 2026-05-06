@@ -439,14 +439,18 @@ class SevHUD : DoomStatusBar
 		{
 			// Singleplayer/co-op
 			
-			// Draw the background first
+			// Draw the background
+			
+			// First, which completion display to use?
+			bool extracounts = CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt();
+			bool extracountsautomap = CVar.GetCVar("sevhud_extra_counts_am", CPlayer).GetInt();
+			bool showrawcounts = automapactive ? extracountsautomap : extracounts;
 			
 			// Is there a full stats gfx? If so, use that instead of drawing the individual parts
-
 			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_stats.png");
 			if (lump >= 0)
 			{
-				if (CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt())
+				if (showrawcounts)
 				{
 					DrawImage(basefilepath..mapset.."/st_stats.png", (320, 168), DI_ITEM_OFFSETS);
 				}
@@ -471,8 +475,7 @@ class SevHUD : DoomStatusBar
 				DrawImage(statimgfilepath.."/st_secret.png", (basex, 185), DI_ITEM_OFFSETS);
 				DrawImage(statimgfilepath.."/st_time.png", (basex, 191), DI_ITEM_OFFSETS);
 				
-				// Debug
-				// Console.Printf(statimgfilepath);
+				// Console.Printf(statimgfilepath);		// Debug
 			}
 			
 			int pcnt;
@@ -481,7 +484,7 @@ class SevHUD : DoomStatusBar
 			int offsetx = 32;
 
 			// Completion stats
-			if (CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt())
+			if (showrawcounts)
 			{
 				// Display raw counts
 				offsetx = offsetx + 10;
@@ -1707,7 +1710,7 @@ class SevHUD : DoomStatusBar
 
 
 		// Completion stats
-		bool usecounts = (CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt());
+		bool usecounts = (CVar.GetCVar("sevhud_extra_counts_am", CPlayer).GetInt());
 		if (CVar.GetCVar("am_showsecrets", CPlayer).GetBool())
 		{
 			// Which secrets gfx to use?

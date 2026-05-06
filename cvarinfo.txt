@@ -3,5 +3,6 @@ user int sevhud_hpbar_min = 0;
 user int sevhud_hpbar_hidestealth = 1;
 user bool sevhud_extra = true;
 user bool sevhud_extra_counts = false;
+user bool sevhud_extra_counts_am = false;
 server noarchive bool sevhud_checksum = false;
 server noarchive int sevhud_debugtime = 0;

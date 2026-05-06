@@ -139,7 +139,13 @@ class SevHUD_Square : DoomStatusBar
 	{
 		int basex = 326;
 
-		// Draw the background first
+		// Draw the background
+
+		// First, which completion display to use?
+		bool extracounts = CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt();
+		bool extracountsautomap = CVar.GetCVar("sevhud_extra_counts_am", CPlayer).GetInt();
+		bool showrawcounts = automapactive ? extracountsautomap : extracounts;
+
 		DrawImage("graphics/SevHUD/square/st_kill.png", (basex, 175), DI_ITEM_OFFSETS);
 		DrawImage("graphics/SevHUD/square/st_item.png", (basex, 181), DI_ITEM_OFFSETS);
 		DrawImage("graphics/SevHUD/square/st_secret.png", (basex, 187), DI_ITEM_OFFSETS);
@@ -163,7 +169,7 @@ class SevHUD_Square : DoomStatusBar
 			DrawString(fnt, FormatNumber(0, 3), (basex + offsetx + 10, 169), DI_TEXT_ALIGN_RIGHT);
 		}
 
-		if (CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt())
+		if (showrawcounts)
 		{
 			// Display raw counts
 			offsetx = offsetx + 10;
@@ -863,7 +869,7 @@ class SevHUD_Square : DoomStatusBar
 		if (nades >= 1)
 			offsety -= 12;
 
-		if (CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt())
+		if (CVar.GetCVar("sevhud_extra_counts_am", CPlayer).GetInt())
 		{
 			if (CVar.GetCVar("am_showsecrets", CPlayer).GetBool())
 			{
