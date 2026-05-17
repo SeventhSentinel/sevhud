@@ -1,0 +1,5 @@
+GameInfo
+{
+	StatusBarClass = "SevHUD_Heretic"
+	AddEventHandlers = "SevHUDHandler"
+}
