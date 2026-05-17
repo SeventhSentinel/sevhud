@@ -3,7 +3,7 @@
 // SevHUD
 //
 // ZScript code: Copyright (C) 2020 - 2025 Nash Muhandes
-// Modifications: Copyright (C) 2025 SeventhSentinel
+// Modifications: Copyright (C) 2025 - 2026 SeventhSentinel
 //
 // License: MIT
 //
@@ -17,7 +17,7 @@ class SevHUD : DoomStatusBar
 	bool dontdrawnames;
 	int normalTxtColor;
 	int nameTxtColor;
-	
+
 	// Mapset
 	bool gotchecksum;
 	bool gotmapset;
@@ -29,14 +29,14 @@ class SevHUD : DoomStatusBar
 	string powerups;
 	bool oldLexicon;
 	int lump;
-	
+
 	vector2 allmapoffset;
 	vector2 berserkoffset;
 	vector2 invisoffset;
 	vector2 invuloffset;
 	vector2 lightampoffset;
 	vector2 radsuitoffset;
-	
+
 	string basefilepath;
 
 	// Fonts
@@ -44,11 +44,11 @@ class SevHUD : DoomStatusBar
 	HUDFont mHUDConFont;
 
 	HUDFont mDefaultIndexFont;
-	
+
 	HUDFont m400minvrHUDFont;
 	HUDFont m400minvrIndexFont;
 	HUDFont m400minvrStatsFont;
-	
+
 	HUDFont mAaliensHUDFont;
 	HUDFont mAaliensIndexFont;
 
@@ -62,12 +62,12 @@ class SevHUD : DoomStatusBar
 	HUDFont mBTSX1IndexFont;
 	HUDFont mBTSX2IndexFont;
 	HUDFont mBTSX3IndexFont;
-	
+
 	HUDFont mClau1024HUDFont;
 	HUDFont mClau1024IndexFont;
-	
+
 	HUDFont mCShock2HUDFont;
-	
+
 	HUDFont mD64D2IndexFont;
 
 	HUDFont mDKDMHUDFont;
@@ -75,13 +75,13 @@ class SevHUD : DoomStatusBar
 	HUDFont mDwango2HUDFont;
 
 	HUDFont mGarruloIndexFont;
-	
+
 	HUDFont mGloryTagHUDFont;
 	HUDFont mGloryTagIndexFont;
-	
+
 	HUDFont mGridlock64HUDFont;
 	HUDFont mGridlock64IndexFont;
-	
+
 	HUDFont mHadephobiaHUDFont;
 	HUDFont mHadephobiaIndexFont;
 
@@ -89,20 +89,20 @@ class SevHUD : DoomStatusBar
 	HUDFont mHasteIndexFont;
 
 	HUDFont mHellboundHUDFont;
-	
+
 	HUDFont mIPXMatchHUDFont;
 
 	HUDFont mJenesisHUDFont;
 	HUDFont mJenesisIndexFont;
-	
+
 	HUDFont mLastEp1IndexFont;
-	
+
 	HUDFont mLostCivHUDFont;
 	HUDFont mLostCivIndexFont;
 
 	HUDFont mNeoDoomHUDFont;
 	HUDFont mNeoDoomIndexFont;
-	
+
 	HUDFont mNewDoom1HUDFont;
 
 	HUDFont mNoEndInSightHUDFont;
@@ -110,9 +110,9 @@ class SevHUD : DoomStatusBar
 
 	HUDFont mNostZeroHUDFont;
 	HUDFont mNostZeroIndexFont;
-	
+
 	HUDFont mPGResurgeHUDFont;
-	
+
 	HUDFont mRequiemHUDFont;
 
 	HUDFont mScythe2HUDFont;
@@ -188,12 +188,12 @@ class SevHUD : DoomStatusBar
 		mBTSX1IndexFont = HUDFont.Create("BTSX1IndexFont");
 		mBTSX2IndexFont = HUDFont.Create("BTSX2IndexFont");
 		mBTSX3IndexFont = HUDFont.Create("BTSX3IndexFont");
-		
+
 		mClau1024HUDFont = HUDFont.Create("Clau1024HUDFont", 14, Mono_CellLeft, 1, 1);
 		mClau1024IndexFont = HUDFont.Create("Clau1024IndexFont");
-		
+
 		mCShock2HUDFont = HUDFont.Create("CShock2HUDFont", 14, Mono_CellLeft, 1, 1);
-		
+
 		mD64D2IndexFont = HUDFont.Create("D64D2IndexFont");
 
 		mDKDMHUDFont = HUDFont.Create("DKDMHUDFont", 14, Mono_CellLeft, 1, 1);
@@ -204,10 +204,10 @@ class SevHUD : DoomStatusBar
 
 		mGloryTagHUDFont = HUDFont.Create("GloryTagHUDFont", 14, Mono_CellLeft, 1, 1);
 		mGloryTagIndexFont = HUDFont.Create("GloryTagIndexFont");
-		
+
 		mGridlock64HUDFont = HUDFont.Create("Gridlock64HUDFont", 13, Mono_CellLeft, 1, 1);
 		mGridlock64IndexFont = HUDFont.Create("Gridlock64IndexFont");
-		
+
 		mHadephobiaHUDFont = HUDFont.Create("HadephobiaHUDFont", 14, Mono_CellLeft, 1, 1);
 		mHadephobiaIndexFont = HUDFont.Create("HadephobiaIndexFont");
 
@@ -220,12 +220,12 @@ class SevHUD : DoomStatusBar
 
 		mJenesisHUDFont = HUDFont.Create("JenesisHUDFont", 13, Mono_CellLeft, 1, 1);
 		mJenesisIndexFont = HUDFont.Create("JenesisIndexFont");
-		
+
 		mLastEp1IndexFont = HUDFont.Create("LastEp1IndexFont");
-		
+
 		mLostCivHUDFont = HUDFont.Create("LostCivHUDFont", 14, Mono_CellLeft, 1, 1);
 		mLostCivIndexFont = HUDFont.Create("LostCivIndexFont");
-		
+
 		mNeoDoomHUDFont = HUDFont.Create("NeoDoomHUDFont", 12, Mono_CellLeft, 1, 1);
 		mNeoDoomIndexFont = HUDFont.Create("NeoDoomIndexFont");
 
@@ -238,13 +238,13 @@ class SevHUD : DoomStatusBar
 		mNostZeroIndexFont = HUDFont.Create("NostZeroIndexFont");
 
 		mPGResurgeHUDFont = HUDFont.Create("PGResurgeHUDFont", 13, Mono_CellLeft, 1, 1);
-		
+
 		mRequiemHUDFont = HUDFont.Create("RequiemHUDFont", 14, Mono_CellLeft, 1, 1);
 
 		mScythe2HUDFont = HUDFont.Create("Scythe2HUDFont", 14, Mono_CellLeft, 1, 1);
 
 		mSD20X7IndexFont = HUDFont.Create("SD20X7IndexFont");
-		
+
 		mSF2011HUDFont = HUDFont.Create("SF2011HUDFont", 14, Mono_CellLeft, 1, 1);
 
 		mSF2012HUDFont = HUDFont.Create("SF2012HUDFont", 14, Mono_CellLeft, 1, 1);
@@ -275,7 +275,7 @@ class SevHUD : DoomStatusBar
 
 		mVanguardHUDFont = HUDFont.Create("VanguardHUDFont", 14, Mono_CellLeft, 1, 1);
 		mVanguardIndexFont = HUDFont.Create("VanguardIndexFont");
-		
+
 		mVXRelocHUDFont = HUDFont.Create("VXRelocHUDFont", 14, Mono_CellLeft, 1, 1);
 
 
@@ -295,10 +295,10 @@ class SevHUD : DoomStatusBar
 			GetMapset();
 			dontdrawnames = false;
 		}
-			
+
 		if ((CVar.GetCVar("sevhud_checksum", CPlayer).GetBool())&&((!gotchecksum)||(level.MapTime == 1)))
 			PrintChecksum();
-		
+
 		if ((state == HUD_StatusBar)||(state == HUD_Fullscreen))
 		{
 			// draw crosshair etc
@@ -356,7 +356,7 @@ class SevHUD : DoomStatusBar
 		if (deathmatch || teamplay)
 		{
 			// Deathmatch
-			
+
 			// Draw time label
 			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_time.png");
 			if (lump >= 0)
@@ -367,11 +367,11 @@ class SevHUD : DoomStatusBar
 			{
 				DrawImage(basefilepath.."standard/st_time.png", (basex, 191), DI_ITEM_OFFSETS);
 			}
-			
+
 			// Move arms here
 
 			// Determine active weapons gfx
-			
+
 			// Set defaults
 			string armsy2 = "STYSNUM2";
 			string armsy3 = "STYSNUM3";
@@ -391,7 +391,7 @@ class SevHUD : DoomStatusBar
 				armsy6 = basefilepath..mapset.."/st_ynum6.png";
 				armsy7 = basefilepath..mapset.."/st_ynum7.png";
 			}
-			
+
 			// Use stats-specific numbers if available
 			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_snum2.png");
 			if (lump >= 0)
@@ -425,7 +425,7 @@ class SevHUD : DoomStatusBar
 				armsg6 = basefilepath..mapset.."/st_gnum6.png";
 				armsg7 = basefilepath..mapset.."/st_gnum7.png";
 			}
-			
+
 			// Draw the numbers
 			DrawImage(CPlayer.HasWeaponsInSlot(2)? armsy2 : armsg2, (basex+8, 173), DI_ITEM_OFFSETS);
 			DrawImage(CPlayer.HasWeaponsInSlot(3)? armsy3 : armsg3, (basex+20, 173), DI_ITEM_OFFSETS);
@@ -434,18 +434,18 @@ class SevHUD : DoomStatusBar
 			DrawImage(CPlayer.HasWeaponsInSlot(6)? armsy6 : armsg6, (basex+20, 182), DI_ITEM_OFFSETS);
 			DrawImage(CPlayer.HasWeaponsInSlot(7)? armsy7 : armsg7, (basex+32, 182), DI_ITEM_OFFSETS);
 		}
-		
+
 		else
 		{
 			// Singleplayer/co-op
-			
+
 			// Draw the background
-			
+
 			// First, which completion display to use?
 			bool extracounts = CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt();
 			bool extracountsautomap = CVar.GetCVar("sevhud_extra_counts_am", CPlayer).GetInt();
 			bool showrawcounts = automapactive ? extracountsautomap : extracounts;
-			
+
 			// Is there a full stats gfx? If so, use that instead of drawing the individual parts
 			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_stats.png");
 			if (lump >= 0)
@@ -468,19 +468,19 @@ class SevHUD : DoomStatusBar
 				}
 				else
 				{
-					statimgfilepath = basefilepath.."standard";					
+					statimgfilepath = basefilepath.."standard";
 				}
 				DrawImage(statimgfilepath.."/st_kill.png", (basex, 173), DI_ITEM_OFFSETS);
 				DrawImage(statimgfilepath.."/st_item.png", (basex, 179), DI_ITEM_OFFSETS);
 				DrawImage(statimgfilepath.."/st_secret.png", (basex, 185), DI_ITEM_OFFSETS);
 				DrawImage(statimgfilepath.."/st_time.png", (basex, 191), DI_ITEM_OFFSETS);
-				
+
 				// Console.Printf(statimgfilepath);		// Debug
 			}
-			
+
 			int pcnt;
 			int mppcnt;
-			
+
 			int offsetx = 32;
 
 			// Completion stats
@@ -540,9 +540,9 @@ class SevHUD : DoomStatusBar
 					mppcnt = 100 * CPlayer.secretcount / Level.total_secrets;
 				}
 				amt = multiplayer ? mppcnt : pcnt;	*/
-				amt = pcnt;		
+				amt = pcnt;
 				DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 185), DI_TEXT_ALIGN_RIGHT);
-				
+
 				// Draw % symbols
 				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + offsetx + 5, 173), DI_ITEM_OFFSETS);
 				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + offsetx + 5, 179), DI_ITEM_OFFSETS);
@@ -614,7 +614,7 @@ class SevHUD : DoomStatusBar
 		let berserk = CPlayer.mo.FindInventory("PowerStrength");
 		let radsuit = Powerup(CPlayer.mo.FindInventory("PowerIronFeet"));
 		let allmap = Level.allmap;
-		
+
 		// Draw mapset-specific gfx, fallback to standard
 		lump = Wads.CheckNumForFullName(basefilepath..powerups.."/st_extra.png");
 		if (lump >= 0)
@@ -755,7 +755,7 @@ class SevHUD : DoomStatusBar
 			{
 				targName = prevAimTarget.player.GetUserName();
 				aimingatplayer = true;
-			}		
+			}
 
 			// retrieve target health
 			int minhpcvar = CVar.GetCVar("sevhud_hpbar_min", CPlayer).GetInt();
@@ -772,11 +772,11 @@ class SevHUD : DoomStatusBar
 			// Fucking Yandere Sim ass code
 			// I'd do this with names + switch case but that didn't work out for
 			// map checksums so I no longer trust it
-			
+
 			string classtype;
 			bool shadowed = prevAimTarget.bShadow;
 			bool stealthed = prevAimTarget.bStealth;
-			
+
 			// Hide stealth monster HP bars
 			int hidestealth = CVar.GetCVar("sevhud_hpbar_hidestealth", CPlayer).GetInt();
 			if (hidestealth > 0)
@@ -796,8 +796,8 @@ class SevHUD : DoomStatusBar
 					}
 				}
 			}
-			
-			
+
+
 			if (!(mapset == "standard"))
 			{
 				if (prevAimTarget is "Zombieman")
@@ -819,7 +819,7 @@ class SevHUD : DoomStatusBar
 				{
 					classtype = "imp";
 				}
-				
+
 				else if (prevAimTarget is "Demon")
 				{
 					classtype = "pinkie";
@@ -900,7 +900,7 @@ class SevHUD : DoomStatusBar
 			}
 
 			// Set default text
-			txt = String.Format("%s", targName);	
+			txt = String.Format("%s", targName);
 
 			// Pirate Doom's LeChuck comes with his own health display
 			if (mapset == "piratedoom")
@@ -912,8 +912,8 @@ class SevHUD : DoomStatusBar
 				if ((txt == "lechuckteleport") || (txt == "LeChuck"))
 					return;
 			}
-			
-			// Clean up target name			
+
+			// Clean up target name
 			if (mapset == "400minvr")
 			{
 				if ((classtype == "keen") || (txt == "Lexicon_4MVR_CommanderKeen"))
@@ -979,7 +979,7 @@ class SevHUD : DoomStatusBar
 				if (classtype == "wolfss")
 					txt = "$ENEMY_AALIENS_PLASMAALIEN";
 			}
-			
+
 			if (mapset == "d64d2")
 			{
 				if ((classtype == "imp") && (shadowed == true))
@@ -987,11 +987,11 @@ class SevHUD : DoomStatusBar
 
 				if ((classtype == "caco") && (shadowed == true))
 					txt = "$ENEMY_D64D2_NIGHTMARECACO";
-				
+
 				if (txt == "Motherdemon")
 					txt = "$ENEMY_D64D2_MOTHERDEMON";
 			}
-			
+
 			if (mapset == "epic2")
 			{
 				if (classtype == "wolfss")
@@ -1000,33 +1000,33 @@ class SevHUD : DoomStatusBar
 				if (classtype == "keen")
 					txt = "$ENEMY_EPIC2_KEEN";
 			}
-			
+
 			if (mapset == "eviternity")
 			{
 				if (txt == "NightmareDemon")
 					txt = "$ENEMY_EVITERNITY_NIGHTMAREDEMON";
-			
+
 				if (txt == "FormerCaptain")
 					txt = "$ENEMY_EVITERNITY_FORMERCAPTAIN";
-					
+
 				if (txt == "AstralCaco")
 					txt = "$ENEMY_EVITERNITY_ASTRALCACO";
 			}
-			
+
 			if (mapset == "eviternity2")
 			{
 				if (txt == "NightmareDemon")
 					txt = "$ENEMY_EVITERNITY_NIGHTMAREDEMON";
-			
+
 				if (txt == "FormerCaptain")
 					txt = "$ENEMY_EVITERNITY_FORMERCAPTAIN";
-					
+
 				if (txt == "AstralCaco")
 					txt = "$ENEMY_EVITERNITY_ASTRALCACO";
 
 				if (txt == "AstralCacodemon")
 					txt = "$ENEMY_EVITERNITY_ASTRALCACO";
-					
+
 				if (txt == "LostSoulCount")
 					txt = "$CC_LOST";
 
@@ -1075,16 +1075,16 @@ class SevHUD : DoomStatusBar
 				if (classtype == "mastermind")
 					txt = "$ENEMY_EXOMOON_FLYINGSPIDERDEMON";
 			}
-			
+
 			if (mapset == "goingdown")
 			{
 				if ((classtype == "keen") || (txt == "Lexicon_GDWN_CommanderKeen"))
 					txt = "$ENEMY_GOINGDOWN_FORBIDDENFRUIT";
-				
+
 				if (classtype == "wolfss")
 					txt = "$ENEMY_GOINGDOWN_REDSPIDERMASTERMIND";
 			}
-			
+
 			if (mapset == "gridlock64")
 			{
 				if ((txt == "DeadLostSoul") || (txt == "Lexicon_GD64_DeadLostSoul"))
@@ -1096,7 +1096,7 @@ class SevHUD : DoomStatusBar
 				if ((classtype == "keen") || (txt == "Lexicon_HADP_CommanderKeen"))
 					txt = "$ENEMY_HADEPHOBIA_HADEPHOBE";
 			}
-			
+
 			if (mapset == "helltopay")
 			{
 				if ((classtype == "imp") || (txt == "Lexicon_HLTP_DoomImp"))
@@ -1123,15 +1123,15 @@ class SevHUD : DoomStatusBar
 				if ((classtype == "keen") || (txt == "Lexicon_HLTP_CommanderKeen"))
 					txt = "$ENEMY_HELLTOPAY_POWERCORE";
 			}
-			
+
 			if (mapset == "infection")
 			{
 				if (txt == "Deh_Actor_200")	// corrupt imp
 					txt = "$ENEMY_INFECTION_IMP";
-					
+
 				if (txt == "Deh_Actor_201")	// corrupt demon
 					txt = "$ENEMY_INFECTION_DEMON";
-					
+
 				if (txt == "Deh_Actor_202")	// corrupt chaingunner
 					txt = "$ENEMY_INFECTION_CHAIN";
 			}
@@ -1165,7 +1165,7 @@ class SevHUD : DoomStatusBar
 				if (txt == "Deh_Actor_155")
 					txt = "$ENEMY_LOR_TYRANT";
 			}
-			
+
 			if (mapset == "lostcivilization")
 			{
 				if (classtype == "wolfss")
@@ -1176,10 +1176,10 @@ class SevHUD : DoomStatusBar
 			{
 				if (classtype == "keen")
 					txt = "$ENEMY_NEODOOM_KEEN";
-				
+
 				if (txt == "FriendlyBabe")
 					txt = "$NEODOOM_FRIENDLYBABE";
-				
+
 				// VictoryBabe is not an enemy
 				if ((txt == "VictoryBabe") || (txt == "Lexicon_NEOD_VictoryBabe"))
 					return;
@@ -1195,10 +1195,10 @@ class SevHUD : DoomStatusBar
 			{
 				if (classtype == "sarge")
 					txt = "$CC_SHOTGUN";
-				
+
 				if (classtype == "chain")
 					txt = "$CC_HEAVY";
-				
+
 				if ((classtype == "pinkie") && (maxHealth == 60))
 					txt = "$ENEMY_PIRATEDOOM_RABIDDEMON";
 
@@ -1207,7 +1207,7 @@ class SevHUD : DoomStatusBar
 
 				if ((txt == "Witch Doctor") && ((maxHealth == 80) || (maxHealth == 50) || (maxHealth == 60)))
 					txt = "$ENEMY_PIRATEDOOM_CANNIBALPYGMY";
-				
+
 				// If the actor doesn't exist, the game crashes, so I dunno how
 				// to make these strings show up
 /*				if (prevAimTarget is "GhostDemon")
@@ -1234,7 +1234,7 @@ class SevHUD : DoomStatusBar
 				if (txt == "BossEye")
 					txt = "$ENEMY_PIRATEDOOM2_LECHUCK";
 			}
-			
+
 			if (mapset == "rotr")
 			{
 				if ((classtype == "lostsoul") || (txt == "LostSoul@rottriangle.zip@rottriangle.wad@DECORATE"))
@@ -1242,11 +1242,11 @@ class SevHUD : DoomStatusBar
 
 				if ((classtype == "wolfss") || (txt == "WolfensteinSS@rottriangle.zip@rottriangle.wad@DECORATE"))
 					txt = "$ENEMY_ROTR_CAT";
-					
+
 				if ((classtype == "mastermind") || (txt == "SpiderMastermind@rottriangle.zip@rottriangle.wad@DECORATE"))
 					txt = "$FN_SPIDER";
 			}
-			
+
 			// Scientist 2023
 			if (mapset == "scientist2023")
 			{
@@ -1256,7 +1256,7 @@ class SevHUD : DoomStatusBar
 				if (classtype == "cybie")
 					txt = "$ENEMY_SCI23_SCISCORPION";
 			}
-			
+
 			if (mapset == "scythe2")
 			{
 				if (classtype == "wolfss")
@@ -1265,13 +1265,13 @@ class SevHUD : DoomStatusBar
 				if (classtype == "keen")
 					txt = "$ENEMY_SCYTHE2_AFRIT";
 			}
-			
+
 			if (mapset == "supermayhem17")
 			{
 				if (classtype == "keen")
 					txt = "$ENEMY_SUPERMAYHEM17_KINGKOOPA";
 			}
-				
+
 			if (mapset == "supermayhem17lexicon")
 			{
 				// Lexicon: don't give the Bowser shell an HP bar
@@ -1279,17 +1279,17 @@ class SevHUD : DoomStatusBar
 				if (classtype == "wolfss")
 					return;
 			}
-			
+
 			if (mapset == "teamrocket1")
 			{
 				if (classtype == "keen")
-					txt = "$ENEMY_TEAMROCKET1_KEEN";				
+					txt = "$ENEMY_TEAMROCKET1_KEEN";
 			}
-			
+
 			if (mapset == "tvr")
 			{
 				if (classtype == "keen")
-					txt = "$ENEMY_TVR_KEEN";			
+					txt = "$ENEMY_TVR_KEEN";
 			}
 
 			if (mapset == "valiant")
@@ -1302,38 +1302,38 @@ class SevHUD : DoomStatusBar
 
 				if (txt == "ValiantSpectre")
 					txt = "$ENEMY_VALIANT_SPECTRE";
-				
+
 				if (txt == "ValiantSuperMancubus")
 					txt = "$ENEMY_VALIANT_SUPERMANCUBUS";
-				
+
 				if (txt == "ValiantArachnotron")
 					txt = "$CC_ARACH";
-				
+
 				if (classtype == "wolfss")
 					txt = "$FN_HEAVY";
 
 				if (txt == "ValiantPyroDemon")
 					txt = "$ENEMY_VALIANT_PYRODEMON";
-				
+
 				if (txt == "ValiantCybruiser")
 					txt = "$ENEMY_VALIANT_CYBRUISER";
-				
+
 				if (txt == "ValiantArachnorb")
 					txt = "$ENEMY_VALIANT_ARACHNORB";
-				
+
 				if (txt == "SuicideBomber")
 					txt = "$ENEMY_SEVHUD_SUICIDEBOMBER";
-				
+
 				if (txt == "ValiantFinalBoss")
 					txt = "$ENEMY_VALIANT_SUPERVILE";
-				
+
 				if (txt == "TorchTree")
 					txt = "$ENEMY_VALIANT_GHOSTVILE";
-				
+
 				if (txt == "BigTree")
 					txt = "$ENEMY_VALIANT_GHOSTREVENANT";
 			}
-			
+
 			if (mapset == "uacultra")
 			{
 				if (classtype == "wolfss")
@@ -1401,15 +1401,15 @@ class SevHUD : DoomStatusBar
 				if (txt == "LWolfensteinSS")
 					txt = "$FN_WOLFSS";
 			}
-			
+
 			// Fix for standard Doom 2
 			// We're checking the string instead of classtype on purpose!
 			if (txt == "CommanderKeen")
 				txt = "$ENEMY_DOOM2_KEEN";
-				
+
 			if (dontdrawnames == true)
 				txt = "";
-			
+
 
 			// no need to draw 0 or negative health
 			if (health <= 0)
@@ -1422,7 +1422,7 @@ class SevHUD : DoomStatusBar
 			baseYPos += fnt.GetHeight();
 
 			// draw background
-			
+
 			string img;
 			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/hp_back.png");
 			if (lump >= 0)
@@ -1532,7 +1532,7 @@ class SevHUD : DoomStatusBar
 		string ammo2 = "Shell";
 		string ammo3 = "RocketAmmo";
 		string ammo4 = "Cell";
-		
+
 		if (useFuel == true)
 		{
 			ammo4 = "id24Fuel";
@@ -1574,13 +1574,13 @@ class SevHUD : DoomStatusBar
 	{
 		if (!automapactive)
 		return;
-	
+
 		HUDFont fnt = littleNumbers;
 		if (statNumbers)
 			fnt = statNumbers;
 
 		int fontHeight = fnt.mFont.GetHeight();
-		
+
 		int amt;
 
 		int basey = 4;
@@ -1595,7 +1595,7 @@ class SevHUD : DoomStatusBar
 			imgcolon = basefilepath..mapset.."/st_colon.png";
 		else
 			imgcolon = basefilepath.."standard/st_colon.png";
-		
+
 		// Global timer
 		if (CVar.GetCVar("am_showtotaltime", CPlayer).GetBool())
 		{
@@ -1640,7 +1640,7 @@ class SevHUD : DoomStatusBar
 			// seconds
 			amt = seconds;
 			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-7, basey), DI_TEXT_ALIGN_RIGHT);
-			
+
 			// move the level timer down
 			offsety += fontHeight;
 		}
@@ -1648,7 +1648,7 @@ class SevHUD : DoomStatusBar
 		// Don't draw anything else if we're already drawing the stats on the status bar
 		if (CVar.GetCVar("sevhud_extra", CPlayer).GetInt())
 			return;
-		
+
 		// Map time
 		if (CVar.GetCVar("am_showtime", CPlayer).GetBool())
 		{
@@ -1826,7 +1826,7 @@ class SevHUD : DoomStatusBar
 			{
 				amt = Level.total_monsters - Level.killed_monsters;
 				DrawString(fnt, FormatNumber(amt), (-7, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
-			}			
+			}
 		}
 	}
 
@@ -1835,7 +1835,7 @@ class SevHUD : DoomStatusBar
 	//
 	//
 	//===========================================================================
-	
+
 	void DrawSevHUDKeys(void)
 	{
 		string basefilepath = "graphics/SevHUD/";
@@ -1856,7 +1856,7 @@ class SevHUD : DoomStatusBar
 		lump = Wads.CheckNumForFullName(filepath.."st_key3.png");
 		if (lump >= 0)
 			key3 = filepath.."st_key3.png";
-		
+
 		// key 2
 		string key7 = "STKEYS7";
 		lump = Wads.CheckNumForFullName(filepath.."st_key7.png");
@@ -1872,7 +1872,7 @@ class SevHUD : DoomStatusBar
 		lump = Wads.CheckNumForFullName(filepath.."st_key4.png");
 		if (lump >= 0)
 			key4 = filepath.."st_key4.png";
-		
+
 		// key 3
 		string key8 = "STKEYS8";
 		lump = Wads.CheckNumForFullName(filepath.."st_key8.png");
@@ -1915,8 +1915,8 @@ class SevHUD : DoomStatusBar
 	{
 		string basefilepath = "graphics/SevHUD/";
 		string filepath = basefilepath..mapset.."/";
-		
-		
+
+
 
 		// DrawMainBar
 		HUDFont fnt = mHUDSmallFont;
@@ -1953,7 +1953,7 @@ class SevHUD : DoomStatusBar
 		// Don't draw a status bar at all in Lexicon VR
 		if (mapset == "none")
 			return;
-		
+
 		// Pester people still running old Lexicon
 		if (mapset == "version-mismatch")
 		{
@@ -1977,7 +1977,7 @@ class SevHUD : DoomStatusBar
 		lump = Wads.CheckNumForFullName("wadfused.txt");
 		if (lump >= 0)
 		{
-			if (CVar.GetCVar("wf_compat_id24_weapons", CPlayer) != null)			
+			if (CVar.GetCVar("wf_compat_id24_weapons", CPlayer) != null)
 			{
 				// 1: use FUEL in LoR only
 				// 2: use FUEL in all maps
@@ -1996,7 +1996,7 @@ class SevHUD : DoomStatusBar
 		}
 
 		// Start drawing
-		
+
 		// Standard bar
 		if (useFuel == false)
 		{
@@ -2024,7 +2024,7 @@ class SevHUD : DoomStatusBar
 
 		if (CVar.GetCVar("sevhud_extra", CPlayer).GetBool())
 		{
-			
+
 			if (statNumbers)
 			{
 				DrawStatusBarStats(state, basefilepath, statNumbers);
@@ -2111,7 +2111,7 @@ class SevHUD : DoomStatusBar
 			// Draw weapons numbers
 
 			// Determine active weapons gfx
-			
+
 			// Set defaults
 			string armsy2 = "STYSNUM2";
 			string armsy3 = "STYSNUM3";
@@ -2131,7 +2131,7 @@ class SevHUD : DoomStatusBar
 				armsy6 = basefilepath..mapset.."/st_ynum6.png";
 				armsy7 = basefilepath..mapset.."/st_ynum7.png";
 			}
-			
+
 			// Determine inactive weapons gfx
 
 			// Set defaults
