@@ -14,14 +14,10 @@ class SevHUD_Heretic : BaseStatusBar
 	// HP bar
 	Actor prevAimTarget;
 	double healthBarAlpha;
-	bool dontdrawnames;
 	int normalTxtColor;
 	int nameTxtColor;
 
 	string mapset;
-	HUDFont bigNumbers;
-	string powerups;
-	bool oldLexicon;
 	int lump;
 
 	string basefilepath;
@@ -295,79 +291,40 @@ class SevHUD_Heretic : BaseStatusBar
 	//
 	//===========================================================================
 
-/*	void DrawStatusBarPowerups(string basefilepath)
+void DrawStatusBarPowerups(void)
 	{
+		string basefilepath = "graphics/SevHUD/";
+
 		// Get powerup states
 		let invul = Powerup(CPlayer.mo.FindInventory("PowerInvulnerable"));
-		let lightamp = Powerup(CPlayer.mo.FindInventory("PowerLightAmp"));
-		let invis = Powerup(CPlayer.mo.FindInventory("PowerInvisibility"));
-		let berserk = CPlayer.mo.FindInventory("PowerStrength");
-		let radsuit = Powerup(CPlayer.mo.FindInventory("PowerIronFeet"));
+		let lightamp = Powerup(CPlayer.mo.FindInventory("PowerTorch"));
+		let invis = Powerup(CPlayer.mo.FindInventory("PowerGhost"));
+		let berserk = Powerup(CPlayer.mo.FindInventory("PowerWeaponLevel2"));
+		let flight = Powerup(CPlayer.mo.FindInventory("PowerFlight"));
 		let allmap = Level.allmap;
 
 		// Draw mapset-specific gfx, fallback to standard
-		lump = Wads.CheckNumForFullName(basefilepath..powerups.."/st_extra.png");
-		if (lump >= 0)
-			DrawImage(basefilepath..powerups.."/st_extra.png", (-53, 168), DI_ITEM_OFFSETS);
-		else
-			DrawImage(basefilepath.."standard/st_extra.png", (-53, 168), DI_ITEM_OFFSETS);
+		DrawImage(basefilepath.."st_extra.png", (-53, 168), DI_ITEM_OFFSETS);
 
 		if (invul)
-		{
-			lump = Wads.CheckNumForFullName(basefilepath..powerups.."/st_invul.png");
-			if (lump >= 0)
-				// These specialized blank bar background graphics help the foreground graphic draw better. I was getting erroneous black pixels otherwise
-				DrawBar(basefilepath..powerups.."/st_invul.png", basefilepath..powerups.."/st_invulback.png", int(Ceil(double(invul.EffectTics))), int(Ceil(double(invul.MaxEffectTics))), invuloffset + (-48, 172), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
-			else
-				DrawBar(basefilepath.."standard/st_invul.png", basefilepath.."standard/st_invulback.png", int(Ceil(double(invul.EffectTics))), int(Ceil(double(invul.MaxEffectTics))), (-48, 172), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
-		}
+			DrawBar(basefilepath.."st_ring.png", basefilepath.."st_ringback.png", int(Ceil(double(invul.EffectTics))), int(Ceil(double(invul.MaxEffectTics))), (-48, 172), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
 
 		if (lightamp)
-		{
-			lump = Wads.CheckNumForFullName(basefilepath..powerups.."/st_lightamp.png");
-			if (lump >= 0)
-				DrawBar(basefilepath..powerups.."/st_lightamp.png", basefilepath..powerups.."/st_lightampback.png", int(Ceil(double(lightamp.EffectTics))), int(Ceil(double(lightamp.MaxEffectTics))), lightampoffset + (-33, 174), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
-			else
-				DrawBar(basefilepath.."standard/st_lightamp.png", basefilepath.."standard/st_lightampback.png", int(Ceil(double(lightamp.EffectTics))), int(Ceil(double(lightamp.MaxEffectTics))), (-33, 174), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
-		}
+			DrawBar(basefilepath.."st_torch.png", basefilepath.."st_torchback.png", int(Ceil(double(lightamp.EffectTics))), int(Ceil(double(lightamp.MaxEffectTics))), (-31, 172), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
 
 		if (invis)
-		{
-			lump = Wads.CheckNumForFullName(basefilepath..powerups.."/st_invis.png");
-			if (lump >= 0)
-				DrawBar(basefilepath..powerups.."/st_invis.png", basefilepath..powerups.."/st_invisback.png", int(Ceil(double(invis.EffectTics))), int(Ceil(double(invis.MaxEffectTics))), invisoffset + (-17, 172), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
-			else
-				DrawBar(basefilepath.."standard/st_invis.png", basefilepath.."standard/st_invisback.png", int(Ceil(double(invis.EffectTics))), int(Ceil(double(invis.MaxEffectTics))), (-17, 172), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
-		}
+			DrawBar(basefilepath.."st_ghost.png", basefilepath.."st_ghostback.png", int(Ceil(double(invis.EffectTics))), int(Ceil(double(invis.MaxEffectTics))), (-17, 172), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
 
 		if (berserk)
-		{
-			lump = Wads.CheckNumForFullName(basefilepath..powerups.."/st_invis.png");
-			if (lump >= 0)
-				DrawImage(basefilepath..powerups.."/st_berserk.png", berserkoffset + (-48, 188), DI_ITEM_OFFSETS);
-			else
-				DrawImage(basefilepath.."standard/st_berserk.png", (-48, 188), DI_ITEM_OFFSETS);
-		}
+			DrawBar(basefilepath.."st_book.png", basefilepath.."st_bookback.png", int(Ceil(double(berserk.EffectTics))), int(Ceil(double(berserk.MaxEffectTics))), (-48, 185), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
 
-		if (radsuit)
-		{
-			lump = Wads.CheckNumForFullName(basefilepath..powerups.."/st_radsuit.png");
-			if (lump >= 0)
-				DrawBar(basefilepath..powerups.."/st_radsuit.png", basefilepath..powerups.."/st_radsuitback.png", int(Ceil(double(radSuit.EffectTics))), int(Ceil(double(radSuit.MaxEffectTics))), radsuitoffset + (-33, 185), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
-			else
-				DrawBar(basefilepath.."standard/st_radsuit.png", basefilepath.."standard/st_radsuitback.png", int(Ceil(double(radSuit.EffectTics))), int(Ceil(double(radSuit.MaxEffectTics))), (-33, 185), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
-		}
+		if (flight)
+			DrawBar(basefilepath.."st_flight.png", basefilepath.."st_flightback.png", int(Ceil(double(flight.EffectTics))), int(Ceil(double(flight.MaxEffectTics))), (-17, 186), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
 
 		if (allmap)
-		{
-			lump = Wads.CheckNumForFullName(basefilepath..powerups.."/st_allmap.png");
-			if (lump >= 0)
-				DrawImage(basefilepath..powerups.."/st_allmap.png", allmapoffset + (-17, 186), DI_ITEM_OFFSETS);
-			else
-				DrawImage(basefilepath.."standard/st_allmap.png", (-17, 186), DI_ITEM_OFFSETS);
-		}
+			DrawImage(basefilepath.."st_allmap.png", (-33, 186), DI_ITEM_OFFSETS);
 	}
-*/
+
 	//===========================================================================
 	//
 	//
@@ -823,7 +780,7 @@ class SevHUD_Heretic : BaseStatusBar
 				mapname = (Level.Levelname);
 			}
 
-			DrawString(fnt, maplabel.."\cj"..mapname, (160, 165-fontHeight), DI_TEXT_ALIGN_CENTER);
+			DrawString(fnt, maplabel.."\cj"..mapname, (160, 163-fontHeight), DI_TEXT_ALIGN_CENTER);
 		}
 
 		// Start drawing
@@ -903,6 +860,7 @@ class SevHUD_Heretic : BaseStatusBar
 		if (CVar.GetCVar("sevhud_extra", CPlayer).GetBool())
 		{
 			DrawStatusBarStats(state, basefilepath, mIndexFont);
+			DrawStatusBarPowerups();
 		}
 	}
 }
