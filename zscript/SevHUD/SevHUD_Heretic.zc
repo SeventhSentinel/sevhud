@@ -751,6 +751,20 @@ void DrawStatusBarPowerups(void)
 		string basefilepath = "graphics/SevHUD/";
 		string filepath = basefilepath..mapset.."/";
 
+		// health
+		// wiggle the chain if it moves
+		int inthealth =  mHealthInterpolator.GetValue();
+		DrawGem("CHAIN", "LIFEGEM2",inthealth, CPlayer.mo.GetMaxHealth(true), (2, 191 + wiggle), 15, 25, 16, (multiplayer? DI_TRANSLATABLE : 0) | DI_ITEM_LEFT_TOP);
+		DrawShader(SHADER_HORZ, (19, 191), (16, 8));
+		DrawShader(SHADER_HORZ|SHADER_REVERSE, (278, 191), (16, 8));
+		DrawImage("graphics/SevHUD/BARBACK.png", (-25, 148), DI_ITEM_OFFSETS);
+		if (isInvulnerable())
+		{
+			//god mode
+			DrawImage("GOD1", (16, 167), DI_ITEM_OFFSETS);
+			DrawImage("GOD2", (287, 167), DI_ITEM_OFFSETS);
+		}
+
 		// DrawMainBar
 		HUDFont fnt = mHUDSmallFont;
 		int fontHeight = fnt.mFont.GetHeight();
@@ -781,25 +795,6 @@ void DrawStatusBarPowerups(void)
 			}
 
 			DrawString(fnt, maplabel.."\cj"..mapname, (160, 163-fontHeight), DI_TEXT_ALIGN_CENTER);
-		}
-
-		// Start drawing
-
-		//health
-		//DrawImage("CHAINBAC", (0, 190), DI_ITEM_OFFSETS);
-		// wiggle the chain if it moves
-		int inthealth =  mHealthInterpolator.GetValue();
-		DrawGem("CHAIN", "LIFEGEM2",inthealth, CPlayer.mo.GetMaxHealth(true), (2, 191 + wiggle), 15, 25, 16, (multiplayer? DI_TRANSLATABLE : 0) | DI_ITEM_LEFT_TOP);
-		DrawImage("LTFACE", (0, 190), DI_ITEM_OFFSETS);
-		DrawImage("RTFACE", (276, 190), DI_ITEM_OFFSETS);
-		DrawShader(SHADER_HORZ, (19, 191), (16, 8));
-		DrawShader(SHADER_HORZ|SHADER_REVERSE, (278, 191), (16, 8));
-		DrawImage("graphics/SevHUD/BARBACK.png", (-25, 148), DI_ITEM_OFFSETS);
-		if (isInvulnerable())
-		{
-			//god mode
-			DrawImage("GOD1", (16, 167), DI_ITEM_OFFSETS);
-			DrawImage("GOD2", (287, 167), DI_ITEM_OFFSETS);
 		}
 
 		if (!isInventoryBarVisible())
