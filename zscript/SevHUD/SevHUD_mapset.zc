@@ -1,3 +1,13 @@
+////===========================================================================
+//
+// SevHUD mapset detector
+//
+// ZScript code: Copyright (C) 2025 - 2026 SeventhSentinel
+//
+// License: MIT
+//
+//===========================================================================
+
 extend class SevHUD
 {
 	void PrintChecksum(void)
@@ -24,17 +34,19 @@ extend class SevHUD
 		basefilepath = "graphics/SevHUD/";
 		normalTxtColor = Font.CR_RED;
 		nameTxtColor = Font.CR_WHITE;
-		
+
 		// Graphic offsets don't work for drawing bars, so we'll add them here instead
+		allmapoffset = (0, 0);
+		berserkoffset = (0, 0);
+		invisoffset = (0, 0);
 		invuloffset = (0, 0);
 		lightampoffset = (0, 0);
-		invisoffset = (0, 0);
 		radsuitoffset = (0, 0);
 
 		// Grab a map checksum to figure out what mapset we're in
 
 		// I used to use names instead of strings so I could use a switch
-		// case, but that resulted in different mapsets having the same 
+		// case, but that resulted in different mapsets having the same
 		// checksum as each other. So strings it is!
 
 		string checksum;
@@ -54,7 +66,7 @@ extend class SevHUD
 			{
 				mapset = "uhadron";
 			}
-			
+
 			// Ultimate Doom in Name Only
 			if (checksum == "622f22f54b70aab23e2e8566b53b92c1")
 			{
@@ -63,7 +75,7 @@ extend class SevHUD
 				littlenumbers = mUDINOIndexFont;
 			}
 		}
-		
+
 		if (LevelInfo.MapExists("E2M1"))
 		{
 			checksum = LevelInfo.MapChecksum("E2M1");
@@ -78,7 +90,7 @@ extend class SevHUD
 			(checksum == "f27e523702be6c2d14b2e83983af218a"))
 				mapset = "alienstc";
 		}
-		
+
 		// Legacy of Rust (WadFusion)
 		int lump;
 		lump = Wads.CheckNumForFullName("wadfused.txt");		//  WadFusion check
@@ -90,7 +102,7 @@ extend class SevHUD
 		if (LevelInfo.MapExists("MAP01"))
 		{
 			checksum = LevelInfo.MapChecksum("MAP01");
-			
+
 			// 400 Minutes of /vr/
 			if (checksum == "fb1ddc26588e0dffdb5cd13a1965c4c8")
 			{
@@ -103,7 +115,7 @@ extend class SevHUD
 			{
 				mapset = "av";
 			}
-					
+
 			// Aliens TC Doom 2 version
 			if (checksum == "6ef79e89e562aab57199af1d572033f4")
 				mapset = "alienstc";
@@ -152,13 +164,13 @@ extend class SevHUD
 				littleNumbers = mBTSX3IndexFont;
 				normalTxtColor = Font.CR_UNTRANSLATED;
 			}
-			
+
 			// Claustrophobia 1024
 			if (checksum == "91e173901e6f3800b81ab646976247cd")
 			{
 				mapset = "clau1024";
 			}
-			
+
 			// Combat Shock 2
 			if (checksum == "b48b4b1caee06eba0b426586ca60aa6")
 			{
@@ -174,7 +186,7 @@ extend class SevHUD
 			{
 				mapset = "cchest";
 				bigNumbers = mRequiemHUDFont;
-				littlenumbers = mGloryTagIndexFont;			
+				littlenumbers = mGloryTagIndexFont;
 			}
 
 			// Deus Vult II (same as Vanguard stbar)
@@ -184,14 +196,14 @@ extend class SevHUD
 				bigNumbers = mVanguardHUDFont;
 				littlenumbers = mVanguardIndexFont;
 			}
-			
+
 			// Doom 64 for Doom 2
 			if (checksum == "ee6f67839988e888ce9a6a817024e482")
 			{
 				mapset = "d64d2";
 				littlenumbers = mD64D2IndexFont;
 			}
-			
+
 			// DWANGO!, Glory Tag, LBDWANGO
 			if ((checksum == "f16b06366fc6c6437de31b7f9bbe6f56") ||	// !
 			(checksum == "8e0a34e808c31d93da0079ddaf88fbc5") ||		// Glory
@@ -201,7 +213,7 @@ extend class SevHUD
 				bigNumbers = mGloryTagHUDFont;
 				littleNumbers = mGloryTagIndexFont;
 			}
-			
+
 			// DWANGO2, DWANGO3, DWANGO4, DWANGO5, DWANGO6, DWANGO7, DWANGO10, DWANGO11, DWANGO12, DWANGO 20th Anniversary, DWANGOX
 			// DWANGO8 does not have a custom STBAR :(
 			if ((checksum == "e3e183ec0d098bb80e666fbe35144d50") ||	// 2
@@ -219,7 +231,7 @@ extend class SevHUD
 				mapset = "dwango2";
 				bigNumbers = mDwango2HUDFont;
 			}
-			
+
 			// Epic 2
 			if (checksum == "c6a0fb52a42a66adc91d0c5acb066db9")
 			{
@@ -237,14 +249,20 @@ extend class SevHUD
 			{
 				mapset = "eviternity2";
 			}
-			
+
+			// Exomoon
+			if (checksum == "b07c4219ff188b36fa8c8af3676363c3")
+			{
+				mapset = "exomoon";
+			}
+
 			// Firefly
 			if (checksum == "0b904ff09f74101c5d0c5ee0b0e247d4")
 			{
 				mapset = "firefly";
 				normalTxtColor = Font.CR_ORANGE;
 			}
-			
+
 			// Going Down
 			if ((checksum == "1dfcba1353e9bbf720f17639f294490d") ||
 			// Going Down Turbo
@@ -252,7 +270,7 @@ extend class SevHUD
 			{
 				mapset = "goingdown";
 			}
-			
+
 			// Gridlock 64
 			if (checksum == "6e3fcb12744e8c36b47fa4e67d973d03")
 			{
@@ -265,13 +283,13 @@ extend class SevHUD
 			{
 				mapset = "hadephobia";
 			}
-			
+
 			// Hell to Pay
 			if (checksum == "b51f5e816b21bef3c36f92f0aada1618")
 			{
 				mapset = "helltopay";
-			}			
-			
+			}
+
 			// Hellbound
 			// I made a minus graphic for this, that's it lol
 			if (checksum == "8f87eeb6b35ce90744f7287ec5a1d145")
@@ -279,27 +297,33 @@ extend class SevHUD
 				mapset = "hellbound";
 				bigNumbers = mHellboundHUDFont;
 			}
-			
+
+			// Infection
+			if (checksum == "dc5cecfe9bbca65b3d09ca6537eb2ade")
+			{
+				mapset = "infection";
+			}
+
 			// Interception
 			if (checksum == "f28c65cfa8d0baadef2918ac996d83bb")
 			{
 				mapset = "interception";
 			}
-			
+
 			// IPXMatch
 			if (checksum == "1cb2f5d140cc0974cbc24427addd1dc0")
 			{
 				mapset = "ipxmatch";
 				bigNumbers = mIPXMatchHUDFont;
 			}
-			
+
 			// Jenesis
 			if (checksum == "4319a664371a3ae927f46261035b170b")
 			{
 				mapset = "jenesis";
 				littlenumbers = mJenesisIndexFont;
 			}
-			
+
 			// Jiffy Bag
 			if (checksum == "9478d8f91efc7548a7d607d011c28a57")
 			{
@@ -313,16 +337,22 @@ extend class SevHUD
 				mapset = "legacyofrust";
 				useFuel = true;
 			}
-			
+
 			// Lost Civilization
 			if (checksum == "a18357279f731d57c38596abafba10b2")
 			{
-				mapset = "lostcivilization";		
+				mapset = "lostcivilization";
 				bigNumbers = mLostCivHUDFont;
 				littlenumbers = mLostCivIndexFont;
 				normalTxtColor = Font.CR_GREEN;
 			}
-			
+
+			// Necromantic Thirst
+			if (checksum == "ee8ec91a8fb68b5d2614e46cfd925222")
+			{
+				mapset = "nt";
+			}
+
 			// NeoDoom Vaccinated
 			if (checksum == "2f76aec2841db70bcf0ba07fc9cf4763")
 			{
@@ -330,7 +360,7 @@ extend class SevHUD
 				bigNumbers = mNeoDoomHUDFont;
 				littlenumbers = mNeoDoomIndexFont;
 			}
-			
+
 			// Perdition's Gate: Resurgeance
 			if (checksum == "9c76fa1bf321d4b0704f291b6f233c0e")
 			{
@@ -356,15 +386,39 @@ extend class SevHUD
 			{
 				mapset = "pl2";
 			}
-			
+
 			// Requiem
 			if (checksum == "5052c313953175798ad9f6933737f5aa")
 			{
 				mapset = "requiem";
 				bigNumbers = mRequiemHUDFont;
-				littlenumbers = mGloryTagIndexFont;			
+				littlenumbers = mGloryTagIndexFont;
 			}
-			
+
+			// Revolution! TV
+			if (checksum == "f99c0a1b6d7214a699637fb9d5367ca5")
+			{
+				mapset = "tvr";
+			}
+
+			// Rise of the Triangles
+			if (checksum == "3e4ae2dd71e542923c2807151de6a9a7")
+			{
+				mapset = "rotr";
+			}
+
+			// Rowdy Rudy II
+			if (checksum == "88f4ef69b728de1e6e9bcfb3b02400a6")
+			{
+				mapset = "Rudy2";
+			}
+
+			// Scientist 2023
+			if (checksum == "ac1595a4ae4a557a3400602d6bf473bb")
+			{
+				mapset = "scientist2023";
+			}
+
 			// Scythe 2
 			if ((checksum == "009855039a4557f5f293b70c5232d473") ||
 			(checksum == "b1228d5758ad1a5a86df6264e71bfa83"))	// Support for my personal Scythe 2 patch; if you're reading this don't ask me for it
@@ -377,7 +431,7 @@ extend class SevHUD
 			{
 				mapset = "sf2011";
 			}
-			
+
 			// Slaughterfest 2012
 			if (checksum == "f9ca26938ad7021aa92eec5868c1c9b0")
 			{
@@ -400,14 +454,41 @@ extend class SevHUD
 				mapset = "sd20x7";
 				normalTxtColor = Font.CR_PURPLE;
 			}
-			
+
+			// Super MAYhem '17
+			// TODO: make this one optional
+			if (checksum == "685c150bd4ea2beab227fe1fd78ac434")
+			{
+				mapset = "supermayhem17";
+				bigNumbers = mSMWHUDFont;
+				littlenumbers = mSMWIndexFont;
+				nameTxtColor = Font.CR_UNTRANSLATED;
+				powerups = mapset;
+				berserkoffset = (0, -3);
+				invisoffset = (-1, 0);
+				radsuitoffset = (1, 0);
+			}
+
+			// Sunder
+			if (checksum == "3c8309ead9332e47e3241abcd11467fd")
+			{
+				mapset = "Sunder";
+				bigNumbers = mNoEndInSightHUDFont;
+			}
+
 			// Sunlust
 			if (checksum == "56f7ec7f82136186fd133d644d36c28d")
 			{
 				mapset = "sunlust";
 				normalTxtColor = Font.CR_UNTRANSLATED;
 			}
-			
+
+			// Team Rocket
+			if (checksum == "a500a960f4693ca2754e1c7c119b5f0d")
+			{
+				mapset = "teamrocket1";
+			}
+
 			// TWANGO1
 			if (checksum == "723c981777e53ba9f89e8b7294a15a74")
 			{
@@ -415,7 +496,7 @@ extend class SevHUD
 				bigNumbers = mIPXMatchHUDFont;	// more polished blue numbers
 				littleNumbers = mD64D2IndexFont;
 			}
-			
+
 			// UAC Ultra
 			if (checksum == "ff1d357dd259a8733e420ad42ffd1c87")
 			{
@@ -423,21 +504,21 @@ extend class SevHUD
 				bigNumbers = mUACUltraHUDFont;
 				nameTxtColor = Font.CR_ORANGE;
 			}
-			
+
 			// UDMX
 			if (checksum == "7f4b63b3194c638e5fd3aa5bffe65489")
 			{
 				mapset = "udmx";
-				bigNumbers = mUDMXHUDFont;				
+				bigNumbers = mUDMXHUDFont;
 			}
-			
+
 			// Valiant
 			if (checksum == "cb8e6a80f7f4f13f5ad0a334ca6c1a66")
 			{
 				mapset = "valiant";
 				nameTxtColor = Font.CR_UNTRANSLATED;
 			}
-			
+
 			// Valiant Vaxx'd
 			if (checksum == "ef1f9c78fd1018594aa2b4d079b5a891")
 			{
@@ -445,13 +526,13 @@ extend class SevHUD
 				nameTxtColor = Font.CR_UNTRANSLATED;	// Still red, but easier to read
 				normalTxtColor = Font.CR_UNTRANSLATED;	// Still red, but easier to read
 			}
-			
+
 			// Vanguard
 			if (checksum == "3da2cc1483e7569872c95f98b5cd5e9d")
 			{
 				mapset = "vanguard";
 				bigNumbers = mVanguardHUDFont;
-				littlenumbers = mVanguardIndexFont;			
+				littlenumbers = mVanguardIndexFont;
 			}
 		}
 
@@ -481,7 +562,7 @@ extend class SevHUD
 				// No stbar in VR
 				if (mapcode == "VR")
 					mapset = "none";
-						
+
 				// 400 Minutes of /vr/
 				if (mapcode == "4MVR")
 				{
@@ -490,7 +571,7 @@ extend class SevHUD
 					littleNumbers = m400minvrIndexFont;
 					statNumbers = m400minvrStatsFont;
 				}
-				
+
 				// Alien Vendetta
 				// Draw Lexicon-specific gfx
 				if (mapcode == "ALVD")
@@ -499,7 +580,7 @@ extend class SevHUD
 					mapset = "avlexicon";
 					bigNumbers = mAVLexiconHUDFont;
 					littleNumbers = mAVLexiconIndexFont;
-				}				
+				}
 
 				// Ancient Aliens
 				if (mapcode == "AALI")
@@ -508,7 +589,7 @@ extend class SevHUD
 					bigNumbers = mAaliensHUDFont;
 					littleNumbers = mAaliensIndexFont;
 				}
-				
+
 				// Bloodspeed
 				if (mapcode == "BDSP")
 				{
@@ -546,7 +627,7 @@ extend class SevHUD
 				{
 					mapset = "cchest";
 					bigNumbers = mRequiemHUDFont;
-					littlenumbers = mGloryTagIndexFont;			
+					littlenumbers = mGloryTagIndexFont;
 				}
 
 				// Deus Vult II (same as Vanguard stbar)
@@ -554,7 +635,7 @@ extend class SevHUD
 				{
 					mapset = "vanguard";
 					bigNumbers = mVanguardHUDFont;
-					littlenumbers = mVanguardIndexFont;			
+					littlenumbers = mVanguardIndexFont;
 				}
 
 				// Doomkid's Deathmatch Series
@@ -571,12 +652,12 @@ extend class SevHUD
 					bigNumbers = mGloryTagHUDFont;
 					littleNumbers = mGloryTagIndexFont;
 				}
-				
+
 				// DWANGO2, DWANGO3, DWANGO4, DWANGO5, DWANGO6, DWANGO7, DWANGO10, DWANGO11, DWANGO12, DWANGO 20th Anniversary
 				if ((mapcode == "DW02") || (mapcode == "DW03") || (mapcode == "DW04") || (mapcode == "DW05") || (mapcode == "DW06") || (mapcode == "DW07") || (mapcode == "DW10") || (mapcode == "DW11") || (mapcode == "DW12") || (mapcode == "DW21") || (mapcode == "DW0X"))
 				{
 					mapset = "dwango2";
-					bigNumbers = mDwango2HUDFont;				
+					bigNumbers = mDwango2HUDFont;
 				}
 
 				// Epic 2
@@ -585,20 +666,20 @@ extend class SevHUD
 					mapset = "epic2";
 					bigNumbers = mGloryTagHUDFont;
 				}
-				
+
 				// Garrulismo
 				if (mapcode == "GRLS")
 				{
 					mapset = "garrulo";
 					littleNumbers = mGarruloIndexFont;
 				}
-				
+
 				// Going Down
 				if (mapcode == "GDWN")
 				{
 					mapset = "goingdown";
 				}
-				
+
 				// Gridlock 64
 				if (mapcode == "GD64")
 				{
@@ -606,7 +687,7 @@ extend class SevHUD
 					bigNumbers = mGridlock64HUDFont;
 					littleNumbers = mGridlock64IndexFont;
 				}
-				
+
 				// Hadephobia
 				if (mapcode == "HADP")
 				{
@@ -614,7 +695,7 @@ extend class SevHUD
 					bigNumbers = mHadephobiaHUDFont;
 					littleNumbers = mHadephobiaIndexFont;
 				}
-				
+
 				// Haste
 				if (mapcode == "HSTE")
 				{
@@ -622,26 +703,26 @@ extend class SevHUD
 					bigNumbers = mHasteHUDFont;
 					littleNumbers = mHasteIndexFont;
 				}
-				
+
 				// Hell to Pay
 				if (mapcode == "HLTP")
 				{
 					mapset = "helltopay";
 				}
-				
+
 				// Hellbound
 				if (mapcode == "HLBD")
 				{
 					mapset = "hellbound";
 					bigNumbers = mHellboundHUDFont;
 				}
-				
+
 				// Interception
 				if (mapcode == "ITC1")
 				{
 					mapset = "interception";
 				}
-				
+
 				// IPXMatch
 				if (mapcode == "IPXM")
 				{
@@ -669,16 +750,16 @@ extend class SevHUD
 					mapset = "lastep1";
 					littleNumbers = mLastEp1IndexFont;
 				}
-				
+
 				// Lost Civilization
 				if (mapcode == "LSCV")
 				{
-					mapset = "lostcivilization";		
+					mapset = "lostcivilization";
 					bigNumbers = mLostCivHUDFont;
 					littlenumbers = mLostCivIndexFont;
 					normalTxtColor = Font.CR_GREEN;
 				}
-				
+
 				// NeoDoom Vaccinated
 				if (mapcode == "NEOD")
 				{
@@ -686,14 +767,14 @@ extend class SevHUD
 					bigNumbers = mNeoDoomHUDFont;
 					littlenumbers = mNeoDoomIndexFont;
 				}
-				
+
 				// NewDoom Community Project 1
 				if (mapcode == "NDC1")
 				{
 					mapset = "ndcp";
 					bigNumbers = mNewDoom1HUDFont;
 				}
-				
+
 				// No End In Sight
 				if (mapcode == "NEIS")
 				{
@@ -701,7 +782,7 @@ extend class SevHUD
 					bigNumbers = mNoEndInSightHUDFont;
 					littlenumbers = mNoEndInSightIndexFont;
 				}
-								
+
 				// Nostalgia Zero
 				if (mapcode == "NSGZ")
 				{
@@ -709,22 +790,34 @@ extend class SevHUD
 					bigNumbers = mNostZeroHUDFont;
 					littlenumbers = mNostZeroIndexFont;
 				}
-								
+
 				// Perdition's Gate: Resurgeance
 				if (mapcode == "PDGR")
 				{
 					mapset = "pg-resurge";
 					bigNumbers = mPGResurgeHUDFont;
 				}
-				
+
 				// Requiem
 				if (mapcode == "REQU")
 				{
 					mapset = "requiem";
 					bigNumbers = mRequiemHUDFont;
-					littlenumbers = mGloryTagIndexFont;			
+					littlenumbers = mGloryTagIndexFont;
 				}
-				
+
+				// Rise of the Triangles
+				if (mapcode == "ROTR")
+				{
+					mapset = "rotr";
+				}
+
+				// Revolution! TV
+				if (mapcode == "TVRV")
+				{
+					mapset = "tvr";
+				}
+
 				// Scythe 2
 				if (mapcode == "URTH")
 				{
@@ -754,7 +847,7 @@ extend class SevHUD
 					bigNumbers = mSF2012HUDFont;
 					littlenumbers = mSF2012IndexFont;
 				}
-				
+
 				// Slaughterfest 3
 				if (mapcode == "SF13")
 				{
@@ -769,7 +862,7 @@ extend class SevHUD
 					mapset = "sod";
 					bigNumbers = mSodHUDFont;
 				}
-				
+
 				// Stardate 20X7
 				if (mapcode == "SDX7")
 				{
@@ -777,7 +870,20 @@ extend class SevHUD
 					littlenumbers = mSD20X7IndexFont;
 					normalTxtColor = Font.CR_PURPLE;
 				}
-				
+
+				// Super MAYhem '17
+				// TODO: make this one optional
+				if (mapcode == "MY17")
+				{
+					mapset = "supermayhem17lexicon";
+					bigNumbers = mSMWHUDFont;
+					littlenumbers = mSMWIndexFont;
+					powerups = mapset;
+					berserkoffset = (0, -3);
+					invisoffset = (-1, 0);
+					radsuitoffset = (1, 0);
+				}
+
 				// Sunlust
 				if (mapcode == "SNLU")
 				{
@@ -786,15 +892,21 @@ extend class SevHUD
 					littlenumbers = mSunlustIndexFont;
 					normalTxtColor = Font.CR_ORANGE;
 				}
-				
+
+				// Team Rocket
+				if (mapcode == "TMR1")
+				{
+					mapset = "teamrocket1";
+				}
+
 				// TWANGO1
 				if (mapcode == "TWN1")
 				{
 					mapset = "twango1";
-					bigNumbers = mIPXMatchHUDFont;				
+					bigNumbers = mIPXMatchHUDFont;
 					littlenumbers = mD64D2IndexFont;
 				}
-				
+
 				// UAC Ultra
 				if (mapcode == "UACU")
 				{
@@ -802,7 +914,7 @@ extend class SevHUD
 					bigNumbers = mUACUltraHUDFont;
 					nameTxtColor = Font.CR_ORANGE;
 				}
-				
+
 				// Ultimate Doom in Name Only
 				if (mapcode == "UDIN")
 				{
@@ -810,14 +922,14 @@ extend class SevHUD
 					bigNumbers = mUDINOHUDFont;
 					littlenumbers = mUDINOIndexFont;
 				}
-				
+
 				// UDMX
 				if (mapcode == "UDMX")
 				{
 					mapset = "udmx";
-					bigNumbers = mUDMXHUDFont;				
+					bigNumbers = mUDMXHUDFont;
 				}
-				
+
 				// Valiant: Vaccinated Edition
 				if (mapcode == "VLNT")
 				{
@@ -833,14 +945,14 @@ extend class SevHUD
 					bigNumbers = mVanguardHUDFont;
 					littlenumbers = mVanguardIndexFont;
 				}
-				
+
 				// Vertex Relocation
 				if (mapcode == "VXRL")
 				{
 					mapset = "vx_reloc";
 					bigNumbers = mVXRelocHUDFont;
 				}
-				
+
 				// DEBUG: Force pester about outdated version in test map
 				if (curmap == "sevhud")
 				{
@@ -855,7 +967,7 @@ extend class SevHUD
 
 		// Mapset is now known
 		gotmapset = true;
-		
+
 		// Debug
 		// console.printf(mapset);
 	}

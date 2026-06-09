@@ -3,7 +3,7 @@
 // SevHUD for Adventures of Square
 //
 // ZScript code: Copyright (C) 2020 - 2025 Nash Muhandes
-// Modifications: Copyright (C) 2025 SeventhSentinel
+// Modifications: Copyright (C) 2025 - 2026 SeventhSentinel
 //
 // License: MIT
 //
@@ -16,9 +16,9 @@ class SevHUD_Square : DoomStatusBar
 
 	HUDFont mHUDSmallFont;
 	HUDFont mHUDConFont;
-	
+
 	HUDFont mDefaultIndexFont;
-	
+
 	Actor prevAimTarget;
 	double healthBarAlpha;
 
@@ -35,7 +35,7 @@ class SevHUD_Square : DoomStatusBar
 
 		mHUDSmallFont = HUDFont.Create(smallfont);
 		mHUDConFont = HUDFont.Create(confont);
-		
+
 		mDefaultIndexFont = HUDFont.Create("DefaultIndexFont");
 
 		InitSevHUD();
@@ -68,7 +68,7 @@ class SevHUD_Square : DoomStatusBar
 			{
 				DrawImage("graphics/SevHUD/square/SQSTBRI.lmp", (0, 168), DI_ITEM_OFFSETS|DI_TRANSLATABLE);
 			}
-			
+
 			// We basically do fullscreenoffsets = true by calling BeginHUD
 			BeginHUD();
 			DrawSevAutomapHUD();
@@ -139,7 +139,13 @@ class SevHUD_Square : DoomStatusBar
 	{
 		int basex = 326;
 
-		// Draw the background first
+		// Draw the background
+
+		// First, which completion display to use?
+		bool extracounts = CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt();
+		bool extracountsautomap = CVar.GetCVar("sevhud_extra_counts_am", CPlayer).GetInt();
+		bool showrawcounts = automapactive ? extracountsautomap : extracounts;
+
 		DrawImage("graphics/SevHUD/square/st_kill.png", (basex, 175), DI_ITEM_OFFSETS);
 		DrawImage("graphics/SevHUD/square/st_item.png", (basex, 181), DI_ITEM_OFFSETS);
 		DrawImage("graphics/SevHUD/square/st_secret.png", (basex, 187), DI_ITEM_OFFSETS);
@@ -163,7 +169,7 @@ class SevHUD_Square : DoomStatusBar
 			DrawString(fnt, FormatNumber(0, 3), (basex + offsetx + 10, 169), DI_TEXT_ALIGN_RIGHT);
 		}
 
-		if (CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt())
+		if (showrawcounts)
 		{
 			// Display raw counts
 			offsetx = offsetx + 10;
@@ -307,7 +313,7 @@ class SevHUD_Square : DoomStatusBar
 		let scanner = Powerup(CPlayer.mo.FindInventory("PowerScanner"));
 
 		if ((invul&&flight)||fast||nodrown||strong||envirosuit||scanner)
-			DrawImage("FS_POWER", (0, 141), DI_ITEM_OFFSETS);					
+			DrawImage("FS_POWER", (0, 141), DI_ITEM_OFFSETS);
 
 		// Same order as base game
 		if (scanner)
@@ -328,12 +334,12 @@ class SevHUD_Square : DoomStatusBar
 		if (nodrown)
 			DrawBar("PW_AIR", "PW_NULL", int(Ceil(double(nodrown.EffectTics))), int(Ceil(double(nodrown.MaxEffectTics))), (3, 156), 0, 0, DI_ITEM_OFFSETS, 1.0);
 
-		// Goonades aren't really a powerup but let's draw them in here anyway		
+		// Goonades aren't really a powerup but let's draw them in here anyway
 		int amt = GetAmount("NumberofGoonades");
 		if (amt >= 1)
 		{
 			DrawImage("FS_NADES", (304, 156), DI_ITEM_OFFSETS);
-			DrawString(fnt, FormatNumber(amt, 3), (318, 162), DI_TEXT_ALIGN_RIGHT, Font.CR_WHITE);			
+			DrawString(fnt, FormatNumber(amt, 3), (318, 162), DI_TEXT_ALIGN_RIGHT, Font.CR_WHITE);
 		}
 	}
 
@@ -360,7 +366,7 @@ class SevHUD_Square : DoomStatusBar
 
 		let fast = Powerup(CPlayer.mo.FindInventory("PowerEnergyDrink"));
 		if (fast)
-			DrawImage("PF_BUBBL", (143, 168), DI_ITEM_OFFSETS);	
+			DrawImage("PF_BUBBL", (143, 168), DI_ITEM_OFFSETS);
 
 		let envirosuit = Powerup(CPlayer.mo.FindInventory("PowerEnviroSuit"));
 		if (envirosuit)
@@ -485,7 +491,7 @@ class SevHUD_Square : DoomStatusBar
 			int minhpcvar = CVar.GetCVar("sevhud_hpbar_min", CPlayer).GetInt();
 			int health = prevAimTarget.Health;
 			int maxHealth = prevAimTarget.GetMaxHealth(true);
-			
+
 			String txt;
 			Bool aimingatplayer = false;
 
@@ -495,9 +501,9 @@ class SevHUD_Square : DoomStatusBar
 			{
 				targName = prevAimTarget.player.GetUserName();
 				aimingatplayer = true;
-			}		
+			}
 			txt = String.Format("%s", targName);
-			
+
 			// See player health regardless of min health threshold
 			If ((aimingatplayer == false) && (minhpcvar > maxHealth))
 			{
@@ -507,19 +513,19 @@ class SevHUD_Square : DoomStatusBar
 			// Cows don't need HP bars
 			if (txt == "Cow")
 				return;
-			
+
 			if (txt == "WinterCow")
 				return;
-			
+
 			if (txt == "SpaceCow")
 				return;
-			
+
 			if (txt == "SpaceCowFloating")
 				return;
-			
+
 			if (txt == "CowboyCow")
 				return;
-			
+
 			if (txt == "MummyCow")
 				return;
 
@@ -532,7 +538,7 @@ class SevHUD_Square : DoomStatusBar
 			// Clean up display names
 			if (txt == "FriendlySquare")
 				txt = "$ENEMY_SQUARE_FRIENDLYSQUARE";
-			
+
 			if (txt == "FriendlySquareWorker")
 				txt = "$ENEMY_SQUARE_FRIENDLYSQUAREWORKER";
 
@@ -740,10 +746,10 @@ class SevHUD_Square : DoomStatusBar
 
 		if (!automapactive)
 			return;
-	
+
 		HUDFont fnt = mDefaultIndexFont;
 		int fontHeight = fnt.mFont.GetHeight();
-		
+
 		int lump;
 		int amt;
 
@@ -798,7 +804,7 @@ class SevHUD_Square : DoomStatusBar
 			// seconds
 			amt = seconds;
 			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-7, basey), DI_TEXT_ALIGN_RIGHT);
-			
+
 			// move the level timer down
 			offsety += fontHeight;
 		}
@@ -806,7 +812,7 @@ class SevHUD_Square : DoomStatusBar
 		// Don't draw anything else if we're already drawing the stats on the status bar
 		if (CVar.GetCVar("sevhud_extra", CPlayer).GetInt())
 			return;
-		
+
 		// Map time
 		if (CVar.GetCVar("am_showtime", CPlayer).GetBool())
 		{
@@ -856,14 +862,14 @@ class SevHUD_Square : DoomStatusBar
 		int pcnt;
 		basey = -33;
 		offsety = 0;
-		
+
 		// For 4:3 play, we need to make sure these stats don't overlap the goonade display
 		int nades = GetAmount("NumberofGoonades");
 
 		if (nades >= 1)
 			offsety -= 12;
 
-		if (CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt())
+		if (CVar.GetCVar("sevhud_extra_counts_am", CPlayer).GetInt())
 		{
 			if (CVar.GetCVar("am_showsecrets", CPlayer).GetBool())
 			{
@@ -887,7 +893,7 @@ class SevHUD_Square : DoomStatusBar
 				DrawImage("graphics/SevHUD/square/st_kill.png", (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
 				amt = Level.total_monsters - Level.killed_monsters;
 				DrawString(fnt, FormatNumber(amt), (-7, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
-			}		
+			}
 		}
 		else
 		{

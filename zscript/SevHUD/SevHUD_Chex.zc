@@ -3,7 +3,7 @@
 // SevHUD for Chex Quest
 //
 // ZScript code: Copyright (C) 2020 - 2025 Nash Muhandes
-// Modifications: Copyright (C) 2025 SeventhSentinel
+// Modifications: Copyright (C) 2025 - 2026 SeventhSentinel
 //
 // License: MIT
 //
@@ -89,7 +89,13 @@ class SevHUD_Chex : DoomStatusBar
 	{
 		int basex = 326;
 
-		// Draw the background first
+		// Draw the background
+
+		// First, which completion display to use?
+		bool extracounts = CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt();
+		bool extracountsautomap = CVar.GetCVar("sevhud_extra_counts_am", CPlayer).GetInt();
+		bool showrawcounts = automapactive ? extracountsautomap : extracounts;
+
 		// Is there a full stats gfx? If so, use that instead of drawing the individual parts
 		int lump;
 
@@ -100,10 +106,10 @@ class SevHUD_Chex : DoomStatusBar
 
 		int amt;
 		int pcnt;
-		
+
 		int offsetx = 32;
 
-		if (CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt())
+		if (showrawcounts)
 		{
 			// Display raw counts
 			offsetx = offsetx + 10;
@@ -286,7 +292,7 @@ class SevHUD_Chex : DoomStatusBar
 			int minhpcvar = CVar.GetCVar("sevhud_hpbar_min", CPlayer).GetInt();
 			int health = prevAimTarget.Health;
 			int maxHealth = prevAimTarget.GetMaxHealth(true);
-			
+
 			String txt;
 			Bool aimingatplayer = false;
 
@@ -296,7 +302,7 @@ class SevHUD_Chex : DoomStatusBar
 			{
 				targName = prevAimTarget.player.GetUserName();
 				aimingatplayer = true;
-			}		
+			}
 			txt = String.Format("%s", targName);
 
 			// See player health regardless of min health threshold
@@ -461,10 +467,10 @@ class SevHUD_Chex : DoomStatusBar
 	{
 		if (!automapactive)
 		return;
-	
+
 		HUDFont fnt = mChexIndexFont;
 		int fontHeight = fnt.mFont.GetHeight();
-		
+
 		int lump;
 		int amt;
 
@@ -515,7 +521,7 @@ class SevHUD_Chex : DoomStatusBar
 			// seconds
 			amt = seconds;
 			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-7, basey), DI_TEXT_ALIGN_RIGHT);
-			
+
 			// move the level timer down
 			offsety += fontHeight;
 		}
@@ -523,7 +529,7 @@ class SevHUD_Chex : DoomStatusBar
 		// Don't draw anything else if we're already drawing the stats on the status bar
 		if (CVar.GetCVar("sevhud_extra", CPlayer).GetInt())
 			return;
-		
+
 		// Map time
 		if (CVar.GetCVar("am_showtime", CPlayer).GetBool())
 		{
@@ -574,7 +580,7 @@ class SevHUD_Chex : DoomStatusBar
 		basey = -33;
 		offsety = 0;
 
-		if (CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt())
+		if (CVar.GetCVar("sevhud_extra_counts_am", CPlayer).GetInt())
 		{
 			if (CVar.GetCVar("am_showsecrets", CPlayer).GetBool())
 			{
@@ -598,7 +604,7 @@ class SevHUD_Chex : DoomStatusBar
 				DrawImage("graphics/SevHUD/chex/st_kill.png", (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
 				amt = Level.total_monsters - Level.killed_monsters;
 				DrawString(fnt, FormatNumber(amt), (-7, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
-			}		
+			}
 		}
 		else
 		{
