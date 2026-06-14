@@ -1,0 +1,861 @@
+//===========================================================================
+//
+// SevHUD for Heretic
+//
+// ZScript code: Copyright (C) 2020 - 2025 Nash Muhandes
+// Modifications: Copyright (C) 2026 SeventhSentinel
+//
+// License: MIT
+//
+//===========================================================================
+
+class SevHUD_Heretic : BaseStatusBar
+{
+	// HP bar
+	Actor prevAimTarget;
+	double healthBarAlpha;
+	int normalTxtColor;
+	int nameTxtColor;
+
+	string mapset;
+	int lump;
+
+	string basefilepath;
+
+	// Fonts
+	HUDFont mHUDSmallFont;
+	HUDFont mHUDConFont;
+
+	// Heretic stuff
+	DynamicValueInterpolator mHealthInterpolator;
+	HUDFont mHUDFont;
+	HUDFont mIndexFont;
+	HUDFont mBigFont;
+	InventoryBarState diparms;
+	InventoryBarState diparms_sbar;
+	private int wiggle;
+
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	override void Init(void)
+	{
+		Super.Init();
+		SetSize(0, 320, 200);
+
+		mHUDSmallFont = HUDFont.Create(smallfont);
+		mHUDConFont = HUDFont.Create(confont);
+
+		// Create the font used for the fullscreen HUD
+		Font fnt = "HUDFONT_RAVEN";
+		mHUDFont = HUDFont.Create(fnt, fnt.GetCharWidth("0") + 1, Mono_CellLeft, 1, 1);
+		fnt = "INDEXFONT_RAVEN";
+		mIndexFont = HUDFont.Create(fnt, fnt.GetCharWidth("0"), Mono_CellLeft);
+		fnt = "BIGFONT";
+		mBigFont = HUDFont.Create(fnt, fnt.GetCharWidth("0"), Mono_CellLeft, 2, 2);
+		diparms = InventoryBarState.Create(mIndexFont);
+		diparms_sbar = InventoryBarState.CreateNoBox(mIndexFont, boxsize:(31, 31), arrowoffs:(0,-10));
+		mHealthInterpolator = DynamicValueInterpolator.Create(0, 0.25, 1, 8);
+
+
+		InitSevHUD();
+	}
+
+	override int GetProtrusion(double scaleratio) const
+	{
+		return scaleratio > 0.7? 8 : 0;
+	}
+
+	override void NewGame(void)
+	{
+		Super.NewGame();
+		mHealthInterpolator.Reset (0);
+		InitSevHUD();
+	}
+
+	override void Tick()
+	{
+		Super.Tick();
+		mHealthInterpolator.Update(CPlayer.health);
+
+		// wiggle the chain if it moves
+		if (Level.time & 1)
+		{
+			wiggle = (mHealthInterpolator.GetValue() != CPlayer.health) && CRandom[ChainWiggle](0, 1);
+		}
+	}
+
+	override void Draw(int state, double TicFrac)
+	{
+		if ((state == HUD_StatusBar)||(state == HUD_Fullscreen))
+		{
+			// draw crosshair etc
+			BaseStatusBar.Draw(state, TicFrac);
+
+			DrawSevHUD(state);
+			DrawHealthBar(state);
+
+			// We basically do fullscreenoffsets = true by calling BeginHUD
+			BeginHUD();
+			DrawSevAutomapHUD();
+		}
+	}
+
+	override void DrawAutomapHUD(double ticFrac)
+	{
+		// do nothing
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void InitSevHUD(void)
+	{
+		prevAimTarget = NULL;
+		healthBarAlpha = 0.;
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void DrawStatusBarStats(int state, string basefilepath, HUDFont fnt)
+	{
+		int basex = 326;
+		int amt;
+		string imgcolon = basefilepath.."standard/st_colon.png";
+		string statimgfilepath;
+
+		if (deathmatch || teamplay)
+		{
+			// Deathmatch
+
+			// Draw time label
+			DrawImage(basefilepath.."standard/st_time.png", (basex, 191), DI_ITEM_OFFSETS);
+
+			// Move arms here
+
+			// Active weapons gfx
+
+			string armsy2 = "SMALLIN2";
+			string armsy3 = "SMALLIN3";
+			string armsy4 = "SMALLIN4";
+			string armsy5 = "SMALLIN5";
+			string armsy6 = "SMALLIN6";
+			string armsy7 = "SMALLIN7";
+
+			// Inactive weapons gfx
+
+			string armsg2 = "graphics/SevHUD/standard/st_gnum2.png";
+			string armsg3 = "graphics/SevHUD/standard/st_gnum3.png";
+			string armsg4 = "graphics/SevHUD/standard/st_gnum4.png";
+			string armsg5 = "graphics/SevHUD/standard/st_gnum5.png";
+			string armsg6 = "graphics/SevHUD/standard/st_gnum6.png";
+			string armsg7 = "graphics/SevHUD/standard/st_gnum7.png";
+
+			// Draw the numbers
+			DrawImage(CPlayer.HasWeaponsInSlot(2)? armsy2 : armsg2, (basex+8, 173), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(3)? armsy3 : armsg3, (basex+20, 173), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(4)? armsy4 : armsg4, (basex+32, 173), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(5)? armsy5 : armsg5, (basex+8, 182), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(6)? armsy6 : armsg6, (basex+20, 182), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(7)? armsy7 : armsg7, (basex+32, 182), DI_ITEM_OFFSETS);
+		}
+
+		else
+		{
+			// Singleplayer/co-op
+
+			// Draw the background
+
+			// First, which completion display to use?
+			bool extracounts = CVar.GetCVar("sevhud_extra_counts", CPlayer).GetInt();
+			bool extracountsautomap = CVar.GetCVar("sevhud_extra_counts_am", CPlayer).GetInt();
+			bool showrawcounts = automapactive ? extracountsautomap : extracounts;
+
+			statimgfilepath = basefilepath.."standard";
+			DrawImage(statimgfilepath.."/st_kill.png", (basex, 173), DI_ITEM_OFFSETS);
+			DrawImage(statimgfilepath.."/st_item.png", (basex, 179), DI_ITEM_OFFSETS);
+			DrawImage(statimgfilepath.."/st_secret.png", (basex, 185), DI_ITEM_OFFSETS);
+			DrawImage(statimgfilepath.."/st_time.png", (basex, 191), DI_ITEM_OFFSETS);
+
+			int pcnt;
+			int mppcnt;
+
+			int offsetx = 32;
+
+			// Completion stats
+			if (showrawcounts)
+			{
+				// Display raw counts
+				offsetx = offsetx + 11;
+				// kills
+				amt = Level.total_monsters - Level.killed_monsters;
+				DrawString(fnt, FormatNumber(amt), (basex + offsetx, 173), DI_TEXT_ALIGN_RIGHT);
+				// items
+				amt = Level.total_items - Level.found_items;
+				DrawString(fnt, FormatNumber(amt), (basex + offsetx, 179), DI_TEXT_ALIGN_RIGHT);
+				// secrets
+				amt = Level.total_secrets - Level.found_secrets;
+				DrawString(fnt, FormatNumber(amt), (basex + offsetx, 185), DI_TEXT_ALIGN_RIGHT);
+			}
+			else
+			{
+				// Display percentages
+				// kills
+				pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
+
+				amt = pcnt;
+				DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx + 1, 173), DI_TEXT_ALIGN_RIGHT);
+
+				// items
+				pcnt = Level.total_items ? 100 * Level.found_items / Level.total_items : 100;
+
+				amt = pcnt;
+				DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx + 1, 179), DI_TEXT_ALIGN_RIGHT);
+
+				// secrets
+				pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
+
+				amt = pcnt;
+				DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx + 1, 185), DI_TEXT_ALIGN_RIGHT);
+
+				// Draw % symbols
+				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + offsetx + 5, 173), DI_ITEM_OFFSETS);
+				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + offsetx + 5, 179), DI_ITEM_OFFSETS);
+				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + offsetx + 5, 185), DI_ITEM_OFFSETS);
+			}
+		}
+
+		// time stuff
+		bool sucks = false;
+		int hoursoffset = 0;
+		int minsdigits = 1;
+		int timeSeconds = Thinker.Tics2Seconds(Level.time);
+		int hours   = timeSeconds / 3600;
+		int minutes = (timeSeconds % 3600) / 60;
+		int seconds = timeSeconds % 60;
+
+		// if ((hours >= Level.sucktime) || (hours >= 10))
+		if (hours >= 10)
+			sucks = true;
+
+		int debugtime = CVar.GetCVar("sevhud_debugtime", CPlayer).GetInt();
+		if (debugtime >= 1)
+		{
+			hours = debugtime;
+			minutes = debugtime;
+		}
+
+		if (!sucks)
+		{
+			// hours
+			if (hours >= 1)
+			{
+				hoursoffset = 1;
+				amt = hours;
+				DrawString(fnt, FormatNumber(amt, 1, format: 2), (basex + 21, 191), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(imgcolon, (basex + 21, 192), DI_ITEM_OFFSETS);
+			}
+
+			// minutes
+			DrawImage(imgcolon, (basex + 32, 192), DI_ITEM_OFFSETS);
+			if ((minutes >= 10) || (hours >= 1))
+				minsdigits = 2;
+			amt = minutes;
+			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (basex + 31 + hoursoffset, 191), DI_TEXT_ALIGN_RIGHT);
+
+			// seconds
+			amt = seconds;
+			DrawString(fnt, FormatNumber(amt, 2, format: 2), (basex + 43, 191), DI_TEXT_ALIGN_RIGHT);
+		}
+		else
+		{
+			// time sucks
+			DrawImage("graphics/SevHUD/standard/st_sucks.png", (basex + 18, 191), DI_ITEM_OFFSETS);
+		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+void DrawStatusBarPowerups(void)
+	{
+		string basefilepath = "graphics/SevHUD/";
+
+		// Get powerup states
+		let invul = Powerup(CPlayer.mo.FindInventory("PowerInvulnerable"));
+		let lightamp = Powerup(CPlayer.mo.FindInventory("PowerTorch"));
+		let invis = Powerup(CPlayer.mo.FindInventory("PowerGhost"));
+		let berserk = Powerup(CPlayer.mo.FindInventory("PowerWeaponLevel2"));
+		let flight = Powerup(CPlayer.mo.FindInventory("PowerFlight"));
+		let allmap = Level.allmap;
+
+		// Draw mapset-specific gfx, fallback to standard
+		DrawImage(basefilepath.."st_extra.png", (-53, 168), DI_ITEM_OFFSETS);
+
+		if (invul)
+			DrawBar(basefilepath.."st_ring.png", basefilepath.."st_ringback.png", int(Ceil(double(invul.EffectTics))), int(Ceil(double(invul.MaxEffectTics))), (-48, 172), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
+
+		if (lightamp)
+			DrawBar(basefilepath.."st_torch.png", basefilepath.."st_torchback.png", int(Ceil(double(lightamp.EffectTics))), int(Ceil(double(lightamp.MaxEffectTics))), (-31, 172), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
+
+		if (invis)
+			DrawBar(basefilepath.."st_ghost.png", basefilepath.."st_ghostback.png", int(Ceil(double(invis.EffectTics))), int(Ceil(double(invis.MaxEffectTics))), (-17, 172), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
+
+		if (berserk)
+			DrawBar(basefilepath.."st_book.png", basefilepath.."st_bookback.png", int(Ceil(double(berserk.EffectTics))), int(Ceil(double(berserk.MaxEffectTics))), (-48, 185), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
+
+		if (flight)
+			DrawBar(basefilepath.."st_flight.png", basefilepath.."st_flightback.png", int(Ceil(double(flight.EffectTics))), int(Ceil(double(flight.MaxEffectTics))), (-17, 186), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
+
+		if (allmap)
+			DrawImage(basefilepath.."st_allmap.png", (-33, 186), DI_ITEM_OFFSETS);
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	// taken from GZDoom's vdraw.cpp
+	int GetUIScale(int altval)
+	{
+		int scaleval;
+		if (altval > 0)
+			scaleval = altval;
+		else if (uiscale == 0)
+		{
+			// Default should try to scale to 640x400
+			int vscale = Screen.GetHeight() / 400;
+			int hscale = Screen.GetWidth() / 640;
+			scaleval = clamp(vscale, 1, hscale);
+		}
+		else scaleval = uiscale;
+
+		// block scales that result in something larger than the current screen.
+		int vmax = Screen.GetHeight() / 200;
+		int hmax = Screen.GetWidth() / 320;
+		int smax = max(vmax, hmax);
+		return max(1, min(scaleval, smax));
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void DrawHealthBar(int state)
+	{
+		if (!CPlayer || !CPlayer.mo)
+			return;
+
+		if (!CVar.GetCVar("sevhud_hpbar", CPlayer).GetBool())
+			return;
+
+		if (automapactive)
+			return;
+
+		let tracer = SevHUDHealthTracer(CPlayer.mo.FindInventory("SevHUDHealthTracer"));
+		if (!tracer)
+			return;
+
+		if (tracer.currentAimTarget && CPlayer.playerstate == PST_LIVE)
+		{
+			prevAimTarget = tracer.currentAimTarget;
+			healthBarAlpha = 1.0;
+		}
+		else
+		{
+			healthBarAlpha *= 0.926;
+		}
+
+		if (prevAimTarget)
+		{
+			// get fonts
+			Font fnt = mHUDSmallFont.mFont;
+
+			// fonts are invalid, cancel drawing
+			if (!fnt)
+				return;
+
+			String txt;
+			Bool aimingatplayer = false;
+
+			// Get target name
+			String targName = prevAimTarget.GetCharacterName();
+			if (prevAimTarget is "PlayerPawn" && prevAimTarget.player && playeringame[prevAimTarget.PlayerNumber()])
+			{
+				targName = prevAimTarget.player.GetUserName();
+				aimingatplayer = true;
+			}
+
+			// retrieve target health
+			int minhpcvar = CVar.GetCVar("sevhud_hpbar_min", CPlayer).GetInt();
+			int health = prevAimTarget.Health;
+			int maxHealth = prevAimTarget.GetMaxHealth(true);
+
+			// See player health regardless of min health threshold
+			If ((aimingatplayer == false) && (minhpcvar > maxHealth))
+			{
+				return;
+			}
+
+			string classtype;
+			bool shadowed = prevAimTarget.bShadow;
+			bool stealthed = prevAimTarget.bStealth;
+
+			// Hide stealth monster HP bars
+			int hidestealth = CVar.GetCVar("sevhud_hpbar_hidestealth", CPlayer).GetInt();
+			if (hidestealth > 0)
+			{
+				if ((shadowed == true) || (stealthed == true))
+				{
+					// Always hide
+					if (hidestealth > 1)
+					{
+						return;
+					}
+					else
+					// Hide if full health -- lets them sneak up on ya
+					{
+						if (health == maxHealth)
+							return;
+					}
+				}
+			}
+
+			// Set default text
+			txt = String.Format("%s", targName);
+
+			// no need to draw 0 or negative health
+			if (health <= 0)
+				return;
+
+			// base Y position of the entire HP bar interface
+			let scale = GetUIScale(con_scaletext);
+			double baseYPos = (fnt.GetHeight() * scale) * con_notifylines;
+			baseYPos /= CleanYFac;
+			baseYPos += fnt.GetHeight();
+
+			// draw background
+
+			string img = "graphics/SevHUD/hp_back.png";
+
+			let bgTex = TexMan.CheckForTexture(img);
+			if (bgTex.IsValid())
+			{
+				Vector2 bgTexSize = TexMan.GetScaledSize(bgTex);
+				Screen.DrawTexture(bgTex, false,
+					(Screen.GetWidth() / 2) - ((bgTexSize.X / 2) * CleanXFac),
+					(baseYPos * CleanYFac),
+					DTA_CleanNoMove, true,
+					DTA_KeepRatio, true,
+					DTA_Alpha, 0.66 * healthBarAlpha);
+			}
+
+			// draw health bar
+			img = "graphics/SevHUD/hp_bar.png";
+
+			let barTex = TexMan.CheckForTexture(img);
+			if (barTex.IsValid())
+			{
+				Vector2 barTexSize = TexMan.GetScaledSize(barTex);
+
+				// get the starting X pos to clip to
+				int clipX = (Screen.GetWidth() / 2) - ((int(barTexSize.X) / 2) * CleanXFac);
+
+				// get the full X size of the texture
+				int fullClip = (int(barTexSize.X) * CleanXFac);
+
+				// get health percentage
+				int healthPercent = 100 * health / maxHealth;
+				int maxClip = fullClip * healthPercent / 100;
+
+				// set the clipping
+				clipX += maxClip;
+
+				Screen.DrawTexture(barTex, false,
+					(Screen.GetWidth() / 2) - ((barTexSize.X / 2) * CleanXFac),
+					(baseYPos * CleanYFac),
+					DTA_ClipRight, int(clipX),
+					DTA_CleanNoMove, true,
+					DTA_KeepRatio, true,
+					DTA_Alpha, healthBarAlpha);
+			}
+
+			// draw HP bar border
+			img = "graphics/SevHUD/hp_border.png";
+
+			let brdTex = TexMan.CheckForTexture(img);
+			if (brdTex.IsValid())
+			{
+				Vector2 brdTexSize = TexMan.GetScaledSize(brdTex);
+				Screen.DrawTexture(brdTex, false,
+					(Screen.GetWidth() / 2) - ((brdTexSize.X / 2) * CleanXFac),
+					(baseYPos * CleanYFac),
+					DTA_CleanNoMove, true,
+					DTA_KeepRatio, true,
+					DTA_Alpha, healthBarAlpha);
+			}
+
+			// Draw target name
+			Screen.DrawText(fnt, Font.CR_WHITE,
+				(Screen.GetWidth() / 2) - ((fnt.StringWidth(txt) / 2) * CleanXFac),
+				(baseYPos * CleanYFac) - (fnt.GetHeight() * CleanYFac),
+				txt,
+				DTA_CleanNoMove, true,
+				DTA_KeepRatio, true,
+				DTA_Alpha, healthBarAlpha);
+
+			// draw target health in numbers
+			txt = String.Format("%d/%d", health, maxHealth);
+			Screen.DrawText(fnt, Font.CR_RED,
+				(Screen.GetWidth() / 2) - ((fnt.StringWidth(txt) / 2) * CleanXFac),
+				(baseYPos * CleanYFac) + (fnt.GetHeight() * CleanYFac) - (fnt.GetHeight() * CleanYFac) + (3 * CleanYFac),
+				txt,
+				DTA_CleanNoMove, true,
+				DTA_KeepRatio, true,
+				DTA_Alpha, healthBarAlpha);
+		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void DrawSevAutomapHUD(void)
+	{
+		if (!automapactive)
+		return;
+
+		HUDFont fnt = mIndexFont;
+
+		int fontHeight = fnt.mFont.GetHeight();
+
+		int amt;
+
+		int basey = 4;
+		int offsety = 0;
+
+		string filepath = "graphics/SevHUD/standard/";
+
+		// Which colon gfx to use?
+		string imgcolon = filepath.."st_colon.png";
+
+		// Global timer
+		if (CVar.GetCVar("am_showtotaltime", CPlayer).GetBool())
+		{
+			int hoursoffset = 0;
+			int hoursdigits = 1;
+			int minsdigits = 1;
+			int timeSeconds = Thinker.Tics2Seconds(Level.totaltime);
+			int hours   = timeSeconds / 3600;
+			int minutes = (timeSeconds % 3600) / 60;
+			int seconds = timeSeconds % 60;
+
+			int debugtime = CVar.GetCVar("sevhud_debugtime", CPlayer).GetInt();
+			if (debugtime >= 1)
+			{
+				hours = debugtime;
+				minutes = debugtime;
+			}
+
+			// hours
+			if (hours >= 1)
+			{
+				if (hours >= 10)
+					hoursdigits = 2;
+
+				if (hours >= 100)
+					hoursdigits = 3;
+
+				hoursoffset = 1;
+				amt = hours;
+				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (-28, basey), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(imgcolon, (-28, basey + 1), DI_ITEM_OFFSETS);
+			}
+
+			// minutes
+			if ((minutes >= 10) || (hours >= 1))
+				minsdigits = 2;
+			amt = minutes;
+			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (hoursoffset-18, basey), DI_TEXT_ALIGN_RIGHT);
+
+			DrawImage(imgcolon, (-17, basey + 1), DI_ITEM_OFFSETS);
+
+			// seconds
+			amt = seconds;
+			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-6, basey), DI_TEXT_ALIGN_RIGHT);
+
+			// move the level timer down
+			offsety += fontHeight;
+		}
+
+		// Don't draw anything else if we're already drawing the stats on the status bar
+		if (CVar.GetCVar("sevhud_extra", CPlayer).GetInt())
+			return;
+
+		// Map time
+		if (CVar.GetCVar("am_showtime", CPlayer).GetBool())
+		{
+			int hoursoffset = 0;
+			int hoursdigits = 1;
+			int minsdigits = 1;
+			int timeSeconds = Thinker.Tics2Seconds(Level.time);
+			int hours   = timeSeconds / 3600;
+			int minutes = (timeSeconds % 3600) / 60;
+			int seconds = timeSeconds % 60;
+
+			string basefilepath = "graphics/SevHUD/";
+			string mapset = "standard";
+			string filepath = basefilepath..mapset.."/";
+
+			int debugtime = CVar.GetCVar("sevhud_debugtime", CPlayer).GetInt();
+			if (debugtime >= 1)
+			{
+				hours = debugtime;
+				minutes = debugtime;
+			}
+
+			// hours
+			if (hours >= 1)
+			{
+				if (hours >= 10)
+					hoursdigits = 2;
+
+				if (hours >= 100)
+					hoursdigits = 3;
+
+				hoursoffset = 1;
+				amt = hours;
+				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (-28, basey + offsety), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(imgcolon, (-27, basey + offsety + 1), DI_ITEM_OFFSETS);
+			}
+
+			// minutes
+			if ((minutes >= 10) || (hours >= 1))
+				minsdigits = 2;
+			amt = minutes;
+			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (hoursoffset-18, basey + offsety), DI_TEXT_ALIGN_RIGHT);
+
+			DrawImage(imgcolon, (-17, basey + offsety + 1), DI_ITEM_OFFSETS);
+
+			// seconds
+			amt = seconds;
+			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-6, basey + offsety), DI_TEXT_ALIGN_RIGHT);
+		}
+
+		// The other stats aren't very useful in deathmatch
+		if (deathmatch || teamplay)
+			return;
+
+		int pcnt;
+		int mppcnt;
+		basey = -33;
+		offsety = 0;
+
+
+
+		// Completion stats
+		bool usecounts = (CVar.GetCVar("sevhud_extra_counts_am", CPlayer).GetInt());
+		if (CVar.GetCVar("am_showsecrets", CPlayer).GetBool())
+		{
+			string imgsecret = filepath.."st_secret.png";
+
+			// Draw automap secrets
+			DrawImage(imgsecret, (-48, basey-fontHeight), DI_ITEM_OFFSETS);
+			if (usecounts == false)
+			{
+				pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
+				amt = pcnt;
+				DrawString(fnt, FormatNumber(amt, 3), (-15, basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(filepath.."st_prcnt2.png", (-11, basey-fontHeight), DI_ITEM_OFFSETS);
+			}
+			else
+			{
+				amt = Level.total_secrets - Level.found_secrets;
+				DrawString(fnt, FormatNumber(amt), (-6, basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+			}
+
+			offsety -= fontHeight;
+		}
+
+		if (CVar.GetCVar("am_showitems", CPlayer).GetBool())
+		{
+			// Which items gfx to use?
+			string imgitem = filepath.."st_item.png";
+
+			// Draw automap items
+			DrawImage(imgitem, (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+			if (usecounts == false)
+			{
+				amt = pcnt;
+				DrawString(fnt, FormatNumber(amt, 3), (-15, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(filepath.."st_prcnt2.png", (-11, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+			}
+			else
+			{
+				amt = Level.total_items - Level.found_items;
+				DrawString(fnt, FormatNumber(amt), (-6, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+			}
+
+			offsety -= fontHeight;
+		}
+
+		if (CVar.GetCVar("am_showmonsters", CPlayer).GetBool())
+		{
+			string imgkill = filepath.."st_kill.png";
+
+			// Draw automap kills
+			DrawImage(imgkill, (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+			if (usecounts == false)
+			{
+				pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
+				amt = pcnt;
+				DrawString(fnt, FormatNumber(amt, 3), (-15, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(filepath.."st_prcnt2.png", (-11, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+			}
+			else
+			{
+				amt = Level.total_monsters - Level.killed_monsters;
+				DrawString(fnt, FormatNumber(amt), (-6, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+			}
+		}
+	}
+
+	//===========================================================================
+	//
+	//
+	//
+	//===========================================================================
+
+	void DrawSevHUD(int state)
+	{
+		string basefilepath = "graphics/SevHUD/";
+		string filepath = basefilepath..mapset.."/";
+
+		// health
+		// wiggle the chain if it moves
+		int inthealth =  mHealthInterpolator.GetValue();
+		DrawGem("CHAIN", "LIFEGEM2",inthealth, CPlayer.mo.GetMaxHealth(true), (2, 191 + wiggle), 15, 25, 16, (multiplayer? DI_TRANSLATABLE : 0) | DI_ITEM_LEFT_TOP);
+		DrawShader(SHADER_HORZ, (19, 191), (16, 8));
+		DrawShader(SHADER_HORZ|SHADER_REVERSE, (278, 191), (16, 8));
+		DrawImage("graphics/SevHUD/BARBACK.png", (-25, 148), DI_ITEM_OFFSETS);
+		if (isInvulnerable())
+		{
+			//god mode
+			DrawImage("GOD1", (16, 167), DI_ITEM_OFFSETS);
+			DrawImage("GOD2", (287, 167), DI_ITEM_OFFSETS);
+		}
+
+		// DrawMainBar
+		HUDFont fnt = mHUDSmallFont;
+		int fontHeight = fnt.mFont.GetHeight();
+		if (automapactive)
+		{
+			// Map label/name
+
+			string maplabel = "";
+			string mapname = "";
+
+			int am_showmaplabel = CVar.GetCVar("am_showmaplabel", CPlayer).GetInt();
+			bool showmaplabel = false;
+			bool showmapname = CVar.GetCVar("am_showlevelname", CPlayer).GetBool();
+
+			if ((am_showmaplabel == 1) || (am_showmaplabel == 2) && (!(Level.clusterflags & Level.CLUSTER_HUB)))
+				showmaplabel = true;
+
+			if (showmaplabel)
+			{
+				maplabel = Level.MapName;
+				if (showmapname)
+					maplabel = maplabel..": ";
+			}
+
+			if (showmapname)
+			{
+				mapname = (Level.Levelname);
+			}
+
+			DrawString(fnt, maplabel.."\cj"..mapname, (160, 163-fontHeight), DI_TEXT_ALIGN_CENTER);
+		}
+
+		if (!isInventoryBarVisible())
+		{
+			//statbar
+			DrawImage("graphics/SevHUD/LIFEBAR.png", (34, 160), DI_ITEM_OFFSETS);
+			if (!deathmatch)
+			{
+				//DrawImage("ARMCLEAR", (57, 171), DI_ITEM_OFFSETS);
+				DrawString(mHUDFont, FormatNumber(mHealthInterpolator.GetValue(), 3), (88, 170), DI_TEXT_ALIGN_RIGHT);
+			}
+			else
+			{
+				DrawImage("graphics/SevHUD/KILLS.png", (54, 160), DI_ITEM_OFFSETS);
+				DrawImage("ARMCLEAR", (57, 171), DI_ITEM_OFFSETS);
+				DrawString(mHUDFont, FormatNumber(CPlayer.FragCount, 3), (88, 170), DI_TEXT_ALIGN_RIGHT);
+			}
+			DrawString(mHUDFont, FormatNumber(GetArmorAmount(), 3), (255, 170), DI_TEXT_ALIGN_RIGHT);
+
+			//ammo
+			Ammo ammo1, ammo2;
+			[ammo1, ammo2] = GetCurrentAmmo();
+			if (ammo1 != null && ammo2 == null)
+			{
+				DrawString(mHUDFont, FormatNumber(ammo1.Amount, 3), (136, 162), DI_TEXT_ALIGN_RIGHT);
+				DrawTexture(ammo1.icon, (123, 180), DI_ITEM_CENTER);
+			}
+			else if (ammo2 != null)
+			{
+				DrawString(mIndexFont, FormatNumber(ammo1.Amount, 3), (137, 165), DI_TEXT_ALIGN_RIGHT);
+				DrawString(mIndexFont, FormatNumber(ammo2.Amount, 3), (137, 177), DI_TEXT_ALIGN_RIGHT);
+				DrawTexture(ammo1.icon, (115, 169), DI_ITEM_CENTER);
+				DrawTexture(ammo2.icon, (115, 180), DI_ITEM_CENTER);
+			}
+
+			//keys
+			if (CPlayer.mo.CheckKeys(3, false, true)) DrawImage("YKEYICON", (153, 164), DI_ITEM_OFFSETS);
+			if (CPlayer.mo.CheckKeys(1, false, true)) DrawImage("GKEYICON", (153, 172), DI_ITEM_OFFSETS);
+			if (CPlayer.mo.CheckKeys(2, false, true)) DrawImage("BKEYICON", (153, 180), DI_ITEM_OFFSETS);
+
+			//inventory box
+			if (CPlayer.mo.InvSel != null)
+			{
+				DrawInventoryIcon(CPlayer.mo.InvSel, (194, 175), DI_ARTIFLASH|DI_ITEM_CENTER|DI_DIMDEPLETED, boxsize:(28, 28));
+				if (CPlayer.mo.InvSel.Amount > 1)
+				{
+					DrawString(mIndexFont, FormatNumber(CPlayer.mo.InvSel.Amount, 3), (209, 182), DI_TEXT_ALIGN_RIGHT);
+				}
+			}
+		}
+		else
+		{
+			DrawImage("INVBAR", (34, 160), DI_ITEM_OFFSETS);
+			DrawInventoryBar(diparms_sbar, (49, 160), 7, DI_ITEM_LEFT_TOP, HX_SHADOW);
+		}
+
+		// Draw stats
+		if (CVar.GetCVar("sevhud_extra", CPlayer).GetBool())
+		{
+			DrawStatusBarStats(state, basefilepath, mIndexFont);
+			DrawStatusBarPowerups();
+		}
+	}
+}
