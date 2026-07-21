@@ -27,7 +27,7 @@ class SevHUD : DoomStatusBar
 	HUDFont littleNumbers;
 	HUDFont statNumbers;
 	string powerups;
-	
+
 	int lump;
 
 	vector2 allmapoffset;
@@ -48,6 +48,9 @@ class SevHUD : DoomStatusBar
 	HUDFont m400minvrHUDFont;
 	HUDFont m400minvrIndexFont;
 	HUDFont m400minvrStatsFont;
+
+	HUDFont mAkeldamaHUDFont;
+	HUDFont mAkeldamaIndexFont;
 
 	HUDFont mAaliensHUDFont;
 	HUDFont mAaliensIndexFont;
@@ -174,6 +177,9 @@ class SevHUD : DoomStatusBar
 		m400minvrHUDFont = HUDFont.Create("400minvrHUDFont", 14, Mono_CellLeft, 1, 1);
 		m400minvrIndexFont = HUDFont.Create("400minvrIndexFont");
 		m400minvrStatsFont = HUDFont.Create("400minvrStatsFont");
+
+		mAkeldamaHUDFont = HUDFont.Create("AkeldamaHUDFont", 14, Mono_CellLeft, 1, 1);
+		mAkeldamaIndexFont = HUDFont.Create("AkeldamaIndexFont");
 
 		mAaliensHUDFont = HUDFont.Create("AaliensHUDFont", 13, Mono_CellLeft, 1, 1);
 		mAaliensIndexFont = HUDFont.Create("AaliensIndexFont");
@@ -1339,7 +1345,7 @@ class SevHUD : DoomStatusBar
 				if (classtype == "wolfss")
 					txt = "$ENEMY_UACULTRA_HAYMAKER";
 			}
-			
+
 			// Fix for standard Doom 2
 			// We're checking the string instead of classtype on purpose!
 			if (txt == "CommanderKeen")

@@ -55,6 +55,35 @@ DefaultIndexFont
 	9 "graphics/SevHUD/400minvr/st_snum9.png"
 }
 
+AkeldamaHUDFont
+{
+	0 "graphics/SevHUD/akeldama/st_num0.png"
+	1 "graphics/SevHUD/akeldama/st_num1.png"
+	2 "graphics/SevHUD/akeldama/st_num2.png"
+	3 "graphics/SevHUD/akeldama/st_num3.png"
+	4 "graphics/SevHUD/akeldama/st_num4.png"
+	5 "graphics/SevHUD/akeldama/st_num5.png"
+	6 "graphics/SevHUD/akeldama/st_num6.png"
+	7 "graphics/SevHUD/akeldama/st_num7.png"
+	8 "graphics/SevHUD/akeldama/st_num8.png"
+	9 "graphics/SevHUD/akeldama/st_num9.png"
+	- "graphics/SevHUD/akeldama/st_minus.png"
+}
+
+AkeldamaIndexFont
+{
+	0 "graphics/SevHUD/akeldama/st_ynum0.png"
+	1 "graphics/SevHUD/akeldama/st_ynum1.png"
+	2 "graphics/SevHUD/akeldama/st_ynum2.png"
+	3 "graphics/SevHUD/akeldama/st_ynum3.png"
+	4 "graphics/SevHUD/akeldama/st_ynum4.png"
+	5 "graphics/SevHUD/akeldama/st_ynum5.png"
+	6 "graphics/SevHUD/akeldama/st_ynum6.png"
+	7 "graphics/SevHUD/akeldama/st_ynum7.png"
+	8 "graphics/SevHUD/akeldama/st_ynum8.png"
+	9 "graphics/SevHUD/akeldama/st_ynum9.png"
+}
+
 AaliensHUDFont
 {
 	0 "graphics/SevHUD/aaliens/st_tnum0.png"
