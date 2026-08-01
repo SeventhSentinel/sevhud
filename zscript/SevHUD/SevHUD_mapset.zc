@@ -110,6 +110,13 @@ extend class SevHUD
 				statNumbers = m400minvrStatsFont;
 			}
 
+			// Akeldama
+			if (checksum == "d93d81013cf47d03c218157100bec30a")
+			{
+				mapset = "akeldama";
+				littleNumbers = mAkeldamaIndexFont;
+			}
+
 			// Alien Vendetta
 			if (checksum == "5a24fc83a3f9a2d6d54af04e2e96684f")
 			{
@@ -558,7 +565,7 @@ extend class SevHUD
 			{
 				string curmap = level.Mapname;
 				string mapcode = curmap.Left(4);
-				
+
 				// No stbar in VR
 				if (mapcode == "VR")
 					mapset = "none";
@@ -570,6 +577,14 @@ extend class SevHUD
 					bigNumbers = m400minvrHUDFont;
 					littleNumbers = m400minvrIndexFont;
 					statNumbers = m400minvrStatsFont;
+				}
+
+				// Akeldama
+				if (mapcode == "AKDL")
+				{
+					mapset = "akeldama";
+					bigNumbers = mAkeldamaHUDFont;
+					littleNumbers = mAkeldamaIndexFont;
 				}
 
 				// Alien Vendetta
@@ -831,7 +846,7 @@ extend class SevHUD
 					mapset = "scythe2";
 					bigNumbers = mScythe2HUDFont;
 				}
-				
+
 				// Slaughterfest 2011
 				if (mapcode == "SF11")
 				{
