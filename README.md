@@ -19,6 +19,7 @@ Code license: GPLv3
 - Doom, Doom II, Final Doom
 - Legacy of Rust
 - Chex Quest (includes optional extra feature)
+- Heretic
 - FreeDoom
 - Adventures of Square
 

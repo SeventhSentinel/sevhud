@@ -5,7 +5,7 @@
 // ZScript code: Copyright (C) 2020 - 2025 Nash Muhandes
 // Modifications: Copyright (C) 2026 SeventhSentinel
 //
-// License: MIT
+// License: GPLv3
 //
 //===========================================================================
 
@@ -130,7 +130,7 @@ class SevHUD_Heretic : BaseStatusBar
 
 	void DrawStatusBarStats(int state, string basefilepath, HUDFont fnt)
 	{
-		int basex = 326;
+		int basex = 326.0;
 		int amt;
 		string imgcolon = basefilepath.."standard/st_colon.png";
 		string statimgfilepath;
@@ -140,7 +140,7 @@ class SevHUD_Heretic : BaseStatusBar
 			// Deathmatch
 
 			// Draw time label
-			DrawImage(basefilepath.."standard/st_time.png", (basex, 191), DI_ITEM_OFFSETS);
+			DrawImage(basefilepath.."standard/st_time.png", (basex, 191.0), DI_ITEM_OFFSETS);
 
 			// Move arms here
 
@@ -163,12 +163,12 @@ class SevHUD_Heretic : BaseStatusBar
 			string armsg7 = "graphics/SevHUD/standard/st_gnum7.png";
 
 			// Draw the numbers
-			DrawImage(CPlayer.HasWeaponsInSlot(2)? armsy2 : armsg2, (basex+8, 173), DI_ITEM_OFFSETS);
-			DrawImage(CPlayer.HasWeaponsInSlot(3)? armsy3 : armsg3, (basex+20, 173), DI_ITEM_OFFSETS);
-			DrawImage(CPlayer.HasWeaponsInSlot(4)? armsy4 : armsg4, (basex+32, 173), DI_ITEM_OFFSETS);
-			DrawImage(CPlayer.HasWeaponsInSlot(5)? armsy5 : armsg5, (basex+8, 182), DI_ITEM_OFFSETS);
-			DrawImage(CPlayer.HasWeaponsInSlot(6)? armsy6 : armsg6, (basex+20, 182), DI_ITEM_OFFSETS);
-			DrawImage(CPlayer.HasWeaponsInSlot(7)? armsy7 : armsg7, (basex+32, 182), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(2)? armsy2 : armsg2, (basex+8.0, 173.0), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(3)? armsy3 : armsg3, (basex+20.0, 173.0), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(4)? armsy4 : armsg4, (basex+32.0, 173.0), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(5)? armsy5 : armsg5, (basex+8.0, 182.0), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(6)? armsy6 : armsg6, (basex+20.0, 182.0), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(7)? armsy7 : armsg7, (basex+32.0, 182.0), DI_ITEM_OFFSETS);
 		}
 
 		else
@@ -183,30 +183,30 @@ class SevHUD_Heretic : BaseStatusBar
 			bool showrawcounts = automapactive ? extracountsautomap : extracounts;
 
 			statimgfilepath = basefilepath.."standard";
-			DrawImage(statimgfilepath.."/st_kill.png", (basex, 173), DI_ITEM_OFFSETS);
-			DrawImage(statimgfilepath.."/st_item.png", (basex, 179), DI_ITEM_OFFSETS);
-			DrawImage(statimgfilepath.."/st_secret.png", (basex, 185), DI_ITEM_OFFSETS);
-			DrawImage(statimgfilepath.."/st_time.png", (basex, 191), DI_ITEM_OFFSETS);
+			DrawImage(statimgfilepath.."/st_kill.png", (basex, 173.0), DI_ITEM_OFFSETS);
+			DrawImage(statimgfilepath.."/st_item.png", (basex, 179.0), DI_ITEM_OFFSETS);
+			DrawImage(statimgfilepath.."/st_secret.png", (basex, 185.0), DI_ITEM_OFFSETS);
+			DrawImage(statimgfilepath.."/st_time.png", (basex, 191.0), DI_ITEM_OFFSETS);
 
 			int pcnt;
 			int mppcnt;
 
-			int offsetx = 32;
+			int xoffset = 32;
 
 			// Completion stats
 			if (showrawcounts)
 			{
 				// Display raw counts
-				offsetx = offsetx + 11;
+				xoffset = xoffset + 11;
 				// kills
 				amt = Level.total_monsters - Level.killed_monsters;
-				DrawString(fnt, FormatNumber(amt), (basex + offsetx, 173), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt), (basex + xoffset, 173.0), DI_TEXT_ALIGN_RIGHT);
 				// items
 				amt = Level.total_items - Level.found_items;
-				DrawString(fnt, FormatNumber(amt), (basex + offsetx, 179), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt), (basex + xoffset, 179.0), DI_TEXT_ALIGN_RIGHT);
 				// secrets
 				amt = Level.total_secrets - Level.found_secrets;
-				DrawString(fnt, FormatNumber(amt), (basex + offsetx, 185), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt), (basex + xoffset, 185.0), DI_TEXT_ALIGN_RIGHT);
 			}
 			else
 			{
@@ -215,24 +215,24 @@ class SevHUD_Heretic : BaseStatusBar
 				pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
 
 				amt = pcnt;
-				DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx + 1, 173), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt, 3), (basex + xoffset + 1.0, 173.0), DI_TEXT_ALIGN_RIGHT);
 
 				// items
 				pcnt = Level.total_items ? 100 * Level.found_items / Level.total_items : 100;
 
 				amt = pcnt;
-				DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx + 1, 179), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt, 3), (basex + xoffset + 1.0, 179.0), DI_TEXT_ALIGN_RIGHT);
 
 				// secrets
 				pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
 
 				amt = pcnt;
-				DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx + 1, 185), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt, 3), (basex + xoffset + 1.0, 185.0), DI_TEXT_ALIGN_RIGHT);
 
 				// Draw % symbols
-				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + offsetx + 5, 173), DI_ITEM_OFFSETS);
-				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + offsetx + 5, 179), DI_ITEM_OFFSETS);
-				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + offsetx + 5, 185), DI_ITEM_OFFSETS);
+				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + xoffset + 5.0, 173.0), DI_ITEM_OFFSETS);
+				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + xoffset + 5.0, 179.0), DI_ITEM_OFFSETS);
+				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + xoffset + 5.0, 185.0), DI_ITEM_OFFSETS);
 			}
 		}
 
@@ -263,25 +263,25 @@ class SevHUD_Heretic : BaseStatusBar
 			{
 				hoursoffset = 1;
 				amt = hours;
-				DrawString(fnt, FormatNumber(amt, 1, format: 2), (basex + 21, 191), DI_TEXT_ALIGN_RIGHT);
-				DrawImage(imgcolon, (basex + 21, 192), DI_ITEM_OFFSETS);
+				DrawString(fnt, FormatNumber(amt, 1, format: 2), (basex + 21.0, 191.0), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(imgcolon, (basex + 21.0, 192.0), DI_ITEM_OFFSETS);
 			}
 
 			// minutes
-			DrawImage(imgcolon, (basex + 32, 192), DI_ITEM_OFFSETS);
+			DrawImage(imgcolon, (basex + 32.0, 192.0), DI_ITEM_OFFSETS);
 			if ((minutes >= 10) || (hours >= 1))
 				minsdigits = 2;
 			amt = minutes;
-			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (basex + 31 + hoursoffset, 191), DI_TEXT_ALIGN_RIGHT);
+			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (basex + 31.0 + hoursoffset, 191.0), DI_TEXT_ALIGN_RIGHT);
 
 			// seconds
 			amt = seconds;
-			DrawString(fnt, FormatNumber(amt, 2, format: 2), (basex + 43, 191), DI_TEXT_ALIGN_RIGHT);
+			DrawString(fnt, FormatNumber(amt, 2, format: 2), (basex + 43.0, 191.0), DI_TEXT_ALIGN_RIGHT);
 		}
 		else
 		{
 			// time sucks
-			DrawImage("graphics/SevHUD/standard/st_sucks.png", (basex + 18, 191), DI_ITEM_OFFSETS);
+			DrawImage("graphics/SevHUD/standard/st_sucks.png", (basex + 18.0, 191.0), DI_ITEM_OFFSETS);
 		}
 	}
 
@@ -304,25 +304,25 @@ void DrawStatusBarPowerups(void)
 		let allmap = Level.allmap;
 
 		// Draw mapset-specific gfx, fallback to standard
-		DrawImage(basefilepath.."st_extra.png", (-53, 168), DI_ITEM_OFFSETS);
+		DrawImage(basefilepath.."st_extra.png", (-53.0, 168.0), DI_ITEM_OFFSETS);
 
 		if (invul)
-			DrawBar(basefilepath.."st_ring.png", basefilepath.."st_ringback.png", int(Ceil(double(invul.EffectTics))), int(Ceil(double(invul.MaxEffectTics))), (-48, 172), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
+			DrawBar(basefilepath.."st_ring.png", basefilepath.."st_ringback.png", int(Ceil(double(invul.EffectTics))), int(Ceil(double(invul.MaxEffectTics))), (-48.0, 172.0), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
 
 		if (lightamp)
-			DrawBar(basefilepath.."st_torch.png", basefilepath.."st_torchback.png", int(Ceil(double(lightamp.EffectTics))), int(Ceil(double(lightamp.MaxEffectTics))), (-31, 172), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
+			DrawBar(basefilepath.."st_torch.png", basefilepath.."st_torchback.png", int(Ceil(double(lightamp.EffectTics))), int(Ceil(double(lightamp.MaxEffectTics))), (-31.0, 172.0), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
 
 		if (invis)
-			DrawBar(basefilepath.."st_ghost.png", basefilepath.."st_ghostback.png", int(Ceil(double(invis.EffectTics))), int(Ceil(double(invis.MaxEffectTics))), (-17, 172), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
+			DrawBar(basefilepath.."st_ghost.png", basefilepath.."st_ghostback.png", int(Ceil(double(invis.EffectTics))), int(Ceil(double(invis.MaxEffectTics))), (-17.0, 172.0), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
 
 		if (berserk)
-			DrawBar(basefilepath.."st_book.png", basefilepath.."st_bookback.png", int(Ceil(double(berserk.EffectTics))), int(Ceil(double(berserk.MaxEffectTics))), (-48, 185), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
+			DrawBar(basefilepath.."st_book.png", basefilepath.."st_bookback.png", int(Ceil(double(berserk.EffectTics))), int(Ceil(double(berserk.MaxEffectTics))), (-48.0, 185.0), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
 
 		if (flight)
-			DrawBar(basefilepath.."st_flight.png", basefilepath.."st_flightback.png", int(Ceil(double(flight.EffectTics))), int(Ceil(double(flight.MaxEffectTics))), (-17, 186), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
+			DrawBar(basefilepath.."st_flight.png", basefilepath.."st_flightback.png", int(Ceil(double(flight.EffectTics))), int(Ceil(double(flight.MaxEffectTics))), (-17.0, 186.0), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
 
 		if (allmap)
-			DrawImage(basefilepath.."st_allmap.png", (-33, 186), DI_ITEM_OFFSETS);
+			DrawImage(basefilepath.."st_allmap.png", (-33.0, 186.0), DI_ITEM_OFFSETS);
 	}
 
 	//===========================================================================
@@ -551,8 +551,8 @@ void DrawStatusBarPowerups(void)
 
 		int amt;
 
-		int basey = 4;
-		int offsety = 0;
+		int basey = 4.0;
+		int yoffset = 0.0;
 
 		string filepath = "graphics/SevHUD/standard/";
 
@@ -588,24 +588,24 @@ void DrawStatusBarPowerups(void)
 
 				hoursoffset = 1;
 				amt = hours;
-				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (-28, basey), DI_TEXT_ALIGN_RIGHT);
-				DrawImage(imgcolon, (-28, basey + 1), DI_ITEM_OFFSETS);
+				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (-28.0, basey), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(imgcolon, (-28.0, basey + 1.0), DI_ITEM_OFFSETS);
 			}
 
 			// minutes
 			if ((minutes >= 10) || (hours >= 1))
 				minsdigits = 2;
 			amt = minutes;
-			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (hoursoffset-18, basey), DI_TEXT_ALIGN_RIGHT);
+			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (hoursoffset-18.0, basey), DI_TEXT_ALIGN_RIGHT);
 
-			DrawImage(imgcolon, (-17, basey + 1), DI_ITEM_OFFSETS);
+			DrawImage(imgcolon, (-17.0, basey + 1.0), DI_ITEM_OFFSETS);
 
 			// seconds
 			amt = seconds;
-			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-6, basey), DI_TEXT_ALIGN_RIGHT);
+			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-6.0, basey), DI_TEXT_ALIGN_RIGHT);
 
 			// move the level timer down
-			offsety += fontHeight;
+			yoffset += fontHeight;
 		}
 
 		// Don't draw anything else if we're already drawing the stats on the status bar
@@ -645,21 +645,21 @@ void DrawStatusBarPowerups(void)
 
 				hoursoffset = 1;
 				amt = hours;
-				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (-28, basey + offsety), DI_TEXT_ALIGN_RIGHT);
-				DrawImage(imgcolon, (-27, basey + offsety + 1), DI_ITEM_OFFSETS);
+				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (-28.0, basey + yoffset), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(imgcolon, (-27.0, basey + yoffset + 1.0), DI_ITEM_OFFSETS);
 			}
 
 			// minutes
 			if ((minutes >= 10) || (hours >= 1))
 				minsdigits = 2;
 			amt = minutes;
-			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (hoursoffset-18, basey + offsety), DI_TEXT_ALIGN_RIGHT);
+			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (hoursoffset-18.0, basey + yoffset), DI_TEXT_ALIGN_RIGHT);
 
-			DrawImage(imgcolon, (-17, basey + offsety + 1), DI_ITEM_OFFSETS);
+			DrawImage(imgcolon, (-17.0, basey + yoffset + 1.0), DI_ITEM_OFFSETS);
 
 			// seconds
 			amt = seconds;
-			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-6, basey + offsety), DI_TEXT_ALIGN_RIGHT);
+			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-6.0, basey + yoffset), DI_TEXT_ALIGN_RIGHT);
 		}
 
 		// The other stats aren't very useful in deathmatch
@@ -668,8 +668,8 @@ void DrawStatusBarPowerups(void)
 
 		int pcnt;
 		int mppcnt;
-		basey = -33;
-		offsety = 0;
+		basey = -33.0;
+		yoffset = 0.0;
 
 
 
@@ -680,21 +680,21 @@ void DrawStatusBarPowerups(void)
 			string imgsecret = filepath.."st_secret.png";
 
 			// Draw automap secrets
-			DrawImage(imgsecret, (-48, basey-fontHeight), DI_ITEM_OFFSETS);
+			DrawImage(imgsecret, (-48.0, basey-fontHeight), DI_ITEM_OFFSETS);
 			if (usecounts == false)
 			{
 				pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
 				amt = pcnt;
-				DrawString(fnt, FormatNumber(amt, 3), (-15, basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
-				DrawImage(filepath.."st_prcnt2.png", (-11, basey-fontHeight), DI_ITEM_OFFSETS);
+				DrawString(fnt, FormatNumber(amt, 3), (-15.0, basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(filepath.."st_prcnt2.png", (-11.0, basey-fontHeight), DI_ITEM_OFFSETS);
 			}
 			else
 			{
 				amt = Level.total_secrets - Level.found_secrets;
-				DrawString(fnt, FormatNumber(amt), (-6, basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt), (-6.0, basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
 			}
 
-			offsety -= fontHeight;
+			yoffset -= fontHeight;
 		}
 
 		if (CVar.GetCVar("am_showitems", CPlayer).GetBool())
@@ -703,20 +703,20 @@ void DrawStatusBarPowerups(void)
 			string imgitem = filepath.."st_item.png";
 
 			// Draw automap items
-			DrawImage(imgitem, (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+			DrawImage(imgitem, (-48.0, yoffset+basey-fontHeight), DI_ITEM_OFFSETS);
 			if (usecounts == false)
 			{
 				amt = pcnt;
-				DrawString(fnt, FormatNumber(amt, 3), (-15, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
-				DrawImage(filepath.."st_prcnt2.png", (-11, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+				DrawString(fnt, FormatNumber(amt, 3), (-15.0, yoffset+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(filepath.."st_prcnt2.png", (-11.0, yoffset+basey-fontHeight), DI_ITEM_OFFSETS);
 			}
 			else
 			{
 				amt = Level.total_items - Level.found_items;
-				DrawString(fnt, FormatNumber(amt), (-6, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt), (-6.0, yoffset+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
 			}
 
-			offsety -= fontHeight;
+			yoffset -= fontHeight;
 		}
 
 		if (CVar.GetCVar("am_showmonsters", CPlayer).GetBool())
@@ -724,18 +724,18 @@ void DrawStatusBarPowerups(void)
 			string imgkill = filepath.."st_kill.png";
 
 			// Draw automap kills
-			DrawImage(imgkill, (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+			DrawImage(imgkill, (-48.0, yoffset+basey-fontHeight), DI_ITEM_OFFSETS);
 			if (usecounts == false)
 			{
 				pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
 				amt = pcnt;
-				DrawString(fnt, FormatNumber(amt, 3), (-15, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
-				DrawImage(filepath.."st_prcnt2.png", (-11, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+				DrawString(fnt, FormatNumber(amt, 3), (-15.0, yoffset+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(filepath.."st_prcnt2.png", (-11.0, yoffset+basey-fontHeight), DI_ITEM_OFFSETS);
 			}
 			else
 			{
 				amt = Level.total_monsters - Level.killed_monsters;
-				DrawString(fnt, FormatNumber(amt), (-6, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt), (-6.0, yoffset+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
 			}
 		}
 	}
@@ -757,12 +757,12 @@ void DrawStatusBarPowerups(void)
 		DrawGem("CHAIN", "LIFEGEM2",inthealth, CPlayer.mo.GetMaxHealth(true), (2, 191 + wiggle), 15, 25, 16, (multiplayer? DI_TRANSLATABLE : 0) | DI_ITEM_LEFT_TOP);
 		DrawShader(SHADER_HORZ, (19, 191), (16, 8));
 		DrawShader(SHADER_HORZ|SHADER_REVERSE, (278, 191), (16, 8));
-		DrawImage("graphics/SevHUD/BARBACK.png", (-25, 148), DI_ITEM_OFFSETS);
+		DrawImage("graphics/SevHUD/BARBACK.png", (-25.0, 148.0), DI_ITEM_OFFSETS);
 		if (isInvulnerable())
 		{
 			//god mode
-			DrawImage("GOD1", (16, 167), DI_ITEM_OFFSETS);
-			DrawImage("GOD2", (287, 167), DI_ITEM_OFFSETS);
+			DrawImage("GOD1", (16.0, 167.0), DI_ITEM_OFFSETS);
+			DrawImage("GOD2", (287.0, 167.0), DI_ITEM_OFFSETS);
 		}
 
 		// DrawMainBar
@@ -794,61 +794,61 @@ void DrawStatusBarPowerups(void)
 				mapname = (Level.Levelname);
 			}
 
-			DrawString(fnt, maplabel.."\cj"..mapname, (160, 163-fontHeight), DI_TEXT_ALIGN_CENTER);
+			DrawString(fnt, maplabel.."\cj"..mapname, (160.0, 163.0-fontHeight), DI_TEXT_ALIGN_CENTER);
 		}
 
 		if (!isInventoryBarVisible())
 		{
 			//statbar
-			DrawImage("graphics/SevHUD/LIFEBAR.png", (34, 160), DI_ITEM_OFFSETS);
+			DrawImage("graphics/SevHUD/LIFEBAR.png", (34.0, 160.0), DI_ITEM_OFFSETS);
 			if (!deathmatch)
 			{
-				//DrawImage("ARMCLEAR", (57, 171), DI_ITEM_OFFSETS);
-				DrawString(mHUDFont, FormatNumber(mHealthInterpolator.GetValue(), 3), (88, 170), DI_TEXT_ALIGN_RIGHT);
+				//DrawImage("ARMCLEAR", (57.0, 171.0), DI_ITEM_OFFSETS);
+				DrawString(mHUDFont, FormatNumber(mHealthInterpolator.GetValue(), 3), (88.0, 170.0), DI_TEXT_ALIGN_RIGHT);
 			}
 			else
 			{
-				DrawImage("graphics/SevHUD/KILLS.png", (54, 160), DI_ITEM_OFFSETS);
-				DrawImage("ARMCLEAR", (57, 171), DI_ITEM_OFFSETS);
-				DrawString(mHUDFont, FormatNumber(CPlayer.FragCount, 3), (88, 170), DI_TEXT_ALIGN_RIGHT);
+				DrawImage("graphics/SevHUD/KILLS.png", (54.0, 160.0), DI_ITEM_OFFSETS);
+				DrawImage("ARMCLEAR", (57.0, 171.0), DI_ITEM_OFFSETS);
+				DrawString(mHUDFont, FormatNumber(CPlayer.FragCount, 3), (88.0, 170.0), DI_TEXT_ALIGN_RIGHT);
 			}
-			DrawString(mHUDFont, FormatNumber(GetArmorAmount(), 3), (255, 170), DI_TEXT_ALIGN_RIGHT);
+			DrawString(mHUDFont, FormatNumber(GetArmorAmount(), 3), (255.0, 170.0), DI_TEXT_ALIGN_RIGHT);
 
 			//ammo
 			Ammo ammo1, ammo2;
 			[ammo1, ammo2] = GetCurrentAmmo();
 			if (ammo1 != null && ammo2 == null)
 			{
-				DrawString(mHUDFont, FormatNumber(ammo1.Amount, 3), (136, 162), DI_TEXT_ALIGN_RIGHT);
-				DrawTexture(ammo1.icon, (123, 180), DI_ITEM_CENTER);
+				DrawString(mHUDFont, FormatNumber(ammo1.Amount, 3), (136.0, 162.0), DI_TEXT_ALIGN_RIGHT);
+				DrawTexture(ammo1.icon, (123.0, 180.0), DI_ITEM_CENTER);
 			}
 			else if (ammo2 != null)
 			{
-				DrawString(mIndexFont, FormatNumber(ammo1.Amount, 3), (137, 165), DI_TEXT_ALIGN_RIGHT);
-				DrawString(mIndexFont, FormatNumber(ammo2.Amount, 3), (137, 177), DI_TEXT_ALIGN_RIGHT);
-				DrawTexture(ammo1.icon, (115, 169), DI_ITEM_CENTER);
-				DrawTexture(ammo2.icon, (115, 180), DI_ITEM_CENTER);
+				DrawString(mIndexFont, FormatNumber(ammo1.Amount, 3), (137.0, 165.0), DI_TEXT_ALIGN_RIGHT);
+				DrawString(mIndexFont, FormatNumber(ammo2.Amount, 3), (13.07, 177.0), DI_TEXT_ALIGN_RIGHT);
+				DrawTexture(ammo1.icon, (115.0, 169.0), DI_ITEM_CENTER);
+				DrawTexture(ammo2.icon, (115.0, 180.0), DI_ITEM_CENTER);
 			}
 
 			//keys
-			if (CPlayer.mo.CheckKeys(3, false, true)) DrawImage("YKEYICON", (153, 164), DI_ITEM_OFFSETS);
-			if (CPlayer.mo.CheckKeys(1, false, true)) DrawImage("GKEYICON", (153, 172), DI_ITEM_OFFSETS);
-			if (CPlayer.mo.CheckKeys(2, false, true)) DrawImage("BKEYICON", (153, 180), DI_ITEM_OFFSETS);
+			if (CPlayer.mo.CheckKeys(3, false, true)) DrawImage("YKEYICON", (153.0, 164.0), DI_ITEM_OFFSETS);
+			if (CPlayer.mo.CheckKeys(1, false, true)) DrawImage("GKEYICON", (153.0, 172.0), DI_ITEM_OFFSETS);
+			if (CPlayer.mo.CheckKeys(2, false, true)) DrawImage("BKEYICON", (153.0, 180.0), DI_ITEM_OFFSETS);
 
 			//inventory box
 			if (CPlayer.mo.InvSel != null)
 			{
-				DrawInventoryIcon(CPlayer.mo.InvSel, (194, 175), DI_ARTIFLASH|DI_ITEM_CENTER|DI_DIMDEPLETED, boxsize:(28, 28));
+				DrawInventoryIcon(CPlayer.mo.InvSel, (194.0, 175.0), DI_ARTIFLASH|DI_ITEM_CENTER|DI_DIMDEPLETED, boxsize:(28, 28));
 				if (CPlayer.mo.InvSel.Amount > 1)
 				{
-					DrawString(mIndexFont, FormatNumber(CPlayer.mo.InvSel.Amount, 3), (209, 182), DI_TEXT_ALIGN_RIGHT);
+					DrawString(mIndexFont, FormatNumber(CPlayer.mo.InvSel.Amount, 3), (209.0, 182.0), DI_TEXT_ALIGN_RIGHT);
 				}
 			}
 		}
 		else
 		{
-			DrawImage("INVBAR", (34, 160), DI_ITEM_OFFSETS);
-			DrawInventoryBar(diparms_sbar, (49, 160), 7, DI_ITEM_LEFT_TOP, HX_SHADOW);
+			DrawImage("INVBAR", (34.0, 160.0), DI_ITEM_OFFSETS);
+			DrawInventoryBar(diparms_sbar, (49.0, 160.0), 7, DI_ITEM_LEFT_TOP, HX_SHADOW);
 		}
 
 		// Draw stats
