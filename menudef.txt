@@ -1,11 +1,11 @@
-AddOptionMenu "OptionsMenu"
+AddOptionMenu "OptionsMenu" after "os_Menu"
 {
+	StaticText ""
 	StaticText "$OPTMNU_SEVHUD_VER"
 	Submenu "$OPTMNU_SEVHUD", "SevHUDOptionMenu"
-	StaticText ""
 }
 
-AddOptionMenu "OptionsMenuSimple"
+AddOptionMenu "OptionsMenuSimple" after "os_Menu"
 {
 	StaticText "$OPTMNU_SEVHUD_VER"
 	Submenu "$OPTMNU_SEVHUD", "SEVHUDOptionMenu"

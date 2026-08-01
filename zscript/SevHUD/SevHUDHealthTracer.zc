@@ -2,10 +2,10 @@
 //
 // SevHUD
 //
-// ZScript code: Copyright (C) 2020 - 2025 Nash Muhandes
-// Modifications: Copyright (C) 2025 SeventhSentinel
+// ZScript code: Copyright (C) 2020 - 2026 Nash Muhandes
+// Modifications: Copyright (C) 2026 SeventhSentinel
 //
-// License: MIT
+// License: GPLv3
 //
 //===========================================================================
 
@@ -35,9 +35,7 @@ class SevHUDHealthTracer : Inventory
 	override void DoEffect(void)
 	{
 		if (Owner.player && Owner.player.playerstate == PST_LIVE)
-		{
 			UpdateAimTarget();
-		}
 	}
 
 	//===========================================================================
@@ -52,13 +50,14 @@ class SevHUDHealthTracer : Inventory
 		double vh = (cam is "PlayerPawn" && cam.player) ? cam.player.viewheight : cam.CameraHeight;
 		FLineTraceData t;
 		int flags = TRF_SOLIDACTORS;
-		cam.LineTrace(cam.Angle, 32768., cam.Pitch, flags, vh, data: t);
+		double dist = MISSILERANGE;
+		double ang = cam.Angle;
+		double pch = cam.AimLineAttack(ang, dist);
+		cam.LineTrace(ang, dist, pch, flags, vh, data: t);
 		at = t.HitActor;
 
 		if (at != currentAimTarget)
-		{
 			currentAimTarget = NULL;
-		}
 
 		return at;
 	}
@@ -66,12 +65,16 @@ class SevHUDHealthTracer : Inventory
 	void UpdateAimTarget(void)
 	{
 		bool invalidTarget = false;
+
 		if (!Owner)
 			invalidTarget = true;
+
 		if (!Owner.player)
 			invalidTarget = true;
+
 		if (!Owner.player.camera)
 			invalidTarget = true;
+
 		if (invalidTarget)
 		{
 			currentAimTarget = NULL;
@@ -106,8 +109,6 @@ class SevHUDHealthTracer : Inventory
 		// Force mapset specific HP bars
 		(at && forceHPbar == true);
 		if (isLiveTarget || at == NULL)
-		{
 			currentAimTarget = at;
-		}
 	}
 }

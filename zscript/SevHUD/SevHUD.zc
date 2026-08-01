@@ -2,10 +2,10 @@
 //
 // SevHUD
 //
-// ZScript code: Copyright (C) 2020 - 2025 Nash Muhandes
+// ZScript code: Copyright (C) 2020 - 2026 Nash Muhandes
 // Modifications: Copyright (C) 2025 - 2026 SeventhSentinel
 //
-// License: MIT
+// License: GPLv3
 //
 //===========================================================================
 
@@ -333,7 +333,7 @@ class SevHUD : DoomStatusBar
 	void InitSevHUD(void)
 	{
 		prevAimTarget = NULL;
-		healthBarAlpha = 0.;
+		healthBarAlpha = 0.0;
 		gotchecksum = false;
 
 		// During the LeChuck fight, I'd like to stop drawing enemy names.
@@ -349,8 +349,10 @@ class SevHUD : DoomStatusBar
 
 	void DrawStatusBarStats(int state, string basefilepath, HUDFont fnt)
 	{
-		int basex = 326;
+		int basex = 326.0;
 		int amt;
+		int pcnt;
+		int mppcnt;
 		string imgcolon;
 		string statimgfilepath;
 		lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_colon.png");
@@ -367,11 +369,11 @@ class SevHUD : DoomStatusBar
 			lump = Wads.CheckNumForFullName(basefilepath..mapset.."/st_time.png");
 			if (lump >= 0)
 			{
-				DrawImage(basefilepath..mapset.."/st_time.png", (basex, 191), DI_ITEM_OFFSETS);
+				DrawImage(basefilepath..mapset.."/st_time.png", (basex, 191.0), DI_ITEM_OFFSETS);
 			}
 			else
 			{
-				DrawImage(basefilepath.."standard/st_time.png", (basex, 191), DI_ITEM_OFFSETS);
+				DrawImage(basefilepath.."standard/st_time.png", (basex, 191.0), DI_ITEM_OFFSETS);
 			}
 
 			// Move arms here
@@ -433,12 +435,12 @@ class SevHUD : DoomStatusBar
 			}
 
 			// Draw the numbers
-			DrawImage(CPlayer.HasWeaponsInSlot(2)? armsy2 : armsg2, (basex+8, 173), DI_ITEM_OFFSETS);
-			DrawImage(CPlayer.HasWeaponsInSlot(3)? armsy3 : armsg3, (basex+20, 173), DI_ITEM_OFFSETS);
-			DrawImage(CPlayer.HasWeaponsInSlot(4)? armsy4 : armsg4, (basex+32, 173), DI_ITEM_OFFSETS);
-			DrawImage(CPlayer.HasWeaponsInSlot(5)? armsy5 : armsg5, (basex+8, 182), DI_ITEM_OFFSETS);
-			DrawImage(CPlayer.HasWeaponsInSlot(6)? armsy6 : armsg6, (basex+20, 182), DI_ITEM_OFFSETS);
-			DrawImage(CPlayer.HasWeaponsInSlot(7)? armsy7 : armsg7, (basex+32, 182), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(2)? armsy2 : armsg2, (basex+8.0, 173.0), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(3)? armsy3 : armsg3, (basex+20.0, 173.0), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(4)? armsy4 : armsg4, (basex+32.0, 173.0), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(5)? armsy5 : armsg5, (basex+8.0, 182.0), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(6)? armsy6 : armsg6, (basex+20.0, 182.0), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(7)? armsy7 : armsg7, (basex+32.0, 182.0), DI_ITEM_OFFSETS);
 		}
 
 		else
@@ -476,33 +478,30 @@ class SevHUD : DoomStatusBar
 				{
 					statimgfilepath = basefilepath.."standard";
 				}
-				DrawImage(statimgfilepath.."/st_kill.png", (basex, 173), DI_ITEM_OFFSETS);
-				DrawImage(statimgfilepath.."/st_item.png", (basex, 179), DI_ITEM_OFFSETS);
-				DrawImage(statimgfilepath.."/st_secret.png", (basex, 185), DI_ITEM_OFFSETS);
-				DrawImage(statimgfilepath.."/st_time.png", (basex, 191), DI_ITEM_OFFSETS);
+				DrawImage(statimgfilepath.."/st_kill.png", (basex, 173.0), DI_ITEM_OFFSETS);
+				DrawImage(statimgfilepath.."/st_item.png", (basex, 179.0), DI_ITEM_OFFSETS);
+				DrawImage(statimgfilepath.."/st_secret.png", (basex, 185.0), DI_ITEM_OFFSETS);
+				DrawImage(statimgfilepath.."/st_time.png", (basex, 191.0), DI_ITEM_OFFSETS);
 
 				// Console.Printf(statimgfilepath);		// Debug
 			}
 
-			int pcnt;
-			int mppcnt;
-
-			int offsetx = 32;
+			int xoffset = 32.0;
 
 			// Completion stats
 			if (showrawcounts)
 			{
 				// Display raw counts
-				offsetx = offsetx + 10;
+				xoffset = xoffset + 10.0;
 				// kills
 				amt = Level.total_monsters - Level.killed_monsters;
-				DrawString(fnt, FormatNumber(amt), (basex + offsetx, 173), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt), (basex + xoffset, 173.0), DI_TEXT_ALIGN_RIGHT);
 				// items
 				amt = Level.total_items - Level.found_items;
-				DrawString(fnt, FormatNumber(amt), (basex + offsetx, 179), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt), (basex + xoffset, 179.0), DI_TEXT_ALIGN_RIGHT);
 				// secrets
 				amt = Level.total_secrets - Level.found_secrets;
-				DrawString(fnt, FormatNumber(amt), (basex + offsetx, 185), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt), (basex + xoffset, 185.0), DI_TEXT_ALIGN_RIGHT);
 			}
 			else
 			{
@@ -519,7 +518,7 @@ class SevHUD : DoomStatusBar
 				}
 				amt = multiplayer ? mppcnt : pcnt;	*/
 				amt = pcnt;
-				DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 173), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt, 3), (basex + xoffset, 173.0), DI_TEXT_ALIGN_RIGHT);
 
 				// items
 				pcnt = Level.total_items ? 100 * Level.found_items / Level.total_items : 100;
@@ -533,7 +532,7 @@ class SevHUD : DoomStatusBar
 				}
 				amt = multiplayer ? mppcnt : pcnt;	*/
 				amt = pcnt;
-				DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 179), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt, 3), (basex + xoffset, 179.0), DI_TEXT_ALIGN_RIGHT);
 
 				// secrets
 				pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
@@ -547,12 +546,12 @@ class SevHUD : DoomStatusBar
 				}
 				amt = multiplayer ? mppcnt : pcnt;	*/
 				amt = pcnt;
-				DrawString(fnt, FormatNumber(amt, 3), (basex + offsetx, 185), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt, 3), (basex + xoffset, 185.0), DI_TEXT_ALIGN_RIGHT);
 
 				// Draw % symbols
-				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + offsetx + 5, 173), DI_ITEM_OFFSETS);
-				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + offsetx + 5, 179), DI_ITEM_OFFSETS);
-				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + offsetx + 5, 185), DI_ITEM_OFFSETS);
+				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + xoffset + 5.0, 173.0), DI_ITEM_OFFSETS);
+				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + xoffset + 5.0, 179.0), DI_ITEM_OFFSETS);
+				DrawImage(statimgfilepath.."/st_prcnt2.png", (basex + xoffset + 5.0, 185.0), DI_ITEM_OFFSETS);
 			}
 		}
 
@@ -583,25 +582,25 @@ class SevHUD : DoomStatusBar
 			{
 				hoursoffset = 1;
 				amt = hours;
-				DrawString(fnt, FormatNumber(amt, 1, format: 2), (basex + 20, 191), DI_TEXT_ALIGN_RIGHT);
-				DrawImage(imgcolon, (basex + 21, 192), DI_ITEM_OFFSETS);
+				DrawString(fnt, FormatNumber(amt, 1, format: 2), (basex + 20.0, 191.0), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(imgcolon, (basex + 21.0, 192.0), DI_ITEM_OFFSETS);
 			}
 
 			// minutes
-			DrawImage(imgcolon, (basex + 32, 192), DI_ITEM_OFFSETS);
+			DrawImage(imgcolon, (basex + 32.0, 192.0), DI_ITEM_OFFSETS);
 			if ((minutes >= 10) || (hours >= 1))
 				minsdigits = 2;
 			amt = minutes;
-			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (basex + 30 + hoursoffset, 191), DI_TEXT_ALIGN_RIGHT);
+			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (basex + 30.0 + hoursoffset, 191.0), DI_TEXT_ALIGN_RIGHT);
 
 			// seconds
 			amt = seconds;
-			DrawString(fnt, FormatNumber(amt, 2, format: 2), (basex + 42, 191), DI_TEXT_ALIGN_RIGHT);
+			DrawString(fnt, FormatNumber(amt, 2, format: 2), (basex + 42.0, 191.0), DI_TEXT_ALIGN_RIGHT);
 		}
 		else
 		{
 			// time sucks
-			DrawImage("graphics/SevHUD/standard/st_sucks.png", (basex + 18, 191), DI_ITEM_OFFSETS);
+			DrawImage("graphics/SevHUD/standard/st_sucks.png", (basex + 18.0, 191.0), DI_ITEM_OFFSETS);
 		}
 	}
 
@@ -624,63 +623,63 @@ class SevHUD : DoomStatusBar
 		// Draw mapset-specific gfx, fallback to standard
 		lump = Wads.CheckNumForFullName(basefilepath..powerups.."/st_extra.png");
 		if (lump >= 0)
-			DrawImage(basefilepath..powerups.."/st_extra.png", (-53, 168), DI_ITEM_OFFSETS);
+			DrawImage(basefilepath..powerups.."/st_extra.png", (-53.0, 168.0), DI_ITEM_OFFSETS);
 		else
-			DrawImage(basefilepath.."standard/st_extra.png", (-53, 168), DI_ITEM_OFFSETS);
+			DrawImage(basefilepath.."standard/st_extra.png", (-53.0, 168.0), DI_ITEM_OFFSETS);
 
 		if (invul)
 		{
 			lump = Wads.CheckNumForFullName(basefilepath..powerups.."/st_invul.png");
 			if (lump >= 0)
 				// These specialized blank bar background graphics help the foreground graphic draw better. I was getting erroneous black pixels otherwise
-				DrawBar(basefilepath..powerups.."/st_invul.png", basefilepath..powerups.."/st_invulback.png", int(Ceil(double(invul.EffectTics))), int(Ceil(double(invul.MaxEffectTics))), invuloffset + (-48, 172), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
+				DrawBar(basefilepath..powerups.."/st_invul.png", basefilepath..powerups.."/st_invulback.png", int(Ceil(double(invul.EffectTics))), int(Ceil(double(invul.MaxEffectTics))), invuloffset + (-48.0, 172.0), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
 			else
-				DrawBar(basefilepath.."standard/st_invul.png", basefilepath.."standard/st_invulback.png", int(Ceil(double(invul.EffectTics))), int(Ceil(double(invul.MaxEffectTics))), (-48, 172), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
+				DrawBar(basefilepath.."standard/st_invul.png", basefilepath.."standard/st_invulback.png", int(Ceil(double(invul.EffectTics))), int(Ceil(double(invul.MaxEffectTics))), (-48.0, 172.0), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
 		}
 
 		if (lightamp)
 		{
 			lump = Wads.CheckNumForFullName(basefilepath..powerups.."/st_lightamp.png");
 			if (lump >= 0)
-				DrawBar(basefilepath..powerups.."/st_lightamp.png", basefilepath..powerups.."/st_lightampback.png", int(Ceil(double(lightamp.EffectTics))), int(Ceil(double(lightamp.MaxEffectTics))), lightampoffset + (-33, 174), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
+				DrawBar(basefilepath..powerups.."/st_lightamp.png", basefilepath..powerups.."/st_lightampback.png", int(Ceil(double(lightamp.EffectTics))), int(Ceil(double(lightamp.MaxEffectTics))), lightampoffset + (-33.0, 174.0), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
 			else
-				DrawBar(basefilepath.."standard/st_lightamp.png", basefilepath.."standard/st_lightampback.png", int(Ceil(double(lightamp.EffectTics))), int(Ceil(double(lightamp.MaxEffectTics))), (-33, 174), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
+				DrawBar(basefilepath.."standard/st_lightamp.png", basefilepath.."standard/st_lightampback.png", int(Ceil(double(lightamp.EffectTics))), int(Ceil(double(lightamp.MaxEffectTics))), (-33.0, 174.0), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
 		}
 
 		if (invis)
 		{
 			lump = Wads.CheckNumForFullName(basefilepath..powerups.."/st_invis.png");
 			if (lump >= 0)
-				DrawBar(basefilepath..powerups.."/st_invis.png", basefilepath..powerups.."/st_invisback.png", int(Ceil(double(invis.EffectTics))), int(Ceil(double(invis.MaxEffectTics))), invisoffset + (-17, 172), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
+				DrawBar(basefilepath..powerups.."/st_invis.png", basefilepath..powerups.."/st_invisback.png", int(Ceil(double(invis.EffectTics))), int(Ceil(double(invis.MaxEffectTics))), invisoffset + (-17.0, 172.0), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
 			else
-				DrawBar(basefilepath.."standard/st_invis.png", basefilepath.."standard/st_invisback.png", int(Ceil(double(invis.EffectTics))), int(Ceil(double(invis.MaxEffectTics))), (-17, 172), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
+				DrawBar(basefilepath.."standard/st_invis.png", basefilepath.."standard/st_invisback.png", int(Ceil(double(invis.EffectTics))), int(Ceil(double(invis.MaxEffectTics))), (-17.0, 172.0), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
 		}
 
 		if (berserk)
 		{
 			lump = Wads.CheckNumForFullName(basefilepath..powerups.."/st_invis.png");
 			if (lump >= 0)
-				DrawImage(basefilepath..powerups.."/st_berserk.png", berserkoffset + (-48, 188), DI_ITEM_OFFSETS);
+				DrawImage(basefilepath..powerups.."/st_berserk.png", berserkoffset + (-48.0, 188.0), DI_ITEM_OFFSETS);
 			else
-				DrawImage(basefilepath.."standard/st_berserk.png", (-48, 188), DI_ITEM_OFFSETS);
+				DrawImage(basefilepath.."standard/st_berserk.png", (-48.0, 188.0), DI_ITEM_OFFSETS);
 		}
 
 		if (radsuit)
 		{
 			lump = Wads.CheckNumForFullName(basefilepath..powerups.."/st_radsuit.png");
 			if (lump >= 0)
-				DrawBar(basefilepath..powerups.."/st_radsuit.png", basefilepath..powerups.."/st_radsuitback.png", int(Ceil(double(radSuit.EffectTics))), int(Ceil(double(radSuit.MaxEffectTics))), radsuitoffset + (-33, 185), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
+				DrawBar(basefilepath..powerups.."/st_radsuit.png", basefilepath..powerups.."/st_radsuitback.png", int(Ceil(double(radSuit.EffectTics))), int(Ceil(double(radSuit.MaxEffectTics))), radsuitoffset + (-33.0, 185.0), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
 			else
-				DrawBar(basefilepath.."standard/st_radsuit.png", basefilepath.."standard/st_radsuitback.png", int(Ceil(double(radSuit.EffectTics))), int(Ceil(double(radSuit.MaxEffectTics))), (-33, 185), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
+				DrawBar(basefilepath.."standard/st_radsuit.png", basefilepath.."standard/st_radsuitback.png", int(Ceil(double(radSuit.EffectTics))), int(Ceil(double(radSuit.MaxEffectTics))), (-33.0, 185.0), 0, SHADER_VERT|SHADER_REVERSE, DI_ITEM_OFFSETS, 1.0);
 		}
 
 		if (allmap)
 		{
 			lump = Wads.CheckNumForFullName(basefilepath..powerups.."/st_allmap.png");
 			if (lump >= 0)
-				DrawImage(basefilepath..powerups.."/st_allmap.png", allmapoffset + (-17, 186), DI_ITEM_OFFSETS);
+				DrawImage(basefilepath..powerups.."/st_allmap.png", allmapoffset + (-17.0, 186.0), DI_ITEM_OFFSETS);
 			else
-				DrawImage(basefilepath.."standard/st_allmap.png", (-17, 186), DI_ITEM_OFFSETS);
+				DrawImage(basefilepath.."standard/st_allmap.png", (-17.0, 186.0), DI_ITEM_OFFSETS);
 		}
 	}
 
@@ -1492,20 +1491,20 @@ class SevHUD : DoomStatusBar
 
 		int amt1, maxamt;
 		[amt1, maxamt] = GetAmount(ammo1);
-		DrawString(fnt, FormatNumber(amt1, 3), (287, 173), DI_TEXT_ALIGN_RIGHT);
-		DrawString(fnt, FormatNumber(maxamt, 3), (313, 173), DI_TEXT_ALIGN_RIGHT);
+		DrawString(fnt, FormatNumber(amt1, 3), (287.0, 173.0), DI_TEXT_ALIGN_RIGHT);
+		DrawString(fnt, FormatNumber(maxamt, 3), (313.0, 173.0), DI_TEXT_ALIGN_RIGHT);
 
 		[amt1, maxamt] = GetAmount(ammo2);
-		DrawString(fnt, FormatNumber(amt1, 3), (287, 179), DI_TEXT_ALIGN_RIGHT);
-		DrawString(fnt, FormatNumber(maxamt, 3), (313, 179), DI_TEXT_ALIGN_RIGHT);
+		DrawString(fnt, FormatNumber(amt1, 3), (287.0, 179.0), DI_TEXT_ALIGN_RIGHT);
+		DrawString(fnt, FormatNumber(maxamt, 3), (313.0, 179.0), DI_TEXT_ALIGN_RIGHT);
 
 		[amt1, maxamt] = GetAmount(ammo3);
-		DrawString(fnt, FormatNumber(amt1, 3), (287, 185), DI_TEXT_ALIGN_RIGHT);
-		DrawString(fnt, FormatNumber(maxamt, 3), (313, 185), DI_TEXT_ALIGN_RIGHT);
+		DrawString(fnt, FormatNumber(amt1, 3), (287.0, 185.0), DI_TEXT_ALIGN_RIGHT);
+		DrawString(fnt, FormatNumber(maxamt, 3), (313.0, 185.0), DI_TEXT_ALIGN_RIGHT);
 
 		[amt1, maxamt] = GetAmount(ammo4);
-		DrawString(fnt, FormatNumber(amt1, 3), (287, 191), DI_TEXT_ALIGN_RIGHT);
-		DrawString(fnt, FormatNumber(maxamt, 3), (313, 191), DI_TEXT_ALIGN_RIGHT);
+		DrawString(fnt, FormatNumber(amt1, 3), (287.0, 191.0), DI_TEXT_ALIGN_RIGHT);
+		DrawString(fnt, FormatNumber(maxamt, 3), (313.0, 191.0), DI_TEXT_ALIGN_RIGHT);
 	}
 
 	//===========================================================================
@@ -1527,8 +1526,8 @@ class SevHUD : DoomStatusBar
 
 		int amt;
 
-		int basey = 4;
-		int offsety = 0;
+		int basey = 4.0;
+		int yoffset = 0.0;
 
 		string filepath = basefilepath..mapset.."/";
 
@@ -1569,24 +1568,24 @@ class SevHUD : DoomStatusBar
 
 				hoursoffset = 1;
 				amt = hours;
-				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (-29, basey), DI_TEXT_ALIGN_RIGHT);
-				DrawImage(imgcolon, (-28, basey + 1), DI_ITEM_OFFSETS);
+				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (-29.0, basey), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(imgcolon, (-28.0, basey + 1.0), DI_ITEM_OFFSETS);
 			}
 
 			// minutes
 			if ((minutes >= 10) || (hours >= 1))
 				minsdigits = 2;
 			amt = minutes;
-			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (hoursoffset-19, basey), DI_TEXT_ALIGN_RIGHT);
+			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (hoursoffset-19.0, basey), DI_TEXT_ALIGN_RIGHT);
 
-			DrawImage(imgcolon, (-17, basey + 1), DI_ITEM_OFFSETS);
+			DrawImage(imgcolon, (-17.0, basey + 1.0), DI_ITEM_OFFSETS);
 
 			// seconds
 			amt = seconds;
-			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-7, basey), DI_TEXT_ALIGN_RIGHT);
+			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-7.0, basey), DI_TEXT_ALIGN_RIGHT);
 
 			// move the level timer down
-			offsety += fontHeight;
+			yoffset += fontHeight;
 		}
 
 		// Don't draw anything else if we're already drawing the stats on the status bar
@@ -1625,21 +1624,21 @@ class SevHUD : DoomStatusBar
 
 				hoursoffset = 1;
 				amt = hours;
-				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (-29, basey + offsety), DI_TEXT_ALIGN_RIGHT);
-				DrawImage(imgcolon, (-28, basey + offsety + 1), DI_ITEM_OFFSETS);
+				DrawString(fnt, FormatNumber(amt, hoursdigits, format: 2), (-29.0, basey + yoffset), DI_TEXT_ALIGN_RIGHT);
+				DrawImage(imgcolon, (-28.0, basey + yoffset + 1.0), DI_ITEM_OFFSETS);
 			}
 
 			// minutes
 			if ((minutes >= 10) || (hours >= 1))
 				minsdigits = 2;
 			amt = minutes;
-			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (hoursoffset-19, basey + offsety), DI_TEXT_ALIGN_RIGHT);
+			DrawString(fnt, FormatNumber(amt, minsdigits, format: 2), (hoursoffset-19.0, basey + yoffset), DI_TEXT_ALIGN_RIGHT);
 
-			DrawImage(imgcolon, (-17, basey + offsety + 1), DI_ITEM_OFFSETS);
+			DrawImage(imgcolon, (-17.0, basey + yoffset + 1.0), DI_ITEM_OFFSETS);
 
 			// seconds
 			amt = seconds;
-			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-7, basey + offsety), DI_TEXT_ALIGN_RIGHT);
+			DrawString(fnt, FormatNumber(amt, 2, format: 2), (-7.0, basey + yoffset), DI_TEXT_ALIGN_RIGHT);
 		}
 
 		// The other stats aren't very useful in deathmatch
@@ -1647,9 +1646,9 @@ class SevHUD : DoomStatusBar
 			return;
 
 		int pcnt;
-		int mppcnt;
-		basey = -33;
-		offsety = 0;
+//		int mppcnt;
+		basey = -33.0;
+		yoffset = 0.0;
 
 
 
@@ -1666,7 +1665,7 @@ class SevHUD : DoomStatusBar
 				imgsecret = basefilepath.."standard/st_secret.png";
 
 			// Draw automap secrets
-			DrawImage(imgsecret, (-48, basey-fontHeight), DI_ITEM_OFFSETS);
+			DrawImage(imgsecret, (-48.0, basey-fontHeight), DI_ITEM_OFFSETS);
 			if (usecounts == false)
 			{
 				pcnt = Level.total_secrets ? 100 * Level.found_secrets / Level.total_secrets : 100;
@@ -1680,19 +1679,19 @@ class SevHUD : DoomStatusBar
 				}
 				amt = multiplayer ? mppcnt : pcnt;	*/
 				amt = pcnt;
-				DrawString(fnt, FormatNumber(amt, 3), (-16, basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt, 3), (-16.0, basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
 				if (lump >= 0)
-					DrawImage(basefilepath..mapset.."/st_prcnt2.png", (-11, basey-fontHeight), DI_ITEM_OFFSETS);
+					DrawImage(basefilepath..mapset.."/st_prcnt2.png", (-11.0, basey-fontHeight), DI_ITEM_OFFSETS);
 				else
-					DrawImage(basefilepath.."standard/st_prcnt2.png", (-11, basey-fontHeight), DI_ITEM_OFFSETS);
+					DrawImage(basefilepath.."standard/st_prcnt2.png", (-11.0, basey-fontHeight), DI_ITEM_OFFSETS);
 			}
 			else
 			{
 				amt = Level.total_secrets - Level.found_secrets;
-				DrawString(fnt, FormatNumber(amt), (-7, basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt), (-7.0, basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
 			}
 
-			offsety -= fontHeight;
+			yoffset -= fontHeight;
 		}
 
 		if (CVar.GetCVar("am_showitems", CPlayer).GetBool())
@@ -1706,7 +1705,7 @@ class SevHUD : DoomStatusBar
 				imgitem = basefilepath.."standard/st_item.png";
 
 			// Draw automap items
-			DrawImage(imgitem, (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+			DrawImage(imgitem, (-48.0, yoffset+basey-fontHeight), DI_ITEM_OFFSETS);
 			if (usecounts == false)
 			{
 				pcnt = Level.total_items ? 100 * Level.found_items / Level.total_items : 100;
@@ -1720,19 +1719,19 @@ class SevHUD : DoomStatusBar
 				}
 				amt = multiplayer ? mppcnt : pcnt;	*/
 				amt = pcnt;
-				DrawString(fnt, FormatNumber(amt, 3), (-16, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt, 3), (-16.0, yoffset+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
 				if (lump >= 0)
-					DrawImage(basefilepath..mapset.."/st_prcnt2.png", (-11, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+					DrawImage(basefilepath..mapset.."/st_prcnt2.png", (-11.0, yoffset+basey-fontHeight), DI_ITEM_OFFSETS);
 				else
-					DrawImage(basefilepath.."standard/st_prcnt2.png", (-11, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+					DrawImage(basefilepath.."standard/st_prcnt2.png", (-11.0, yoffset+basey-fontHeight), DI_ITEM_OFFSETS);
 			}
 			else
 			{
 				amt = Level.total_items - Level.found_items;
-				DrawString(fnt, FormatNumber(amt), (-7, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt), (-7.0, yoffset+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
 			}
 
-			offsety -= fontHeight;
+			yoffset -= fontHeight;
 		}
 
 		if (CVar.GetCVar("am_showmonsters", CPlayer).GetBool())
@@ -1746,7 +1745,7 @@ class SevHUD : DoomStatusBar
 				imgkill = basefilepath.."standard/st_kill.png";
 
 			// Draw automap kills
-			DrawImage(imgkill, (-48, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+			DrawImage(imgkill, (-48.0, yoffset+basey-fontHeight), DI_ITEM_OFFSETS);
 			if (usecounts == false)
 			{
 				pcnt = Level.total_monsters ? 100 * Level.killed_monsters / Level.total_monsters : 100;
@@ -1760,16 +1759,16 @@ class SevHUD : DoomStatusBar
 				}
 				amt = multiplayer ? mppcnt : pcnt;	*/
 				amt = pcnt;
-				DrawString(fnt, FormatNumber(amt, 3), (-16, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt, 3), (-16.0, yoffset+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
 				if (lump >= 0)
-					DrawImage(basefilepath..mapset.."/st_prcnt2.png", (-11, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+					DrawImage(basefilepath..mapset.."/st_prcnt2.png", (-11.0, yoffset+basey-fontHeight), DI_ITEM_OFFSETS);
 				else
-					DrawImage(basefilepath.."standard/st_prcnt2.png", (-11, offsety+basey-fontHeight), DI_ITEM_OFFSETS);
+					DrawImage(basefilepath.."standard/st_prcnt2.png", (-11.0, yoffset+basey-fontHeight), DI_ITEM_OFFSETS);
 			}
 			else
 			{
 				amt = Level.total_monsters - Level.killed_monsters;
-				DrawString(fnt, FormatNumber(amt), (-7, offsety+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
+				DrawString(fnt, FormatNumber(amt), (-7.0, yoffset+basey-fontHeight), DI_TEXT_ALIGN_RIGHT);
 			}
 		}
 	}
@@ -1840,19 +1839,19 @@ class SevHUD : DoomStatusBar
 		if (locks[1] && locks[4]) image = key6;
 		else if (locks[1]) image = key0;
 		else if (locks[4]) image = key3;
-		DrawImage(image, (239, 171), DI_ITEM_OFFSETS);
+		DrawImage(image, (239.0, 171.0), DI_ITEM_OFFSETS);
 		// key 2
 		if (locks[2] && locks[5]) image = key7;
 		else if (locks[2]) image = key1;
 		else if (locks[5]) image = key4;
 		else image = "";
-		DrawImage(image, (239, 181), DI_ITEM_OFFSETS);
+		DrawImage(image, (239.0, 181.0), DI_ITEM_OFFSETS);
 		// key 3
 		if (locks[0] && locks[3]) image = key8;
 		else if (locks[0]) image = key2;
 		else if (locks[3]) image = key5;
 		else image = "";
-		DrawImage(image, (239, 191), DI_ITEM_OFFSETS);
+		DrawImage(image, (239.0, 191.0), DI_ITEM_OFFSETS);
 	}
 
 	void DrawSevHUD(int state)
@@ -1891,7 +1890,7 @@ class SevHUD : DoomStatusBar
 				mapname = (Level.Levelname);
 			}
 
-			DrawString(fnt, maplabel.."\cj"..mapname, (160, 167-fontHeight), DI_TEXT_ALIGN_CENTER);
+			DrawString(fnt, maplabel.."\cj"..mapname, (160.0, 167.0-fontHeight), DI_TEXT_ALIGN_CENTER);
 		}
 
 		// Don't draw a status bar at all in Lexicon VR
@@ -1907,13 +1906,13 @@ class SevHUD : DoomStatusBar
 			string txt4 = Stringtable.Localize("$SEVHUD_VERSION_MISMATCH_4");
 			string txt5 = Stringtable.Localize("$SEVHUD_VERSION_MISMATCH_5");
 			string txt6 = Stringtable.Localize("$SEVHUD_VERSION_MISMATCH_6");
-			DrawString(fnt, txt1, (160, 100-(fontHeight*7)), DI_TEXT_ALIGN_CENTER);
-			DrawString(fnt, txt2, (160, 100-(fontHeight*6)), DI_TEXT_ALIGN_CENTER);
-			DrawString(fnt, txt3, (160, 100-(fontHeight*5)), DI_TEXT_ALIGN_CENTER);
-			DrawString(fnt, txt4, (160, 100-(fontHeight*4)), DI_TEXT_ALIGN_CENTER);
-			DrawString(fnt, txt5, (160, 100-(fontHeight*3)), DI_TEXT_ALIGN_CENTER);
-			DrawString(fnt, txt6, (160, 100-(fontHeight*2)), DI_TEXT_ALIGN_CENTER);
-			DrawString(fnt, txt4, (160, 100-fontHeight), DI_TEXT_ALIGN_CENTER);
+			DrawString(fnt, txt1, (160.0, 100.0-(fontHeight*7)), DI_TEXT_ALIGN_CENTER);
+			DrawString(fnt, txt2, (160.0, 100.0-(fontHeight*6)), DI_TEXT_ALIGN_CENTER);
+			DrawString(fnt, txt3, (160.0, 100.0-(fontHeight*5)), DI_TEXT_ALIGN_CENTER);
+			DrawString(fnt, txt4, (160.0, 100.0-(fontHeight*4)), DI_TEXT_ALIGN_CENTER);
+			DrawString(fnt, txt5, (160.0, 100.0-(fontHeight*3)), DI_TEXT_ALIGN_CENTER);
+			DrawString(fnt, txt6, (160.0, 100.0-(fontHeight*2)), DI_TEXT_ALIGN_CENTER);
+			DrawString(fnt, txt4, (160.0, 100.0-fontHeight), DI_TEXT_ALIGN_CENTER);
 			return;
 		}
 
@@ -1946,7 +1945,7 @@ class SevHUD : DoomStatusBar
 		{
 			lump = Wads.CheckNumForFullName(filepath.."st_bar.png");
 			if (lump >= 0)
-				DrawImage(filepath.."st_bar.png", (0, 168), DI_ITEM_OFFSETS);
+				DrawImage(filepath.."st_bar.png", (0.0, 168.0), DI_ITEM_OFFSETS);
 			else
 				DrawImage(basefilepath.."standard/st_bar.png", (0, 168), DI_ITEM_OFFSETS);
 		}
@@ -1955,14 +1954,14 @@ class SevHUD : DoomStatusBar
 		{
 			lump = Wads.CheckNumForFullName(filepath.."st_barfuel.png");
 			if (lump >= 0)
-				DrawImage(filepath.."st_barfuel.png", (0, 168), DI_ITEM_OFFSETS);
+				DrawImage(filepath.."st_barfuel.png", (0.0, 168.0), DI_ITEM_OFFSETS);
 			else
 			{
 			lump = Wads.CheckNumForFullName(filepath.."st_bar.png");
 			if (lump >= 0)
-				DrawImage(filepath.."st_bar.png", (0, 168), DI_ITEM_OFFSETS);
+				DrawImage(filepath.."st_bar.png", (0.0, 168.0), DI_ITEM_OFFSETS);
 			else
-				DrawImage(basefilepath.."standard/st_barfuel.png", (0, 168), DI_ITEM_OFFSETS);
+				DrawImage(basefilepath.."standard/st_barfuel.png", (0.0, 168.0), DI_ITEM_OFFSETS);
 			}
 		}
 
@@ -1983,19 +1982,19 @@ class SevHUD : DoomStatusBar
 		lump = Wads.CheckNumForFullName(filepath.."st_prcnt.png");
 		if (lump >= 0)
 		{
-			DrawImage(filepath.."st_prcnt.png", (90, 171), DI_ITEM_OFFSETS);
-			DrawImage(filepath.."st_prcnt.png", (221, 171), DI_ITEM_OFFSETS);
+			DrawImage(filepath.."st_prcnt.png", (90.0, 171.0), DI_ITEM_OFFSETS);
+			DrawImage(filepath.."st_prcnt.png", (221.0, 171.0), DI_ITEM_OFFSETS);
 		}
 		else
 		{
-			DrawImage("STTPRCNT", (90, 171), DI_ITEM_OFFSETS);
-			DrawImage("STTPRCNT", (221, 171), DI_ITEM_OFFSETS);
+			DrawImage("STTPRCNT", (90.0, 171.0), DI_ITEM_OFFSETS);
+			DrawImage("STTPRCNT", (221.0, 171.0), DI_ITEM_OFFSETS);
 		}
 
 		Inventory a1 = GetCurrentAmmo();
-		if (a1 != null) DrawString(bigNumbers, FormatNumber(a1.Amount, 3), (44, 171), DI_TEXT_ALIGN_RIGHT|DI_NOSHADOW);
-		DrawString(bigNumbers, FormatNumber(CPlayer.health, 3), (90, 171), DI_TEXT_ALIGN_RIGHT|DI_NOSHADOW);
-		DrawString(bigNumbers, FormatNumber(GetArmorAmount(), 3), (221, 171), DI_TEXT_ALIGN_RIGHT|DI_NOSHADOW);
+		if (a1 != null) DrawString(bigNumbers, FormatNumber(a1.Amount, 3), (44.0, 171.0), DI_TEXT_ALIGN_RIGHT|DI_NOSHADOW);
+		DrawString(bigNumbers, FormatNumber(CPlayer.health, 3), (90.0, 171.0), DI_TEXT_ALIGN_RIGHT|DI_NOSHADOW);
+		DrawString(bigNumbers, FormatNumber(GetArmorAmount(), 3), (221.0, 171.0), DI_TEXT_ALIGN_RIGHT|DI_NOSHADOW);
 
 		DrawSevHUDKeys();
 
@@ -2003,16 +2002,16 @@ class SevHUD : DoomStatusBar
 
 		if (deathmatch || teamplay)
 		{
-			DrawString(bigNumbers, FormatNumber(CPlayer.FragCount, 3), (138, 171), DI_TEXT_ALIGN_RIGHT);
+			DrawString(bigNumbers, FormatNumber(CPlayer.FragCount, 3), (138.0, 171.0), DI_TEXT_ALIGN_RIGHT);
 		}
 
 		if (multiplayer)
 		{
 			lump = Wads.CheckNumForFullName(filepath.."st_fbany.lmp");
 			if (lump >= 0)
-				DrawImage(filepath.."st_fbany.lmp", (143, 169), DI_ITEM_OFFSETS|DI_TRANSLATABLE);
+				DrawImage(filepath.."st_fbany.lmp", (143.0, 169.0), DI_ITEM_OFFSETS|DI_TRANSLATABLE);
 			else
-				DrawImage(basefilepath.."standard/st_fbany.lmp", (143, 169), DI_ITEM_OFFSETS|DI_TRANSLATABLE);
+				DrawImage(basefilepath.."standard/st_fbany.lmp", (143.0, 169.0), DI_ITEM_OFFSETS|DI_TRANSLATABLE);
 		}
 
 		if (CPlayer.mo.InvSel != null && !Level.NoInventoryBar)
@@ -2020,12 +2019,12 @@ class SevHUD : DoomStatusBar
 			DrawInventoryIcon(CPlayer.mo.InvSel, (160, 198), DI_DIMDEPLETED);
 			if (CPlayer.mo.InvSel.Amount > 1)
 			{
-				DrawString(mAmountFont, FormatNumber(CPlayer.mo.InvSel.Amount), (175, 198-mIndexFont.mFont.GetHeight()), DI_TEXT_ALIGN_RIGHT, Font.CR_GOLD);
+				DrawString(mAmountFont, FormatNumber(CPlayer.mo.InvSel.Amount), (175.0, 198.0-mIndexFont.mFont.GetHeight()), DI_TEXT_ALIGN_RIGHT, Font.CR_GOLD);
 			}
 		}
 		else
 		{
-			DrawTexture(GetMugShot(5), (143, 168), DI_ITEM_OFFSETS);
+			DrawTexture(GetMugShot(5), (143.0, 168.0), DI_ITEM_OFFSETS);
 		}
 		if (isInventoryBarVisible())
 		{
@@ -2037,20 +2036,20 @@ class SevHUD : DoomStatusBar
 			// Draw "FRAGS" text
 			lump = Wads.CheckNumForFullName(filepath.."st_frag.png");
 			if (lump >= 0)
-				DrawImage(filepath.."st_frag.png", (104, 168), DI_ITEM_OFFSETS);
+				DrawImage(filepath.."st_frag.png", (104.0, 168.0), DI_ITEM_OFFSETS);
 			else
-				DrawImage(basefilepath.."standard/st_frag.png", (104, 168), DI_ITEM_OFFSETS);
+				DrawImage(basefilepath.."standard/st_frag.png", (104.0, 168.0), DI_ITEM_OFFSETS);
 			// Draw amount of frags
-			DrawString(bigNumbers, FormatNumber(CPlayer.FragCount, 3), (138, 171), DI_TEXT_ALIGN_RIGHT);
+			DrawString(bigNumbers, FormatNumber(CPlayer.FragCount, 3), (138.0, 171.0), DI_TEXT_ALIGN_RIGHT);
 		}
 		else
 		{
 			// Draw "ARMS" text
 			lump = Wads.CheckNumForFullName(filepath.."st_arms.png");
 			if (lump >= 0)
-				DrawImage(filepath.."st_arms.png", (104, 168), DI_ITEM_OFFSETS);
+				DrawImage(filepath.."st_arms.png", (104.0, 168.0), DI_ITEM_OFFSETS);
 			else
-				DrawImage(basefilepath.."standard/st_arms.png", (104, 168), DI_ITEM_OFFSETS);
+				DrawImage(basefilepath.."standard/st_arms.png", (104.0, 168.0), DI_ITEM_OFFSETS);
 
 			// Draw weapons numbers
 
@@ -2098,12 +2097,12 @@ class SevHUD : DoomStatusBar
 				armsg7 = basefilepath..mapset.."/st_gnum7.png";
 			}
 
-			DrawImage(CPlayer.HasWeaponsInSlot(2)? armsy2 : armsg2, (111, 172), DI_ITEM_OFFSETS);
-			DrawImage(CPlayer.HasWeaponsInSlot(3)? armsy3 : armsg3, (123, 172), DI_ITEM_OFFSETS);
-			DrawImage(CPlayer.HasWeaponsInSlot(4)? armsy4 : armsg4, (135, 172), DI_ITEM_OFFSETS);
-			DrawImage(CPlayer.HasWeaponsInSlot(5)? armsy5 : armsg5, (111, 182), DI_ITEM_OFFSETS);
-			DrawImage(CPlayer.HasWeaponsInSlot(6)? armsy6 : armsg6, (123, 182), DI_ITEM_OFFSETS);
-			DrawImage(CPlayer.HasWeaponsInSlot(7)? armsy7 : armsg7, (135, 182), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(2)? armsy2 : armsg2, (111.0, 172.0), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(3)? armsy3 : armsg3, (123.0, 172.0), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(4)? armsy4 : armsg4, (135.0, 172.0), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(5)? armsy5 : armsg5, (111.0, 182.0), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(6)? armsy6 : armsg6, (123.0, 182.0), DI_ITEM_OFFSETS);
+			DrawImage(CPlayer.HasWeaponsInSlot(7)? armsy7 : armsg7, (135.0, 182.0), DI_ITEM_OFFSETS);
 		}
 	}
 }
